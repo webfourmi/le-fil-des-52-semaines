@@ -3,7 +3,7 @@
 ## Installation
 Le site possède un manifeste PWA, une icône SVG et un service worker. Sur Android, ouvrir dans Chrome et chercher **Installer l'application** ou **Ajouter à l'écran d'accueil** dans le menu. Sur iPhone, ouvrir dans Safari, **Partager → Sur l'écran d'accueil → Ajouter**.
 
-**Attention :** l'icône actuelle est SVG. Pour une compatibilité d'installation maximale sur Android et Apple, ajouter aussi des icônes PNG 192×192, 512×512 et Apple Touch Icon avant publication. Le bouton d'installation Android n'est affiché que si le navigateur émet `beforeinstallprompt`. Le guide manuel reste accessible en permanence.
+**Icônes disponibles :** SVG, PNG 192 × 192, PNG 512 × 512 et Apple Touch Icon 180 × 180. Leur rendu exact sur iOS et Android doit encore être validé sur un appareil réel. Le bouton d'installation Android n'est affiché que si le navigateur émet `beforeinstallprompt`. Le guide manuel reste accessible en permanence.
 
 ## Mises à jour
 - Lorsqu'un nouveau service worker est installé, un bandeau propose **Mettre à jour** et attend une action de l'utilisatrice avant de recharger.
@@ -17,6 +17,6 @@ Le site possède un manifeste PWA, une icône SVG et un service worker. Sur Andr
 - Test réel de la mise à jour du service worker après incrément de sa version.
 - Test de nouvelle édition et préservation des notes en cours de saisie.
 - Vérification des chemins et du cache sur GitHub Pages, y compris hors ligne.
-- Compléter les icônes PNG pour fiabilité mobile.
+- Tester les icônes PNG et la proposition d'installation sur Android et iOS.
 
 La branche n'est pas fusionnée.
