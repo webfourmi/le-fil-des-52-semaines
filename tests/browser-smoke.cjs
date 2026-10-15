@@ -94,8 +94,15 @@ async function main(){
     await journal(autre.page);
     await autre.page.getByRole('button',{name:'Sauvegarder mon journal'}).click();
     await autre.page.locator('#backup-file').setInputFiles(temp);
-    await autre.page.locator('#backup-restore').waitFor({state:'visible'});
-    assert.ok(await autre.page.locator('#backup-restore').isEnabled());
+    // prepareBackup() lit et valide le fichier de façon asynchrone.
+    // Attendre la fin de ce traitement plutôt que constater son état initial.
+    await autre.page.waitForFunction(() => {
+      const b = document.getElementById('backup-restore');
+      const preview = document.getElementById('backup-preview');
+      return (b && !b.disabled) || (preview && /Import refusé/.test(preview.textContent));
+    }, {timeout:10000});
+    assert.ok(await autre.page.locator('#backup-restore').isEnabled(),
+      'Import refusé : '+await autre.page.locator('#backup-preview').textContent());
     autre.page.once('dialog',dialog=>dialog.accept());
     await autre.page.locator('#backup-restore').click();
     await journal(autre.page);
