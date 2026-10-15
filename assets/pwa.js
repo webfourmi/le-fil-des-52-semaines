@@ -31,14 +31,18 @@ function releaseUpdate(){
  if(waiting && waiting.state==='installed')waiting.postMessage({type:'SKIP_WAITING'});
  else location.reload();
 }
-async function checkEdition(){
- // Ne pas masquer une alerte de mise à jour technique par une nouvelle édition.
- if(!navigator.onLine||waiting)return;
+async function checkEdition(showCurrent=false){
+ // Ne pas masquer une alerte technique par la liste des cours.
+ if(waiting)return 'update';
+ if(!navigator.onLine){
+   if(showCurrent)notice('Hors connexion : les nouveautés seront vérifiées au prochain accès à Internet.');
+   return 'offline';
+ }
  try{
   const response=await fetch('./data/editions.json',{cache:'no-store'});
-  if(!response.ok)return;
+  if(!response.ok)throw Error('Service inaccessible');
   const d=await response.json();
-  if(!Array.isArray(d.published)||!d.published.every(n=>Number.isInteger(n)&&n>0&&n<=52))return;
+  if(!Array.isArray(d.published)||!d.published.length||!d.published.every(n=>Number.isInteger(n)&&n>0&&n<=52))throw Error('Éditions invalides');
   const newest=Math.max(1,...d.published);
   const seen=Number(localStorage.getItem('fil52.seen.latest')||0);
   if(newest>seen&&seen>0){
@@ -47,8 +51,37 @@ async function checkEdition(){
      if(typeof window.Fil52OpenEdition==='function')window.Fil52OpenEdition(d,newest);
      else location.reload();
    });
-  } else if(!seen){localStorage.setItem('fil52.seen.latest',String(newest))}
- }catch(_){}
+    return 'new';
+  } else {
+    if(!seen)localStorage.setItem('fil52.seen.latest',String(newest));
+    if(showCurrent)notice('Ton atelier est à jour : aucun nouveau cours pour le moment.');
+    return 'current';
+  }
+ }catch(_){
+   if(showCurrent)notice('Impossible de vérifier les cours. Réessaie lorsque la connexion fonctionne.');
+   return 'error';
+ }
+}
+async function checkUpdates(){
+ if(!navigator.onLine){
+   notice('Hors connexion : les nouveautés seront vérifiées dès ton retour sur Internet.');
+   return;
+ }
+ const check=el('pwa-check');
+ if(check){check.disabled=true;check.textContent='Vérification…'}
+ try{
+   const registration=worker||(('serviceWorker' in navigator)?await navigator.serviceWorker.getRegistration('./'):null);
+   if(registration){
+     await registration.update();
+     if(registration.waiting){showWorker(registration.waiting);return}
+     if(registration.installing){
+       // Le service worker annoncera lui-même son installation.
+       notice('Une nouvelle version est en cours de préparation.');return;
+     }
+   }
+   await checkEdition(true);
+ }catch(_){notice('Vérification impossible pour le moment. Réessaie plus tard.')}
+ finally{if(check){check.disabled=false;check.textContent='Vérifier les nouveautés'}}
 }
 function register(){
  if(!('serviceWorker' in navigator)||!window.isSecureContext)return;
@@ -72,6 +105,7 @@ document.addEventListener('DOMContentLoaded',()=>{
  document.addEventListener('click',e=>{
   if(e.target.closest('#pwa-install')) install();
   else if(e.target.closest('#pwa-help-toggle')) showGuide();
+  else if(e.target.closest('#pwa-check')) checkUpdates();
  });
  el('pwa-notice-close')?.addEventListener('click',dismiss);
  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;updateUI()});
