@@ -1,7 +1,7 @@
 /* Sauvegardes personnelles du Fil des 52 semaines. Aucune donnée transférée. */
 (function(root){
   'use strict';
-  const FORMAT='le-fil-des-52-semaines.personnel',SCHEMA=2,MAX_FILE_SIZE=2*1024*1024;
+  const FORMAT='le-fil-des-52-semaines.personnel',SCHEMA=3,MAX_FILE_SIZE=52*1024*1024;
   const arrKinds=['mat','steps','blocks','ready','projectsDone'];
   const objectKinds=['notes','ratings'];
   const validProfile=p=>p==='m'||p==='f';
@@ -40,19 +40,19 @@
     output.ratings=ratings(data.ratings);
     return output;
   }
-  function exportData(state,profile){
+  function exportData(state,profile,photos=[]){
     check(validProfile(profile),'Identité personnelle non choisie.');
     const data={};
     for(const kind of [...arrKinds,...objectKinds])data[kind]=state[kind]?.[profile];
-    return {format:FORMAT,schema:SCHEMA,profile,exportedAt:new Date().toISOString(),data:validateData(data)};
+    check(Array.isArray(photos)&&photos.length<=104,'Album invalide.');return {format:FORMAT,schema:SCHEMA,profile,exportedAt:new Date().toISOString(),data:validateData(data),photos:photos.map(x=>({week:x.week,type:x.type,dataUrl:x.dataUrl,updatedAt:x.updatedAt}))};
   }
   function parseBackup(text){
     check(typeof text==='string'&&text.length<=MAX_FILE_SIZE&&text.length>0,'Fichier vide ou trop grand.');
     let file;try{file=JSON.parse(text)}catch(e){throw Error('Ce fichier ne contient pas un JSON valide.')}
-    check(plain(file)&&file.format===FORMAT&&file.schema===SCHEMA,'Format de sauvegarde incompatible.');
+    check(plain(file)&&file.format===FORMAT&&(file.schema===SCHEMA||file.schema===2),'Format de sauvegarde incompatible.');
     check(validProfile(file.profile),'Identité de sauvegarde inconnue.');
     check(typeof file.exportedAt==='string'&&Number.isFinite(Date.parse(file.exportedAt)),'Date de sauvegarde invalide.');
-    return {profile:file.profile,exportedAt:file.exportedAt,data:validateData(file.data)};
+    const photos=file.schema===2?[]:file.photos;check(Array.isArray(photos)&&photos.length<=104,'Album manquant ou invalide.');const validPhotos=photos.map(x=>root.Fil52Gallery.validatePhoto(x,file.profile));return {profile:file.profile,exportedAt:file.exportedAt,data:validateData(file.data),photos:validPhotos,legacy:file.schema===2};
   }
   function applyBackup(state,backup,profile){
     check(validProfile(profile)&&backup.profile===profile,'Cette sauvegarde appartient à un autre espace personnel.');
