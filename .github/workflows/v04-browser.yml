@@ -1,0 +1,35 @@
+name: V0.4 - Browser smoke tests
+
+on:
+  push:
+    branches:
+      - feat/v0-4-galerie-locale-drive-manuel
+  pull_request:
+    branches:
+      - feat/v0-3-sauvegarde-restauration
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  chromium:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Retrieve repository
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright
+        run: npm install --no-save playwright@1.56.1
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Launch test server
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/fil52-http.log 2>&1 &
+          sleep 2
+      - name: Run browser tests
+        run: node tests/browser-smoke.cjs
