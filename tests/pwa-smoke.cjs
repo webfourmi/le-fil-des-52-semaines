@@ -16,6 +16,18 @@ assert.equal(request.status(),200);
 const json=await request.json();
 assert.equal(json.display,'standalone');
 assert.ok(json.icons.some(i=>i.src.endsWith('.svg')));
+for(const size of [192,512]){
+  const icon=json.icons.find(i=>i.sizes===size+'x'+size&&i.type==='image/png');
+  assert.ok(icon,'Icône '+size+' manquante');
+  const response=await page.request.get(new URL(icon.src, 'http://127.0.0.1:8765/').href);
+  assert.equal(response.status(),200);
+  const image=await response.body();
+  assert.equal(image.readUInt32BE(16),size);
+  assert.equal(image.readUInt32BE(20),size);
+}
+const apple=await page.request.get('http://127.0.0.1:8765/assets/pwa-icon-180.png');
+assert.equal(apple.status(),200);
+assert.equal((await apple.body()).readUInt32BE(16),180);
 await page.getByRole('button',{name:'Comment l’installer ?'}).click();
 assert.ok(await page.getByText('Sur l’écran d’accueil').count());
 assert.ok(await page.getByText('Installer l’application',{exact:false}).count());
