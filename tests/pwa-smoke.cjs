@@ -32,6 +32,14 @@ await page.getByRole('button',{name:'Comment l’installer ?'}).click();
 assert.ok(await page.getByText('Sur l’écran d’accueil').count());
 assert.ok(await page.getByText('Installer l’application',{exact:false}).count());
 assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
+// Vérifie le chargement hors connexion après installation du service worker.
+await page.reload({waitUntil:'domcontentloaded'});
+await page.waitForFunction(()=>navigator.serviceWorker.controller!==null,{timeout:15000});
+await context.setOffline(true);
+await page.reload({waitUntil:'domcontentloaded'});
+assert.ok(await page.getByRole('heading',{name:/Petits points/i}).count());
+assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
+await context.setOffline(false);
 assert.deepEqual(errors,[]);
 console.log('OK : manifeste, guide iPhone/Android, absence de débordement mobile.');
 await context.close();
