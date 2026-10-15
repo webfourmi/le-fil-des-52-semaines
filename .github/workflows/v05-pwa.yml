@@ -25,3 +25,4 @@ jobs:
       - run: node tests/pwa-smoke.cjs
       - run: node tests/pwa-update.cjs
       - run: node tests/pwa-offline-album.cjs
+      - run: node tests/pwa-pages-subpath.cjs
