@@ -3,7 +3,7 @@ const CACHE_VERSION = 'fil52-shell-v0.5.0';
 const CORE = [
   './','./index.html','./manifest.webmanifest','./data/editions.json',
   './assets/backup.js','./assets/gallery.js','./assets/atelier.webp',
-  './assets/pwa-icon-192.png','./assets/pwa-icon-512.png','./assets/pwa-icon.svg'
+  './assets/pwa-icon.svg','./assets/pwa.js'
 ];
 const base = self.registration.scope;
 self.addEventListener('install', event => {
