@@ -75,10 +75,17 @@ console.log('OK : bouton installer visible et action de déclenchement prise en 
 await page.reload({waitUntil:'domcontentloaded'});
 await page.waitForFunction(()=>navigator.serviceWorker.controller!==null,{timeout:15000});
 await context.setOffline(true);
+await page.locator('#pwa-check').click();
+await page.getByText('Hors connexion : les nouveautés seront vérifiées dès ton retour sur Internet.').waitFor();
+await page.locator('#bottomnav [data-page="journal"]').click();
+assert.equal(await page.locator('[data-note="1"]').inputValue(),'Notes personnelles avant la nouvelle édition.');
+await page.locator('#bottomnav [data-page="home"]').click();
 await page.reload({waitUntil:'domcontentloaded'});
 assert.ok(await page.getByRole('heading',{name:/Petits points/i}).count());
 assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
 await context.setOffline(false);
+await page.locator('#pwa-check').click();
+await page.getByText('Ton atelier est à jour : aucun nouveau cours pour le moment.').waitFor({timeout:10000});
 assert.deepEqual(errors,[]);
 console.log('OK : manifeste, guide iPhone/Android, absence de débordement mobile.');
 await context.close();
