@@ -22,6 +22,12 @@ Le site possède un manifeste PWA, une icône SVG et un service worker. Sur Andr
 
 **Important :** effacer les données du site ou désinstaller l'application peut supprimer les notes et photos locales. Les sauvegardes manuelles sur chaque Google Drive restent indispensables.
 
+## Vérifications automatisées
+- **GitHub Actions #38817970528 : réussi**, avec quatre scénarios Chromium, dont un test servi sous le préfixe réel de GitHub Pages `/le-fil-des-52-semaines/`.
+- Le service worker, les ressources mises en cache et les notes ont été vérifiés hors connexion sous ce préfixe.
+- L'accueil affiche maintenant **Sauvegarder mon carnet** avant l'installation pour prévenir la séparation des espaces de stockage entre Safari/Chrome et l'application installée.
+- Les notifications de nouveaux cours restent **internes à l'application** : aucune notification push sur écran verrouillé n'est prévue.
+
 ## Points à vérifier
 - Test Android Chrome et iOS Safari de l'installation.
 - Test réel de la mise à jour du service worker après incrément de sa version.
