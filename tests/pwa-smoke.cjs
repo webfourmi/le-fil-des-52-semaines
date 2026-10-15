@@ -32,6 +32,45 @@ await page.getByRole('button',{name:'Comment l’installer ?'}).click();
 assert.ok(await page.getByText('Sur l’écran d’accueil').count());
 assert.ok(await page.getByText('Installer l’application',{exact:false}).count());
 assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
+// Contrôle que la présence d'un nouvel épisode déclenche une alerte sans perdre les notes.
+await page.locator('#bottomnav [data-page="journal"]').click();
+await page.locator('[data-note="1"]').fill('Notes personnelles avant la nouvelle édition.');
+await page.evaluate(()=>{
+  const previousFetch=window.fetch.bind(window);
+  window.fetch=(input,options)=>{
+    if(String(input).includes('data/editions.json')){
+      return Promise.resolve(new Response(JSON.stringify({
+        version:'0.5-test',
+        published:[1,2],
+        issues:{
+          2:{title:'Dessous de verre réversible',intro:'Essai de publication',steps:[{title:'Découper',detail:'Préparer les tissus'}],materials:['Chutes de coton']}
+        }
+      }),{status:200,headers:{'Content-Type':'application/json'}}));
+    }
+    return previousFetch(input,options);
+  };
+  document.dispatchEvent(new Event('visibilitychange'));
+});
+await page.getByText('Le cours n° 02 est disponible !').waitFor({timeout:10000});
+await page.getByRole('button',{name:'Voir le cours',exact:true}).click();
+assert.equal(await page.locator('#week-select').inputValue(),'2');
+assert.ok(await page.getByText('Essai de publication').count());
+await page.locator('#bottomnav [data-page="journal"]').click();
+await page.locator('#journal-week').selectOption('1');
+assert.equal(await page.locator('[data-note="1"]').inputValue(),'Notes personnelles avant la nouvelle édition.');
+console.log('OK : alerte nouvelle édition, ouverture du cours, notes préservées.');
+await page.locator('#bottomnav [data-page="home"]').click();
+// Test du bouton installer quand le navigateur annonce l'éligibilité.
+await page.evaluate(()=>{
+  const installEvent=new Event('beforeinstallprompt',{cancelable:true});
+  installEvent.prompt=()=>Promise.resolve();
+  installEvent.userChoice=Promise.resolve({outcome:'dismissed'});
+  window.dispatchEvent(installEvent);
+});
+await page.locator('#pwa-install').waitFor({state:'visible'});
+await page.locator('#pwa-install').click();
+console.log('OK : bouton installer visible et action de déclenchement prise en charge.');
+
 // Vérifie le chargement hors connexion après installation du service worker.
 await page.reload({waitUntil:'domcontentloaded'});
 await page.waitForFunction(()=>navigator.serviceWorker.controller!==null,{timeout:15000});
