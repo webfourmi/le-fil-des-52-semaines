@@ -1,7 +1,8 @@
 /* V0.5 · installation et alertes non intrusives pendant l'utilisation. */
 (function(){
 'use strict';
-let deferred=null, worker=null, waiting=null;
+let deferred=null, worker=null, waiting=null, updateAccepted=false;
+let previouslyControlled=false;
 const el=id=>document.getElementById(id);
 const updateUI=()=>{
  const install=el('pwa-install');
@@ -25,11 +26,14 @@ async function install(){
  await prompt.userChoice;
 }
 function releaseUpdate(){
- if(waiting)waiting.postMessage({type:'SKIP_WAITING'});
+ // Seule une action explicite de l'utilisatrice autorise le rechargement.
+ updateAccepted=true;
+ if(waiting && waiting.state==='installed')waiting.postMessage({type:'SKIP_WAITING'});
  else location.reload();
 }
 async function checkEdition(){
- if(!navigator.onLine)return;
+ // Ne pas masquer une alerte de mise à jour technique par une nouvelle édition.
+ if(!navigator.onLine||waiting)return;
  try{
   const response=await fetch('./data/editions.json',{cache:'no-store'});
   if(!response.ok)return;
@@ -60,6 +64,7 @@ function register(){
  }).catch(()=>{});
 }
 function showWorker(w){
+ if(updateAccepted)return;
  waiting=w;
  notice('Une nouvelle version de l’application est prête.','Mettre à jour',releaseUpdate);
 }
@@ -71,7 +76,19 @@ document.addEventListener('DOMContentLoaded',()=>{
  el('pwa-notice-close')?.addEventListener('click',dismiss);
  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;updateUI()});
  window.addEventListener('appinstalled',()=>{deferred=null;updateUI();dismiss()});
- navigator.serviceWorker?.addEventListener('controllerchange',()=>location.reload());
+ previouslyControlled=!!navigator.serviceWorker?.controller;
+ navigator.serviceWorker?.addEventListener('controllerchange',()=>{
+   if(updateAccepted){location.reload();return}
+   // Première installation : le service worker prend le contrôle sans interrompre l'atelier.
+   // Actualisation provenant d'un autre onglet : demander confirmation.
+   if(previouslyControlled){
+     waiting=null;
+     notice('L’application a été actualisée dans un autre onglet.','Actualiser',()=>{
+       updateAccepted=true;location.reload();
+     });
+   }
+   previouslyControlled=true;
+ });
  updateUI();register();checkEdition();
  new MutationObserver(()=>updateUI()).observe(el('app'),{childList:true,subtree:false});
  document.addEventListener('visibilitychange',()=>{if(!document.hidden){checkEdition();worker?.update().catch(()=>{})}});
