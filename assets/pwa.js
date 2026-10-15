@@ -63,13 +63,16 @@ function showWorker(w){
  notice('Une nouvelle version de l’application est prête.','Mettre à jour',releaseUpdate);
 }
 document.addEventListener('DOMContentLoaded',()=>{
- el('pwa-install')?.addEventListener('click',install);
- el('pwa-help-toggle')?.addEventListener('click',showGuide);
+ document.addEventListener('click',e=>{
+  if(e.target.closest('#pwa-install')) install();
+  else if(e.target.closest('#pwa-help-toggle')) showGuide();
+ });
  el('pwa-notice-close')?.addEventListener('click',dismiss);
  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;updateUI()});
  window.addEventListener('appinstalled',()=>{deferred=null;updateUI();dismiss()});
  navigator.serviceWorker?.addEventListener('controllerchange',()=>location.reload());
  updateUI();register();checkEdition();
+ new MutationObserver(()=>updateUI()).observe(el('app'),{childList:true,subtree:false});
  document.addEventListener('visibilitychange',()=>{if(!document.hidden){checkEdition();worker?.update().catch(()=>{})}});
 });
 })();
