@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - feat/v0-4-galerie-locale-drive-manuel
+  pull_request:
+    branches:
+      - feat/v0-3-sauvegarde-restauration
   workflow_dispatch:
 
 permissions:
