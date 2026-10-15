@@ -24,3 +24,4 @@ jobs:
           sleep 2
       - run: node tests/pwa-smoke.cjs
       - run: node tests/pwa-update.cjs
+      - run: node tests/pwa-offline-album.cjs
