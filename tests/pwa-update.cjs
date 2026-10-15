@@ -40,6 +40,15 @@ async function main(){
   await page.goto(origin,{waitUntil:'domcontentloaded'});
   await page.getByRole('button',{name:'Moi',exact:true}).click();
   await page.locator('#bottomnav [data-page="journal"]').click();
+  await page.locator('[data-note="1"]').fill('Écriture pendant la première installation.');
+  await page.evaluate(()=>{window.__initialMarker='premier atelier';});
+  await page.waitForFunction(()=>!!navigator.serviceWorker.controller,{timeout:15000});
+  assert.equal(await page.evaluate(()=>window.__initialMarker),'premier atelier',
+    'La première prise de contrôle ne doit jamais recharger la page');
+  assert.equal(await page.locator('[data-note="1"]').inputValue(),'Écriture pendant la première installation.');
+  assert.equal(await page.locator('#pwa-notice').isVisible(),false);
+  console.log('OK : première installation sans rechargement ni perte de la saisie.');
+  await page.locator('#bottomnav [data-page="journal"]').click();
   await page.locator('[data-note="1"]').fill('Une note à garder même après mise à jour.');
   await page.waitForFunction(()=>!!navigator.serviceWorker.controller,{timeout:15000});
   await page.evaluate(()=>{window.__notReloadedMarker='en train de coudre'});
