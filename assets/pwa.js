@@ -40,13 +40,14 @@ async function checkEdition(){
   if(newest>seen&&seen>0){
    notice('Le cours n° '+String(newest).padStart(2,'0')+' est disponible !','Voir le cours',()=>{
      dismiss();localStorage.setItem('fil52.seen.latest',String(newest));
-     if(typeof selectWeek==='function')selectWeek(newest);
+     if(typeof window.Fil52OpenEdition==='function')window.Fil52OpenEdition(d,newest);
+     else location.reload();
    });
   } else if(!seen){localStorage.setItem('fil52.seen.latest',String(newest))}
  }catch(_){}
 }
 function register(){
- if(!('serviceWorker' in navigator)||location.protocol!=='https:')return;
+ if(!('serviceWorker' in navigator)||!window.isSecureContext)return;
  navigator.serviceWorker.register('./sw.js',{scope:'./'}).then(reg=>{
    worker=reg;
    if(reg.waiting)showWorker(reg.waiting);
