@@ -4,7 +4,7 @@
 (function(root){
 'use strict';
 const NAME='fil52.personal-photos.v1',STORE='photos';
-const MAX_PHOTOS=60,MAX_PER_PROJECT=6;
+const MAX_PHOTOS=100,MAX_PER_PROJECT=20;
 const validProfile=p=>p==='m'||p==='f';
 const validId=x=>typeof x==='string'&&/^[a-zA-Z0-9_-]{1,64}$/.test(x);
 const check=(ok,msg)=>{if(!ok)throw Error(msg)};
@@ -40,8 +40,8 @@ async function list(profile){
 async function add(profile,projectId,file){
  check(validProfile(profile)&&validId(projectId),'Projet incorrect.');
  const existing=await list(profile);
- check(existing.length<MAX_PHOTOS,'La galerie personnelle contient déjà 60 photos.');
- check(existing.filter(x=>x.projectId===projectId).length<MAX_PER_PROJECT,'Six photos maximum par projet.');
+ check(existing.length<MAX_PHOTOS,'La galerie personnelle contient déjà 100 photos.');
+ check(existing.filter(x=>x.projectId===projectId).length<MAX_PER_PROJECT,'20 photos maximum par projet.');
  check(typeof root.Fil52Gallery.compress==='function','Mets à jour l’application avant d’ajouter des photos personnelles.');
  const dataUrl=await root.Fil52Gallery.compress(file);
  const result=validate({projectId,photoId:newId(),dataUrl,updatedAt:new Date().toISOString()},profile);
