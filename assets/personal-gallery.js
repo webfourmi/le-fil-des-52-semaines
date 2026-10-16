@@ -42,6 +42,7 @@ async function add(profile,projectId,file){
  const existing=await list(profile);
  check(existing.length<MAX_PHOTOS,'La galerie personnelle contient déjà 60 photos.');
  check(existing.filter(x=>x.projectId===projectId).length<MAX_PER_PROJECT,'Six photos maximum par projet.');
+ check(typeof root.Fil52Gallery.compress==='function','Mets à jour l’application avant d’ajouter des photos personnelles.');
  const dataUrl=await root.Fil52Gallery.compress(file);
  const result=validate({projectId,photoId:newId(),dataUrl,updatedAt:new Date().toISOString()},profile);
  const db=await database();
