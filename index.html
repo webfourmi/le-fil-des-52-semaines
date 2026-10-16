@@ -165,6 +165,7 @@ function backupPage(){let p=state.profile;return `<span class="eyebrow">Mon jour
 let backupPending=null;
 let exportBusy=false;
 async function downloadBackup(){if(exportBusy)return;exportBusy=true;const button=el('backup-export');if(button){button.disabled=true;button.textContent='Préparation de la sauvegarde…'}try{
+if(Fil52Backup.SCHEMA!==4)throw Error('Une mise à jour de l’application est nécessaire avant de sauvegarder les projets persos.');
 const photos=await Fil52Gallery.list(state.profile);
 const personalPhotos=await Fil52PersonalPhotos.list(state.profile);
 const json=JSON.stringify(Fil52Backup.exportData(state,state.profile,photos,personalPhotos));
@@ -243,7 +244,7 @@ async function uploadPersonalPhotos(projectId,files){
   for(const file of list){await Fil52PersonalPhotos.add(profile,projectId,file);completed++}
   toast(completed+' photo(s) ajoutée(s).');
  }catch(e){toast(completed+' photo(s) ajoutée(s). '+e.message)}
- finally{if(profile===state.profile&&state.page==='personal')renderPersonalPhotos(profile)}
+ finally{if(input)input.value='';if(profile===state.profile&&state.page==='personal')renderPersonalPhotos(profile)}
 }
 async function deletePersonalPhoto(projectId,photoId){
  if(!confirm('Supprimer cette photographie de ton projet personnel ?'))return;
