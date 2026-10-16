@@ -1,10 +1,10 @@
-# V0.6 · Projets persos
+# V0.7 · Projets persos et voyage textile
 
 ## Fonctionnement
 - **Mon journal → Mes projets persos**, aussi accessible depuis l'accueil et la navigation sur ordinateur.
 - Chaque personne crée ses **ouvrages hors des 52 cours** : vestes, cadeaux, vêtements, réparations, créations spontanées, etc.
-- Chaque projet possède un nom modifiable, des notes et jusqu'à **6 photos** JPEG, PNG ou WebP.
-- Jusqu'à **40 projets et 60 photographies** personnelles par appareil et par profil pour protéger le stockage mobile.
+- Chaque projet possède un nom modifiable, des notes et jusqu'à **20 photos** JPEG, PNG ou WebP.
+- Jusqu'à **40 projets et 100 photographies** personnelles par appareil et par profil pour protéger le stockage mobile.
 - Les photos sont compressées localement (960 px côté long, JPEG), sauvegardées dans IndexedDB et jamais transférées vers GitHub.
 - Supprimer une photo ne supprime pas le projet ; supprimer un projet demande confirmation et supprime ses photos.
 
@@ -18,7 +18,7 @@
 
 ## Limites
 - Le dossier personnel est un album local, **pas un espace de partage ni un service cloud**.
-- 40 projets, 6 photos par projet, 60 photos perso au total. Limite totale de sauvegarde : 96 Mio.
+- 40 projets, 20 photos par projet, 100 photos perso au total. Limite totale de sauvegarde : 96 Mio. Les photographies sont compressées à environ 420 Ko de texte encodé maximum par image.
 - Le stockage IndexedDB dépend du navigateur et peut être effacé en cas de suppression des données du site.
 - Le nombre de photos a été plafonné pour éviter qu'un carnet contenant les 104 images des 52 cours et les créations libres n'explose la mémoire du téléphone.
 
