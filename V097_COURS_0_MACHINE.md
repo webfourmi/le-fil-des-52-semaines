@@ -16,3 +16,7 @@ Sources consultées le 16 octobre 2026 :
 Les indications précises de sens de rotation, de débrayage, de pose de canette et de trajet du fil sont renvoyées aux repères et à la notice Cherry 21. Ne pas présenter une démonstration d’un autre modèle comme celle de la Cherry 21.
 
 Test machine-intro.cjs ajouté à la CI : neuf étapes, reprise, affichage à 320 px, liens du fabricant, export/lecture/application de sauvegarde, 52 semaines inchangées, autonomie du cours 1, hors connexion et séparation des profils.
+
+## Complément V0.9.8 — Choix du fil
+
+Section documentaire ajoutée avant les étapes : polyester tous tissus pour débuter, lecture de l’étiquette, grosseur du fil et aiguille, fil de canette, couleur, fils spéciaux et essai. Les neuf étapes et leurs identifiants restent inchangés. Sources fabricants consultées le 16 octobre 2026 : https://www7.janome.co.jp/2355/ ; https://consumer.guetermann.com/en/products/sew-all_thread/ ; https://consumer.guetermann.com/en/product-information-quilting/. Les numéros de fil ne sont pas assimilés aux tailles d’aiguille.
