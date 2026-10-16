@@ -103,7 +103,7 @@ async function main(){
   assert.ok(await daughter.page.locator('#backup-restore').isDisabled());
   console.log('OK : isolement Mathilde / Moi et refus du mauvais profil');
   await p.locator('#bottomnav [data-page="journal"]').click();
-  assert.equal(await p.locator('#journal-gallery .gallery-slot').count(),2);
+  await p.waitForFunction(()=>document.querySelectorAll('#journal-gallery .gallery-slot').length===2);
   await p.getByRole('button',{name:/Mes projets persos/}).click();
   p.once('dialog',dialog=>dialog.accept());
   await p.locator('[data-personal-photo-delete]').first().click();
