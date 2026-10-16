@@ -22,6 +22,7 @@ jobs:
       - run: |
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/fil52-http.log 2>&1 &
           sleep 2
+      - run: node tests/machine-intro.cjs
       - run: node tests/course-resume.cjs
       - run: node tests/home-progress.cjs
       - run: node tests/patchwork-one.cjs
