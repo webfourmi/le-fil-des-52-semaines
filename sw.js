@@ -1,8 +1,8 @@
 /* Le fil des 52 semaines — cache PWA. Augmenter CACHE_VERSION pour chaque nouvelle version de l'application. */
-const CACHE_VERSION = 'fil52-shell-v0.8.1';
+const CACHE_VERSION = 'fil52-shell-v0.9.0';
 const CORE = [
   './','./index.html','./manifest.webmanifest','./data/editions.json',
-  './assets/backup.js','./assets/gallery.js','./assets/personal-gallery.js','./assets/textile-travel.js','./assets/lesson-guides.js','./assets/atelier.webp',
+  './assets/backup.js','./assets/gallery.js','./assets/personal-gallery.js','./assets/textile-travel.js','./assets/lesson-guides.js','./assets/lesson-photos.js','./assets/lesson-photos.css','./assets/atelier.webp',
   './assets/pwa-icon.svg','./assets/pwa-icon-192.png','./assets/pwa-icon-512.png','./assets/pwa-icon-180.png','./assets/pwa.js'
 ];
 const base = self.registration.scope;
