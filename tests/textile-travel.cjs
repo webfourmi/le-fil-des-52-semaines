@@ -14,15 +14,22 @@ async function main(){
   }));
   await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
   await page.getByRole('button',{name:'Moi',exact:true}).click();
-  await page.getByRole('button',{name:/Voyage textile/}).click();
+  await page.locator('#bottomnav [data-page="world"]').click();
   await page.getByRole('heading',{name:'Histoires à coudre'}).waitFor();
   assert.equal(await page.locator('.travel-article').count(),3);
   assert.equal(await page.locator('.travel-photo img').count(),7);
+  assert.equal(await page.locator('.travel-videos a').count(),2);
+  assert.equal(await page.locator('.travel-content iframe').count(),0);
+  for(const link of await page.locator('.travel-videos a').all()){
+   assert.match(await link.getAttribute('href'),/^https:\/\//);
+   assert.equal(await link.getAttribute('target'),'_blank');
+   assert.match(await link.getAttribute('rel'),/noopener/);
+  }
   const countries=['japon','bengale','coree'];
   for(const country of countries){
    const item=page.locator('.travel-article[data-travel="'+country+'"]');
    if(!(await item.evaluate(e=>e.open)))await item.locator('summary').click();
-   assert.ok(await item.locator('.travel-chapter').count()>=3);
+   assert.ok(await item.locator('.travel-chapter').count()>=6);
    assert.ok(await item.locator('.travel-vocabulary dt').count()>=3);
    assert.ok(await item.locator('.travel-workshop li').count()>=3);
    assert.ok(await item.locator('.travel-photo img').count()>=2);

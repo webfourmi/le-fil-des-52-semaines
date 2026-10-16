@@ -58,6 +58,102 @@ const cards=[
   resources:[['V&A : Jogakbo, le patchwork coréen traditionnel','https://www.vam.ac.uk/articles/jogakbo-traditional-korean-patchwork'],['LACMA : Bojagi, le tissu d’emballage coréen','https://unframed.lacma.org/2014/01/02/bojagi-the-korean-wrapping-cloth']]
  }
 ];
+const enrichments={
+ "japon": {
+  "sections": [
+   [
+    "Une réparation qui se construit avec l’usage",
+    "Une étoffe réparée invite à regarder plusieurs moments à la fois : le tissu d’origine, une première pièce de renfort, puis un nouvel accroc. Une réparation peut chevaucher une couture plus ancienne. Pour lire l’objet, cherche les bords des pièces et les différences d’usure, sans supposer que chaque détail a une signification décorative. Le panneau raconte surtout des décisions prises pour continuer à utiliser ce qui était disponible."
+   ],
+   [
+    "Arrêter le fil : plusieurs réponses possibles",
+    "L’artisan Atsushi Futatsuya explique que, dans son apprentissage du sashiko, des points se chevauchant pouvaient maintenir le fil sans nœud afin de conserver une surface douce des deux côtés. Il précise aussi qu’une pièce très abîmée peut nécessiter d’autres choix, y compris des nœuds. Ce témoignage décrit une pratique située : il ne transforme pas une préférence d’atelier en règle universelle. Dans ton exercice, compare la souplesse et la tenue d’une ligne avant de décider comment arrêter ton fil."
+   ],
+   [
+    "Petit laboratoire de tension",
+    "Sur une chute solide, trace trois lignes espacées. Couds la première en tirant le fil après chaque point, la deuxième en laissant beaucoup de mou, puis la troisième en lissant le tissu après quelques points. Pose le travail à plat : quelle ligne fronce ? Où le fil forme-t-il des boucles ? Cherche une tension qui maintient les couches sans les comprimer. Cet essai personnel prépare une réparation plus confortable et aide à comprendre ce que les photographies seules ne montrent pas."
+   ]
+  ],
+  "resources": [
+   [
+    "Atsushi Futatsuya : finitions, nœuds et contexte du sashiko",
+    "https://upcyclestitches.com/sashiko-boro-knots/"
+   ]
+  ],
+  "videos": [
+   {
+    "title": "Sashiko, boro et arrêts du fil",
+    "url": "https://upcyclestitches.com/sashiko-boro-knots/",
+    "author": "Atsushi Futatsuya · Upcycle Stitches",
+    "language": "Anglais · page avec vidéo et transcription en anglais",
+    "look": "Observer l’endroit et l’envers, puis écouter pourquoi le choix de la finition dépend de l’état du tissu."
+   }
+  ]
+ },
+ "bengale": {
+  "sections": [
+   [
+    "Un objet offert et transmis",
+    "Le Mingei International Museum rappelle que les kanthas pouvaient accompagner un mariage ou être offerts à un enfant. Certains réunissent le travail de plusieurs générations. Une couverture est donc aussi une relation : quelqu’un choisit une étoffe, passe du temps à la coudre et la destine à une personne. Les dimensions et l’usage comptent autant que le motif. Un petit emballage d’objet précieux ne répond pas aux mêmes contraintes qu’une grande couverture."
+   ],
+   [
+    "Les noms et les récits dans le textile",
+    "L’historien de l’art Pratapaditya Pal décrit des kanthas portant des inscriptions : noms de destinataires, noms de créatrices ou indications liées aux figures représentées. Ces traces permettent parfois de relier l’ouvrage à une personne précise. Elles ne donnent toutefois pas automatiquement toute son histoire. Devant un objet de musée, distingue ce que la notice établit, ce que l’on voit et ce que l’on imagine. Un bateau ou une fleur peuvent appeler plusieurs lectures ; mieux vaut garder une question ouverte qu’inventer une signification."
+   ],
+   [
+    "Composer son propre récit en points",
+    "Choisis un souvenir très simple : une plante du jardin, une tasse partagée ou le contour d’une maison. Dessine une silhouette facile à suivre, puis réserve autour d’elle une zone de lignes répétées. Bâtis les épaisseurs avant de broder pour limiter leurs déplacements. Après quelques lignes, pose le carré à plat et vérifie qu’il reste souple. Note dans ton carnet le tissu choisi et le souvenir associé. C’est une proposition contemporaine personnelle, qui reprend le principe d’un textile raconté sans prétendre reproduire un kantha historique."
+   ]
+  ],
+  "resources": [
+   [
+    "Mingei International Museum : usages et transmission des kanthas",
+    "https://mingei.org/exhibitions/kantha/"
+   ],
+   [
+    "Pratapaditya Pal : inscriptions et récits des kanthas",
+    "https://www.asianart.com/articles/kantha/index.html"
+   ]
+  ],
+  "videos": []
+ },
+ "coree": {
+  "sections": [
+   [
+    "Imaginer le tissu autour d’un objet",
+    "Le LACMA décrit des bojagi employés pour le transport, le rangement, la protection d’objets et la couverture des aliments. Pour comprendre leur forme, imagine le carré soulevé par ses coins autour d’un petit volume. Les coutures doivent accompagner les plis et rester agréables à manipuler. Une composition observée à plat change quand elle est nouée : des couleurs disparaissent, des bandes deviennent des diagonales. L’objet utile et l’image géométrique sont deux façons complémentaires de regarder le même textile."
+   ],
+   [
+    "Des destinataires et des usages précis",
+    "L’Asian Art Museum explique que beaucoup de bojagi étaient fabriqués pour une personne ou une fonction déterminée, notamment par une mère pour sa fille avant un mariage. Le nom peut varier avec l’usage : un sang-bo, par exemple, sert à couvrir une table. Le jogakbo est la forme assemblée à partir de petits morceaux. Ces distinctions évitent de réduire tous les bojagi à un seul style multicolore. Un tissu uni, une pièce brodée et un patchwork peuvent appartenir à cette même famille d’objets d’emballage."
+   ],
+   [
+    "S’exercer à la couture avant de composer",
+    "Avant d’assembler un grand panneau, prépare deux petits rectangles de même tissu et teste une couture dont les bords sont enfermés. Le tutoriel de Mimi Shim présente une finition ssamsol à la machine puis à la main. Observe l’ordre des replis et le repassage ; ne transpose pas automatiquement les marges de ton bloc de couverture. Garde cet échantillon à part, regarde-le à contre-jour et plie-le plusieurs fois. Tu pourras ensuite choisir une matière et une finition adaptées à un petit ouvrage, sans mélanger l’exercice avec les dimensions du programme annuel."
+   ]
+  ],
+  "resources": [
+   [
+    "Asian Art Museum : objets, destinataires et noms des bojagi",
+    "https://searchcollection.asianart.org/objects/18653/wrapping-cloth-bojagi"
+   ],
+   [
+    "Mimi Shim : présentation de la couture ssamsol",
+    "https://mimishim.squarespace.com/"
+   ]
+  ],
+  "videos": [
+   {
+    "title": "Jogakbo : couture ssamsol à la machine et à la main",
+    "url": "https://www.youtube.com/watch?v=EmMLHgMDCf0",
+    "author": "Mimi Shim Studio",
+    "language": "Anglais · démonstration des gestes",
+    "look": "Comparer les deux méthodes et observer comment les bords sont enfermés avant de commencer un échantillon."
+   }
+  ]
+ }
+};
+for(const item of cards){const extra=enrichments[item.id];item.sections.push(...extra.sections);item.resources.push(...extra.resources);item.videos=extra.videos;}
 function render(){
  const imageCard=item=>'<figure class="travel-photo photo-card"><img loading="lazy" decoding="async" src="'+commons(item.file)+'" alt="'+item.alt+'"><figcaption class="photo-caption"><b>'+item.description+'</b><small>'+item.credit+' · '+item.license+'</small><a href="'+source(item.file)+'" target="_blank" rel="noopener noreferrer">Objet, photo et licence ↗</a></figcaption></figure>';
  return '<section class="section travel-intro"><span class="eyebrow">Voyage textile · 3 escales documentées</span><h2>Le monde vu à travers ses coutures</h2><p>Trois traditions, trois façons de réparer, transmettre et transformer la matière. Chaque article présente son histoire, des photographies d’objets identifiés, un vocabulaire et un petit atelier libre à partir de chutes.</p><p class="small">Ouvre l’escale qui t’intéresse. Les photographies historiques peuvent nécessiter Internet ; les textes restent accessibles hors connexion après installation.</p></section>'+
@@ -66,6 +162,7 @@ function render(){
  '<div class="travel-gallery">'+item.photos.map(imageCard).join('')+'</div>'+
  '<section class="travel-vocabulary"><h3>Petit lexique</h3><dl>'+item.vocab.map(([word,definition])=>'<div><dt>'+word+'</dt><dd>'+definition+'</dd></div>').join('')+'</dl></section>'+
  '<section class="travel-workshop"><span class="eyebrow">À essayer dans notre atelier</span><h3>'+item.workshop.title+'</h3><p><b>Durée indicative : '+item.workshop.minutes+'.</b> <b>Matériel :</b> '+item.workshop.material+'</p><ol>'+item.workshop.steps.map(x=>'<li>'+x+'</li>').join('')+'</ol><p class="small">'+item.workshop.note+'</p></section>'+
+ (item.videos.length?'<section class="travel-videos"><h3>Voir les gestes en vidéo</h3><p class="small">Liens externes : connexion Internet nécessaire. Ouverture dans un nouvel onglet.</p>'+item.videos.map(video=>'<article><h4><a target="_blank" rel="noopener noreferrer" href="'+video.url+'">'+video.title+' ↗</a></h4><p class="small">'+video.author+' · '+video.language+'</p><p>'+video.look+'</p></article>').join('')+'</section>':'')+
  '<p class="travel-sources"><b>Pour aller plus loin :</b> '+item.resources.map(([label,url])=>'<a target="_blank" rel="noopener noreferrer" href="'+url+'">'+label+' ↗</a>').join(' · ')+'</p></div></details>').join('');
 }
 root.Fil52Travel={cards,render};
