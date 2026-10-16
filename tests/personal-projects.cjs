@@ -88,7 +88,7 @@ async function main(){
   console.log('OK : restauration des projets libres sur un second navigateur');
   const old={...saved,schema:3,data:{...saved.data}};
   delete old.data.personalProjects;delete old.personalPhotos;
-  await two.page.locator('[data-page="backup"]').first().click();
+  await two.page.getByRole('button',{name:'Sauvegarder mes créations'}).click();
   await importJSON(two.page,old);
   await toPersonal(two.page);
   await two.page.locator('.personal-thumb img').first().waitFor({state:'visible',timeout:15000});
