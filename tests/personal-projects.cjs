@@ -25,7 +25,7 @@ async function toPersonal(page){
  await page.getByRole('heading',{name:'Projets persos'}).waitFor();
 }
 async function backupJSON(page){
- await page.locator('[data-page="backup"]').first().click();
+ await page.getByRole('button',{name:'Sauvegarder mes créations'}).click();
  const promise=page.waitForEvent('download',{timeout:20000});
  await page.locator('#backup-export').click();
  const download=await promise;
@@ -79,7 +79,7 @@ async function main(){
   const two=await launch(browser,'Moi');holders.push(two);
   await toPersonal(two.page);
   assert.equal(await two.page.locator('.personal-card').count(),0);
-  await two.page.locator('[data-page="backup"]').first().click();
+  await two.page.getByRole('button',{name:'Sauvegarder mes créations'}).click();
   await importJSON(two.page,saved);
   await toPersonal(two.page);
   await two.page.locator('.personal-thumb img').first().waitFor({state:'visible',timeout:15000});
@@ -97,7 +97,7 @@ async function main(){
   const daughter=await launch(browser,'Mathilde');holders.push(daughter);
   await toPersonal(daughter.page);
   assert.equal(await daughter.page.locator('.personal-card').count(),0);
-  await daughter.page.locator('[data-page="backup"]').first().click();
+  await daughter.page.getByRole('button',{name:'Sauvegarder mes créations'}).click();
   await daughter.page.locator('#backup-file').setInputFiles({name:'sauvegarde.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(saved))});
   await daughter.page.getByText('Import refusé :').waitFor({timeout:10000});
   assert.ok(await daughter.page.locator('#backup-restore').isDisabled());
