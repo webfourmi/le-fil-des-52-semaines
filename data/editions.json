@@ -1,7 +1,538 @@
 {
-  "version": "0.7",
+  "version": "0.8",
   "published": [
-    1
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
   ],
-  "issues": {}
+  "issues": {
+    "2": {
+      "title": "Dessous de verre réversible",
+      "intro": "Deux faces de coton, un contour régulier et une ouverture invisible : une première petite réalisation dont on est fière.",
+      "duration": "1 h à 1 h 30 (couture + bloc)",
+      "technique": "Endroit contre endroit, pivot aux angles, surpiqûre",
+      "reuse": "Deux morceaux de chemise en coton ou des chutes stables",
+      "objective": "Obtenir un sous-verre plat d’environ 10 × 10 cm, avec quatre angles nets et une ouverture refermée par surpiqûre.",
+      "result": "Un sous-verre d’environ 10 × 10 cm. Les dimensions peuvent varier légèrement selon l’épaisseur et la précision des marges.",
+      "materials": [
+        "2 carrés de coton tissé de 12 × 12 cm (un pour chaque face)",
+        "Fil polyester ou coton assorti, aiguille universelle 80/12 en bon état",
+        "Épingles ou pinces, petite paire de ciseaux, règle et craie textile",
+        "Fer à repasser et chute de coton pour un essai"
+      ],
+      "settings": "Janome Cherry 21 : point droit, longueur indicative 2,5 mm, pied universel, marge de couture de 1 cm. Faire un essai sur deux épaisseurs, puis piquer lentement aux angles.",
+      "tip": "Marquez les 4 angles à 1 cm des bords. Arrêtez-vous aiguille plantée dans le tissu, levez le pied, pivotez de 90° et rabaissez le pied.",
+      "safety": "Débranchez la machine avant de changer l’aiguille ; gardez les doigts à distance du pied et retirez les épingles avant de les atteindre.",
+      "prep": [
+        "Laver et repasser les deux chutes si elles risquent de rétrécir.",
+        "Tracer une ligne de couture à 1 cm sur chaque côté et repérer une ouverture de 4 cm.",
+        "Faire un essai de point droit puis contrôler sa régularité au recto et au verso."
+      ],
+      "steps": [
+        {
+          "title": "Couper les deux faces",
+          "detail": "Découpez exactement deux carrés de 12 × 12 cm. Ces cotes comprennent les marges de 1 cm : un seul sous-verre demande deux pièces."
+        },
+        {
+          "title": "Assembler endroit contre endroit",
+          "detail": "Superposez les carrés, les jolies faces l’une contre l’autre. Épinglez sans déformer ; marquez une ouverture de 4 cm sur un côté."
+        },
+        {
+          "title": "Piquer le contour",
+          "detail": "Piquez à 1 cm du bord en laissant l’ouverture. Arrêtez-vous aiguille en bas pour tourner les angles ; consolidez le début et la fin par quelques points arrière."
+        },
+        {
+          "title": "Dégarnir les coins",
+          "detail": "Coupez très légèrement la marge en biais près de chaque coin, sans entamer la couture. Cela évite une boule de tissu une fois retourné."
+        },
+        {
+          "title": "Retourner et former les angles",
+          "detail": "Retournez par l’ouverture, aidez doucement les angles avec un outil non pointu, rentrez les marges de l’ouverture et repassez."
+        },
+        {
+          "title": "Surpiquer et fermer",
+          "detail": "Surpiquez tout autour à 2–3 mm du bord pour tenir les épaisseurs et fermer l’ouverture. Gardez la même distance de l’angle au côté."
+        },
+        {
+          "title": "Contrôler la finition",
+          "detail": "Posez le sous-verre à plat, mesurez ses deux côtés et observez le tissu : pas de pli marqué ni d’ouverture résiduelle."
+        }
+      ],
+      "bonus": "Réaliser un second sous-verre avec deux tissus contrastants et une surpiqûre discrète parfaitement parallèle.",
+      "mistakes": [
+        [
+          "Coins arrondis",
+          "Arrêtez l’aiguille au point de pivot et dégarnissez les pointes avant le retournement."
+        ],
+        [
+          "Surpiqûre ondulée",
+          "Allez moins vite et prenez le bord du pied comme repère ; repassez avant de surpiquer."
+        ],
+        [
+          "Ouverture visible",
+          "Rentrez les deux marges sur exactement 1 cm et maintenez-les avant de surpiquer."
+        ]
+      ],
+      "checkpoint": [
+        "Ai-je laissé l’ouverture avant de coudre tout le contour ?",
+        "Les quatre côtés finis mesurent-ils environ 10 cm ?",
+        "L’ouverture est-elle fermée par une couture régulière ?"
+      ],
+      "diagram": "coaster",
+      "patchworkTitle": "Deux bandes verticales",
+      "patchCuts": [
+        "2 rectangles de 11,5 × 21,5 cm, de deux tissus contrastants",
+        "Marge de couture : 7,5 mm, comprise dans les découpes",
+        "Dimension du bloc avant assemblage à la couverture : 21,5 × 21,5 cm"
+      ],
+      "patchSteps": [
+        "Placez les deux bandes endroit contre endroit le long de leurs grands côtés de 21,5 cm.",
+        "Piquez à 7,5 mm, ouvrez et repassez la couture vers le tissu plus foncé.",
+        "Le carré obtenu mesure 21,5 × 21,5 cm brut : vérifiez les angles et photographiez le bloc."
+      ],
+      "patchTip": "Repère de calcul : 11,5 + 11,5 − 1,5 = 21,5 cm. Après couture du bloc dans la couverture, la zone visible sera de 20 × 20 cm.",
+      "patchDiagram": "vertical",
+      "history": {
+        "title": "Coudre dans l’Antiquité",
+        "text": "Aiguilles et textiles tissés existaient bien avant les machines. Pour reconstituer les gestes, les historiens croisent objets trouvés, traces de fibres et représentations anciennes."
+      },
+      "world": {
+        "title": "Bengale · Kantha",
+        "text": "Le kantha emploie notamment des tissus réutilisés et des rangées de points avant. Retrouve l’article développé dans « Voyage textile »."
+      },
+      "resources": [
+        {
+          "title": "Janome : vidéos couture pour débuter",
+          "url": "https://www.janome.fr/blog/nos-videos-couture-debutant-n412"
+        }
+      ]
+    },
+    "3": {
+      "title": "Étui à mouchoirs",
+      "intro": "Un rectangle de coton devient une petite pochette à ouverture croisée. Cette séance apprend les ourlets doubles et le pliage précis.",
+      "duration": "1 h à 1 h 30 (couture + bloc)",
+      "technique": "Ourlet double, plis symétriques, coutures latérales",
+      "reuse": "Un morceau de drap ou de chemise en coton non extensible",
+      "objective": "Fabriquer un étui simple d’environ 13 × 7,5 cm, adapté à un petit paquet de mouchoirs pliés.",
+      "result": "Environ 13 × 7,5 cm après couture. Présente d’abord le paquet de mouchoirs prévu : ajuste la largeur si son format est atypique.",
+      "materials": [
+        "1 rectangle de coton tissé de 15 × 19 cm",
+        "Fil assorti, aiguille universelle 80/12",
+        "Règle, craie ou feutre effaçable, fer à repasser",
+        "Épingles ou pinces et un paquet de mouchoirs pour l’essayage"
+      ],
+      "settings": "Point droit, longueur 2,5 mm sur un essai ; ourlets des deux petits côtés par 2 replis de 5 mm ; coutures latérales à 1 cm.",
+      "tip": "L’ouverture croisée doit être centrée avant de coudre les deux côtés. Tracez une ligne médiane sur le tissu et comparez le recouvrement à droite et à gauche.",
+      "safety": "Repasser les petits ourlets avant de piquer évite de devoir approcher les doigts trop près de l’aiguille.",
+      "prep": [
+        "Marquer les deux petits côtés de 15 cm qui seront ourlés.",
+        "Repérer l’endroit et l’envers avec une petite épingle de couleur.",
+        "Essayer les doubles replis sur une chute et conserver la même largeur sur les deux extrémités."
+      ],
+      "steps": [
+        {
+          "title": "Tracer et découper",
+          "detail": "Coupez un rectangle de 15 × 19 cm, bien d’équerre ; la dimension 19 cm correspond à la longueur à plier."
+        },
+        {
+          "title": "Former deux ourlets de 5 mm",
+          "detail": "Sur chacun des côtés de 15 cm, repliez 5 mm puis à nouveau 5 mm sur l’envers. Repassez les deux petits ourlets."
+        },
+        {
+          "title": "Piquer les ourlets",
+          "detail": "Cousez près du pli intérieur. Les ourlets doivent être de largeur identique pour que l’ouverture soit régulière."
+        },
+        {
+          "title": "Former l’ouverture croisée",
+          "detail": "Posez le rectangle endroit vers vous. Ramenez les bords ourlés vers le centre, l’un sur l’autre, avec environ 2 cm de chevauchement. Ajustez pour former une poche d’environ 7,5 cm de hauteur avant coutures latérales."
+        },
+        {
+          "title": "Maintenir et coudre les côtés",
+          "detail": "Épinglez les deux côtés non ourlés ; piquez à 1 cm sur ces deux bords. Renforcez à la rencontre des deux lèvres de l’ouverture."
+        },
+        {
+          "title": "Retourner et repasser",
+          "detail": "Retournez sur l’endroit par l’ouverture centrale et formez délicatement les coins. Aplatissez l’étui au fer."
+        },
+        {
+          "title": "Essayer et corriger",
+          "detail": "Glissez quelques mouchoirs. Si le paquet force, réduisez le remplissage ou notez l’ajustement à prévoir pour le prochain étui."
+        }
+      ],
+      "bonus": "Créer un second étui bicolore en assemblant deux tissus avant de former les ourlets.",
+      "mistakes": [
+        [
+          "Fente décentrée",
+          "Pliez et mesurez les deux côtés avant de piquer ; une couture épinglée peut encore être corrigée."
+        ],
+        [
+          "Mouchoirs coincés",
+          "Vérifiez la taille du paquet dès le début : les dimensions indiquées correspondent à un modèle compact."
+        ],
+        [
+          "Ourlets qui roulent",
+          "Repassez le premier puis le deuxième pli, au lieu de les former directement sous le pied."
+        ]
+      ],
+      "checkpoint": [
+        "Les deux ourlets mesurent-ils chacun environ 1 cm au total ?",
+        "L’ouverture est-elle centrée avec un recouvrement d’environ 2 cm ?",
+        "Le paquet de mouchoirs se glisse-t-il facilement ?"
+      ],
+      "diagram": "tissue",
+      "patchworkTitle": "Bandes horizontales",
+      "patchCuts": [
+        "2 rectangles de 21,5 × 11,5 cm, avec couleurs contrastées",
+        "Marge de 7,5 mm, comprise dans les dimensions"
+      ],
+      "patchSteps": [
+        "Superposez les deux longues bandes endroit contre endroit le long d’un bord de 21,5 cm.",
+        "Piquez sur 7,5 mm ; repassez la marge vers le tissu le plus foncé.",
+        "Le bloc brut est un carré de 21,5 × 21,5 cm avec une ligne horizontale centrale."
+      ],
+      "patchTip": "Ici on tourne simplement le principe de la semaine 2 de 90°. Les deux bandes doivent rester bien parallèles.",
+      "patchDiagram": "horizontal",
+      "history": {
+        "title": "Les métiers de couture au Moyen Âge",
+        "text": "En Europe médiévale, les vêtements faisaient intervenir plusieurs métiers spécialisés. Les procédés et l’organisation variaient selon les villes, les époques et les milieux sociaux."
+      },
+      "world": {
+        "title": "Corée · Jogakbo",
+        "text": "Des chutes cousues ensemble peuvent devenir un tissu d’emballage. Découvre les assemblages jogakbo dans « Voyage textile »."
+      },
+      "resources": [
+        {
+          "title": "Janome : quatre vérifications en cas de machine bloquée",
+          "url": "https://www.janome.fr/blog/quatre-choses-a-verifier-avant-de-sinquieter-si-votre-machine-ne-coud-plus--n287"
+        }
+      ]
+    },
+    "4": {
+      "title": "Chouchou en tissu",
+      "intro": "Une jolie façon de transformer une chute allongée en accessoire utile. Cette fois, tu apprendras à retourner un tube et à installer un élastique.",
+      "duration": "45 min à 1 h 15 (couture + bloc)",
+      "technique": "Tube de tissu, montage d’élastique, fermeture invisible",
+      "reuse": "Chute de popeline de coton légère ou ancienne chemise",
+      "objective": "Fabriquer un chouchou souple avec un élastique bien fixé et une ouverture refermée proprement.",
+      "result": "Chouchou souple adapté à l’épaisseur du tissu et à la longueur de l’élastique ; essaye le tour sur tes cheveux avant de fermer.",
+      "materials": [
+        "1 bande de coton tissé léger de 45 × 10 cm",
+        "1 morceau d’élastique souple de 18 cm environ, à ajuster selon le confort",
+        "Épingle à nourrice pour passer l’élastique, fil assorti",
+        "Aiguille universelle 80/12 et aiguille à coudre à la main"
+      ],
+      "settings": "Point droit de longueur 2,5 mm pour le tissu ; fermeture de l’élastique avec des points solides à la main ou un zigzag court validé sur une chute.",
+      "tip": "Ne laisse pas l’élastique s’échapper dans le tube : épingle une extrémité sur le bord pendant que tu tires l’autre.",
+      "safety": "L’épingle à nourrice doit être bien fermée pour le passage dans le tube ; garde les petits objets hors de portée des jeunes enfants.",
+      "prep": [
+        "Vérifier que le coton ne s’effiloche pas excessivement ; surfiler si nécessaire.",
+        "Tester le glissement de l’élastique dans le tissu.",
+        "Repérer l’envers et l’endroit de la bande."
+      ],
+      "steps": [
+        {
+          "title": "Découper le rectangle",
+          "detail": "Coupez une bande de 45 × 10 cm pour un chouchou. Préférez un tissu léger qui fronce bien."
+        },
+        {
+          "title": "Plier sur la longueur",
+          "detail": "Pliez endroit contre endroit, dans le sens de la longueur, pour obtenir un long rectangle de 45 × 5 cm."
+        },
+        {
+          "title": "Piquer le tube",
+          "detail": "Piquez le grand côté à 1 cm du bord. Laissez les deux petites extrémités ouvertes et faites quelques points arrière."
+        },
+        {
+          "title": "Retourner le tube",
+          "detail": "Retournez sur l’endroit à l’aide d’une épingle à nourrice fermée ou d’un retourne-biais ; repassez légèrement."
+        },
+        {
+          "title": "Introduire l’élastique",
+          "detail": "Fixez l’élastique à l’épingle à nourrice, glissez-le dans le tube et maintenez fermement l’autre extrémité."
+        },
+        {
+          "title": "Fermer l’anneau élastique",
+          "detail": "Superposez les extrémités de l’élastique sur 2 cm et cousez-les solidement en plusieurs passages. Vérifiez la tenue en étirant doucement."
+        },
+        {
+          "title": "Assembler les extrémités du tube",
+          "detail": "Rapprochez les deux bouts de tissu : rentrez environ 1 cm d’un bout et glissez l’autre dedans, sans tordre l’anneau. Épinglez soigneusement."
+        },
+        {
+          "title": "Refermer le tissu",
+          "detail": "Fermez la jonction par de petits points invisibles à la main, puis répartissez les fronces tout autour de l’élastique."
+        }
+      ],
+      "bonus": "Comparer un chouchou de popeline et un chouchou de tissu plus fluide : lequel crée des fronces régulières ?",
+      "mistakes": [
+        [
+          "Tube difficile à retourner",
+          "Utilisez une épingle fermée et avancez par petits plis au lieu de tirer brutalement."
+        ],
+        [
+          "Élastique lâche",
+          "Mesurez la tension sur la chevelure avant la fermeture définitive et choisissez un élastique de meilleure tenue si besoin."
+        ],
+        [
+          "Bourrelet à la jonction",
+          "Égalisez les marges et répartissez l’épaisseur avant les points à la main."
+        ]
+      ],
+      "checkpoint": [
+        "L’élastique est-il solidement cousu et assez confortable ?",
+        "Le tissu forme-t-il un anneau sans torsion ?",
+        "La fermeture est-elle discrète et résistante ?"
+      ],
+      "diagram": "scrunchie",
+      "patchworkTitle": "Carré central simple",
+      "patchCuts": [
+        "1 carré central de 11,5 × 11,5 cm",
+        "2 bandes latérales de 6,5 × 11,5 cm",
+        "2 bandes supérieure et inférieure de 6,5 × 21,5 cm",
+        "Marge constante de 7,5 mm"
+      ],
+      "patchSteps": [
+        "Cousez les deux petites bandes de chaque côté du carré central à 7,5 mm, puis repassez.",
+        "La pièce obtenue mesure 21,5 × 11,5 cm. Cousez ensuite les deux grandes bandes en haut et en bas.",
+        "Repassez et contrôlez le bloc brut de 21,5 × 21,5 cm, futur carré fini de 20 × 20 cm."
+      ],
+      "patchTip": "Vérification de largeur : 11,5 + 6,5 + 6,5 − 3 = 21,5 cm après deux coutures. Les marges ne sont comptées qu’une fois par bord cousu.",
+      "patchDiagram": "center",
+      "history": {
+        "title": "L’évolution des maisons de couture",
+        "text": "La création de vêtements sur mesure a évolué vers des maisons structurées, particulièrement à Paris au XIXᵉ siècle. L’histoire de la haute couture mêle création, savoir-faire et organisation du travail."
+      },
+      "world": {
+        "title": "Textiles d’Afrique de l’Ouest",
+        "text": "Les étoffes tissées en bandes et cousues ensemble constituent un vaste ensemble de traditions régionales, avec des usages et des motifs très différents selon les communautés."
+      },
+      "resources": [
+        {
+          "title": "Janome : vidéos couture débutant",
+          "url": "https://www.janome.fr/blog/nos-videos-couture-debutant-n412"
+        }
+      ]
+    },
+    "5": {
+      "title": "Sachet de lavande",
+      "intro": "Un petit objet parfumé pour découvrir le remplissage, la couture à la main et le soin des finitions.",
+      "duration": "1 h à 1 h 30 (couture + bloc)",
+      "technique": "Couture de contour, retournement et fermeture à la main",
+      "reuse": "Deux rectangles de drap ou de chemise en coton serré",
+      "objective": "Réaliser un petit sachet réutilisable, bien fermé, d’environ 11 × 14 cm.",
+      "result": "Sachet d’environ 11 × 14 cm, peu rempli pour conserver sa souplesse. Si tu es sensible aux parfums, remplace la lavande par des chutes propres et sèches.",
+      "materials": [
+        "2 rectangles de coton au tissage serré de 13 × 16 cm",
+        "15 à 20 g de fleurs de lavande parfaitement sèches (ou des chutes propres en remplacement)",
+        "Fil assorti, aiguille machine universelle 80/12, aiguille à la main",
+        "Épingles, règle, fer, petite cuillère et entonnoir papier"
+      ],
+      "settings": "Point droit de 2,5 mm environ, marge de couture 1 cm. Faire un point d’arrêt au début et à la fin ; fermer l’ouverture à la main par petits points glissés.",
+      "tip": "Choisissez un coton serré : des grains de lavande ne doivent pas sortir entre les fils. Ne remplissez pas entièrement pour éviter la tension sur les coutures.",
+      "safety": "Ne pas utiliser de lavande humide : risque de moisissure. Ce sachet n’est pas un jouet ni un article destiné à être porté par un bébé.",
+      "prep": [
+        "Laver et sécher complètement le tissu avant utilisation.",
+        "Dessiner le contour de couture à 1 cm et une ouverture de 4 cm.",
+        "Prévoir le remplissage dans une coupelle pour éviter de répandre les fleurs près de la machine."
+      ],
+      "steps": [
+        {
+          "title": "Découper les deux faces",
+          "detail": "Coupez deux rectangles de 13 × 16 cm et repassez-les soigneusement."
+        },
+        {
+          "title": "Assembler endroit contre endroit",
+          "detail": "Placez les deux faces l’une sur l’autre, motifs face à face, puis épinglez. Marquez une ouverture de 4 cm sur le haut."
+        },
+        {
+          "title": "Coudre le contour",
+          "detail": "Piquez à 1 cm sur le périmètre en laissant l’ouverture. Renforcez les points de début et fin."
+        },
+        {
+          "title": "Dégarnir et retourner",
+          "detail": "Réduisez un peu les marges aux angles, retournez, mettez les coins en place doucement, puis repassez."
+        },
+        {
+          "title": "Vérifier les coutures",
+          "detail": "Inspectez les coutures avant de remplir : aucune zone ne doit présenter un point sauté ou un trou."
+        },
+        {
+          "title": "Remplir sans tasser",
+          "detail": "Introduisez 15 à 20 g de lavande sèche par petites portions. Gardez l’ouverture libre et évitez de remplir au-delà des deux tiers du volume."
+        },
+        {
+          "title": "Fermer par points glissés",
+          "detail": "Rentrez les marges de l’ouverture et fermez à la main par de petits points réguliers. Faites un nœud solide et rentrez le fil."
+        },
+        {
+          "title": "Tester l’étanchéité textile",
+          "detail": "Pressez doucement le sachet : aucune fleur ne doit sortir. Ajoutez un point à la main si une zone paraît ouverte."
+        }
+      ],
+      "bonus": "Décorer le sachet d’une petite broderie de trois brins de lavande avant d’assembler les faces.",
+      "mistakes": [
+        [
+          "Lavande qui ressort",
+          "Optez pour un tissu au tissage plus serré et contrôlez particulièrement les angles."
+        ],
+        [
+          "Sachet bombé",
+          "Retirez une partie du remplissage ; il doit rester souple."
+        ],
+        [
+          "Fermeture visible",
+          "Rapprochez les plis au fer et utilisez des points glissés à la main."
+        ]
+      ],
+      "checkpoint": [
+        "Le sachet est-il bien fermé sur ses quatre côtés ?",
+        "La lavande est-elle parfaitement sèche ?",
+        "Le tissu reste-t-il souple et sans fuite de fleurs ?"
+      ],
+      "diagram": "lavender",
+      "patchworkTitle": "Nine-patch, neuf carrés",
+      "patchCuts": [
+        "9 carrés de 8,2 × 8,2 cm (5 d’un coloris, 4 d’un autre)",
+        "Marge 7,5 mm : après assemblage, bloc brut d’environ 21,6 cm",
+        "Équerrer délicatement le bloc à 21,5 × 21,5 cm avant la couverture"
+      ],
+      "patchSteps": [
+        "Disposez 3 rangées de 3 carrés en alternant les couleurs comme un damier.",
+        "Assemblez chaque rangée à 7,5 mm. Repassez les marges de rangées voisines dans des sens opposés.",
+        "Superposez les trois rangées en faisant coïncider les intersections, puis piquez. Mesurez : environ 21,6 cm avant d’équerrer à 21,5."
+      ],
+      "patchTip": "Calcul : 3 × 8,2 − 4 × 0,75 = 21,6 cm. La légère marge de 1 mm permet d’équerrer. Mesurez toujours avant de recouper.",
+      "patchDiagram": "nine",
+      "history": {
+        "title": "Les premiers brevets de machines à coudre",
+        "text": "Les premières machines à coudre sont le fruit de plusieurs inventeurs et brevets au XIXᵉ siècle. Leur diffusion a progressivement transformé les ateliers, puis la couture domestique."
+      },
+      "world": {
+        "title": "Royaume-Uni · Patchwork",
+        "text": "Les assemblages de pièces de tissu et les quilts sont documentés sous des formes variées dans les îles britanniques. Leur fabrication dépendait des époques, des usages et des tissus disponibles."
+      },
+      "resources": [
+        {
+          "title": "Janome : contrôler les problèmes courants de couture",
+          "url": "https://www.janome.fr/blog/quatre-choses-a-verifier-avant-de-sinquieter-si-votre-machine-ne-coud-plus--n287"
+        }
+      ]
+    },
+    "6": {
+      "title": "Pochon à coulisse",
+      "intro": "Le premier petit sac : travailler les coutures latérales, une coulisse et deux cordons en coton.",
+      "duration": "1 h 30 à 2 h (couture + bloc)",
+      "technique": "Coulisse, piqûre de montage, cordons opposés",
+      "reuse": "Chutes suffisamment grandes de drap de coton ou vieille chemise",
+      "objective": "Confectionner un pochon d’environ 20 × 23 cm, qui se ferme en tirant sur deux cordons.",
+      "result": "Pochon souple d’environ 20 × 23 cm, selon les replis et les marges de montage.",
+      "materials": [
+        "2 rectangles de coton tissé de 22 × 27 cm",
+        "2 cordons souples d’environ 60 cm chacun, ou lacets propres réemployés",
+        "Fil assorti, aiguille universelle 80/12, épingle à nourrice",
+        "Fer à repasser, épingles ou pinces, règle et crayon textile"
+      ],
+      "settings": "Point droit de 2,5 mm, marges latérales et fond de 1 cm. Bord supérieur : replier 1 cm puis 2 cm pour créer la coulisse. Adapter au diamètre des cordons.",
+      "tip": "Laisser 3 cm non cousus en haut de chaque côté crée l’accès aux deux coulisses. Surfilez ou repliez les petits bords ouverts pour éviter l’effilochage.",
+      "safety": "Vérifiez la bonne fermeture de l’épingle à nourrice pour guider les cordons. Un pochon à cordons n’est pas un article destiné aux tout-petits.",
+      "prep": [
+        "Mesurer le cordon : il doit circuler librement dans une coulisse de 2 cm.",
+        "Repérer l’emplacement des 3 cm d’ouverture en haut de chaque côté.",
+        "Repasser un repli de 1 cm puis 2 cm sur le haut de chaque pièce avant de tout assembler."
+      ],
+      "steps": [
+        {
+          "title": "Découper deux rectangles",
+          "detail": "Coupez deux pièces de 22 × 27 cm, identiques, dans un coton non extensible."
+        },
+        {
+          "title": "Préparer l’ouverture de coulisse",
+          "detail": "Sur les deux côtés de chaque rectangle, finissez les bords sur les 3 cm supérieurs par de petits replis ou un zigzag discret, sans réduire trop fortement l’ouverture."
+        },
+        {
+          "title": "Assembler les côtés et le fond",
+          "detail": "Placez les pièces endroit contre endroit. Piquez à 1 cm sur les deux côtés en commençant 3 cm sous le bord supérieur, puis sur le fond. Consolidez le haut des coutures."
+        },
+        {
+          "title": "Repasser les coutures",
+          "detail": "Ouvrez ou couchez les marges selon le tissu et repassez les quatre petites parties non cousues au haut du sac."
+        },
+        {
+          "title": "Former les deux coulisses",
+          "detail": "Sur chaque face, repliez le bord supérieur vers l’envers de 1 cm, puis de 2 cm. Piquez près du bord inférieur du repli pour former une coulisse distincte sur chaque face."
+        },
+        {
+          "title": "Retourner le pochon",
+          "detail": "Retournez sur l’endroit, formez les angles du fond et repassez légèrement sans écraser les coulisses."
+        },
+        {
+          "title": "Passer le premier cordon",
+          "detail": "Avec une épingle à nourrice, faites passer un cordon de 60 cm dans la coulisse avant puis dans la coulisse arrière et faites ressortir ses deux extrémités du même côté. Nouez-les."
+        },
+        {
+          "title": "Passer le second cordon",
+          "detail": "Passez le deuxième cordon dans le sens opposé, en ressortant ses extrémités de l’autre côté du pochon. Nouez et vérifiez la symétrie."
+        },
+        {
+          "title": "Tester la fermeture",
+          "detail": "Tirez doucement sur les deux paires d’extrémités : le haut doit se froncer sans blocage ni déchirure. Ajustez la longueur des cordons si nécessaire."
+        }
+      ],
+      "bonus": "Créer une étiquette textile cousue sur une face avant le montage, avec des chutes de ton damier précédent.",
+      "mistakes": [
+        [
+          "Cordon bloqué",
+          "Vérifiez que la piqûre de la coulisse ne traverse pas un pli supplémentaire et que l’ouverture latérale reste accessible."
+        ],
+        [
+          "Coulisse de largeur variable",
+          "Repasser et marquer la distance des deux plis avant de piquer."
+        ],
+        [
+          "Un seul côté fronce",
+          "L’un des cordons ne parcourt pas les deux coulisses ; reprenez le trajet étape par étape."
+        ]
+      ],
+      "checkpoint": [
+        "Les deux coulisses sont-elles libres et accessibles ?",
+        "Chaque cordon entre et sort-il du même côté ?",
+        "Le sac se ferme-t-il en tirant sur les deux cordons ?"
+      ],
+      "diagram": "drawstring",
+      "patchworkTitle": "Coins contrastés",
+      "patchCuts": [
+        "1 carré de fond de 21,5 × 21,5 cm",
+        "4 petits carrés contrastés de 7 × 7 cm",
+        "Marge à 7,5 mm ; coudre une diagonale sur chacun des petits carrés"
+      ],
+      "patchSteps": [
+        "Placez un petit carré endroit contre endroit sur chacun des quatre coins du grand carré, en alignant les deux bords extérieurs.",
+        "Cousez une diagonale de chaque petit carré, reliant ses deux points d’intersection avec les bords du grand carré. Recoupez l’excédent côté coin à 7,5 mm de la couture.",
+        "Rabattez les petits triangles vers les coins et repassez. Le bloc brut reste à 21,5 × 21,5 cm."
+      ],
+      "patchTip": "Contrôlez que les quatre triangles recouvrent bien les coins sans rétrécir le bord du grand carré. La marge de coupe se place sur le côté du petit triangle à éliminer.",
+      "patchDiagram": "corners",
+      "history": {
+        "title": "Barthélemy Thimonnier et la machine",
+        "text": "Au XIXᵉ siècle, Barthélemy Thimonnier a développé en France un modèle de machine à coudre à point de chaînette. Son histoire illustre les nombreuses tentatives d’automatisation de la couture."
+      },
+      "world": {
+        "title": "Hawaï · Quilt appliqué",
+        "text": "Le quilting hawaïen se distingue notamment par des compositions d’appliqués souvent symétriques, issues d’un contexte historique et culturel spécifique. Notre exercice de coins reste une géométrie d’initiation."
+      },
+      "resources": [
+        {
+          "title": "Janome : présentation de la Cherry 21",
+          "url": "https://www.janome.fr/machines-a-coudre-mecaniques/274-cherry-21-4933621710330"
+        },
+        {
+          "title": "Janome : remplir la canette",
+          "url": "https://www.janome.fr/blog/comment-remplir-la-canette-de-notre-machine-a-coudre-sur-la-cherry-21--n254"
+        }
+      ]
+    }
+  }
 }

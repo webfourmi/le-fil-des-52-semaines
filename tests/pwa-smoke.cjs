@@ -40,10 +40,10 @@ await page.evaluate(()=>{
   window.fetch=(input,options)=>{
     if(String(input).includes('data/editions.json')){
       return Promise.resolve(new Response(JSON.stringify({
-        version:'0.5-test',
-        published:[1,2],
+        version:'0.8-test',
+        published:[1,2,3,4,5,6,7],
         issues:{
-          2:{title:'Dessous de verre réversible',intro:'Essai de publication',steps:[{title:'Découper',detail:'Préparer les tissus'}],materials:['Chutes de coton']}
+          7:{title:'Serviette de table',intro:'Essai de publication',steps:[{title:'Découper',detail:'Préparer les tissus'}],materials:['Chutes de coton']}
         }
       }),{status:200,headers:{'Content-Type':'application/json'}}));
     }
@@ -51,9 +51,9 @@ await page.evaluate(()=>{
   };
   document.dispatchEvent(new Event('visibilitychange'));
 });
-await page.getByText('Le cours n° 02 est disponible !').waitFor({timeout:10000});
+await page.getByText('Le cours n° 07 est disponible !').waitFor({timeout:10000});
 await page.getByRole('button',{name:'Voir le cours',exact:true}).click();
-assert.equal(await page.locator('#week-select').inputValue(),'2');
+assert.equal(await page.locator('#week-select').inputValue(),'7');
 assert.ok(await page.getByText('Essai de publication').count());
 await page.locator('#bottomnav [data-page="journal"]').click();
 await page.locator('#journal-week').selectOption('1');
