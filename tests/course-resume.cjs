@@ -2,6 +2,8 @@
 const {chromium}=require('playwright');const assert=require('node:assert/strict');
 (async()=>{const browser=await chromium.launch({headless:true});try{
  const context=await browser.newContext({viewport:{width:320,height:740}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.route('https://fonts.googleapis.com/**',route=>route.abort());
+ await page.route('https://fonts.gstatic.com/**',route=>route.abort());
  await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});await page.getByRole('button',{name:'Moi',exact:true}).click();await page.waitForFunction(()=>!!upcomingEditions[2]);
  await page.locator('.home-course').click();await page.getByRole('button',{name:'Commencer le cours',exact:false}).click();
  const focusedStep=async()=>page.evaluate(()=>document.activeElement.querySelector('[data-toggle="steps"]')?.dataset.val);
@@ -9,7 +11,7 @@ const {chromium}=require('playwright');const assert=require('node:assert/strict'
  await page.locator('[data-toggle="steps"][data-val="0"]').check();await page.locator('[data-toggle="steps"][data-val="2"]').check();
  await page.locator('#week-select').selectOption('2');await page.locator('[data-toggle="steps"][data-val="2000"]').check();await page.locator('#week-select').selectOption('1');
  assert.match(await page.locator('.course-resume').innerText(),/Reprendre à l’étape 2/);assert.ok(await page.getByText('2 étapes sur 8 terminées pour Moi',{exact:true}).count());await page.locator('.course-resume').click();assert.equal(await focusedStep(),'1');
- assert.ok(await page.evaluate(()=>{const r=document.activeElement.getBoundingClientRect();return r.top>=0&&r.top<innerHeight}));
+ await page.waitForFunction(()=>{const r=document.activeElement.getBoundingClientRect();return r.top>=-1&&r.top<innerHeight&&r.bottom>0});
  await page.locator('#bottomnav [data-page="home"]').click();assert.equal(await page.locator('.feature-sew p').innerText(),'2 étapes sur 8');assert.match(await page.locator('.feature-sew .feature-link').innerText(),/Reprendre/);
  await page.locator('.home-course').click();assert.equal(await focusedStep(),'1');
  await page.locator('#bottomnav [data-page="home"]').click();await page.locator('.feature-sew').click();assert.equal(await focusedStep(),'1');
