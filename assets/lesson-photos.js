@@ -1,0 +1,43 @@
+/* Contenu éditorial commun : aucune écriture dans le carnet personnel. */
+(function(root){
+'use strict';
+const captions={
+1:['Deux rectangles de coton de 8 × 22 cm et le matériel de couture','Épingler endroit contre endroit et réserver une ouverture de 5 cm','Piquer à 1 cm puis dégarnir les coins','Retourner, repasser et surpiquer pour fermer','Le marque-page réversible terminé, environ 6 × 20 cm','Bloc 1 : damier à quatre carrés'],
+2:['Deux carrés de coton de 12 × 12 cm et le matériel','Superposer les carrés endroit contre endroit','Piquer à 1 cm en laissant une ouverture','Retourner les coins, repasser et surpiquer','Le dessous de verre réversible terminé','Bloc 2 : deux bandes verticales'],
+3:['Le rectangle de coton de 15 × 19 cm et le matériel','Réaliser les ourlets des deux côtés','Replier les côtés pour former une ouverture croisée','Coudre les côtés puis retourner','L’étui terminé avec ses mouchoirs','Bloc 3 : bandes horizontales'],
+4:['La bande de coton de 45 × 10 cm et l’élastique','Plier et coudre le tube de tissu','Retourner et passer l’élastique','Assembler l’élastique puis fermer le tissu','Le chouchou terminé','Bloc 4 : carré central simple'],
+5:['Les deux faces de 13 × 16 cm et la lavande','Piquer le contour en réservant une ouverture','Dégarnir les coins puis retourner','Remplir de lavande et fermer à la main','Le sachet de lavande terminé','Bloc 5 : nine-patch à neuf carrés'],
+6:['Les deux rectangles de 22 × 27 cm et les deux cordons','Assembler le corps du pochon','Former et coudre la coulisse','Passer les cordons dans la coulisse','Le pochon terminé, ouvert et fermé','Bloc 6 : coins contrastés']};
+const roles=['Matériel','Étape clé 1','Étape clé 2','Étape clé 3','Résultat','Bloc de patchwork'];
+const lessons=Object.fromEntries(Object.entries(captions).map(([w,items])=>[w,items.map((caption,i)=>({id:'week-'+w+'-'+(i+1),role:roles[i],caption,image:null}))]));
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+// Les chemins locaux garantissent la compatibilité GitHub Pages et le cache PWA.
+function source(src){return typeof src==='string' && /^\.\/assets\/[a-zA-Z0-9_./-]+\.(webp|avif|png|jpe?g)$/.test(src) && !src.includes('..')?src:'';}
+function render(w){
+ const slots=lessons[w];if(!slots)return '';
+ return '<section class="card section lesson-gallery" aria-label="Photos du cours, semaine '+w+'"><h3>Photos du cours</h3><p class="small">Six repères pour suivre ton ouvrage. Les vraies photos seront ajoutées prochainement.</p><div class="lesson-photo-grid">'+slots.map((slot,i)=>{
+ const img=slot.image,src=source(img?.src);
+ const media=src?'<button type="button" class="lesson-photo-open" data-lesson-photo="'+w+':'+i+'" aria-label="'+esc('Agrandir : '+slot.caption)+'"><img loading="lazy" decoding="async" src="'+esc(src)+'" alt="'+esc(img.alt||slot.caption)+'"'+(Number.isInteger(img.width)&&img.width>0?' width="'+img.width+'"':'')+(Number.isInteger(img.height)&&img.height>0?' height="'+img.height+'"':'')+'></button>':'<div class="lesson-photo-empty">Photo à venir</div>';
+ return '<figure>'+media+'<figcaption><b>'+esc(slot.role)+'</b><span>'+esc(slot.caption)+'</span></figcaption></figure>';
+ }).join('')+'</div></section>';
+}
+let dialog,opener;
+function close(){dialog.close();if(opener?.isConnected)opener.focus();}
+document.addEventListener('click',event=>{
+ const button=event.target.closest('[data-lesson-photo]');if(!button)return;
+ const [w,i]=button.dataset.lessonPhoto.split(':'),slot=lessons[w]?.[i],img=slot?.image;
+ if(!source(img?.src))return;
+ if(!dialog){dialog=document.createElement('dialog');dialog.className='lesson-photo-dialog';dialog.setAttribute('aria-label','Photo du cours agrandie');document.body.append(dialog);dialog.addEventListener('cancel',event=>{event.preventDefault();close()});dialog.addEventListener('click',event=>{if(event.target===dialog||event.target.closest('[data-close-photo]'))close()});}
+ opener=button;
+ dialog.innerHTML='<button type="button" class="secondary" data-close-photo autofocus>Fermer la photo</button><figure><img src="'+esc(source(img.full)||img.src)+'" alt="'+esc(img.alt||slot.caption)+'"><figcaption>'+esc(slot.caption)+'</figcaption></figure>';
+ dialog.showModal();dialog.querySelector('button').focus();
+});
+// Une ressource absente doit rester honnête et lisible, même hors connexion.
+document.addEventListener('error',event=>{
+ const img=event.target;if(img.tagName!=='IMG')return;
+ const button=img.closest('.lesson-photo-open');
+ if(button){const empty=document.createElement('div');empty.className='lesson-photo-empty';empty.textContent='Photo indisponible';button.replaceWith(empty);}
+ else if(img.closest('.lesson-photo-dialog')){const message=document.createElement('p');message.textContent='Photo indisponible hors connexion ou introuvable.';img.replaceWith(message);}
+},true);
+root.Fil52LessonPhotos={lessons,render};
+})(globalThis);
