@@ -7,8 +7,8 @@ const {chromium}=require('playwright');const assert=require('node:assert/strict'
  assert.equal(await page.locator('#week-select option').count(),52);
  await page.locator('.machine-intro-entry button').click();await page.getByRole('heading',{name:'Prendre en main ma machine'}).waitFor();
  assert.equal(await page.locator('[data-toggle="steps"]').count(),9);assert.equal(await page.locator('iframe').count(),0);
- assert.equal(await page.locator('.lesson-problem').count(),3);assert.ok(await page.getByText('Machine à l’arrêt',{exact:false}).count());
- for(const a of await page.locator('#app a').all()){assert.match(await a.getAttribute('href'),/^https:\/\/www\.janome\.fr\//);assert.equal(await a.getAttribute('target'),'_blank');assert.match(await a.getAttribute('rel'),/noopener/)}
+ assert.equal(await page.locator('.lesson-problem').count(),4);assert.ok(await page.getByText('Machine à l’arrêt',{exact:false}).count());
+ for(const a of await page.locator('#app a').all()){assert.match(await a.getAttribute('href'),/^https:\/\/(www\.janome\.fr|www7\.janome\.co\.jp|consumer\.guetermann\.com)\//);assert.equal(await a.getAttribute('target'),'_blank');assert.match(await a.getAttribute('rel'),/noopener/)}
  await page.locator('[data-val="90000"]').check();await page.locator('.course-resume').click();assert.equal(await page.evaluate(()=>document.activeElement.querySelector('input')?.dataset.val),'90001');
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  const snapshot=await page.evaluate(()=>{const file=Fil52Backup.exportData(state,state.profile);const parsed=Fil52Backup.parseBackup(JSON.stringify(file));return {schema:file.schema,steps:Fil52Backup.applyBackup(state,parsed,state.profile).steps[state.profile],blocks:parsed.data.blocks,projectsDone:parsed.data.projectsDone}});
