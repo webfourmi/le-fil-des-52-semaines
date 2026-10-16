@@ -1,0 +1,26 @@
+'use strict';
+const {chromium}=require('playwright');const assert=require('node:assert/strict');
+(async()=>{const browser=await chromium.launch({headless:true});try{
+ const context=await browser.newContext({viewport:{width:320,height:740}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.route('https://fonts.googleapis.com/**',route=>route.abort());
+ await page.route('https://fonts.gstatic.com/**',route=>route.abort());
+ await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});await page.getByRole('button',{name:'Moi',exact:true}).click();await page.waitForFunction(()=>!!upcomingEditions[2]);
+ await page.locator('.home-course').click();await page.getByRole('button',{name:'Commencer le cours',exact:false}).click();
+ const focusedStep=async()=>page.evaluate(()=>document.activeElement.querySelector('[data-toggle="steps"]')?.dataset.val);
+ assert.equal(await focusedStep(),'0');assert.equal(await page.locator('[data-toggle="steps"]').first().isChecked(),false);
+ await page.locator('[data-toggle="steps"][data-val="0"]').check();await page.locator('[data-toggle="steps"][data-val="2"]').check();
+ await page.locator('#week-select').selectOption('2');await page.locator('[data-toggle="steps"][data-val="2000"]').check();await page.locator('#week-select').selectOption('1');
+ assert.match(await page.locator('.course-resume').innerText(),/Reprendre à l’étape 2/);assert.ok(await page.getByText('2 étapes sur 8 terminées pour Moi',{exact:true}).count());await page.locator('.course-resume').click();assert.equal(await focusedStep(),'1');
+ await page.waitForFunction(()=>{const r=document.activeElement.getBoundingClientRect();return r.top>=-1&&r.top<innerHeight&&r.bottom>0});
+ await page.locator('#bottomnav [data-page="home"]').click();assert.equal(await page.locator('.feature-sew p').innerText(),'2 étapes sur 8');assert.match(await page.locator('.feature-sew .feature-link').innerText(),/Reprendre/);
+ await page.locator('.home-course').click();assert.equal(await focusedStep(),'1');
+ await page.locator('#bottomnav [data-page="home"]').click();await page.locator('.feature-sew').click();assert.equal(await focusedStep(),'1');
+ await page.waitForFunction(()=>!!navigator.serviceWorker.controller);await context.setOffline(true);await page.reload({waitUntil:'domcontentloaded'});await page.waitForFunction(()=>!!upcomingEditions[2]);await page.locator('.home-course').click();assert.equal(await focusedStep(),'1');
+ await page.locator('#week-select').selectOption('2');await page.locator('.course-resume').click();assert.equal(await focusedStep(),'2001');assert.ok(await page.getByText('1 étape sur 7',{exact:true}).count());
+ await page.locator('#week-select').selectOption('1');for(const box of await page.locator('[data-toggle="steps"]').all())await box.check();
+ assert.match(await page.locator('.course-resume').innerText(),/Valider mon cours/);await page.locator('.course-resume').click();assert.ok(await page.locator('.course-validation').evaluate(el=>el===document.activeElement));assert.equal(await page.locator('[data-journal-complete="1"]').isChecked(),false);
+ await page.locator('[data-journal-complete="1"]').check();await page.locator('.course-resume').click();assert.equal(await focusedStep(),'0');assert.equal(await page.locator('[data-toggle="steps"]').first().isChecked(),true);
+ await page.locator('#week-select').selectOption('7');assert.equal(await page.locator('.course-resume').count(),0);assert.deepEqual(errors,[]);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await context.setOffline(false);
+ const other=await browser.newContext();const q=await other.newPage();await q.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});await q.getByRole('button',{name:'Mathilde',exact:true}).click();await q.locator('.home-course').click();assert.match(await q.locator('.course-resume').innerText(),/Commencer/);assert.equal(await q.locator('[data-toggle="steps"]').first().isChecked(),false);await other.close();
+ console.log('OK : reprise première étape ouverte, comptage isolé, focus mobile, accueil, validation distincte, hors connexion et profils');
+ }finally{await browser.close()}})().catch(e=>{console.error(e);process.exitCode=1});
