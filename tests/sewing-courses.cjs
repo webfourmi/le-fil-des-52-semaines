@@ -16,7 +16,7 @@ async function main(){
   const expected=[
    [2,'Dessous de verre réversible',7,'Deux bandes verticales'],
    [3,'Étui à mouchoirs',7,'Bandes horizontales'],
-   [4,'Chouchou',8,'Carré central simple'],
+   [4,'Chouchou en tissu',8,'Carré central simple'],
    [5,'Sachet de lavande',8,'Nine-patch'],
    [6,'Pochon à coulisse',9,'Coins contrastés']
   ];
