@@ -102,5 +102,5 @@ async function replace(profile,photos){
   tx.onabort=()=>reject(tx.error||Error('Restauration de la galerie interrompue.'));
  });
 }
-root.Fil52Gallery={TYPES,MAX_FILE,MAX_DATAURL,list,get,upsert,remove,replace,validatePhoto};
+root.Fil52Gallery={TYPES,MAX_FILE,MAX_DATAURL,compress,list,get,upsert,remove,replace,validatePhoto};
 })(globalThis);

@@ -20,7 +20,7 @@ async function serve(req,res){
   let bytes=await fs.readFile(absolute);
   if(relative==='sw.js'){
    let source=bytes.toString('utf8');
-   source=source.replace("fil52-shell-v0.5.0","fil52-shell-v0.5.test."+revision);
+   source=source.replace(/fil52-shell-v[\d.]+/,'fil52-shell-v0.6.test.'+revision);
    bytes=Buffer.from(source+'\n// Browser test revision: '+revision+'\n');
   }
   res.writeHead(200,{'Content-Type':mime[path.extname(relative)]||'application/octet-stream','Cache-Control':'no-store'});
