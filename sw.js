@@ -1,5 +1,5 @@
 /* Le fil des 52 semaines — cache PWA. Augmenter CACHE_VERSION pour chaque nouvelle version de l'application. */
-const CACHE_VERSION = 'fil52-shell-v0.9.2';
+const CACHE_VERSION = 'fil52-shell-v0.9.3';
 const CORE = [
   './','./index.html','./manifest.webmanifest','./data/editions.json',
   './assets/backup.js','./assets/gallery.js','./assets/personal-gallery.js','./assets/textile-travel.js','./assets/lesson-guides.js','./assets/lesson-photos.js','./assets/lesson-photos.css','./assets/travel-updates.css','./assets/atelier.webp',
