@@ -23,9 +23,9 @@ const assert=require('node:assert/strict');
  }
  await page.locator('.course-patchwork button').click();
  assert.equal(await page.locator('.sewing-photo-gallery').count(),0);
- assert.equal(await page.locator('.patchwork-photo-gallery figure').count(),1);
- assert.match(await page.locator('.patchwork-photo-gallery').innerText(),/damier à quatre carrés/);
- assert.doesNotMatch(await page.locator('.patchwork-photo-gallery').innerText(),/marque-page/);
+ assert.equal(await page.locator('[data-patch-course="1"] .patchwork-photo-gallery figure').count(),1);
+ assert.match(await page.locator('[data-patch-course="1"] .patchwork-photo-gallery').innerText(),/damier à quatre carrés/);
+ assert.doesNotMatch(await page.locator('[data-patch-course="1"] .patchwork-photo-gallery').innerText(),/marque-page/);
  await page.locator('#bottomnav [data-page="learn"]').click();
  await page.locator('#week-select').selectOption('7');
  assert.equal(await page.locator('.lesson-gallery').count(),0);
