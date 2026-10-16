@@ -25,6 +25,8 @@ Le site possède un manifeste PWA, une icône SVG et un service worker. Sur Andr
 ## Vérifications automatisées
 - **GitHub Actions #38817970528 : réussi**, avec quatre scénarios Chromium, dont un test servi sous le préfixe réel de GitHub Pages `/le-fil-des-52-semaines/`.
 - Le service worker, les ressources mises en cache et les notes ont été vérifiés hors connexion sous ce préfixe.
+- **GitHub Actions #38902964661 : réussi**, avec un cinquième scénario sur **WebKit mobile**, proche du moteur Safari : interface iPhone, ajout d’une photo, conservation après rechargement et téléchargement de sauvegarde JSON.
+- L'essai WebKit automatisé n'est pas équivalent à l'installation d'une PWA dans Safari sur un iPhone physique.
 - L'accueil affiche maintenant **Sauvegarder mon carnet** avant l'installation pour prévenir la séparation des espaces de stockage entre Safari/Chrome et l'application installée.
 - Les notifications de nouveaux cours restent **internes à l'application** : aucune notification push sur écran verrouillé n'est prévue.
 
