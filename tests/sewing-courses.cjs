@@ -17,7 +17,7 @@ async function main(){
    [2,'Dessous de verre réversible',7,'Deux bandes verticales'],
    [3,'Étui à mouchoirs',7,'Bandes horizontales'],
    [4,'Chouchou en tissu',8,'Carré central simple'],
-   [5,'Sachet de lavande',8,'Nine-patch'],
+   [5,'Sachet de lavande',8,'Nine-patch, neuf carrés'],
    [6,'Pochon à coulisse',9,'Coins contrastés']
   ];
   for(const [week,title,numSteps,quiltTitle] of expected){
