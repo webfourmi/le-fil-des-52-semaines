@@ -40,7 +40,7 @@ async function main(){
   assert.ok(await p.locator('[data-toggle="steps"]').first().isChecked());
   assert.match(await p.locator('.lesson-patch-done').innerText(),/terminé/i);
   await p.locator('.course-patchwork [data-page="quilt"]').click();
-  assert.equal(await p.locator('[data-quilt-block="2"]').getAttribute('aria-pressed'),'true');
+  assert.equal(await p.locator('.quilt [data-quilt-block="2"]').getAttribute('aria-pressed'),'true');
   console.log('OK : cases personnelles et carré n°2 synchronisés avec la couverture');
   await p.reload({waitUntil:'domcontentloaded'});
   await p.locator('#bottomnav [data-page="learn"]').click();

@@ -25,6 +25,7 @@ jobs:
       - run: node tests/machine-intro.cjs
       - run: node tests/course-resume.cjs
       - run: node tests/home-progress.cjs
+      - run: node tests/patchwork-courses.cjs
       - run: node tests/patchwork-one.cjs
       - run: node tests/navigation-travel.cjs
       - run: node tests/lesson-photos.cjs
