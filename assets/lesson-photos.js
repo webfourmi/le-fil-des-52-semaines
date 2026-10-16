@@ -13,11 +13,12 @@ const lessons=Object.fromEntries(Object.entries(captions).map(([w,items])=>[w,it
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 // Les chemins locaux garantissent la compatibilité GitHub Pages et le cache PWA.
 function source(src){return typeof src==='string' && /^\.\/assets\/[a-zA-Z0-9_./-]+\.(webp|avif|png|jpe?g)$/.test(src) && !src.includes('..')?src:'';}
-function render(w){
- const slots=lessons[w];if(!slots)return '';
- return '<section class="card section lesson-gallery" aria-label="Photos du cours, semaine '+w+'"><h3>Photos du cours</h3><p class="small">Six repères pour suivre ton ouvrage. Les vraies photos seront ajoutées prochainement.</p><div class="lesson-photo-grid">'+slots.map((slot,i)=>{
+function render(w,patchwork=false){
+ const all=lessons[w];if(!all)return '';
+ const slots=patchwork?all.slice(5):all.slice(0,5),title=patchwork?'Photos du patchwork':'Photos du cours couture';
+ return '<section class="card section lesson-gallery '+(patchwork?'patchwork-photo-gallery':'sewing-photo-gallery')+'" aria-label="'+title+', semaine '+w+'"><h3>'+title+'</h3><p class="small">'+(patchwork?'Le carré terminé, avant son assemblage dans la couverture.':'Le matériel, les étapes clés et le résultat du projet couture.')+' Les vraies photos seront ajoutées prochainement.</p><div class="lesson-photo-grid">'+slots.map((slot,i)=>{
  const img=slot.image,src=source(img?.src);
- const media=src?'<button type="button" class="lesson-photo-open" data-lesson-photo="'+w+':'+i+'" aria-label="'+esc('Agrandir : '+slot.caption)+'"><img loading="lazy" decoding="async" src="'+esc(src)+'" alt="'+esc(img.alt||slot.caption)+'"'+(Number.isInteger(img.width)&&img.width>0?' width="'+img.width+'"':'')+(Number.isInteger(img.height)&&img.height>0?' height="'+img.height+'"':'')+'></button>':'<div class="lesson-photo-empty">Photo à venir</div>';
+ const media=src?'<button type="button" class="lesson-photo-open" data-lesson-photo="'+w+':'+(patchwork?i+5:i)+'" aria-label="'+esc('Agrandir : '+slot.caption)+'"><img loading="lazy" decoding="async" src="'+esc(src)+'" alt="'+esc(img.alt||slot.caption)+'"'+(Number.isInteger(img.width)&&img.width>0?' width="'+img.width+'"':'')+(Number.isInteger(img.height)&&img.height>0?' height="'+img.height+'"':'')+'></button>':'<div class="lesson-photo-empty">Photo à venir</div>';
  return '<figure>'+media+'<figcaption><b>'+esc(slot.role)+'</b><span>'+esc(slot.caption)+'</span></figcaption></figure>';
  }).join('')+'</div></section>';
 }
@@ -39,5 +40,5 @@ document.addEventListener('error',event=>{
  if(button){const empty=document.createElement('div');empty.className='lesson-photo-empty';empty.textContent='Photo indisponible';button.replaceWith(empty);}
  else if(img.closest('.lesson-photo-dialog')){const message=document.createElement('p');message.textContent='Photo indisponible hors connexion ou introuvable.';img.replaceWith(message);}
 },true);
-root.Fil52LessonPhotos={lessons,render};
+root.Fil52LessonPhotos={lessons,render,renderPatchwork:w=>render(w,true)};
 })(globalThis);

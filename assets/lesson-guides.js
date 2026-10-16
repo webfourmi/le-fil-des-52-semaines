@@ -57,7 +57,7 @@ function renderPatchwork(d,w,p,done){
  '<h4>Montage du bloc</h4>'+list(d.patchSteps,true)+
  '<div class="tip"><b>Astuce de précision :</b> '+esc(d.patchTip)+'</div>'+
  '<button class="secondary lesson-patch-done" type="button" data-quilt-person="'+esc(p)+'" data-quilt-block="'+w+'" aria-pressed="'+(complete?'true':'false')+'">'+(complete?'✓ Bloc n° '+w+' terminé · décocher':'□ Marquer mon bloc n° '+w+' comme terminé')+'</button>'+
- '<p class="small">Cette coche est personnelle et se retrouvera aussi dans ta couverture des 52 blocs.</p></section>';
+ '<p class="small">Cette coche est personnelle et se retrouvera aussi dans ta couverture des 52 blocs.</p></section>'+root.Fil52LessonPhotos.renderPatchwork(w);
 }
 
 function renderFirstPatchwork(p,done){
@@ -82,7 +82,7 @@ function renderFirstPatchwork(p,done){
  <details class="lesson-problem"><summary>Le centre forme une marche</summary><p>Découds seulement quelques centimètres de la dernière couture autour du centre. Replace les coutures des rangées face à face, emboîte les marges et bâtis pour contrôler. Reprends la couture en chevauchant légèrement les points restés en place.</p></details>
  <details class="lesson-problem"><summary>Le bloc gondole ou dépasse la dimension</summary><p>Laisse-le refroidir à plat après un repassage sans glissement. Vérifie les marges et les coupes. Une marge trop étroite peut expliquer un bloc trop grand. Corrige la couture en cause avant de retailler ; ne coupe que de minuscules fils ou irrégularités si le bloc reste bien carré à 21,5 cm. Un bloc plus petit ne se répare pas en le retaillant.</p></details>
  <h3>Avant de ranger mon premier carré</h3><ul class="lesson-checkpoints"><li>Les quatre pièces alternent clair et foncé, et se rejoignent au centre.</li><li>Le bloc est plat, carré et mesure 21,5 × 21,5 cm.</li><li>Les bords restent bruts, avec les marges nécessaires pour obtenir 20 × 20 cm dans la couverture.</li></ul>
- <div class="actions"><button class="primary" data-page="print">Imprimer le gabarit →</button><button class="secondary lesson-patch-done" type="button" data-quilt-person="${esc(p)}" data-quilt-block="1" aria-pressed="${complete?'true':'false'}">${complete?'✓ Bloc n° 1 terminé · décocher':'□ Marquer mon bloc n° 1 comme terminé'}</button></div><p class="small">Le gabarit s’imprime à 100 %. Vérifie son carré de contrôle de 5 cm avant de couper. La coche reste personnelle et se retrouve dans ta couverture.</p></section>`;
+ <div class="actions"><button class="primary" data-page="print">Imprimer le gabarit →</button><button class="secondary lesson-patch-done" type="button" data-quilt-person="${esc(p)}" data-quilt-block="1" aria-pressed="${complete?'true':'false'}">${complete?'✓ Bloc n° 1 terminé · décocher':'□ Marquer mon bloc n° 1 comme terminé'}</button></div><p class="small">Le gabarit s’imprime à 100 %. Vérifie son carré de contrôle de 5 cm avant de couper. La coche reste personnelle et se retrouve dans ta couverture.</p></section>${root.Fil52LessonPhotos.renderPatchwork(1)}`;
 }
 
 root.Fil52LessonGuides={renderFirstPatchwork,renderPreparation,renderTroubleshooting,renderPatchwork,diagram};
