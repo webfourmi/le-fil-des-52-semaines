@@ -28,6 +28,7 @@ for(const size of [192,512]){
 const apple=await page.request.get('http://127.0.0.1:8765/assets/pwa-icon-180.png');
 assert.equal(apple.status(),200);
 assert.equal((await apple.body()).readUInt32BE(16),180);
+await page.locator('details.pwa-panel > summary').click();
 await page.getByRole('button',{name:'Comment l’installer ?'}).click();
 assert.ok(await page.getByText('Sur l’écran d’accueil').count());
 assert.ok(await page.getByText('Installer l’application',{exact:false}).count());
@@ -67,6 +68,7 @@ await page.evaluate(()=>{
   installEvent.userChoice=Promise.resolve({outcome:'dismissed'});
   window.dispatchEvent(installEvent);
 });
+await page.locator('details.pwa-panel > summary').click();
 await page.locator('#pwa-install').waitFor({state:'visible'});
 await page.locator('#pwa-install').click();
 console.log('OK : bouton installer visible et action de déclenchement prise en charge.');
@@ -75,6 +77,7 @@ console.log('OK : bouton installer visible et action de déclenchement prise en 
 await page.reload({waitUntil:'domcontentloaded'});
 await page.waitForFunction(()=>navigator.serviceWorker.controller!==null,{timeout:15000});
 await context.setOffline(true);
+await page.locator('details.pwa-panel > summary').click();
 await page.locator('#pwa-check').click();
 await page.getByText('Hors connexion : les nouveautés seront vérifiées dès ton retour sur Internet.').waitFor();
 await page.locator('#bottomnav [data-page="journal"]').click();
@@ -84,6 +87,7 @@ await page.reload({waitUntil:'domcontentloaded'});
 assert.ok(await page.getByRole('heading',{name:/Petits points/i}).count());
 assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
 await context.setOffline(false);
+await page.locator('details.pwa-panel > summary').click();
 await page.locator('#pwa-check').click();
 await page.getByText('Ton atelier est à jour : aucun nouveau cours pour le moment.').waitFor({timeout:10000});
 assert.deepEqual(errors,[]);
