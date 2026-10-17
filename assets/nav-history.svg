@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Histoire de la couture">
+<rect x="2" y="2" width="124" height="124" rx="28" fill="#FAEEE7" stroke="#E4C9B9" stroke-width="3"/>
+<rect x="10" y="10" width="108" height="108" rx="22" fill="none" stroke="#BF8B85" stroke-dasharray="4 6" stroke-width="2"/>
+<path d="M41 98 91 28" stroke="#C89C6A" stroke-width="7" stroke-linecap="round"/>
+<ellipse cx="87" cy="33" rx="6" ry="11" transform="rotate(34 87 33)" fill="#FFF7ED" stroke="#9A745B" stroke-width="3"/>
+<path d="M41 99C33 107 24 101 29 91M29 91C39 80 29 72 21 81" fill="none" stroke="#BC7C86" stroke-width="4" stroke-linecap="round"/>
+<g transform="translate(84 84)">
+<path d="M0-12Q7-28 16-18Q18-7 0-3Q19-8 20 5Q8 16 0 6Q4 22-7 20Q-16 9-5 2Q-20 11-23 0Q-18-13-5-5Q-17-20-6-22Q4-18 0-12" fill="#DCA9A3" stroke="#B77C7E" stroke-width="2"/>
+<circle r="6" fill="#D3B47E"/><circle r="2" fill="#FFF1D6"/>
+</g>
+<path d="M70 104Q80 114 100 108" stroke="#91A48F" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M80 110Q71 100 69 105Q72 114 80 110M98 109Q108 97 104 95Q93 102 98 109" fill="#A3B7A0" stroke="#829A83" stroke-width="1.2"/>
+</svg>
