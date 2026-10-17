@@ -23,6 +23,7 @@ async function main(){
     localStorage.setItem('fil52.progress.v1',JSON.stringify(p));
    });
    await page.reload({waitUntil:'domcontentloaded'});
+   await page.waitForFunction(()=>!!upcomingEditions[2]&&state.published.includes(2),{timeout:12000});
    const stateRead=await page.evaluate(()=>({profile:state.profile,name:state.names.m,other:state.names.f,notes:state.notes.m['1'],done:state.projectsDone.m.slice(),blocks:state.blocks.m.slice(),persistedIdentity:localStorage.getItem('fil52.identity')}));
    assert.equal(stateRead.profile,'m');assert.equal(stateRead.persistedIdentity,'m');
    assert.equal(stateRead.name,'Viera');assert.equal(stateRead.other,'Mathilde');
