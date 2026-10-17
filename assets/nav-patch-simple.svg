@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Patchwork">
+<rect x="2" y="2" width="124" height="124" rx="28" fill="#FAEEE7" stroke="#DFC4B4" stroke-width="3"/>
+<rect x="10" y="10" width="108" height="108" rx="22" fill="none" stroke="#A99C87" stroke-width="1.7" stroke-dasharray="4 6" opacity=".76"/>
+<rect x="28" y="29" width="72" height="72" rx="4" fill="#FEFBF3" stroke="#7B9B85" stroke-width="4.2"/>
+<path d="M64 32v66M31 64h66" stroke="#C6A2A0" stroke-width="2.8"/>
+<path d="m64 32-16 16 16 16 16-16z" fill="#D7E3D4" stroke="#7B9B85" stroke-width="2"/>
+<path d="m32 64 16-16 16 16-16 16z" fill="#F2D8CB" stroke="#B78278" stroke-width="2"/>
+<path d="m64 64 16-16 16 16-16 16z" fill="#E9E2D3" stroke="#BDA07D" stroke-width="2"/>
+<path d="m64 64-16 16 16 16 16-16z" fill="#D7E3D4" stroke="#7B9B85" stroke-width="2"/>
+<circle cx="64" cy="64" r="7" fill="#DBA9A0" stroke="#BB8380" stroke-width="1.8"/>
+<circle cx="24" cy="24" r="3" fill="#CE9A95"/><circle cx="104" cy="104" r="3" fill="#A5B6A1"/>
+</svg>

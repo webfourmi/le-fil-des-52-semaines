@@ -13,7 +13,7 @@ async function main(){
    body:'<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><rect width="160" height="160" fill="#dadfd3"/></svg>'
   }));
   await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
-  await page.getByRole('button',{name:'Moi',exact:true}).click();
+  await page.getByRole('button',{name:'Viera',exact:true}).click();
   await page.locator('#bottomnav [data-page="world"]').click();
   await page.getByRole('heading',{name:'Histoires à coudre'}).waitFor();
   assert.equal(await page.locator('.travel-article').count(),3);

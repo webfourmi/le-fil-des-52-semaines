@@ -33,7 +33,7 @@ async function saveSnapshot(page){
     const page=await context.newPage(),errors=[];
     page.on('pageerror',e=>errors.push(e.message));
     await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
-    await page.getByRole('button',{name:'Moi',exact:true}).click();
+    await page.getByRole('button',{name:'Viera',exact:true}).click();
     await openJournal(page);
     const note='Carré patchwork à fleurs, à garder même hors ligne.';
     await page.locator('[data-note="1"]').fill(note);

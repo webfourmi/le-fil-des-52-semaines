@@ -40,7 +40,7 @@ async function main(){
    assert.equal(new URL(manifest.id,base).pathname,prefix);
    assert.equal(new URL(manifest.scope,base).pathname,prefix);
    assert.equal(new URL(manifest.start_url,base).pathname,prefix);
-   await page.getByRole('button',{name:'Moi',exact:true}).click();
+   await page.getByRole('button',{name:'Viera',exact:true}).click();
    await page.locator('details.pwa-panel > summary').click();
    await page.getByRole('button',{name:'Sauvegarder mon carnet',exact:true}).click();
    await page.getByRole('heading',{name:/Sauvegarde de/}).waitFor();

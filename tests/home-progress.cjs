@@ -2,7 +2,7 @@
 const {chromium}=require('playwright');const assert=require('node:assert/strict');
 (async()=>{const browser=await chromium.launch({headless:true});try{
  const context=await browser.newContext({viewport:{width:320,height:740}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
- await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});await page.getByRole('button',{name:'Moi',exact:true}).click();
+ await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});await page.getByRole('button',{name:'Viera',exact:true}).click();
  await page.waitForFunction(()=>homeNext('projectsDone')===1 && !!upcomingEditions[2]);
  const home=async()=>page.locator('#bottomnav [data-page="home"]').click();
  const expectTargets=async(course,patch)=>{assert.equal(await page.locator('.home-course').getAttribute('data-week'),course===null?null:String(course));assert.equal(await page.locator('.home-patch').getAttribute('data-home-patch'),patch===null?null:String(patch));};

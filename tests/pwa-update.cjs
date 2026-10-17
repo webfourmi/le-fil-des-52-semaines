@@ -38,7 +38,7 @@ async function main(){
   const errors=[];
   page.on('pageerror',e=>errors.push(e.message));
   await page.goto(origin,{waitUntil:'domcontentloaded'});
-  await page.getByRole('button',{name:'Moi',exact:true}).click();
+  await page.getByRole('button',{name:'Viera',exact:true}).click();
   await page.locator('#bottomnav [data-page="journal"]').click();
   await page.locator('[data-note="1"]').fill('Écriture pendant la première installation.');
   await page.evaluate(()=>{window.__initialMarker='premier atelier';});

@@ -5,7 +5,7 @@ const base='http://127.0.0.1:8765/';
 const six=['home','learn','quilt','world','journal','print'];
 const eight=[...six,'backup','personal'];
 const assets={
-home:'icon-app.svg',learn:'icon-couture.svg',quilt:'icon-patchwork.svg',
+home:'nav-home-simple.svg',learn:'nav-sewing-simple.svg',quilt:'nav-patch-simple.svg',
 world:'nav-world.svg',journal:'nav-journal.svg',print:'nav-print.svg',
 backup:'nav-backup.svg',personal:'nav-personal.svg'
 };
@@ -29,7 +29,7 @@ async function main(){
    const page=await ctx.newPage();
    const errors=[];page.on('pageerror',e=>errors.push(e.message));
    await page.goto(base,{waitUntil:'domcontentloaded'});
-   await page.getByRole('button',{name:'Moi',exact:true}).click();
+   await page.getByRole('button',{name:'Viera',exact:true}).click();
    const isMobile=width<=850;
    await verifyMenu(page,isMobile?'#bottomnav':'#nav',isMobile?six:eight);
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),'horizontal overflow at '+width);

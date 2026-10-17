@@ -1,9 +1,9 @@
 /* Le fil des 52 semaines — cache PWA. Augmenter CACHE_VERSION pour chaque nouvelle version de l'application. */
-const CACHE_VERSION = 'fil52-shell-v1.0.1';
+const CACHE_VERSION = 'fil52-shell-v1.1.1';
 const CORE = [
   './','./index.html','./manifest.webmanifest','./data/editions.json',
   './assets/backup.js','./assets/gallery.js','./assets/personal-gallery.js','./assets/textile-travel.js','./assets/lesson-guides.js','./assets/patchwork-courses.js','./assets/patchwork-courses.css','./assets/machine-intro.js','./assets/lesson-photos.js','./assets/lesson-photos.css','./assets/travel-updates.css','./assets/atelier.webp',
-  './assets/pwa-icon.svg','./assets/icon-app.svg','./assets/icon-couture.svg','./assets/icon-patchwork.svg','./assets/nav-world.svg','./assets/nav-journal.svg','./assets/nav-print.svg','./assets/nav-backup.svg','./assets/nav-personal.svg','./assets/pwa-icon-192.png','./assets/pwa-icon-512.png','./assets/pwa-icon-180.png','./assets/pwa.js'
+  './assets/romantic-theme.css','./assets/romantic-botanical.svg','./assets/nav-history.svg','./assets/nav-home-simple.svg','./assets/nav-sewing-simple.svg','./assets/nav-patch-simple.svg','./assets/pwa-icon.svg','./assets/icon-app.svg','./assets/icon-couture.svg','./assets/icon-patchwork.svg','./assets/nav-world.svg','./assets/nav-journal.svg','./assets/nav-print.svg','./assets/nav-backup.svg','./assets/nav-personal.svg','./assets/pwa-icon-192.png','./assets/pwa-icon-512.png','./assets/pwa-icon-180.png','./assets/pwa.js'
 ];
 const base = self.registration.scope;
 self.addEventListener('install', event => {

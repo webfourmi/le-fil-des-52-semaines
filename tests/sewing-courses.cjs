@@ -9,7 +9,7 @@ async function main(){
   const c=await browser.newContext({viewport:{width:390,height:844},acceptDownloads:true});contexts.push(c);
   const p=await c.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));
   await p.goto(ROOT,{waitUntil:'domcontentloaded'});
-  await p.getByRole('button',{name:'Moi',exact:true}).click();
+  await p.getByRole('button',{name:'Viera',exact:true}).click();
   await p.locator('#bottomnav [data-page="learn"]').click();
   await p.getByRole('heading',{name:'Mes cours'}).waitFor();
   assert.equal(await p.locator('#week-select option').count(),52,'Le programme conserve 52 semaines');
@@ -71,7 +71,7 @@ async function main(){
   await q.getByText('Cours publié · N° 02').waitFor();
   assert.equal(await q.locator('[data-toggle="steps"]').first().isChecked(),false);
   assert.equal(await q.locator('.lesson-patch-done').getAttribute('aria-pressed'),'false');
-  console.log('OK : progression de Mathilde indépendante de celle de Moi');
+  console.log('OK : progression de Mathilde indépendante de celle de Viera');
  }finally{for(const c of contexts)await c.close();await browser.close()}
 }
 main().catch(error=>{console.error('Échec cours enrichis :',error.stack||error);process.exitCode=1});

@@ -7,7 +7,7 @@ const assert=require('node:assert/strict');
  const context=await browser.newContext({viewport:{width:320,height:740}});
  const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto('http://127.0.0.1:8765/');
- await page.getByRole('button',{name:'Moi',exact:true}).click();
+ await page.getByRole('button',{name:'Viera',exact:true}).click();
  await page.locator('#bottomnav [data-page="learn"]').click();
  for(let w=1;w<=6;w++){
  await page.locator('#week-select').selectOption(String(w));
