@@ -37,6 +37,7 @@ async function run(){
    assert.ok(info.manifest?.includes('manifest.webmanifest'));
    assert.ok(info.icon?.includes('pwa-icon-180.png'));
    await page.getByRole('button',{name:'Moi',exact:true}).click();
+   await page.locator('details.pwa-panel > summary').click();
    await page.getByRole('button',{name:'Comment l’installer ?'}).click();
    await page.getByText('Sur l’écran d’accueil',{exact:false}).waitFor();
    console.log('OK Safari WebKit : accueil et instructions iPhone');
