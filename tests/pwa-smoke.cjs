@@ -8,7 +8,7 @@ const context=await browser.newContext({viewport:{width:390,height:844}});
 const page=await context.newPage();
 const errors=[];page.on('pageerror',e=>errors.push(e.message));
 await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
-await page.getByRole('button',{name:'Moi',exact:true}).click();
+await page.getByRole('button',{name:'Viera',exact:true}).click();
 const manifest=await page.locator('link[rel="manifest"]').getAttribute('href');
 assert.equal(manifest,'./manifest.webmanifest');
 const request=await page.request.get('http://127.0.0.1:8765/manifest.webmanifest');
