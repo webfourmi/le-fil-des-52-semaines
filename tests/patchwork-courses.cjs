@@ -3,7 +3,7 @@ const {chromium}=require('playwright');const assert=require('node:assert/strict'
 (async()=>{const browser=await chromium.launch({headless:true});try{
  const context=await browser.newContext({viewport:{width:320,height:740}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.route('https://fonts.googleapis.com/**',r=>r.abort());await page.route('https://fonts.gstatic.com/**',r=>r.abort());
- await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});await page.getByRole('button',{name:'Moi',exact:true}).click();await page.waitForFunction(()=>!!upcomingEditions[6]);
+ await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});await page.getByRole('button',{name:'Viera',exact:true}).click();await page.waitForFunction(()=>!!upcomingEditions[6]);
  await page.locator('#bottomnav [data-page="learn"]').click();await page.locator('.course-patchwork button').click();
  assert.equal(await page.locator('[data-patch-course]').count(),53);assert.equal(await page.locator('.quilt button[data-quilt-block]').count(),52);
  const panel=n=>page.locator('[data-patch-course="'+n+'"]');assert.equal(await panel(0).evaluate(el=>el.open),false);
