@@ -49,7 +49,7 @@ async function main(){
  const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
  const holders=[];
  try{
-  const one=await launch(browser,'Moi');holders.push(one);
+  const one=await launch(browser,'Viera');holders.push(one);
   const p=one.page;await toPersonal(p);
   await p.locator('#personal-new-name').fill('Ma veste en velours');
   await p.getByRole('button',{name:'Ajouter ce projet'}).click();
@@ -76,7 +76,7 @@ async function main(){
   assert.ok(saved.personalPhotos.every(x=>x.dataUrl.startsWith('data:image/jpeg')));
   console.log('OK : archive V0.6 avec toutes les photos personnelles, exportée hors ligne');
   await one.ctx.setOffline(false);
-  const two=await launch(browser,'Moi');holders.push(two);
+  const two=await launch(browser,'Viera');holders.push(two);
   await toPersonal(two.page);
   assert.equal(await two.page.locator('.personal-card').count(),0);
   await two.page.getByRole('button',{name:'Sauvegarder mes créations'}).click();
@@ -101,7 +101,7 @@ async function main(){
   await daughter.page.locator('#backup-file').setInputFiles({name:'sauvegarde.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(saved))});
   await daughter.page.getByText('Import refusé :').waitFor({timeout:10000});
   assert.ok(await daughter.page.locator('#backup-restore').isDisabled());
-  console.log('OK : isolement Mathilde / Moi et refus du mauvais profil');
+  console.log('OK : isolement Mathilde / Viera et refus du mauvais profil');
   await p.locator('#bottomnav [data-page="journal"]').click();
   await p.waitForFunction(()=>document.querySelectorAll('#journal-gallery .gallery-slot').length===2);
   await p.getByRole('button',{name:/Mes projets persos/}).click();
