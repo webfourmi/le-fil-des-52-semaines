@@ -10,7 +10,7 @@ async function main(){
   const page=await context.newPage(),errors=[];
   page.on('pageerror',e=>errors.push(e.message));
   await page.goto(url,{waitUntil:'domcontentloaded'});
-  await page.getByRole('button',{name:'Moi',exact:true}).click();
+  await page.getByRole('button',{name:'Viera',exact:true}).click();
   await page.locator('#bottomnav [data-page="journal"]').click();
   await page.getByRole('button',{name:/Mes projets persos/}).click();
   await page.locator('#personal-new-name').fill('Patchwork photo : plusieurs étapes');
