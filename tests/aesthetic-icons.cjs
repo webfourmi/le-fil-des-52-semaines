@@ -6,7 +6,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict');
   const ctx=await browser.newContext({viewport:{width:360,height:780}}),page=await ctx.newPage();
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
-  await page.getByRole('button',{name:'Moi',exact:true}).click();
+  await page.getByRole('button',{name:'Viera',exact:true}).click();
   const pwa=page.locator('details.pwa-panel');
   assert.equal(await pwa.count(),1);
   assert.equal(await pwa.evaluate(e=>e.open),false,'PWA replié par défaut');
