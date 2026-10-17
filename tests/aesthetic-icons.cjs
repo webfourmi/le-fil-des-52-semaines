@@ -27,7 +27,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict');
   for(const n of [192,512]){
     const path=manifest.icons.find(i=>i.sizes===n+'x'+n&&i.type==='image/png')?.src;
     assert.ok(path);
-    const blob=await (await page.request.get(new URL(path,'http://127.0.0.1:8765/'))).body();
+    const blob=await (await page.request.get(new URL(path,'http://127.0.0.1:8765/').href)).body();
     assert.equal(blob.readUInt32BE(16),n);
   }
   assert.equal(await page.locator('.feature-sew .brand-feature-icon img').count(),1);
