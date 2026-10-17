@@ -48,7 +48,7 @@ async function main(){
     const moi=await start(browser,'Moi');contexts.push(moi.context);
     const p=moi.page;
     assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
-    assert.equal(await p.locator('#bottomnav button').count(),5);
+    assert.equal(await p.locator('#bottomnav button').count(),6);
     pass('Navigation mobile 390 px : cinq onglets et aucun débordement');
     await journal(p);
     await p.locator('[data-journal-complete="1"]').check();
