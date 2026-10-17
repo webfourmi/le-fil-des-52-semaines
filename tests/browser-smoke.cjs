@@ -45,7 +45,7 @@ async function main(){
   const cases=[];const pass=(name)=>{cases.push(name);console.log('OK  '+name)};
   const contexts=[];let temp='';
   try {
-    const moi=await start(browser,'Moi');contexts.push(moi.context);
+    const moi=await start(browser,'Viera');contexts.push(moi.context);
     const p=moi.page;
     assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
     assert.equal(await p.locator('#bottomnav button').count(),6);
@@ -89,8 +89,8 @@ async function main(){
     await fille.page.locator('#backup-file').setInputFiles(temp);
     await fille.page.getByText('Import refusé :').waitFor({timeout:5000});
     assert.ok(await fille.page.locator('#backup-restore').isDisabled());
-    pass('Fichier Moi refusé par le carnet Mathilde');
-    const autre=await start(browser,'Moi');contexts.push(autre.context);
+    pass('Fichier Viera refusé par le carnet Mathilde');
+    const autre=await start(browser,'Viera');contexts.push(autre.context);
     await journal(autre.page);
     await autre.page.getByRole('button',{name:'Sauvegarder mon journal'}).click();
     await autre.page.locator('#backup-file').setInputFiles(temp);
@@ -115,7 +115,7 @@ async function main(){
     const pdf=await autre.page.pdf({format:'A4',printBackground:true});
     assert.ok(pdf.toString('utf8',0,4)==='%PDF');
     pass('Patron A4 présent et imprimable en PDF');
-    const desktop=await start(browser,'Moi',{width:1280,height:900});contexts.push(desktop.context);
+    const desktop=await start(browser,'Viera',{width:1280,height:900});contexts.push(desktop.context);
     assert.ok(await desktop.page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
     pass('Aucun débordement à 1 280 px');
     for(const c of [moi,fille,autre,desktop]){
