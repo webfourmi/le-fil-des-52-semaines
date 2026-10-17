@@ -98,8 +98,8 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
 .nav button.active .nav-art{box-shadow:0 0 0 2px #789982,0 3px 9px #354d3223}
 .nav button:hover{transform:translateX(2px)}
 @media(max-width:850px){
- .bottomnav{justify-content:space-between;gap:0;padding:6px 2px calc(7px + env(safe-area-inset-bottom))}
- .bottomnav button{flex:1 1 0;min-width:0;width:0;gap:2px;padding:5px 0 3px;min-height:56px;color:#5b6e62;font-size:clamp(.54rem,1.65vw,.66rem);border-radius:12px;white-space:nowrap}
+ .bottomnav{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr));justify-content:stretch;gap:0;padding:6px 2px calc(7px + env(safe-area-inset-bottom))}
+ .bottomnav button{min-width:0;width:100%;gap:2px;padding:5px 0 3px;min-height:56px;color:#5b6e62;font-size:clamp(.54rem,1.65vw,.66rem);border-radius:12px;white-space:nowrap}
  .bottomnav button .nav-art{display:block;object-fit:cover;height:clamp(30px,9vw,39px);width:clamp(30px,9vw,39px);border-radius:10px;box-shadow:0 2px 7px #3044341c;background:#f8eee7}
  .bottomnav button.active{background:#e6eee3;color:#2d5140}
  .bottomnav button.active .nav-art{box-shadow:0 0 0 2px #7e9e88,0 2px 7px #3044342b}
