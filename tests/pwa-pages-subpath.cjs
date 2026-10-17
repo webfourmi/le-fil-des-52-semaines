@@ -41,9 +41,11 @@ async function main(){
    assert.equal(new URL(manifest.scope,base).pathname,prefix);
    assert.equal(new URL(manifest.start_url,base).pathname,prefix);
    await page.getByRole('button',{name:'Moi',exact:true}).click();
+   await page.locator('details.pwa-panel > summary').click();
    await page.getByRole('button',{name:'Sauvegarder mon carnet',exact:true}).click();
    await page.getByRole('heading',{name:/Sauvegarde de/}).waitFor();
    await page.locator('#bottomnav [data-page="home"]').click();
+   await page.locator('details.pwa-panel > summary').click();
    await page.getByRole('button',{name:'Comment l’installer ?'}).click();
    assert.ok(await page.getByText('importe ta sauvegarde personnelle',{exact:false}).count());
    console.log('OK : installation GitHub Pages sous-chemin, guide sauvegarde avant installation.');
