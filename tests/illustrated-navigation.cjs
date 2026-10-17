@@ -29,7 +29,7 @@ async function main(){
    const page=await ctx.newPage();
    const errors=[];page.on('pageerror',e=>errors.push(e.message));
    await page.goto(base,{waitUntil:'domcontentloaded'});
-   await page.getByRole('button',{name:'Moi',exact:true}).click();
+   await page.getByRole('button',{name:'Viera',exact:true}).click();
    const isMobile=width<=850;
    await verifyMenu(page,isMobile?'#bottomnav':'#nav',isMobile?six:eight);
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),'horizontal overflow at '+width);
