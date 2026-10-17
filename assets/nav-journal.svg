@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Mon carnet">
+ <defs><linearGradient id="paper" x2="1" y2="1"><stop stop-color="#fffdfa"/><stop offset="1" stop-color="#faeee9"/></linearGradient></defs>
+ <rect x="2" y="2" width="124" height="124" rx="28" fill="url(#paper)" stroke="#e3cbbb" stroke-width="3"/>
+ <rect x="10" y="10" width="108" height="108" rx="22" fill="none" stroke="#b17a74" stroke-width="1.8" stroke-dasharray="3.5 6" opacity=".6"/>
+ <g stroke-linecap="round" stroke-linejoin="round"><path d="M18 41Q38 29 60 41v59Q35 85 18 96z" fill="#fff9ec" stroke="#b17a74" stroke-width="4"/><path d="M110 41Q89 29 65 41v59Q91 85 110 96z" fill="#fff6ef" stroke="#b17a74" stroke-width="4"/><path d="M62 40v60M29 56q17-6 27 2M29 68q17-6 27 2M74 69q10-5 23-2" fill="none" stroke="#b17a74" stroke-width="2.6"/><path d="M81 54q5-13 10 0 13 0 5 10L86 73l-10-9q-8-10 5-10" fill="#819f85" stroke="#b96f70" stroke-width="1.5"/><path d="M64 23v12" stroke="#819f85" stroke-width="3"/><circle cx="64" cy="18" r="4" fill="#819f85"/></g>
+ <g fill="#819f85" opacity=".85"><circle cx="23" cy="22" r="3"/><circle cx="105" cy="105" r="3"/></g>
+ </svg>
