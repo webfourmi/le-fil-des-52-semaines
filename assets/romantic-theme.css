@@ -294,3 +294,30 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline-offset:2
  .card,.quilt,.travel-article{box-shadow:none!important}
  .hero-copy::before{display:none}
 }
+
+/* V1.1.1 : titres plus discrets et pictogrammes aérés comme Voyage / Journal / Patrons. */
+#app .hero-editorial h1{font-size:clamp(1.28rem,2.65vw,2.5rem);line-height:1.2;letter-spacing:-.012em;margin-bottom:16px}
+#app > h1,#app .weektop h1{font-size:clamp(1.45rem,2.45vw,2.1rem)}
+#app .hero-meta{font-size:.68rem;margin-bottom:12px}
+#app .hero-copy{padding-top:clamp(23px,3vw,36px);padding-bottom:clamp(23px,3vw,36px)}
+#app .hero-actions{display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin-top:18px}
+#app .hero-icon-link{
+ width:78px;height:78px;min-height:78px;flex:0 0 78px;
+ display:grid;place-items:center;
+ padding:7px;border-radius:20px;
+ background:#fffbf5;border:1.5px solid #d9b9ab;
+ box-shadow:0 4px 12px #795c4a1b;
+}
+#app .hero-icon-link img{display:block;width:60px;height:60px;object-fit:contain;border-radius:13px}
+#app .hero-icon-link:hover{background:#f7eae1;border-color:#b88980;transform:translateY(-2px)}
+#app .hero-icon-link:focus-visible{outline:3px solid #926d9c;outline-offset:3px}
+#app .hero-icon-link.home-patch{background:#f8f8ee;border-color:#c7d1bf}
+#app .hero-icon-link.home-patch:hover{background:#eaf0e4;border-color:#8faaa0}
+#nav .nav-art,#bottomnav .nav-art{object-fit:contain}
+@media(max-width:850px){
+ #app .hero-editorial h1{font-size:clamp(1.17rem,5.5vw,1.75rem);line-height:1.23}
+ #app .hero-icon-link{width:67px;height:67px;min-height:67px;flex-basis:67px;padding:5px;border-radius:16px}
+ #app .hero-icon-link img{width:54px;height:54px}
+ #app .hero-actions{gap:11px}
+}
+@media(prefers-reduced-motion:reduce){#app .hero-icon-link:hover{transform:none}}
