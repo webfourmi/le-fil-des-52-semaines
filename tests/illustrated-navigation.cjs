@@ -5,7 +5,7 @@ const base='http://127.0.0.1:8765/';
 const six=['home','learn','quilt','world','journal','print'];
 const eight=[...six,'backup','personal'];
 const assets={
-home:'icon-app.svg',learn:'icon-couture.svg',quilt:'icon-patchwork.svg',
+home:'nav-home-simple.svg',learn:'nav-sewing-simple.svg',quilt:'nav-patch-simple.svg',
 world:'nav-world.svg',journal:'nav-journal.svg',print:'nav-print.svg',
 backup:'nav-backup.svg',personal:'nav-personal.svg'
 };
