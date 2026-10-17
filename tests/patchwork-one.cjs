@@ -2,7 +2,7 @@
 const {chromium}=require('playwright');const assert=require('node:assert/strict');
 (async()=>{const browser=await chromium.launch({headless:true});try{
  const context=await browser.newContext({viewport:{width:320,height:740}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
- await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});await page.getByRole('button',{name:'Moi',exact:true}).click();await page.locator('#bottomnav [data-page="learn"]').click();
+ await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});await page.getByRole('button',{name:'Viera',exact:true}).click();await page.locator('#bottomnav [data-page="learn"]').click();
  await page.locator('#week-select').selectOption('1');
  const guide=page.locator('.patchwork-one');await guide.waitFor();assert.equal(await guide.count(),1);assert.equal(await guide.locator('.patchwork-one-steps>li').count(),9);
  assert.match(await guide.innerText(),/21,5 × 21,5 cm/);assert.match(await guide.innerText(),/20 × 20 cm/);assert.equal(await guide.locator('svg[aria-label]').count(),1);assert.equal(await guide.locator('.lesson-problem').count(),3);
