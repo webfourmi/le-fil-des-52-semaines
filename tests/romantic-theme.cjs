@@ -55,7 +55,9 @@ async function main(){
      await page.getByRole('heading',{name:'Projets persos'}).waitFor();
      await page.screenshot({path:'tests/screenshots/v11-projets-desktop.png',fullPage:false});
    }
-   must(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),'Aucun débordement horizontal, '+width+' px');
+   const overflow=await page.evaluate(()=>({w:innerWidth,scroll:document.documentElement.scrollWidth,offenders:[...document.querySelectorAll('body *')].filter(e=>{const r=e.getBoundingClientRect();return r.width>0&&r.right>innerWidth+3;}).slice(0,12).map(e=>({tag:e.tagName,cls:e.className,scroll:e.scrollWidth,rect:e.getBoundingClientRect().toJSON()}))}));
+   if(overflow.scroll>overflow.w+2)console.error('Overflow diagnostic :',JSON.stringify(overflow));
+   must(overflow.scroll<=overflow.w+2,'Aucun débordement horizontal, '+width+' px');
    await page.locator(nav+' [data-page="home"]').click();
    await page.waitForFunction(()=>navigator.serviceWorker.controller!==null,{timeout:15000});
    await ctx.setOffline(true);await page.reload({waitUntil:'domcontentloaded'});
