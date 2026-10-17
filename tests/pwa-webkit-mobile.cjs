@@ -36,7 +36,7 @@ async function run(){
    assert.ok(info.width<=info.viewport+2,'Débordement horizontal sur iPhone');
    assert.ok(info.manifest?.includes('manifest.webmanifest'));
    assert.ok(info.icon?.includes('pwa-icon-180.png'));
-   await page.getByRole('button',{name:'Moi',exact:true}).click();
+   await page.getByRole('button',{name:'Viera',exact:true}).click();
    await page.locator('details.pwa-panel > summary').click();
    await page.getByRole('button',{name:'Comment l’installer ?'}).click();
    await page.getByText('Sur l’écran d’accueil',{exact:false}).waitFor();
