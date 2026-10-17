@@ -12,7 +12,7 @@ async function main(){
    const ctx=await browser.newContext({viewport:{width,height:width>850?900:844},deviceScaleFactor:1});
    const page=await ctx.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
    await page.goto(url,{waitUntil:'domcontentloaded'});
-   await page.getByRole('button',{name:'Moi',exact:true}).click();
+   await page.getByRole('button',{name:'Viera',exact:true}).click();
    const theme=await page.evaluate(()=>({
      loaded:[...document.styleSheets].some(s=>s.href?.includes('romantic-theme.css')),
      paper:getComputedStyle(document.documentElement).getPropertyValue('--paper').trim(),
