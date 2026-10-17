@@ -3,7 +3,7 @@ const {chromium}=require('playwright');const assert=require('node:assert/strict'
 (async()=>{const browser=await chromium.launch({headless:true});try{
  const context=await browser.newContext({viewport:{width:320,height:740}}),page=await context.newPage();
  await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
- await page.getByRole('button',{name:'Moi',exact:true}).click();
+ await page.getByRole('button',{name:'Viera',exact:true}).click();
  assert.deepEqual(await page.locator('#bottomnav button').evaluateAll(buttons=>buttons.map(b=>b.dataset.page)),['home','learn','quilt','world','journal','print']);
  const travel=page.locator('#bottomnav [data-page="world"]');
  assert.equal(await travel.locator('img.nav-art').count(),1);await travel.click();
