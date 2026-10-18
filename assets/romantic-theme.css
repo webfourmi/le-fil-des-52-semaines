@@ -385,3 +385,33 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline-offset:2
 #app .gallery-slot{min-width:0;max-width:100%;overflow-wrap:anywhere}
 #app .gallery-slot input[type="file"]{display:block;width:100%;min-width:0;max-width:100%}
 @media(max-width:640px){#app .gallery-pair{grid-template-columns:minmax(0,1fr)}}
+
+
+/* V1.1.4 · trois raccourcis illustrés immédiatement après le sélecteur de cours. */
+#app .sewing-course-tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:580px;margin:14px 0 23px}
+#app .sewing-tool{display:flex;align-items:center;flex-direction:column;justify-content:center;gap:4px;min-width:0;min-height:95px;padding:9px 5px 10px;border:1.5px solid #ddc6b8;border-radius:15px;background:#fffaf4;box-shadow:0 3px 10px #6d594719;color:#415949;font-weight:700;font-size:clamp(.72rem,2.5vw,.89rem);line-height:1.25;text-align:center}
+#app .sewing-tool:hover,#app .sewing-tool.selected{border-color:#a88e79;background:#f4e9df}
+#app .sewing-tool:focus-visible{outline:3px solid #9b6c9c;outline-offset:3px}
+#app .sewing-tool-art{display:inline-block;width:57px;height:57px;position:relative;flex:none}
+#app .sewing-tool-art img{width:100%;height:100%;object-fit:contain;display:block}
+#app .sewing-tool-zero{position:absolute;right:-2px;top:0;display:grid;place-items:center;width:23px;height:23px;border:2px solid #fffaf3;border-radius:50%;background:#6a8d7e;color:white;font-weight:800;font-size:13px;box-shadow:0 2px 5px #334f4533}
+#app .sewing-dictionary-panel{margin:8px 0 20px}
+#app .sewing-dico-heading{display:flex;align-items:center;gap:15px}
+#app .sewing-dico-heading>img{width:74px;height:74px;object-fit:contain}
+#app .sewing-dico-heading h2{margin:3px 0 5px}
+#app .sewing-dico-filters{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:12px;margin:18px 0 13px}
+#app .sewing-dico-filters label{display:flex;flex-direction:column;min-width:0;gap:6px;font-weight:650}
+#app .sewing-dico-filters input,#app .sewing-dico-filters select{width:100%;min-width:0;height:44px;border:1px solid #b9c7b7;background:#fffdf9;border-radius:10px;padding:8px 10px;color:#394f43}
+#app .sewing-dico-results{margin:0 0 10px;font-style:italic}
+#app .sewing-term>summary{display:flex;align-items:center;justify-content:space-between;gap:6px}
+#app .sewing-first-tag{flex:none;border:1px solid #dfccba;background:#f7eee2;border-radius:8px;font-weight:600;font-size:.72rem;color:#795e55;padding:3px 6px}
+#app .sewing-term .sewing-dico-go{margin-top:13px;font-size:.84rem}
+#app .sewing-term[hidden],#app .sewing-dico-empty[hidden]{display:none!important}
+#app .sewing-dico-empty{padding:16px;background:#fbf3e6;border-radius:11px}
+@media(max-width:560px){
+ #app .sewing-course-tools{gap:8px;margin-top:13px}
+ #app .sewing-tool{min-height:85px}
+ #app .sewing-tool-art{width:49px;height:49px}
+ #app .sewing-dico-filters{grid-template-columns:minmax(0,1fr)}
+ #app .sewing-dico-heading>img{width:59px;height:59px}
+}
