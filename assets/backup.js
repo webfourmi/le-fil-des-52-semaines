@@ -1,7 +1,7 @@
 /* Sauvegardes personnelles du Fil des 52 semaines. Aucune donnée transférée. */
 (function(root){
   'use strict';
-  const FORMAT='le-fil-des-52-semaines.personnel',SCHEMA=4,MAX_FILE_SIZE=96*1024*1024;
+  const FORMAT='le-fil-des-52-semaines.personnel',SCHEMA=5,MAX_FILE_SIZE=96*1024*1024;
   const arrKinds=['mat','steps','blocks','ready','projectsDone'];
   const objectKinds=['notes','ratings'];
   const validProfile=p=>p==='m'||p==='f';
@@ -44,6 +44,11 @@
       return {id:project.id,title:project.title,notes:project.notes,createdAt:project.createdAt};
     });
   }
+  function cultureIds(value,kind){
+    check(Array.isArray(value)&&value.length<=100,'Liste de lecture '+kind+' invalide.');
+    check(value.every(id=>typeof id==='string'&&/^(world|history):[a-z0-9-]{1,40}$/.test(id)),'Identifiant de lecture invalide.');
+    return [...new Set(value)];
+  }
   function validateData(data,schema=SCHEMA){
     check(plain(data),'Données de couture manquantes.');
     const output={};
@@ -51,6 +56,7 @@
     output.notes=notes(data.notes);
     output.ratings=ratings(data.ratings);
     if(schema>=4)output.personalProjects=personalProjects(data.personalProjects);
+    if(schema>=5){output.cultureFavorites=cultureIds(data.cultureFavorites,'favoris');output.cultureRead=cultureIds(data.cultureRead,'terminés');}
     return output;
   }
   function exportData(state,profile,photos=[],personalPhotos=[]){
@@ -58,6 +64,8 @@
     const data={};
     for(const kind of [...arrKinds,...objectKinds])data[kind]=state[kind]?.[profile];
     data.personalProjects=state.personalProjects?.[profile]||[];
+    data.cultureFavorites=state.cultureFavorites?.[profile]||[];
+    data.cultureRead=state.cultureRead?.[profile]||[];
     check(Array.isArray(photos)&&photos.length<=104,'Album invalide.');
     const validated=validateData(data);
     check(Array.isArray(personalPhotos)&&personalPhotos.length<=root.Fil52PersonalPhotos.MAX_PHOTOS,'Galerie des projets personnels invalide.');
@@ -69,7 +77,7 @@
   function parseBackup(text){
     check(typeof text==='string'&&text.length<=MAX_FILE_SIZE&&text.length>0,'Fichier vide ou trop grand.');
     let file;try{file=JSON.parse(text)}catch(e){throw Error('Ce fichier ne contient pas un JSON valide.')}
-    check(plain(file)&&file.format===FORMAT&&(file.schema===SCHEMA||file.schema===3||file.schema===2),'Format de sauvegarde incompatible.');
+    check(plain(file)&&file.format===FORMAT&&(file.schema===SCHEMA||file.schema===4||file.schema===3||file.schema===2),'Format de sauvegarde incompatible.');
     check(validProfile(file.profile),'Identité de sauvegarde inconnue.');
     check(typeof file.exportedAt==='string'&&Number.isFinite(Date.parse(file.exportedAt)),'Date de sauvegarde invalide.');
     const photos=file.schema===2?[]:file.photos;
@@ -97,6 +105,9 @@
     const next={...state};
     for(const kind of [...arrKinds,...objectKinds])next[kind]={...state[kind],[profile]:data[kind]};
     if(!backup.preservePersonal)next.personalProjects={...(state.personalProjects||{m:[],f:[]}),[profile]:data.personalProjects};
+    if((backup.schema||SCHEMA)>=5){
+      for(const kind of ['cultureFavorites','cultureRead'])next[kind]={...(state[kind]||{m:[],f:[]}),[profile]:data[kind]};
+    }
     return next;
   }
   root.Fil52Backup={FORMAT,SCHEMA,MAX_FILE_SIZE,exportData,parseBackup,applyBackup};
