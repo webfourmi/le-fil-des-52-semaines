@@ -23,7 +23,7 @@ async function main(){
    assert.ok((await page.locator('.sewing-variants').innerText()).includes('matelassé'));
    assert.equal(await page.locator('.sewing-variant-diagram').count(),2);
    assert.ok((await page.locator('.material').allTextContents()).some(t=>t.includes('Vlieseline H630')));
-   await page.locator('#dico-couture>summary').click();
+   await page.locator('.sewing-course-tools [data-dico-toggle]').click();
    assert.equal(await page.locator('.sewing-term').count(),8);
    for(const term of ['Droit-fil','Surfilage','Molleton','Matelassage']){
     const item=page.locator('.sewing-term').filter({has:page.locator('summary', {hasText:term})});
