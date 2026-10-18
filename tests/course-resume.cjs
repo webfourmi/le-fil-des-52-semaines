@@ -10,9 +10,9 @@ const {chromium}=require('playwright');const assert=require('node:assert/strict'
  assert.equal(await focusedStep(),'0');assert.equal(await page.locator('[data-toggle="steps"]').first().isChecked(),false);
  await page.locator('[data-toggle="steps"][data-val="0"]').check();await page.locator('[data-toggle="steps"][data-val="2"]').check();
  await page.locator('#week-select').selectOption('2');await page.locator('[data-toggle="steps"][data-val="2000"]').check();await page.locator('#week-select').selectOption('1');
- assert.match(await page.locator('.course-resume').innerText(),/Reprendre à l’étape 2/);assert.ok(await page.getByText('2 étapes sur 8 terminées pour Viera',{exact:true}).count());await page.locator('.course-resume').click();assert.equal(await focusedStep(),'1');
+ assert.match(await page.locator('.course-resume').innerText(),/Reprendre à l’étape 2/);assert.ok(await page.getByText('2 étapes sur 9 terminées pour Viera',{exact:true}).count());await page.locator('.course-resume').click();assert.equal(await focusedStep(),'1');
  await page.waitForFunction(()=>{const r=document.activeElement.getBoundingClientRect();return r.top>=-1&&r.top<innerHeight&&r.bottom>0});
- await page.locator('#bottomnav [data-page="home"]').click();assert.equal(await page.locator('.feature-sew p').innerText(),'2 étapes sur 8');assert.match(await page.locator('.feature-sew .feature-link').innerText(),/Reprendre/);
+ await page.locator('#bottomnav [data-page="home"]').click();assert.equal(await page.locator('.feature-sew p').innerText(),'2 étapes sur 9');assert.match(await page.locator('.feature-sew .feature-link').innerText(),/Reprendre/);
  await page.locator('.home-course').click();assert.equal(await focusedStep(),'1');
  await page.locator('#bottomnav [data-page="home"]').click();await page.locator('.feature-sew').click();assert.equal(await focusedStep(),'1');
  await page.waitForFunction(()=>!!navigator.serviceWorker.controller);await context.setOffline(true);await page.reload({waitUntil:'domcontentloaded'});await page.waitForFunction(()=>!!upcomingEditions[2]);await page.locator('.home-course').click();assert.equal(await focusedStep(),'1');
