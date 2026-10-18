@@ -7,7 +7,7 @@ const line=(x,y,X,Y,dash='')=>'<line x1="'+x+'" y1="'+y+'" x2="'+X+'" y2="'+Y+'"
 const label=(x,y,s)=>'<text x="'+x+'" y="'+y+'" font-family="sans-serif" font-size="15" fill="#334b40" text-anchor="middle">'+esc(s)+'</text>';
 const A='#d3a190',B='#8eada0',C='#eedbc3',D='#738f80';
 function diagram(w,patch){
- let shapes='',title=patch?'Schéma du bloc de patchwork, semaine '+w:'Schéma des gestes du projet couture, semaine '+w;
+ let shapes='',title=patch?'Schéma du bloc de patchwork, rendez-vous '+w:'Schéma des gestes du projet couture, rendez-vous '+w;
  if(patch){
   if(w===2){shapes=rect(175,25,126,170,A)+rect(301,25,126,170,B)+line(301,25,301,195,'5 4')+label(301,220,'2 bandes verticales · bloc brut 21,5 cm');}
   if(w===3){shapes=rect(180,25,240,85,A)+rect(180,110,240,85,B)+line(180,110,420,110,'5 4')+label(300,220,'2 bandes horizontales · bloc brut 21,5 cm');}
