@@ -8,7 +8,7 @@ Chaque numéro propose **exactement quatre contenus coordonnés** : un cours de 
 
 Le programme conserve **52 numéros**, qui se déroulent sur environ **deux ans**, et non plus sur 52 semaines. Les six premiers numéros déjà disponibles restent consultables, avec leur progression et leurs données intactes. Chaque nouveau contenu culturel sera publié dans son espace Monde ou Temps, avec favoris et suivi de lecture individuels.
 
-**Rythme éditorial prévu :** un vendredi sur deux, à 8 h, à partir du vendredi 23 octobre 2026 pour le numéro 2 (date indicative du calendrier, non déclencheur de publication automatique). Les autres numéros suivent la même cadence à compter des futures publications. Le calendrier et la mise en ligne du contenu sont distincts : une publication exige l'ajout effectif des quatre contenus dans l'application.
+**Rythme éditorial prévu :** un vendredi sur deux, à 8 h, à compter du vendredi 23 octobre 2026 pour les prochains rendez-vous (date indicative du calendrier, non déclencheur de publication automatique). Les autres numéros suivent la même cadence à compter des futures publications. Le calendrier et la mise en ligne du contenu sont distincts : une publication exige l'ajout effectif des quatre contenus dans l'application.
 
 ## Deux maisons, les mêmes cours
 
@@ -20,7 +20,7 @@ Au premier lancement sur un navigateur, choisir **Moi** ou **Mathilde**. Le choi
 
 ## V0.3 : journal personnel et sauvegarde individuelle
 
-- **Mon journal :** projet de la semaine terminé, bloc terminé, difficulté de 1 à 5, notes par semaine.
+- **Mon journal :** projet du numéro terminé, bloc terminé, difficulté de 1 à 5, notes par numéro.
 - **Sauvegardes :** export JSON du **seul profil choisi**, avec coche des fournitures, étapes, projets, blocs, notes et évaluations.
 - **Restauration :** validation du format et de l'identité dans le fichier. Un profil « Moi » ne peut pas importer une sauvegarde « Mathilde », et inversement.
 - La restauration **remplace** la progression locale du profil sélectionné. Une confirmation est demandée. Exporter une sauvegarde récente avant de remplacer les données.
@@ -49,7 +49,7 @@ L'application est hébergée via GitHub Pages à https://webfourmi.github.io/le-
 - Chaque numéro contient un projet couture et un bloc patchwork progressif, une fiche technique et les gabarits imprimables nécessaires.
 - Chaque personne construit sa **propre couverture de 52 blocs**, complétée de quatre carrés unis.
 - Les rubriques « Histoire de la couture » et « Coutures du monde » utilisent des sources vérifiées et des photographies documentaires avec crédits et licences.
-- Les 51 semaines encore non publiées ne sont pour l'instant qu'un programme prévisionnel, pas des tutoriels détaillés.
+- Les numéros restant à publier sont un programme prévisionnel : les tutoriels et fiches documentées ne seront disponibles que lorsqu'ils auront été ajoutés.
 
 ## Crédits des photographies documentaires du n° 01
 
