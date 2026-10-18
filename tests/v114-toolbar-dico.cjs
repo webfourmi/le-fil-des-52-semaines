@@ -16,7 +16,13 @@ async function main(){
   await page.locator(nav+' [data-page="learn"]').click();
   const toolbar=page.locator('.sewing-course-tools');
   assert.equal(await toolbar.locator('button').count(),3,'Barre à trois icônes');
-  assert.deepEqual(await toolbar.locator('button').evaluateAll(bs=>bs.map(b=>b.textContent.trim())),['0Cours 0','Dico couture','Patrons']);
+  assert.deepEqual(await toolbar.locator('button').evaluateAll(bs=>bs.map(b=>b.textContent.trim())),['0','',''],'La barre ne doit contenir aucun libellé visible');
+  assert.deepEqual(await toolbar.locator('button').evaluateAll(bs=>bs.map(b=>b.getAttribute('aria-label'))),['Cours 0 : préparation de la machine','Dico couture','Patrons à imprimer'],'Les boutons conservent des noms accessibles');
+  assert.equal(await toolbar.locator('[data-page="print"] img').getAttribute('src'),await page.locator(nav+' [data-page="print"] img').getAttribute('src'),'Le raccourci Patrons reprend strictement l’icône de la navigation d’accueil');
+  assert.equal(await toolbar.locator('[data-page="machine"] img').getAttribute('src'),await page.locator(nav+' [data-page="learn"] img').getAttribute('src'),'Cours 0 reprend l’icône Couture');
+  const dicoIcon=toolbar.locator('[data-dico-toggle] img');
+  assert.equal(await dicoIcon.getAttribute('src'),'./assets/icon-dico-couture.svg');
+  assert.ok(await dicoIcon.evaluate(img=>img.complete&&img.naturalWidth>0),'Nouvelle icône Dico couture rendue');
   assert.ok(await page.locator('.machine-intro-entry').isVisible(),'Cours 0 affiché si non validé');
   assert.equal(await page.locator('.sewing-course-tools .sewing-tool-zero').innerText(),'0');
   assert.equal(await page.locator('#dico-couture').count(),0,'Dico fermé par défaut');
