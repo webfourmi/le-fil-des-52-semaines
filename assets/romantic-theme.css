@@ -415,3 +415,15 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline-offset:2
  #app .sewing-dico-filters{grid-template-columns:minmax(0,1fr)}
  #app .sewing-dico-heading>img{width:59px;height:59px}
 }
+
+
+/* Retouche V1.1.4 · trois icônes seules, sans libellés affichés. */
+#app .sewing-course-tools{max-width:340px;gap:12px;margin:13px 0 21px}
+#app .sewing-course-tools .sewing-tool{min-height:84px;padding:8px;gap:0;border-radius:17px;font-size:0}
+#app .sewing-course-tools .sewing-tool-art{width:64px;height:64px}
+#app .sewing-course-tools .sewing-tool-zero{width:25px;height:25px;right:-3px;top:-3px;font-size:14px}
+@media(max-width:560px){
+ #app .sewing-course-tools{max-width:300px;gap:9px}
+ #app .sewing-course-tools .sewing-tool{min-height:78px;padding:7px}
+ #app .sewing-course-tools .sewing-tool-art{width:58px;height:58px}
+}
