@@ -10,7 +10,7 @@ const {chromium}=require('playwright');const assert=require('node:assert/strict'
  await page.locator('.travel-article').first().waitFor();assert.equal(await travel.getAttribute('aria-current'),'page');
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  await page.locator('#bottomnav [data-page="learn"]').click();
- await page.locator('.course-patchwork button').click();await page.getByRole('heading',{name:'Ma couverture de 52 blocs'}).waitFor();
+ await page.locator('#bottomnav [data-page="quilt"]').click();await page.getByRole('heading',{name:'Mes cours de patchwork'}).waitFor();
  assert.ok(await page.locator('#bottomnav [data-page="quilt"]').evaluate(el=>el.classList.contains('active')));
  await page.waitForFunction(()=>!!navigator.serviceWorker.controller);await context.setOffline(true);await page.reload({waitUntil:'domcontentloaded'});
  await page.locator('#bottomnav [data-page="world"]').click();assert.equal(await page.locator('.travel-chapter').count(),18);
