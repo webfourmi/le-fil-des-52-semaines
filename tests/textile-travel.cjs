@@ -16,19 +16,23 @@ async function main(){
   await page.getByRole('button',{name:'Viera',exact:true}).click();
   await page.locator('#bottomnav [data-page="world"]').click();
   await page.getByRole('heading',{name:'Histoires à coudre'}).waitFor();
-  assert.equal(await page.locator('.travel-article').count(),3);
-  assert.equal(await page.locator('.travel-photo img').count(),7);
-  assert.equal(await page.locator('.travel-videos a').count(),2);
-  assert.equal(await page.locator('.travel-content iframe').count(),0);
-  for(const link of await page.locator('.travel-videos a').all()){
-   assert.match(await link.getAttribute('href'),/^https:\/\//);
-   assert.equal(await link.getAttribute('target'),'_blank');
-   assert.match(await link.getAttribute('rel'),/noopener/);
-  }
+  assert.equal(await page.locator('.travel-article').count(),1,'Un article visible à la fois');
+  assert.equal(await page.locator('#culture-article-select option').count(),3);
+  let totalPhotos=0,totalVideos=0;
   const countries=['japon','bengale','coree'];
   for(const country of countries){
+   await page.locator('#culture-article-select').selectOption('world:'+country);
    const item=page.locator('.travel-article[data-travel="'+country+'"]');
-   if(!(await item.evaluate(e=>e.open)))await item.locator('summary').click();
+   assert.equal(await item.count(),1,'Chaque escale accessible dans le menu');
+   assert.equal(await page.locator('.travel-article').count(),1);
+   totalPhotos+=await item.locator('.travel-photo img').count();
+   totalVideos+=await item.locator('.travel-videos a').count();
+   assert.equal(await item.locator('iframe').count(),0);
+   for(const link of await item.locator('.travel-videos a').all()){
+    assert.match(await link.getAttribute('href'),/^https:\/\//);
+    assert.equal(await link.getAttribute('target'),'_blank');
+    assert.match(await link.getAttribute('rel'),/noopener/);
+   }
    assert.ok(await item.locator('.travel-chapter').count()>=6);
    assert.ok(await item.locator('.travel-vocabulary dt').count()>=3);
    assert.ok(await item.locator('.travel-workshop li').count()>=3);
@@ -46,6 +50,8 @@ async function main(){
      assert.ok(p.source.includes('commons.wikimedia.org/wiki/File:'),'Source photo manquante');
    }
   }
+  assert.equal(totalPhotos,7,'Sept photos réparties entre les trois escales');
+  assert.equal(totalVideos,2,'Deux vidéos réparties entre les trois escales');
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),'Débordement mobile');
   assert.deepEqual(errors,[]);
   console.log('OK : trois articles détaillés, sept photos sourcées, lexiques et ateliers, sans débordement mobile.');

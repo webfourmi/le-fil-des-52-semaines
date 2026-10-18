@@ -13,7 +13,7 @@ const {chromium}=require('playwright');const assert=require('node:assert/strict'
  await page.locator('#bottomnav [data-page="quilt"]').click();await page.getByRole('heading',{name:'Mes cours de patchwork'}).waitFor();
  assert.ok(await page.locator('#bottomnav [data-page="quilt"]').evaluate(el=>el.classList.contains('active')));
  await page.waitForFunction(()=>!!navigator.serviceWorker.controller);await context.setOffline(true);await page.reload({waitUntil:'domcontentloaded'});
- await page.locator('#bottomnav [data-page="world"]').click();assert.equal(await page.locator('.travel-chapter').count(),18);
+ await page.locator('#bottomnav [data-page="world"]').click();assert.equal(await page.locator('.travel-chapter').count(),await page.evaluate(()=>Fil52Travel.cards[0].sections.length));assert.equal(await page.locator('.travel-article').count(),1);
  await page.screenshot({path:'../voyage-mobile.png',fullPage:false});
  console.log('OK : six vraies icônes à 320 px, accès patchwork depuis Mes cours, articles hors connexion');
  }finally{await browser.close()}})().catch(e=>{console.error(e);process.exitCode=1});

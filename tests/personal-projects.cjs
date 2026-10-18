@@ -70,7 +70,7 @@ async function main(){
   assert.equal(await p.locator('[data-personal-notes]').inputValue(),'Veste réalisée hors programme de 52 semaines.');
   console.log('OK : projets libres, notes et photos hors connexion');
   const saved=await backupJSON(p);
-  assert.equal(saved.schema,4);assert.equal(saved.profile,'m');
+  assert.equal(saved.schema,5);assert.equal(saved.profile,'m');
   assert.equal(saved.data.personalProjects.length,1);
   assert.equal(saved.personalPhotos.length,2);
   assert.ok(saved.personalPhotos.every(x=>x.dataUrl.startsWith('data:image/jpeg')));

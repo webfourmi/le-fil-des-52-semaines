@@ -40,7 +40,7 @@ async function main(){
   const waiting=page.waitForEvent('download',{timeout:15000});
   await page.locator('#backup-export').click();
   const download=await waiting,backup=JSON.parse(await fs.readFile(await download.path(),'utf8'));
-  assert.equal(backup.schema,4);
+  assert.equal(backup.schema,5);
   assert.equal(backup.personalPhotos.length,20);
   console.log('OK : le fichier JSON conserve les 20 photographies et reste au format V0.6.');
   assert.deepEqual(errors,[],errors.join('; '));
