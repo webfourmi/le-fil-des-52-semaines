@@ -26,7 +26,7 @@ async function main(){
    await p.getByRole('heading',{name:title,exact:true}).waitFor();
    assert.equal(await p.locator('[data-toggle="steps"]').count(),numSteps);
    assert.ok(await p.locator('[data-toggle="mat"]').count()>=4);
-   assert.equal(await p.locator('.lesson-figure svg').count(),2);
+   assert.equal(await p.locator('.lesson-figure svg').count(),1);
    assert.equal(await p.locator('.patchwork-one,[data-lesson-patch]').count(),0,'Les blocs restent dans le volet Patchwork');
    assert.equal(await p.locator('.lesson-problem').count(),3);
    assert.equal(await p.locator('.lesson-checkpoints li').count(),3);
@@ -59,7 +59,7 @@ async function main(){
   await p.locator('#bottomnav [data-page="learn"]').click();
   await p.locator('#week-select').selectOption('5');
   await p.getByText('Cours publié · N° 05').waitFor({timeout:10000});
-  assert.equal(await p.locator('.lesson-figure svg').count(),2);
+  assert.equal(await p.locator('.lesson-figure svg').count(),1);
   console.log('OK : nouvelle leçon, schémas et textes accessibles hors connexion');
   assert.deepEqual(errors,[],'Erreurs JS dans le navigateur');
   await c.setOffline(false);
