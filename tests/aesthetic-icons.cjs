@@ -45,7 +45,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict');
   assert.equal(await tabs.first().getAttribute('aria-label'),'Coutures du monde');
   assert.equal(await tabs.nth(1).getAttribute('aria-label'),'Histoire de la couture');
   assert.equal(await tabs.first().getAttribute('aria-pressed'),'true');
-  assert.ok(await page.locator('.travel-article').count()>=3);
+  assert.equal(await page.locator('.travel-article').count(),1,'Un seul article dans le voyage');
   await tabs.nth(1).click();
   assert.equal(await page.locator('.travel-article').count(),0);
   await page.getByRole('heading',{name:"Bien avant nos machines : l'aiguille à chas"}).waitFor();
