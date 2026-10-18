@@ -378,3 +378,10 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline-offset:2
 #app .sewing-term>summary{cursor:pointer;color:#47634f;font-weight:700}
 #app .sewing-term p{margin:9px 0 0;line-height:1.65}
 @media(max-width:700px){#app .sewing-variants{padding:15px 13px}#app .sewing-variant-grid,#app .sewing-terms{grid-template-columns:minmax(0,1fr)}#app .sewing-variant-focus{padding:13px}#app .sewing-dictionary>summary strong{font-size:1.25rem}}
+
+
+/* La galerie du journal ne doit jamais imposer la largeur intrinsèque du bouton de fichier. */
+#app .gallery-pair{grid-template-columns:repeat(2,minmax(0,1fr));min-width:0}
+#app .gallery-slot{min-width:0;max-width:100%;overflow-wrap:anywhere}
+#app .gallery-slot input[type="file"]{display:block;width:100%;min-width:0;max-width:100%}
+@media(max-width:640px){#app .gallery-pair{grid-template-columns:minmax(0,1fr)}}
