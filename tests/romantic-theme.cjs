@@ -35,7 +35,7 @@ async function main(){
    must(await page.locator('.weektop').count()===1,'Entête du cours conservé');
    if(width===390)await page.screenshot({path:'tests/screenshots/v11-cours-mobile.png',fullPage:false});
    await page.locator(nav+' [data-page="quilt"]').click();
-   await page.getByRole('heading',{name:'Ma couverture de 52 blocs'}).waitFor();
+   await page.getByRole('heading',{name:'Mes cours de patchwork'}).waitFor();await page.locator('[data-patch-cover]').click();
    must(await page.locator('.quilt .block').count()===56,'56 cases de couverture préservées');
    if(width===390)await page.screenshot({path:'tests/screenshots/v11-patchwork-mobile.png',fullPage:false});
    await page.locator(nav+' [data-page="world"]').click();
