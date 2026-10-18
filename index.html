@@ -154,7 +154,7 @@ function save(){try{localStorage.setItem('fil52.progress.v1',JSON.stringify({...
 const el=id=>document.getElementById(id);
 const safe=s=>String(s??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function toast(t){let x=el('toast');x.textContent=t;x.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>x.classList.remove('show'),2700)}
-function selectIdentity(p){if(!['m','f'].includes(p))return;state.profile=p;localStorage.setItem('fil52.identity',p);save();render()}function page(p){state.page=p;render();scrollTo({top:0,behavior:'instant'})}
+function selectIdentity(p){if(!['m','f'].includes(p))return;state.profile=p;localStorage.setItem('fil52.identity',p);save();render()}function page(p){if(p!=='learn')dicoOpen=false;state.page=p;render();scrollTo({top:0,behavior:'instant'})}
 function chooseProfile(p){if(state.profile!==p)return;render()}
 function selectWeek(w){state.week=+w;state.page='learn';save();render();scrollTo({top:0,behavior:'instant'})}
 function toggle(kind,p,v){const a=state[kind][p]||[];state[kind][p]=a.includes(v)?a.filter(x=>x!==v):[...a,v];save();render();}
@@ -458,7 +458,7 @@ document.addEventListener('click',e=>{
  const dicoButton=e.target.closest('[data-dico-toggle]');
  if(dicoButton){dicoOpen=!dicoOpen;render();if(dicoOpen){document.getElementById('dico-couture')?.scrollIntoView({block:'nearest'});document.getElementById('dico-search')?.focus({preventScroll:true})}else{document.querySelector('[data-dico-toggle]')?.focus({preventScroll:true})}return}
  const goDico=e.target.closest('[data-dico-goto]');
- if(goDico){const first=+goDico.dataset.dicoGoto;if(first===0)page('machine');else if(state.published.includes(first))selectWeek(first);return}
+ if(goDico){const first=+goDico.dataset.dicoGoto;dicoOpen=false;dicoQuery='';dicoCourse='';if(first===0)page('machine');else if(state.published.includes(first))selectWeek(first);return}
  const ct=e.target.closest('[data-culture-tab]');if(ct){cultureTab=ct.dataset.cultureTab==='history'?'history':'world';render();return}
 
  if(e.target.closest('[data-resume-course]')){resumeCourse(+e.target.closest('[data-resume-course]').dataset.resumeCourse);return}
