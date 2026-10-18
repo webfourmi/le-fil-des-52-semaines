@@ -52,7 +52,7 @@ async function main(){
    assert.equal(await page.locator('#week-select').inputValue(),'2');
    await page.locator(nav+' [data-page="home"]').click();
    await page.locator('.hero-actions .home-patch').click();
-   await page.getByRole('heading',{name:'Ma couverture de 52 blocs'}).waitFor();
+   await page.getByRole('heading',{name:'Mes cours de patchwork'}).waitFor();assert.equal(await page.locator('#patch-week-select').inputValue(),'2');
    const stored=await page.evaluate(()=>JSON.parse(localStorage.getItem('fil52.progress.v1')));
    assert.equal(stored.notes.m['1'],'Un souvenir de couture qui ne doit pas être effacé.');
    assert.deepEqual(stored.projectsDone.m,[1]);assert.deepEqual(stored.blocks.m,[1]);
