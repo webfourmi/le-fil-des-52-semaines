@@ -1,6 +1,14 @@
-# Le fil des 52 semaines · V0.3 (proposition)
+# De fil en aiguille · V1.1.7
 
-Application de couture progressive en 52 semaines : projets de récupération, apprentissage de la **Janome Cherry 21**, patronnerie, 52 blocs de patchwork par personne, et rubriques culturelles documentées.
+Application de couture et patchwork en **52 rendez-vous, espacés de 15 jours** : projets de récupération, apprentissage de la **Janome Cherry 21**, patronnerie, 52 blocs de patchwork par personne, et rubriques culturelles documentées.
+
+## Un rendez-vous tous les 15 jours
+
+Chaque numéro propose **exactement quatre contenus coordonnés** : un cours de couture progressif sur Janome Cherry 21, **un cours de patchwork** (un bloc personnel final de 20 × 20 cm), **une fiche Coutures du monde** et **une fiche Histoire de la couture**, ces deux dernières documentées et sourcées. Les fournitures sont toujours données pour **un seul ouvrage**.
+
+Le programme conserve **52 numéros**, qui se déroulent sur environ **deux ans**, et non plus sur 52 semaines. Les six premiers numéros déjà disponibles restent consultables, avec leur progression et leurs données intactes. Chaque nouveau contenu culturel sera publié dans son espace Monde ou Temps, avec favoris et suivi de lecture individuels.
+
+**Rythme éditorial :** un nouvel ensemble de quatre contenus tous les 15 jours. Il s'agit de l'organisation **interne du programme**, pas d'une tâche ChatGPT programmée ni d'un rappel automatique. La date de départ reste à définir dans le calendrier éditorial ; chaque édition paraît une fois ses quatre contenus préparés et intégrés dans l'application. Aucun cours existant n'est supprimé.
 
 ## Deux maisons, les mêmes cours
 
@@ -12,7 +20,7 @@ Au premier lancement sur un navigateur, choisir **Moi** ou **Mathilde**. Le choi
 
 ## V0.3 : journal personnel et sauvegarde individuelle
 
-- **Mon journal :** projet de la semaine terminé, bloc terminé, difficulté de 1 à 5, notes par semaine.
+- **Mon journal :** projet du numéro terminé, bloc terminé, difficulté de 1 à 5, notes par numéro.
 - **Sauvegardes :** export JSON du **seul profil choisi**, avec coche des fournitures, étapes, projets, blocs, notes et évaluations.
 - **Restauration :** validation du format et de l'identité dans le fichier. Un profil « Moi » ne peut pas importer une sauvegarde « Mathilde », et inversement.
 - La restauration **remplace** la progression locale du profil sélectionné. Une confirmation est demandée. Exporter une sauvegarde récente avant de remplacer les données.
@@ -41,7 +49,7 @@ L'application est hébergée via GitHub Pages à https://webfourmi.github.io/le-
 - Chaque numéro contient un projet couture et un bloc patchwork progressif, une fiche technique et les gabarits imprimables nécessaires.
 - Chaque personne construit sa **propre couverture de 52 blocs**, complétée de quatre carrés unis.
 - Les rubriques « Histoire de la couture » et « Coutures du monde » utilisent des sources vérifiées et des photographies documentaires avec crédits et licences.
-- Les 51 semaines encore non publiées ne sont pour l'instant qu'un programme prévisionnel, pas des tutoriels détaillés.
+- Les numéros restant à publier sont un programme prévisionnel : les tutoriels et fiches documentées ne seront disponibles que lorsqu'ils auront été ajoutés.
 
 ## Crédits des photographies documentaires du n° 01
 

@@ -1,8 +1,8 @@
 {
   "id": "/le-fil-des-52-semaines/",
-  "name": "Le fil des 52 semaines",
-  "short_name": "Fil & aiguilles",
-  "description": "52 semaines de couture, patchwork et découvertes textiles. Deux carnets personnels.",
+  "name": "De fil en aiguille",
+  "short_name": "De fil en aiguille",
+  "description": "Un rendez-vous tous les 15 jours : un cours de couture, un cours de patchwork, une fiche Coutures du monde et une fiche Histoire de la couture. 52 rendez-vous, deux carnets personnels.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
