@@ -89,9 +89,9 @@ function renderFirstPatchwork(p,done,checkedSteps=[]){
  <details class="lesson-problem"><summary>Le bloc gondole ou dépasse la dimension</summary><p>Laisse-le refroidir à plat après un repassage sans glissement. Vérifie les marges et les coupes. Une marge trop étroite peut expliquer un bloc trop grand. Corrige la couture en cause avant de retailler ; ne coupe que de minuscules fils ou irrégularités si le bloc reste bien carré à 21,5 cm. Un bloc plus petit ne se répare pas en le retaillant.</p></details>
  <h3>Avant de ranger mon premier carré</h3><ul class="lesson-checkpoints"><li>Les quatre pièces alternent clair et foncé, et se rejoignent au centre.</li><li>Le bloc est plat, carré et mesure 21,5 × 21,5 cm.</li><li>Les bords restent bruts, avec les marges nécessaires pour obtenir 20 × 20 cm dans la couverture.</li></ul>
  <div class="actions"><button class="primary" data-page="print">Imprimer le gabarit →</button><button class="secondary lesson-patch-done" type="button" data-quilt-person="${esc(p)}" data-quilt-block="1" aria-pressed="${complete?'true':'false'}">${complete?'✓ Bloc n° 1 terminé · décocher':'□ Marquer mon bloc n° 1 comme terminé'}</button></div><p class="small">Le gabarit s’imprime à 100 %. Vérifie son carré de contrôle de 5 cm avant de couper. La coche reste personnelle et se retrouve dans ta couverture.</p></section>${root.Fil52LessonPhotos.renderPatchwork(1)}`;
- return html.replace(/(<ol class="patchwork-one-steps">)([\\s\\S]*?)(<\\/ol>)/,(_,open,items,close)=>{
+ return html.replace(/(<ol class="patchwork-one-steps">)([\s\S]*?)(<\/ol>)/,(_,open,items,close)=>{
   let i=0;
-  const decorated=items.replace(/<li>(<h4>[\\s\\S]*?<\\/h4><p>[\\s\\S]*?<\\/p>)<\\/li>/g,(_,body)=>{
+  const decorated=items.replace(/<li>(<h4>[\s\S]*?<\/h4><p>[\s\S]*?<\/p>)<\/li>/g,(_,body)=>{
    const id=60100+i++;
    return '<li><label class="patch-step-label"><input type="checkbox" data-toggle="steps" data-val="'+id+'" aria-label="Bloc 1 étape '+i+'" '+(checkedSteps.includes(id)?'checked':'')+'><span>'+body+'</span></label></li>';
   });
