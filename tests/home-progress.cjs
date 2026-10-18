@@ -13,9 +13,9 @@ const {chromium}=require('playwright');const assert=require('node:assert/strict'
  await home();await expectTargets(1,1);
  await page.locator('.home-course').click();await page.locator('[data-journal-complete="1"]').check();await home();await expectTargets(2,1);
  assert.match(await page.locator('.feature-sew h3').innerText(),/Dessous de verre/);
- await page.locator('.home-patch').click();assert.ok(await page.locator('[data-patch-course="1"]').evaluate(el=>el.open));assert.ok(await page.locator('.patchwork-one').evaluate(el=>el===document.activeElement));
+ await page.locator('.home-patch').click();assert.equal(await page.locator('#patch-week-select').inputValue(),'1');assert.ok(await page.locator('.patchwork-one').evaluate(el=>el===document.activeElement));
  await page.locator('.patchwork-one [data-quilt-block="1"]').click();await home();await expectTargets(2,2);
- await page.locator('.home-patch').click();assert.ok(await page.locator('[data-patch-course="2"]').evaluate(el=>el.open));assert.ok(await page.locator('[data-lesson-patch="2"]').evaluate(el=>el===document.activeElement));
+ await page.locator('.home-patch').click();assert.equal(await page.locator('#patch-week-select').inputValue(),'2');assert.ok(await page.locator('[data-lesson-patch="2"]').evaluate(el=>el===document.activeElement));
  await page.locator('#bottomnav [data-page="learn"]').click();await page.locator('#week-select').selectOption('1');await page.locator('[data-journal-complete="1"]').uncheck();await home();await expectTargets(1,2);
  // Validations non consécutives : reprendre le premier trou, sans sauter de cours.
  await page.evaluate(()=>{state.projectsDone.m=[2,3];state.blocks.m=[2,3];save();render()});await expectTargets(1,1);
