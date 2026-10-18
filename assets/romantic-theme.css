@@ -461,3 +461,35 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline-offset:2
  #app .patchwork-one-steps>li{padding:9px 8px}
  #app .pattern-kind button{flex:1;min-width:120px}
 }
+
+
+/* V1.1.6 · carnets Monde et Temps, favoris et suivi des lectures */
+#app .culture-tabs{display:flex;align-items:center;gap:13px;margin:15px 0 20px}
+#app .culture-tabs .culture-tab{width:86px;height:86px;display:grid;place-items:center}
+#app .culture-tabs .culture-tab img{width:64px;height:64px;max-width:100%;object-fit:contain}
+#app .culture-tabs .culture-tab:focus-visible,#app .culture-star:focus-visible{outline:3px solid #946da1;outline-offset:3px}
+#app .culture-article-picker{max-width:760px;margin:8px 0 14px}
+#app .culture-article-picker label{display:block;margin-bottom:8px;color:#465b4e;font-size:1.02rem}
+#app #culture-article-select{display:block;max-width:100%;width:100%;min-height:48px;padding:11px 13px;border:1.5px solid #c9bba7;border-radius:12px;background:#fffaf4;color:#365548;font-size:1rem;line-height:1.4}
+#app #culture-article-select:focus-visible{outline:3px solid #9b6c9c;outline-offset:2px}
+#app .culture-status-hint{margin:8px 0;color:#766d63}
+#app .culture-reading-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:15px 0 17px}
+#app .culture-star{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:45px;border:1.5px solid #cbb098;border-radius:13px;padding:8px 15px;color:#79664e;background:#fff8e9;font-weight:700;cursor:pointer;font-size:1.1rem}
+#app .culture-star span{font-size:.96rem}
+#app .culture-star.is-favorite{color:#705330;background:#f5e7c7;border-color:#bea16c}
+#app .culture-read-state{color:#536e60;font-size:.93rem;font-weight:600}
+#app .culture-read-complete{margin:16px 0 23px;padding:16px 20px;border:1px dashed #bdab94;background:#edf2e8}
+#app .culture-read-complete .material{display:flex;align-items:flex-start;gap:12px;cursor:pointer}
+#app .culture-read-complete input{flex:none;width:21px;height:21px;margin-top:3px;accent-color:#6e907d;cursor:pointer}
+#app .culture-read-complete .material>span{display:flex;flex-direction:column;gap:2px}
+#app .culture-read-complete .material small{font-size:.88rem;color:#566957;line-height:1.5}
+#app .travel-article .travel-article-heading{border-bottom:1px dashed #dac0b3;background:linear-gradient(110deg,#fffaf1,#f5e8dd);padding:21px 22px;margin:-20px -20px 20px;border-radius:17px 17px 0 0}
+#app .travel-article .travel-article-heading h2{font-size:clamp(1.35rem,3.1vw,2rem);margin:8px 0}
+#app .travel-article .travel-article-heading small{color:#6c766a}
+@media(max-width:600px){
+ #app .culture-tabs .culture-tab{width:72px;height:72px}
+ #app .culture-tabs .culture-tab img{width:54px;height:54px}
+ #app .culture-reading-actions{gap:8px}
+ #app .culture-star{padding:8px 12px}
+ #app .travel-article .travel-article-heading{padding:18px 16px;margin:-17px -17px 18px}
+}
