@@ -22,6 +22,7 @@ const fs=require('node:fs/promises');
    assert.equal(await page.locator('.cadence-links button').count(),4,'Couture + Patchwork + Monde + Histoire');
    assert.match(await page.locator('.cadence-panel').innerText(),/tous les 15 jours/i);
    assert.match(await page.locator('.cadence-panel').innerText(),/environ deux ans/i);
+   assert.equal(await page.locator('#app .editorial-note').count(),0,'Ancien bandeau « Chaque jeudi » retiré de l’accueil');
    assert.doesNotMatch(await page.locator('#app').innerText(),/52 semaines|chaque jeudi|atelier de la semaine/i);
    await page.locator('[data-culture-home-tab="history"]').click();
    assert.equal(await page.locator('[data-culture-tab="history"]').getAttribute('aria-pressed'),'true');
