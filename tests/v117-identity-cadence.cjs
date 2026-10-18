@@ -12,7 +12,7 @@ const fs=require('node:fs/promises');
    await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
    await page.getByRole('button',{name:'Viera',exact:true}).click();
    assert.match(await page.title(),/^De fil en aiguille/);
-   assert.match(await page.locator('.brand strong').innerText(),/De fil en\\s*aiguille/);
+   assert.match(await page.locator('.brand strong').innerText(),/De fil en\s*aiguille/);
    const manifest=await (await page.request.get('http://127.0.0.1:8765/manifest.webmanifest')).json();
    assert.equal(manifest.id,'/le-fil-des-52-semaines/','Identité PWA préservée');
    assert.equal(manifest.name,'De fil en aiguille');
