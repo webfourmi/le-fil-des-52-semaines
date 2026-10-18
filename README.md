@@ -1,6 +1,14 @@
-# Le fil des 52 semaines · V0.3 (proposition)
+# De fil en aiguille · V1.1.7
 
-Application de couture progressive en 52 semaines : projets de récupération, apprentissage de la **Janome Cherry 21**, patronnerie, 52 blocs de patchwork par personne, et rubriques culturelles documentées.
+Application de couture et patchwork en **52 rendez-vous tous les 15 jours (un vendredi sur deux)** : projets de récupération, apprentissage de la **Janome Cherry 21**, patronnerie, 52 blocs de patchwork par personne, et rubriques culturelles documentées.
+
+## Un rendez-vous tous les 15 jours
+
+Chaque numéro propose **exactement quatre contenus coordonnés** : un cours de couture progressif sur Janome Cherry 21, **un cours de patchwork** (un bloc personnel final de 20 × 20 cm), **une fiche Coutures du monde** et **une fiche Histoire de la couture**, ces deux dernières documentées et sourcées. Les fournitures sont toujours données pour **un seul ouvrage**.
+
+Le programme conserve **52 numéros**, qui se déroulent sur environ **deux ans**, et non plus sur 52 semaines. Les six premiers numéros déjà disponibles restent consultables, avec leur progression et leurs données intactes. Chaque nouveau contenu culturel sera publié dans son espace Monde ou Temps, avec favoris et suivi de lecture individuels.
+
+**Rythme éditorial prévu :** un vendredi sur deux, à 8 h, à partir du vendredi 23 octobre 2026 pour le numéro 2 (date indicative du calendrier, non déclencheur de publication automatique). Les autres numéros suivent la même cadence à compter des futures publications. Le calendrier et la mise en ligne du contenu sont distincts : une publication exige l'ajout effectif des quatre contenus dans l'application.
 
 ## Deux maisons, les mêmes cours
 
