@@ -46,7 +46,13 @@ function renderTroubleshooting(d,w){
  const resources=(d.resources||[]).filter(x=>/^https:\/\//.test(x.url)).map(x=>'<a target="_blank" rel="noopener noreferrer" href="'+esc(x.url)+'">'+esc(x.title)+' ↗</a>').join(' · ');
  return '<section class="card section lesson-extra"><h3>Si cela ne se passe pas comme prévu…</h3><p>Ouvre la difficulté rencontrée pour trouver une correction.</p>'+rows+'<h3>Avant de déclarer mon ouvrage terminé</h3><ul class="lesson-checkpoints">'+checkpoints+'</ul>'+(resources?'<p class="small"><b>Ressources utiles :</b> '+resources+'</p>':'')+'</section>';
 }
-function renderPatchwork(d,w,p,done){
+function patchStepChecklist(steps,w,checked){
+ return '<div class="patch-steps" aria-label="Étapes du bloc '+w+'">'+(steps||[]).map((body,i)=>{
+  const id=60000+w*100+i;
+  return '<div class="step patch-step"><div class="stepnum">'+(i+1)+'</div><div class="patch-step-body"><label><input type="checkbox" data-toggle="steps" data-val="'+id+'" aria-label="Bloc '+w+' étape '+(i+1)+'" '+(checked.includes(id)?'checked':'')+'><span><b>Étape '+(i+1)+'</b><p>'+esc(body)+'</p></span></label></div></div>';
+ }).join('')+'</div>';
+}
+function renderPatchwork(d,w,p,done,checkedSteps=[]){
  if(!d.patchCuts?.length)return '';
  const complete=done.includes(w);
  return '<section class="card section lesson-extra" data-lesson-patch="'+w+'">'+
@@ -54,15 +60,15 @@ function renderPatchwork(d,w,p,done){
  '<p>Un bloc <b>fini de 20 × 20 cm</b> après son assemblage dans la couverture. Conserve <b>21,5 × 21,5 cm avant assemblage</b> pour tenir compte des marges de 7,5 mm.</p>'+
  diagram(w,true)+
  '<h4>Découpe pour un seul bloc</h4>'+list(d.patchCuts)+
- '<h4>Montage du bloc</h4>'+list(d.patchSteps,true)+
+ '<h4>Montage du bloc · étapes à cocher</h4>'+patchStepChecklist(d.patchSteps,w,checkedSteps)+
  '<div class="tip"><b>Astuce de précision :</b> '+esc(d.patchTip)+'</div>'+
  '<button class="secondary lesson-patch-done" type="button" data-quilt-person="'+esc(p)+'" data-quilt-block="'+w+'" aria-pressed="'+(complete?'true':'false')+'">'+(complete?'✓ Bloc n° '+w+' terminé · décocher':'□ Marquer mon bloc n° '+w+' comme terminé')+'</button>'+
  '<p class="small">Cette coche est personnelle et se retrouvera aussi dans ta couverture des 52 blocs.</p></section>'+root.Fil52LessonPhotos.renderPatchwork(w);
 }
 
-function renderFirstPatchwork(p,done){
+function renderFirstPatchwork(p,done,checkedSteps=[]){
  const complete=done.includes(1);
- return `<section class="card section lesson-extra patchwork-one" aria-label="Tutoriel détaillé du bloc 1"><span class="eyebrow">Fiche technique du n° 01 · pour un seul bloc</span><h2>Le damier à quatre carrés</h2><p>Tu vas assembler quatre petits carrés pour obtenir un damier : deux tissus clairs et deux tissus foncés. Prévois environ 45 à 60 minutes pour ce premier essai, en prenant le temps de mesurer et de repasser.</p>
+ const html=`<section class="card section lesson-extra patchwork-one" aria-label="Tutoriel détaillé du bloc 1"><span class="eyebrow">Fiche technique du n° 01 · pour un seul bloc</span><h2>Le damier à quatre carrés</h2><p>Tu vas assembler quatre petits carrés pour obtenir un damier : deux tissus clairs et deux tissus foncés. Prévois environ 45 à 60 minutes pour ce premier essai, en prenant le temps de mesurer et de repasser.</p>
  <div class="grid2"><div class="info"><b>À découper</b><br>4 carrés de 11,5 × 11,5 cm : 2 clairs et 2 foncés. Les marges sont déjà comprises.</div><div class="info"><b>À conserver après couture</b><br>Un bloc de 21,5 × 21,5 cm, marges extérieures comprises. Il mesurera 20 × 20 cm une fois cousu dans la couverture.</div></div>
  <h3>Le matériel à préparer</h3><ul><li>Deux cotons tissés non extensibles, de poids proche : une chute claire et une chute foncée. Évite le jersey pour débuter.</li><li>Fil assorti, aiguille universelle adaptée au coton (80/12 pour un coton courant), canette et pied standard.</li><li>Règle graduée, crayon textile, ciseaux à tissu ou matériel de coupe habituel, épingles ou pinces.</li><li>Fer et surface de repassage. Si tu utilises un cutter rotatif, protège la table avec un tapis de coupe et referme la lame après chaque coupe.</li></ul>
  <p class="tip"><b>Le repère essentiel : 7,5 mm.</b> Toutes les coutures de ce bloc se font à 7,5 mm du bord, soit 0,75 cm. Ne rajoute pas cette marge aux carrés de 11,5 cm et ne les couds pas à 1 cm comme le marque-page.</p>
@@ -83,6 +89,14 @@ function renderFirstPatchwork(p,done){
  <details class="lesson-problem"><summary>Le bloc gondole ou dépasse la dimension</summary><p>Laisse-le refroidir à plat après un repassage sans glissement. Vérifie les marges et les coupes. Une marge trop étroite peut expliquer un bloc trop grand. Corrige la couture en cause avant de retailler ; ne coupe que de minuscules fils ou irrégularités si le bloc reste bien carré à 21,5 cm. Un bloc plus petit ne se répare pas en le retaillant.</p></details>
  <h3>Avant de ranger mon premier carré</h3><ul class="lesson-checkpoints"><li>Les quatre pièces alternent clair et foncé, et se rejoignent au centre.</li><li>Le bloc est plat, carré et mesure 21,5 × 21,5 cm.</li><li>Les bords restent bruts, avec les marges nécessaires pour obtenir 20 × 20 cm dans la couverture.</li></ul>
  <div class="actions"><button class="primary" data-page="print">Imprimer le gabarit →</button><button class="secondary lesson-patch-done" type="button" data-quilt-person="${esc(p)}" data-quilt-block="1" aria-pressed="${complete?'true':'false'}">${complete?'✓ Bloc n° 1 terminé · décocher':'□ Marquer mon bloc n° 1 comme terminé'}</button></div><p class="small">Le gabarit s’imprime à 100 %. Vérifie son carré de contrôle de 5 cm avant de couper. La coche reste personnelle et se retrouve dans ta couverture.</p></section>${root.Fil52LessonPhotos.renderPatchwork(1)}`;
+ return html.replace(/(<ol class="patchwork-one-steps">)([\s\S]*?)(<\/ol>)/,(_,open,items,close)=>{
+  let i=0;
+  const decorated=items.replace(/<li>(<h4>[\s\S]*?<\/h4><p>[\s\S]*?<\/p>)<\/li>/g,(_,body)=>{
+   const id=60100+i++;
+   return '<li><label class="patch-step-label"><input type="checkbox" data-toggle="steps" data-val="'+id+'" aria-label="Bloc 1 étape '+i+'" '+(checkedSteps.includes(id)?'checked':'')+'><span>'+body+'</span></label></li>';
+  });
+  return open+decorated+close;
+ });
 }
 
 root.Fil52LessonGuides={renderFirstPatchwork,renderPreparation,renderTroubleshooting,renderPatchwork,diagram};

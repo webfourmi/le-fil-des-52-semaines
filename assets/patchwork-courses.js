@@ -14,5 +14,26 @@ function render(blocks,published,issues,p,done){
  }).join('')+'</section>';
 }
 document.addEventListener('toggle',event=>{const node=event.target;if(!node.matches?.('[data-patch-course]')||!node.isConnected)return;const n=+node.dataset.patchCourse;if(node.open)openCourses.add(n);else openCourses.delete(n)},true);
-root.Fil52PatchworkCourses={render};
+
+const introSteps=[["Choisir les tissus","Trouve deux cotons tissés non extensibles de poids voisin, dont un clair et un foncé. Vérifie qu’ils sont propres, secs et repassés."],["Préparer la coupe","Pose la règle et l’équerre, repère le droit-fil, puis choisis les ciseaux ou un cutter rotatif utilisé avec un tapis de coupe et une règle adaptée."],["Tester la marge de couture","Sur deux chutes, couds au point droit avec une marge de 7,5 mm. Mesure avec une règle pour vérifier le guidage sur la Janome Cherry 21."],["Contrôler les dimensions","Distingue un bloc brut de 21,5 × 21,5 cm de sa partie finie de 20 × 20 cm. Ne coupe pas les marges extérieures."],["Préparer et ranger","Dispose deux carrés clairs et deux foncés de 11,5 × 11,5 cm pour le premier damier. Prépare une pochette étiquetée pour ranger tes futurs blocs à plat."]];
+function stepIds(w,issues){
+ if(w===0)return introSteps.map((_,i)=>60000+i);
+ if(w===1)return Array.from({length:9},(_,i)=>60100+i);
+ const steps=issues[w]?.patchSteps||[];
+ return steps.map((_,i)=>60000+w*100+i);
+}
+function renderSelected(w,blocks,published,issues,p,done,checked){
+ const title=w===0?'Bien préparer mon matériel':blocks[w-1];
+ if(w===0){
+  const total=introSteps.length,completed=stepIds(0,issues).filter(id=>checked.includes(id)).length;
+  return '<section class="card section patch-zero" data-patch-course="0"><span class="eyebrow">Cours 0 · Mes premiers pas en patchwork</span><h2>Bien préparer mon matériel</h2><p class="small">Préparation sans bloc supplémentaire pour ta couverture.</p><div class="progressbar"><span style="width:'+(100*completed/total)+'%"></span></div><p class="small">'+completed+' étape'+(completed>1?'s':'')+' sur '+total+' cochées</p></section>'+intro()+
+   '<section class="card section"><h3>Mon cours 0 · étapes à cocher</h3><div class="patch-steps">'+introSteps.map(([name,body],i)=>{const id=60000+i;return '<div class="step patch-step"><div class="stepnum">'+(i+1)+'</div><div class="patch-step-body"><label><input type="checkbox" data-toggle="steps" data-val="'+id+'" aria-label="Cours patchwork 0, étape '+(i+1)+'" '+(checked.includes(id)?'checked':'')+'><span><b>'+esc(name)+'</b><p>'+esc(body)+'</p></span></label></div></div>';}).join('')+'</div></section>';
+ }
+ const available=published.includes(w)&&(w===1||!!issues[w]?.patchCuts?.length);
+ if(!available)return '<section class="card section patch-unpublished" data-patch-course="'+w+'"><span class="tag orange">À venir · bloc n° '+w+'</span><h2>'+esc(title)+'</h2><p>Le tutoriel et les étapes à cocher seront disponibles lors de la publication de cette semaine.</p><p class="small">Le programme compte 52 blocs finis de 20 × 20 cm, un par semaine et par personne.</p></section>';
+ const ids=stepIds(w,issues),completed=ids.filter(id=>checked.includes(id)).length,total=ids.length;
+ return '<section class="card section patch-course-head" data-patch-course="'+w+'"><span class="tag">Cours patchwork publié · N° '+String(w).padStart(2,'0')+'</span><h2>'+esc(w===1?'Damier de quatre carrés':issues[w]?.patchworkTitle||title)+'</h2><p>Un bloc de patchwork personnel, avec des fournitures pour <b>un seul bloc</b>. Chaque étape peut être cochée indépendamment de la validation finale du carré.</p><div class="progressbar"><span style="width:'+(total?100*completed/total:0)+'%"></span></div><p class="small">'+completed+' étape'+(completed>1?'s':'')+' sur '+total+' · '+(done.includes(w)?'✓ Bloc terminé':'Bloc à réaliser')+'</p><button type="button" class="secondary patch-resume" data-patch-resume="'+w+'">'+(done.includes(w)?'Revoir les étapes':completed?'Reprendre le bloc':'Commencer le bloc')+' →</button></section><div class="patch-course-content">'+(w===1?root.Fil52LessonGuides.renderFirstPatchwork(p,done,checked):root.Fil52LessonGuides.renderPatchwork(issues[w],w,p,done,checked))+'</div>';
+}
+
+root.Fil52PatchworkCourses={render,renderSelected,stepIds};
 })(globalThis);

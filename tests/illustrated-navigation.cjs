@@ -42,7 +42,7 @@ async function main(){
    }
    const menu=isMobile?'#bottomnav':'#nav';
    await page.locator(menu+' [data-page="quilt"]').click();
-   await page.getByRole('heading',{name:'Ma couverture de 52 blocs'}).waitFor();
+   await page.getByRole('heading',{name:'Mes cours de patchwork'}).waitFor();
    assert.equal(await page.locator(menu+' [data-page="quilt"]').getAttribute('aria-current'),'page');
    assert.equal(await page.locator(menu+' [data-page="learn"]').getAttribute('aria-current'),'false');
    await page.locator(menu+' [data-page="world"]').click();
@@ -55,7 +55,7 @@ async function main(){
    await page.reload({waitUntil:'domcontentloaded'});
    await verifyMenu(page,menu,isMobile?six:eight);
    await page.locator(menu+' [data-page="quilt"]').click();
-   await page.getByRole('heading',{name:'Ma couverture de 52 blocs'}).waitFor();
+   await page.getByRole('heading',{name:'Mes cours de patchwork'}).waitFor();
    await ctx.setOffline(false);
    assert.deepEqual(errors,[],errors.join('; '));
    await ctx.close();
