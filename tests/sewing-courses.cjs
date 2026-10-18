@@ -27,19 +27,19 @@ async function main(){
    assert.equal(await p.locator('[data-toggle="steps"]').count(),numSteps);
    assert.ok(await p.locator('[data-toggle="mat"]').count()>=4);
    assert.equal(await p.locator('.lesson-figure svg').count(),2);
-   assert.ok(await p.getByText(quiltTitle,{exact:true}).count());
+   assert.equal(await p.locator('.patchwork-one,[data-lesson-patch]').count(),0,'Les blocs restent dans le volet Patchwork');
    assert.equal(await p.locator('.lesson-problem').count(),3);
    assert.equal(await p.locator('.lesson-checkpoints li').count(),3);
-   assert.ok(await p.locator('.lesson-patch-done').count());
+   assert.equal(await p.locator('.lesson-patch-done').count(),0,'Aucune validation patchwork dans la couture');
    assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
   }
   console.log('OK : cinq cours 2 à 6 complets, schémas, matériels, blocs et diagnostics');
   await p.locator('#week-select').selectOption('2');
   await p.locator('[data-toggle="steps"]').first().check();
-  await p.locator('.lesson-patch-done').click();
+  await p.locator('#bottomnav [data-page="quilt"]').click();await p.locator('#patch-week-select').selectOption('2');await p.locator('.lesson-patch-done').click();
   assert.ok(await p.locator('[data-toggle="steps"]').first().isChecked());
   assert.match(await p.locator('.lesson-patch-done').innerText(),/terminé/i);
-  await p.locator('.course-patchwork [data-page="quilt"]').click();
+  await p.locator('[data-patch-cover]').click();
   assert.equal(await p.locator('.quilt [data-quilt-block="2"]').getAttribute('aria-pressed'),'true');
   console.log('OK : cases personnelles et carré n°2 synchronisés avec la couverture');
   await p.reload({waitUntil:'domcontentloaded'});
@@ -70,7 +70,7 @@ async function main(){
   await q.locator('#week-select').selectOption('2');
   await q.getByText('Cours publié · N° 02').waitFor();
   assert.equal(await q.locator('[data-toggle="steps"]').first().isChecked(),false);
-  assert.equal(await q.locator('.lesson-patch-done').getAttribute('aria-pressed'),'false');
+  await q.locator('#bottomnav [data-page="quilt"]').click();await q.locator('#patch-week-select').selectOption('2');assert.equal(await q.locator('.lesson-patch-done').getAttribute('aria-pressed'),'false');
   console.log('OK : progression de Mathilde indépendante de celle de Viera');
  }finally{for(const c of contexts)await c.close();await browser.close()}
 }
