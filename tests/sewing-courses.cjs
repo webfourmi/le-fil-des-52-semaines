@@ -37,7 +37,7 @@ async function main(){
   await p.locator('#week-select').selectOption('2');
   await p.locator('[data-toggle="steps"]').first().check();
   await p.locator('#bottomnav [data-page="quilt"]').click();await p.locator('#patch-week-select').selectOption('2');await p.locator('.lesson-patch-done').click();
-  assert.ok(await p.locator('[data-toggle="steps"]').first().isChecked());
+  assert.ok(await p.evaluate(()=>state.steps[state.profile].includes(2000)),'La progression Couture est conservée quand on ouvre le Patchwork');
   assert.match(await p.locator('.lesson-patch-done').innerText(),/terminé/i);
   await p.locator('[data-patch-cover]').click();
   assert.equal(await p.locator('.quilt [data-quilt-block="2"]').getAttribute('aria-pressed'),'true');
