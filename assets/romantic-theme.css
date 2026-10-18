@@ -493,3 +493,18 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline-offset:2
  #app .culture-star{padding:8px 12px}
  #app .travel-article .travel-article-heading{padding:18px 16px;margin:-17px -17px 18px}
 }
+
+
+/* V1.1.7 · De fil en aiguille : une quinzaine, quatre découvertes */
+#app .cadence-panel{
+ margin:18px 0 25px;
+ padding:23px 25px;
+ border:1px dashed #c9ae9d;
+ background:linear-gradient(115deg,#fffaf5,#f3eee5);
+}
+#app .cadence-panel h2{font-size:clamp(1.5rem,3vw,2rem);margin:6px 0 10px}
+#app .cadence-panel p{max-width:780px;line-height:1.7}
+#app .cadence-links{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:17px}
+#app .cadence-links button{min-width:0;white-space:normal;line-height:1.35;padding:11px 8px}
+@media(max-width:850px){#app .cadence-links{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:390px){#app .cadence-panel{padding:17px 15px}#app .cadence-links button{font-size:.89rem}}
