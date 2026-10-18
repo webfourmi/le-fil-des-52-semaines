@@ -1,6 +1,6 @@
 # De fil en aiguille · V1.1.7
 
-Application de couture et patchwork en **52 rendez-vous tous les 15 jours (un vendredi sur deux)** : projets de récupération, apprentissage de la **Janome Cherry 21**, patronnerie, 52 blocs de patchwork par personne, et rubriques culturelles documentées.
+Application de couture et patchwork en **52 rendez-vous, espacés de 15 jours** : projets de récupération, apprentissage de la **Janome Cherry 21**, patronnerie, 52 blocs de patchwork par personne, et rubriques culturelles documentées.
 
 ## Un rendez-vous tous les 15 jours
 
@@ -8,7 +8,7 @@ Chaque numéro propose **exactement quatre contenus coordonnés** : un cours de 
 
 Le programme conserve **52 numéros**, qui se déroulent sur environ **deux ans**, et non plus sur 52 semaines. Les six premiers numéros déjà disponibles restent consultables, avec leur progression et leurs données intactes. Chaque nouveau contenu culturel sera publié dans son espace Monde ou Temps, avec favoris et suivi de lecture individuels.
 
-**Rythme éditorial prévu :** un vendredi sur deux, à 8 h, à compter du vendredi 23 octobre 2026 pour les prochains rendez-vous (date indicative du calendrier, non déclencheur de publication automatique). Les autres numéros suivent la même cadence à compter des futures publications. Le calendrier et la mise en ligne du contenu sont distincts : une publication exige l'ajout effectif des quatre contenus dans l'application.
+**Rythme éditorial :** un nouvel ensemble de quatre contenus tous les 15 jours. Il s'agit de l'organisation **interne du programme**, pas d'une tâche ChatGPT programmée ni d'un rappel automatique. La date de départ reste à définir dans le calendrier éditorial ; chaque édition paraît une fois ses quatre contenus préparés et intégrés dans l'application. Aucun cours existant n'est supprimé.
 
 ## Deux maisons, les mêmes cours
 
