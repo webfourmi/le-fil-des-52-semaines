@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#436854"><meta name="description" content="De fil en aiguille : un cours de couture, un bloc patchwork et deux fiches culturelles tous les 15 jours, pour Viera et Mathilde.">
+<meta name="theme-color" content="#436854"><meta name="description" content="De fil en aiguille : couture, patchwork et voyages textiles sans calendrier ni date limite.">
 <title>De fil en aiguille | Couture, patchwork et voyages textiles</title>
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" type="image/svg+xml" href="./assets/pwa-icon.svg">
@@ -108,6 +108,7 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
 </style>
 <script defer src="./assets/gallery.js"></script>
 <script defer src="./assets/personal-gallery.js"></script>
+<script defer src="./assets/halloween-voyage.js"></script>
 <script defer src="./assets/textile-travel.js"></script>
 <script defer src="./assets/lesson-guides.js"></script>
 <script defer src="./assets/patchwork-courses.js"></script>
@@ -121,7 +122,7 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
 <script defer src="./assets/pwa.js"></script>
 </head>
 <body>
-<div class="shell"><aside class="sidebar"><div class="brand"><div class="brandmark"><img src="./assets/icon-app.svg" alt="" aria-hidden="true"></div><div><strong>De fil en<br>aiguille</strong><small>Le studio de couture</small></div></div><nav class="nav" id="nav"></nav><div class="side-bottom"><span class="eyebrow">Notre rendez-vous</span><b>Tous les 15 jours</b><span class="small">Un cours Couture, un bloc Patchwork, une fiche Monde et une fiche Histoire. Chacune avance à son rythme.</span></div></aside><main class="main"><div class="topline"><div class="small">✺ Le studio créatif · 52 rendez-vous à savourer</div><div class="top-avatar"><span class="avatar" title="Viera">V</span><span class="avatar" title="Mathilde">M</span></div></div><div id="app" aria-live="polite"></div><div class="foot">De fil en aiguille · Carnet d’atelier fleuri, V1.1 · Photographies historiques créditées ; illustrations d’atelier décoratives.</div></main></div>
+<div class="shell"><aside class="sidebar"><div class="brand"><div class="brandmark"><img src="./assets/icon-app.svg" alt="" aria-hidden="true"></div><div><strong>De fil en<br>aiguille</strong><small>Le studio de couture</small></div></div><nav class="nav" id="nav"></nav><div class="side-bottom"><span class="eyebrow">Notre rendez-vous</span><b>Au fil de nos envies</b><span class="small">Couture, patchwork et voyages textiles : des nouveautés quand elles sont prêtes, sans date limite.</span></div></aside><main class="main"><div class="topline"><div class="small">✺ Le studio créatif · 52 rendez-vous à savourer</div><div class="top-avatar"><span class="avatar" title="Viera">V</span><span class="avatar" title="Mathilde">M</span></div></div><div id="app" aria-live="polite"></div><div class="foot">De fil en aiguille · Carnet d’atelier fleuri, V1.1 · Photographies historiques créditées ; illustrations d’atelier décoratives.</div></main></div>
 <nav class="bottomnav" id="bottomnav" aria-label="Navigation"></nav><div id="toast" role="status"></div>
 <div class="pwa-notice" id="pwa-notice" hidden role="status" aria-live="polite"><span id="pwa-notice-message"></span><button id="pwa-notice-action" hidden type="button"></button><button id="pwa-notice-close" type="button" aria-label="Fermer l’alerte">×</button></div>
 <div class="print-sheet" id="print-marker">
@@ -147,6 +148,15 @@ const blocks=['Damier de 4 carrés','Deux bandes verticales','Bandes horizontale
 const histories=['Les aiguilles préhistoriques','Coudre dans l’Antiquité','Les métiers médiévaux','La naissance de la haute couture','Les premiers brevets de machines','Barthélemy Thimonnier','Isaac Singer et l’industrie','La fermeture Éclair','Chanel et la silhouette','Le prêt-à-porter','Madeleine Vionnet','L’histoire des patrons'];
 const worlds=['Japon · Sashiko','Inde · Kantha','Corée · Pojagi','Afrique de l’Ouest · Assemblages textiles','Royaume-Uni · Patchwork','Hawaï · Quilt appliqué','Mexique · Broderies otomi','Palestine · Tatreez','Inde · Chikankari','Bangladesh · Nakshi kantha','Japon · Kogin-zashi','États-Unis · Sampler quilt'];
 let upcomingEditions={};
+/* Validation éditoriale globale, distincte des progressions personnelles. */
+const EDITORIAL_APPROVED=Object.freeze({
+ sewing:Object.freeze([0,1]),patchwork:Object.freeze([0]),
+ world:Object.freeze(['japon','bengale','coree','halloween']),
+ history:Object.freeze(['needle-01'])
+});
+window.Fil52EditorialApproved=EDITORIAL_APPROVED;
+function editorialIsApproved(kind,id){return EDITORIAL_APPROVED[kind]?.includes(id)===true}
+function editorialBadge(kind,id){const ok=editorialIsApproved(kind,id);return '<span class="editorial-status '+(ok?'editorial-ok':'editorial-writing')+'">'+(ok?'✓ Validé à 100 %':'✎ En cours d’écriture')+'</span>'}
 const DEFAULT={profile:'m',page:'home',week:1,patchWeek:1,cultureFavorites:{m:[],f:[]},cultureRead:{m:[],f:[]},mat:{m:[],f:[]},steps:{m:[],f:[]},blocks:{m:[],f:[]},notes:{m:{},f:{}},names:{m:'Viera',f:'Mathilde'},published:[1],edition:'0.2'};
 let state;try{let data=JSON.parse(localStorage.getItem('fil52.progress.v1')||'{}');state={...structuredClone(DEFAULT),...data};}catch(e){state=structuredClone(DEFAULT)}
 if(!Number.isInteger(state.patchWeek)||state.patchWeek<0||state.patchWeek>52)state.patchWeek=1;
@@ -169,9 +179,9 @@ function material(n,txt){return `<div class="material"><input aria-label="Matér
 function listProfile(){return `<div class="tag">Carnet personnel : ${safe(state.names[state.profile])}</div>`}
 function miniQuilt(p){const b=state.blocks[p];let i=0;return `<div class="micro ${p==='f'?'daughter':''}">${Array.from({length:56},(_,cell)=>{let row=Math.floor(cell/7),col=cell%7,corner=(row===0||row===7)&&(col===0||col===6);if(corner)return `<span class="corner"></span>`;i++;return `<span class="${b.includes(i)?'done':''}"></span>`}).join('')}</div>`}
 function profileCard(p){let n=state.blocks[p].length;return `<div class="card profilecard ${p==='f'?'daughter':''}"><div class="profiletop"><div><span class="eyebrow">Couverture personnelle</span><h3>${safe(state.names[p])}</h3></div><div class="circleicon">${p==='m'?'✿':'✦'}</div></div><div><span class="stat">${n}</span><span class="small"> / 52 blocs</span></div><div class="progressbar"><span style="width:${n/52*100}%"></span></div>${miniQuilt(p)}<button class="secondary" style="margin-top:15px" data-page="quilt">Voir ma couverture ↗</button></div>`}
-function weekCard(w){return `<button class="weektile ${w===state.week?'sel':''} ${state.published.includes(w)?'published':''}" data-week="${w}"><span class="eyebrow">N° ${String(w).padStart(2,'0')}</span><strong>${safe(projects[w-1])}</strong><small>${((w===1||!!upcomingEditions[w]?.steps?.length)&&state.published.includes(w))?'Cours disponible':'Au programme'}</small></button>`}
+function weekCard(w){return `<button class="weektile ${w===state.week?'sel':''} ${state.published.includes(w)?'published':''}" data-week="${w}"><span class="eyebrow">N° ${String(w).padStart(2,'0')}</span><strong>${safe(projects[w-1])}</strong><small>${editorialIsApproved('sewing',w)?'✓ Validé à 100 %':'✎ En cours d’écriture'}</small></button>`}
 function homeNext(kind){
- const available=state.published.filter(w=>w===1 || (upcomingEditions[w]?.steps?.length && (kind!=='blocks'||upcomingEditions[w]?.patchCuts?.length))).sort((a,b)=>a-b);
+ const available=state.published.filter(w=>(kind==='blocks'?editorialIsApproved('patchwork',w):editorialIsApproved('sewing',w)) && (w===1||upcomingEditions[w]?.steps?.length)).sort((a,b)=>a-b);
  return available.find(w=>!state[kind][state.profile].includes(w))||null;
 }
 function openHomePatch(w){
@@ -206,35 +216,25 @@ function resumeCourse(w){
  if(target){target.setAttribute('tabindex','-1');target.focus({preventScroll:true});target.scrollIntoView({behavior:'instant',block:'start'});}
 }
 
-function machineIntro(){return Fil52MachineIntro.render(state.steps[state.profile],courseResumeButton(0));}
+function machineIntro(){return '<div class="editorial-head-status">'+editorialBadge('sewing',0)+'</div>'+Fil52MachineIntro.render(state.steps[state.profile],courseResumeButton(0));}
 function dashboard(){const course=homeNext('projectsDone'),patch=homeNext('blocks'),number=w=>String(w).padStart(2,'0'),progress=course?courseProgress(course):null;return `<section class="hero hero-editorial">
   <div class="hero-copy">
-    <div class="hero-meta"><span class="edition-dot"></span> LE RENDEZ-VOUS DE LA QUINZAINE <span class="issue">${course?'N° '+number(course)+' / 52':'Cours publiés terminés'}</span></div>
+    <div class="hero-meta"><span class="edition-dot"></span> L’ATELIER À TON RYTHME <span class="issue">${course?'N° '+number(course)+' / 52':'Cours validés terminés'}</span></div>
     <h1>Petits points,<br><em>grandes idées.</em></h1>
     
     <div class="hero-actions">
       <button class="primary home-course hero-icon-link" ${course?'data-week="'+course+'"'+(progress.done?' data-resume-course="'+course+'"':''):'data-page="learn"'} aria-label="${course?'Ouvrir le cours '+course:'Revoir mes cours'}" title="${course?'Cours '+course:'Revoir mes cours'}"><img src="./assets/nav-sewing-simple.svg" alt="" aria-hidden="true" width="60" height="60"></button>
-      <button class="secondary home-patch hero-icon-link" ${patch?'data-home-patch="'+patch+'"':'data-page="quilt"'} aria-label="${patch?'Ouvrir le patchwork '+patch:'Voir ma couverture'}" title="${patch?'Patchwork '+patch:'Voir ma couverture'}"><img src="./assets/nav-patch-simple.svg" alt="" aria-hidden="true" width="60" height="60"></button>
+      <button class="secondary home-patch hero-icon-link" ${patch?'data-home-patch="'+patch+'"':'data-patch-zero'} aria-label="${patch?'Ouvrir le patchwork '+patch:'Voir ma couverture'}" title="${patch?'Patchwork '+patch:'Voir ma couverture'}"><img src="./assets/nav-patch-simple.svg" alt="" aria-hidden="true" width="60" height="60"></button>
     </div>
-    <div class="hero-foot"><span>✦</span> Avec la Janome Cherry 21 <span class="sep">·</span> 52 rendez-vous pour apprendre</div>
+    <div class="hero-foot"><span>✦</span> Avec la Janome Cherry 21 <span class="sep">·</span> 52 idées à explorer librement</div>
   </div>
   <div class="hero-visual" role="img" aria-label="Ambiance d'atelier de couture et marque-pages en tissu, illustration d'ambiance"><div class="stitched-note">fait main<br><span>avec amour ♡</span></div><div class="hero-caption">L'atelier de Mathilde &amp; Viera <span>Édition automne 2026</span></div></div>
 </section><details class="pwa-panel" aria-label="Installer l’application"><summary><strong>✳ L’atelier dans votre poche</strong><span class="pwa-chevron" aria-hidden="true">⌄</span></summary><div class="pwa-inner"><p>Installe le carnet sur ton téléphone pour le retrouver directement sur ton écran d’accueil. Les nouveaux cours seront signalés quand tu ouvriras l’application.</p><p class="small"><b>Avant l’installation :</b> télécharge une sauvegarde de ton carnet et de tes photos. Sur certains téléphones, l’application installée peut utiliser un stockage distinct de celui du navigateur.</p><div class="pwa-actions"><button class="secondary" type="button" data-page="backup">Sauvegarder mon carnet</button><button class="primary" id="pwa-install" type="button" hidden>Installer l’application</button><button class="secondary" id="pwa-help-toggle" type="button">Comment l’installer ?</button><button class="secondary" id="pwa-check" type="button">Vérifier les nouveautés</button></div><div id="pwa-help" hidden><p><b>iPhone :</b> ouvre ce site dans Safari, touche <b>Partager</b>, puis <b>Sur l’écran d’accueil</b> et <b>Ajouter</b>. Si le journal est vide dans l’app installée, importe ta sauvegarde personnelle.</p><p><b>Android :</b> ouvre le site dans Chrome, puis le menu <b>⋮</b> et <b>Installer l’application</b> ou <b>Ajouter à l’écran d’accueil</b>.</p><p class="small">Aucune notification push n’est envoyée lorsque l’application est fermée. Les alertes apparaissent au retour dans l’application.</p></div></div></details>
 <section class="card section"><span class="eyebrow">MES CRÉATIONS LIBRES</span><h2>Projets persos</h2><p>Ajoute aussi les créations réalisées en dehors des 52 cours : photos, titres et notes restent dans ton carnet.</p><button class="secondary" data-page="personal">Ouvrir mes projets persos ↗</button></section>
-<section class="card section cadence-panel" aria-label="Notre programme tous les 15 jours">
- <span class="eyebrow">NOTRE NOUVELLE CADENCE</span><h2>De fil en aiguille, tous les 15 jours</h2>
- <p>Un seul rendez-vous, quatre découvertes : <b>un cours de couture</b> à la Janome Cherry 21, <b>un bloc de patchwork</b> par personne, <b>une fiche Coutures du monde</b> et <b>une fiche Histoire de la couture</b>. Les 52 numéros s'étendent sur environ deux ans, sans précipitation.</p>
- <div class="cadence-links">
-  <button class="secondary" data-page="learn">✂ Cours couture</button>
-  <button class="secondary" data-page="quilt">▦ Cours patchwork</button>
-  <button class="secondary" data-culture-home-tab="world">🌍 Coutures du monde</button>
-  <button class="secondary" data-culture-home-tab="history">⌛ Histoire de la couture</button>
- </div>
- </section>
- <div class="current-heading"><span class="eyebrow">PRENDRE LE FIL</span><h2>À ton rythme <span class="hand-drawn">✳</span></h2><p>Ton prochain cours et ton prochain carré restent ici jusqu’à leur validation.</p></div>
+<div class="current-heading"><span class="eyebrow">PRENDRE LE FIL</span><h2>À ton rythme <span class="hand-drawn">✳</span></h2><p>Ton prochain cours et ton prochain carré restent ici jusqu’à leur validation.</p></div>
 <div class="feature-grid">
- <button class="feature-card feature-sew" ${course?'data-week="'+course+'"'+(progress.done?' data-resume-course="'+course+'"':''):'data-page="learn"'}><div class="feature-pattern brand-feature-icon" aria-hidden="true"><img src="./assets/icon-couture.svg" alt=""></div><div class="feature-info"><span class="eyebrow">${course?'Cours n° '+number(course):'À jour'}</span><h3>${course?safe(projects[course-1]):'Cours publiés terminés'}</h3><p>${course?progress.done+' étape'+(progress.done>1?'s':'')+' sur '+progress.total:'Bravo ! Tes cours restent disponibles. Le prochain apparaîtra après sa publication.'}</p><span class="feature-link">${course?(progress.done?'Reprendre mon cours':'Ouvrir mon cours'):'Revoir mes cours'} <b>↗</b></span></div></button>
- <button class="feature-card feature-patch" ${patch?'data-home-patch="'+patch+'"':'data-page="quilt"'}><div class="feature-pattern brand-feature-icon" aria-hidden="true"><img src="./assets/icon-patchwork.svg" alt=""></div><div class="feature-info"><span class="eyebrow">${patch?'Patchwork n° '+number(patch):'À jour'}</span><h3>${patch?safe(blocks[patch-1]):'Blocs publiés terminés'}</h3><p>${patch?'Le pas à pas de ton prochain carré pour la couverture.':'Tes carrés sont conservés. Retrouve ta couverture en attendant le prochain bloc.'}</p><span class="feature-link">${patch?'Ouvrir mon patchwork':'Voir ma couverture'} <b>↗</b></span></div></button>
+ <button class="feature-card feature-sew" ${course?'data-week="'+course+'"'+(progress.done?' data-resume-course="'+course+'"':''):'data-page="learn"'}><div class="feature-pattern brand-feature-icon" aria-hidden="true"><img src="./assets/icon-couture.svg" alt=""></div><div class="feature-info"><span class="eyebrow">${course?'Cours n° '+number(course):'À jour'}</span><h3>${course?safe(projects[course-1]):'Cours validés terminés'}</h3><p>${course?progress.done+' étape'+(progress.done>1?'s':'')+' sur '+progress.total:'Bravo ! Tes cours restent disponibles. Le prochain apparaîtra après sa publication.'}</p><span class="feature-link">${course?(progress.done?'Reprendre mon cours':'Ouvrir mon cours'):'Revoir mes cours'} <b>↗</b></span></div></button>
+ <button class="feature-card feature-patch" ${patch?'data-home-patch="'+patch+'"':'data-patch-zero'}><div class="feature-pattern brand-feature-icon" aria-hidden="true"><img src="./assets/icon-patchwork.svg" alt=""></div><div class="feature-info"><span class="eyebrow">${patch?'Patchwork n° '+number(patch):'Cours 0 validé'}</span><h3>${patch?safe(blocks[patch-1]):'Premiers pas en patchwork'}</h3><p>${patch?'Le pas à pas de ton prochain carré pour la couverture.':'Les autres cours sont en cours d’écriture. Le cours préparatoire 0 est validé.'}</p><span class="feature-link">${patch?'Ouvrir mon patchwork':'Ouvrir le cours 0'} <b>↗</b></span></div></button>
 </div>
 <div class="sectionline personal-head"><div><span class="eyebrow">NOTRE PARCOURS, NOS CRÉATIONS</span><h2>Ma couverture, mon parcours <span class="hand-drawn">♡</span></h2><p class="lead">Les mêmes leçons pour toutes les deux, mais tu coches uniquement tes propres réalisations.</p></div><button class="ghost" data-page="quilt">Toutes les cases ↗</button></div>
 <div class="grid2 profile-featured">${profileCard(state.profile)}</div>
