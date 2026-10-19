@@ -43,10 +43,13 @@ async function checkEdition(showCurrent=false){
   if(!response.ok)throw Error('Service inaccessible');
   const d=await response.json();
   if(!Array.isArray(d.published)||!d.published.length||!d.published.every(n=>Number.isInteger(n)&&n>0&&n<=52))throw Error('Éditions invalides');
-  const newest=Math.max(1,...d.published);
-  const seen=Number(localStorage.getItem('fil52.seen.latest')||0);
+  const approved=Array.isArray(d.approved?.sewing)?d.approved.sewing.filter(n=>Number.isInteger(n)&&n>=1&&d.published.includes(n)):[1];
+  const newest=Math.max(1,...approved);
+  const prev=Number(localStorage.getItem('fil52.seen.latest')||0);
+  const seen=Math.min(prev,newest);
+  if(prev!==seen)localStorage.setItem('fil52.seen.latest',String(seen));
   if(newest>seen&&seen>0){
-   notice('Le cours n° '+String(newest).padStart(2,'0')+' est disponible !','Voir le cours',()=>{
+   notice('Le cours n° '+String(newest).padStart(2,'0')+' est désormais validé !','Voir le cours',()=>{
      dismiss();localStorage.setItem('fil52.seen.latest',String(newest));
      if(typeof window.Fil52OpenEdition==='function')window.Fil52OpenEdition(d,newest);
      else location.reload();
@@ -54,7 +57,7 @@ async function checkEdition(showCurrent=false){
     return 'new';
   } else {
     if(!seen)localStorage.setItem('fil52.seen.latest',String(newest));
-    if(showCurrent)notice('Ton atelier est à jour : aucun nouveau cours pour le moment.');
+    if(showCurrent)notice('Ton atelier est à jour : aucun nouveau cours validé pour le moment.');
     return 'current';
   }
  }catch(_){
