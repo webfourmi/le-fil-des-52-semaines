@@ -1,5 +1,6 @@
 {
-  "version": "0.8",
+  "version": "0.9",
+  "approved": {"sewing":[0,1],"patchwork":[0],"world":["japon","bengale","coree","halloween"],"history":["needle-01"]},
   "published": [
     1,
     2,

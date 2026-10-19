@@ -508,3 +508,48 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline-offset:2
 #app .cadence-links button{min-width:0;white-space:normal;line-height:1.35;padding:11px 8px}
 @media(max-width:850px){#app .cadence-links{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:390px){#app .cadence-panel{padding:17px 15px}#app .cadence-links button{font-size:.89rem}}
+
+
+/* V1.1.8 · Statuts éditoriaux et voyage Halloween, sans calendrier */
+.editorial-head-status{margin:12px 0 14px}
+.editorial-status{display:inline-flex;align-items:center;gap:5px;border-radius:9px;border:1px solid #c7d8ca;padding:6px 11px;font-size:.86rem;font-weight:700;background:#f8f8f5;color:#41604d}
+.editorial-ok{background:#eaf4e8;color:#375e47;border-color:#9dbba0}
+.editorial-writing{background:#fbf0e6;color:#8c6845;border-color:#d5bba5}
+.travel-halloween .travel-article-heading{background:linear-gradient(120deg,#fff8e8,#fbe6d6)}
+.travel-halloween .travel-lead{font-size:1.1rem;line-height:1.75}
+.halloween-archives{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:20px 0 24px}
+.halloween-archive-wide{grid-template-columns:minmax(0,370px)}
+.halloween-archive{margin:0;min-width:0;background:#fcfaf5;border:1px solid #eadbd0;border-radius:13px;overflow:hidden}
+.halloween-archive>a{display:block}
+.halloween-archive img{width:100%;height:230px;object-fit:contain;background:#eeeae2}
+.halloween-archive figcaption{padding:12px;display:flex;flex-direction:column;gap:6px;line-height:1.45;font-size:.85rem}
+.halloween-archive figcaption small{color:#6b6d62}
+.halloween-archive a{overflow-wrap:anywhere}
+.halloween-choice{background:#f2f4eb;border:1px solid #cbdccf;padding:18px;border-radius:15px;margin:22px 0}
+.halloween-workshops{display:grid;gap:12px;margin:20px 0}
+.halloween-workshop{padding:0!important;overflow:hidden}
+.halloween-workshop>summary{display:flex;flex-direction:column;gap:6px;cursor:pointer;padding:17px 23px;background:#fff6ee;position:relative;list-style:none}
+.halloween-workshop>summary::-webkit-details-marker{display:none}
+.halloween-workshop>summary:after{content:'⌄';position:absolute;right:17px;top:23px;font-size:1.5rem;color:#875b48}
+.halloween-workshop[open]>summary:after{content:'⌃'}
+.halloween-workshop>summary strong{font:1.35rem Georgia,serif;color:#345748}
+.halloween-workshop>summary small{color:#7a6c5b}
+.halloween-workshop-body{padding:18px 25px 23px}
+.halloween-workshop-body li{margin:10px 0;line-height:1.6}
+.halloween-workshop-body ol{padding-left:1.5rem}
+.halloween-print-link{display:inline-flex;align-items:center;max-width:100%;text-decoration:none;overflow-wrap:anywhere;margin:10px 0;padding:12px 15px;border-radius:11px}
+.halloween-print-link.primary{background:#446c58;color:#fff;border:1px solid #446c58}
+.halloween-print-link.secondary{background:#fffaf3;color:#385f4e;border:1px solid #acc4b1}
+.travel-halloween .travel-sources ul{padding-left:22px}
+@media(max-width:850px){.halloween-archives{grid-template-columns:repeat(2,minmax(0,1fr))}.halloween-archive img{height:200px}}
+@media(max-width:500px){.halloween-archives{grid-template-columns:1fr}.halloween-archive img{height:245px}.halloween-workshop-body{padding:14px 16px}.halloween-workshop>summary{padding:14px 17px}}
+@media print{.halloween-workshop{break-inside:avoid}.halloween-workshop[open]>summary:after{display:none}.halloween-archive{break-inside:avoid}}
+
+/* Les nouveaux libellés éditoriaux longs ne doivent pas élargir les menus natifs. */
+.weektop,.patch-weektop{max-width:100%;min-width:0}
+.weektop>*{min-width:0}
+#week-select,#patch-week-select{box-sizing:border-box;display:block;width:min(100%,315px);max-width:100%;min-width:0;text-overflow:ellipsis;overflow:hidden}
+@media(max-width:640px){#week-select,#patch-week-select{width:100%;max-width:100%}}
+
+/* Permettre le retour à la ligne du libellé « En cours d’écriture » sur 320 px. */
+#app .tag.orange{display:inline-block;max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.45;vertical-align:middle}

@@ -17,7 +17,7 @@ async function main(){
   await page.locator('#bottomnav [data-page="world"]').click();
   await page.getByRole('heading',{name:'Histoires à coudre'}).waitFor();
   assert.equal(await page.locator('.travel-article').count(),1,'Un article visible à la fois');
-  assert.equal(await page.locator('#culture-article-select option').count(),3);
+  assert.equal(await page.locator('#culture-article-select option').count(),4);
   let totalPhotos=0,totalVideos=0;
   const countries=['japon','bengale','coree'];
   for(const country of countries){
