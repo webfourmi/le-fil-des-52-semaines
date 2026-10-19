@@ -17,7 +17,7 @@ async function verifyMenu(page,id,keys){
   const img=btn.locator('img.nav-art');
   assert.equal(await img.count(),1,key+' image missing');
   assert.equal((await img.getAttribute('src')).split('/').pop(),assets[key]);
-  assert.ok(await img.evaluate(e=>e.complete&&e.naturalWidth>0),'broken image '+key);
+  assert.ok(await img.evaluate(async e=>{if(!e.complete)await e.decode().catch(()=>{});return e.complete&&e.naturalWidth>0}),'broken image '+key);
   assert.ok((await btn.innerText()).trim().length>0,'missing label for '+key);
  }
 }
