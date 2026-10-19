@@ -154,7 +154,9 @@ const enrichments={
  }
 };
 for(const item of cards){const extra=enrichments[item.id];item.sections.push(...extra.sections);item.resources.push(...extra.resources);item.videos=extra.videos;}
+cards.push({id:'halloween',country:'États-Unis',title:'Halloween : citrouilles, tissus et quilts',era:'Archives américaines et trois projets facultatifs'});
 function render(selectedId){
+ if(selectedId==='halloween')return root.Fil52Halloween.render();
  const imageCard=item=>'<figure class="travel-photo photo-card"><img loading="lazy" decoding="async" src="'+commons(item.file)+'" alt="'+item.alt+'"><figcaption class="photo-caption"><b>'+item.description+'</b><small>'+item.credit+' · '+item.license+'</small><a href="'+source(item.file)+'" target="_blank" rel="noopener noreferrer">Objet, photo et licence ↗</a></figcaption></figure>';
  return '<section class="section travel-intro"><span class="eyebrow">Voyage textile · Coutures du monde</span><h2>Le monde vu à travers ses coutures</h2><p>Chaque escale explore un savoir-faire textile, son histoire, des photographies d’objets identifiés, un vocabulaire et un petit atelier libre à partir de chutes.</p><p class="small">Choisis une escale dans le menu. Les photographies historiques peuvent nécessiter Internet ; les textes restent accessibles hors connexion après installation.</p></section>'+
  cards.filter(item=>!selectedId||item.id===selectedId).map(item=>'<article class="card section travel-article" data-travel="'+item.id+'"><header class="travel-article-heading"><span class="culture-label">Escale · '+item.country+'</span><h2>'+item.title+'</h2><small>'+item.era+'</small></header><div class="travel-content"><p class="travel-lead">'+item.lead+'</p>'+
