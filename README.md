@@ -1,14 +1,24 @@
-# De fil en aiguille · V1.1.7
+# De fil en aiguille · V1.1.8
 
-Application de couture et patchwork en **52 rendez-vous, espacés de 15 jours** : projets de récupération, apprentissage de la **Janome Cherry 21**, patronnerie, 52 blocs de patchwork par personne, et rubriques culturelles documentées.
+Application de couture et patchwork organisée en **52 projets sans calendrier imposé** : projets de récupération, apprentissage de la **Janome Cherry 21**, patronnerie, 52 blocs de patchwork par personne, et rubriques culturelles documentées.
 
-## Un rendez-vous tous les 15 jours
+## Publications libres et validation éditoriale
 
-Chaque numéro propose **exactement quatre contenus coordonnés** : un cours de couture progressif sur Janome Cherry 21, **un cours de patchwork** (un bloc personnel final de 20 × 20 cm), **une fiche Coutures du monde** et **une fiche Histoire de la couture**, ces deux dernières documentées et sourcées. Les fournitures sont toujours données pour **un seul ouvrage**.
+L'application **n'impose aucune périodicité**. Les 52 emplacements numérotés de couture et patchwork restent accessibles comme structure pédagogique, mais de nouveaux articles et ateliers spéciaux peuvent être ajoutés à tout moment, une fois approuvés.
 
-Le programme conserve **52 numéros**, qui se déroulent sur environ **deux ans**, et non plus sur 52 semaines. Les six premiers numéros déjà disponibles restent consultables, avec leur progression et leurs données intactes. Chaque nouveau contenu culturel sera publié dans son espace Monde ou Temps, avec favoris et suivi de lecture individuels.
+Statut éditorial **validé à 100 %** par la responsable du projet :
+- **Couture** : cours 0 (prise en main de la machine), cours 1 (marque-page).
+- **Patchwork** : cours 0 (préparation des fournitures).
+- **Voyage → Histoire** : fiche n°1 sur l'aiguille à chas.
+- **Voyage → Monde** : les trois articles Japon (sashiko/boro), Bengale (kantha), Corée (bojagi/jogakbo), ainsi que **États-Unis : Halloween, citrouilles, tissus et quilts**.
 
-**Rythme éditorial :** un nouvel ensemble de quatre contenus tous les 15 jours. Il s'agit de l'organisation **interne du programme**, pas d'une tâche ChatGPT programmée ni d'un rappel automatique. La date de départ reste à définir dans le calendrier éditorial ; chaque édition paraît une fois ses quatre contenus préparés et intégrés dans l'application. Aucun cours existant n'est supprimé.
+**Tous les autres cours** portent le statut « En cours d’écriture ». Les brouillons consultables ne sont pas annoncés comme finalisés. Le statut éditorial ne modifie jamais les coches personnelles de Viera et Mathilde.
+
+### Voyage spécial Halloween
+
+L'article consacré aux États-Unis comprend une partie documentaire, quatre reproductions historiques issues des collections de Wikimedia Commons/Met/archives américaines, les crédits et liens de provenance, et trois ateliers **facultatifs** : sac à bonbons, mini-quilt décoratif de 20 × 20 cm et guirlande de trois fanions.
+
+Les patrons sont accessibles via `assets/halloween-patrons.html`, **quatre pages SVG A4** à imprimer à 100 %, carré témoin de 5 × 5 cm et fanion de 16 × 19 cm. Ils ne remplacent aucun bloc obligatoire des deux couvertures.
 
 ## Deux maisons, les mêmes cours
 
