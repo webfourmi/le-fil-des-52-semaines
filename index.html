@@ -224,7 +224,7 @@ function dashboard(){const course=homeNext('projectsDone'),patch=homeNext('block
     
     <div class="hero-actions">
       <button class="primary home-course hero-icon-link" ${course?'data-week="'+course+'"'+(progress.done?' data-resume-course="'+course+'"':''):'data-page="learn"'} aria-label="${course?'Ouvrir le cours '+course:'Revoir mes cours'}" title="${course?'Cours '+course:'Revoir mes cours'}"><img src="./assets/nav-sewing-simple.svg" alt="" aria-hidden="true" width="60" height="60"></button>
-      <button class="secondary home-patch hero-icon-link" ${patch?'data-home-patch="'+patch+'"':'data-patch-zero'} aria-label="${patch?'Ouvrir le patchwork '+patch:'Voir ma couverture'}" title="${patch?'Patchwork '+patch:'Voir ma couverture'}"><img src="./assets/nav-patch-simple.svg" alt="" aria-hidden="true" width="60" height="60"></button>
+      <button class="secondary home-patch hero-icon-link" ${patch?'data-home-patch="'+patch+'"':'data-patch-zero'} aria-label="${patch?'Ouvrir le patchwork '+patch:'Ouvrir le cours 0 de patchwork'}" title="${patch?'Patchwork '+patch:'Cours 0 · Préparation au patchwork'}"><img src="./assets/nav-patch-simple.svg" alt="" aria-hidden="true" width="60" height="60"></button>
     </div>
     <div class="hero-foot"><span>✦</span> Avec la Janome Cherry 21 <span class="sep">·</span> 52 idées à explorer librement</div>
   </div>
