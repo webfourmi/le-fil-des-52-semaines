@@ -24,6 +24,20 @@ async function main(){
    await p.locator('#week-select').selectOption(String(week));
    await p.getByText('En cours d’écriture · N° '+String(week).padStart(2,'0')).waitFor();
    await p.getByRole('heading',{name:title,exact:true}).waitFor();
+   if(week===2){
+    const doc=await p.evaluate(()=>({data:upcomingEditions[2],approved:EDITORIAL_APPROVED.sewing.includes(2)}));
+    assert.equal(doc.approved,false,'Le cours 2 reste en cours d’écriture avant approbation');
+    assert.match(doc.data.materials[0],/FACE A/);
+    assert.match(doc.data.materials[1],/FACE B/);
+    assert.match(doc.data.steps[4].detail,/deux endroits deviennent extérieurs/);
+    assert.match(doc.data.steps[6].detail,/Retourne ensuite le même ouvrage/);
+    assert.equal(doc.data.steps.length,7,'Numéros des étapes conservés pour les sauvegardes');
+    assert.match(await p.locator('.lesson-figure figcaption').first().innerText(),/même sous-verre terminé/i);
+    const faces=await p.locator('.lesson-figure svg text').allTextContents();
+    assert.ok(faces.some(x=>x.includes('FACE A')&&x.includes('imprimé')),'Face A illustrée');
+    assert.ok(faces.some(x=>x.includes('FACE B')&&x.includes('uni')),'Face B illustrée');
+    assert.match(await p.locator('.editorial-head-status').innerText(),/En cours d’écriture/);
+   }
    assert.equal(await p.locator('[data-toggle="steps"]').count(),numSteps);
    assert.ok(await p.locator('[data-toggle="mat"]').count()>=4);
    assert.equal(await p.locator('.lesson-figure svg').count(),1);
