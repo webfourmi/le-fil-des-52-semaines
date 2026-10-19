@@ -550,3 +550,6 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline-offset:2
 .weektop>*{min-width:0}
 #week-select,#patch-week-select{box-sizing:border-box;display:block;width:min(100%,315px);max-width:100%;min-width:0;text-overflow:ellipsis;overflow:hidden}
 @media(max-width:640px){#week-select,#patch-week-select{width:100%;max-width:100%}}
+
+/* Permettre le retour à la ligne du libellé « En cours d’écriture » sur 320 px. */
+#app .tag.orange{display:inline-block;max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.45;vertical-align:middle}
