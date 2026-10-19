@@ -17,10 +17,10 @@ const options=page=>page.locator('#culture-article-select').evaluate(select=>[..
    await page.locator(nav+' [data-page="world"]').click();
    assert.equal(await page.locator('.culture-tab').count(),2,'Deux pictogrammes monde et temps');
    assert.equal(await page.locator('.culture-tab img').count(),2);
-   assert.equal(await page.locator('#culture-article-select option').count(),3,'Trois escales dans le menu');
+   assert.equal(await page.locator('#culture-article-select option').count(),4,'Quatre escales dans le menu');
    assert.equal(await page.locator('.travel-article').count(),1,'Un seul article rendu');
    assert.equal(await page.locator('.travel-chapter').count(),await page.evaluate(()=>Fil52Travel.cards[0].sections.length));
-   assert.deepEqual(await options(page),[{label:'○ Articles non lus',ids:['world:japon','world:bengale','world:coree']}]);
+   assert.deepEqual(await options(page),[{label:'○ Articles non lus',ids:['world:japon','world:bengale','world:coree','world:halloween']}]);
    assert.equal(await page.locator('#culture-complete').isChecked(),false,'Lecture à cocher manuellement');
    await page.locator('#culture-article-select').selectOption('world:bengale');
    assert.equal(await page.locator('.travel-article').getAttribute('data-travel'),'bengale');
@@ -33,7 +33,7 @@ const options=page=>page.locator('#culture-article-select').evaluate(select=>[..
    assert.equal(await page.locator('#culture-complete').isChecked(),true);
    let groups=await options(page);
    assert.deepEqual(groups[0].ids,['world:bengale']);
-   assert.deepEqual(groups[1].ids,['world:coree'],'Non lus après favoris');
+   assert.deepEqual(groups[1].ids,['world:coree','world:halloween'],'Non lus après favoris');
    assert.deepEqual(groups[2].ids,['world:japon'],'Lus à la fin');
    await page.locator('[data-culture-favorite]').click();
    groups=await options(page);
