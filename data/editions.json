@@ -1,6 +1,23 @@
 {
   "version": "0.9",
-  "approved": {"sewing":[0,1],"patchwork":[0],"world":["japon","bengale","coree","halloween"],"history":["needle-01"]},
+  "approved": {
+    "sewing": [
+      0,
+      1
+    ],
+    "patchwork": [
+      0
+    ],
+    "world": [
+      "japon",
+      "bengale",
+      "coree",
+      "halloween"
+    ],
+    "history": [
+      "needle-01"
+    ]
+  },
   "published": [
     1,
     2,
@@ -12,57 +29,59 @@
   "issues": {
     "2": {
       "title": "Dessous de verre réversible",
-      "intro": "Deux faces de coton, un contour régulier et une ouverture invisible : une première petite réalisation dont on est fière.",
+      "intro": "Un seul dessous de verre, deux ambiances : côté A un coton imprimé, côté B un coton uni contrastant. On le retourne à volonté, car les deux faces sont entièrement finies et peuvent accueillir un verre.",
       "duration": "1 h à 1 h 30 (couture + bloc)",
-      "technique": "Endroit contre endroit, pivot aux angles, surpiqûre",
-      "reuse": "Deux morceaux de chemise en coton ou des chutes stables",
-      "objective": "Obtenir un sous-verre plat d’environ 10 × 10 cm, avec quatre angles nets et une ouverture refermée par surpiqûre.",
-      "result": "Un sous-verre d’environ 10 × 10 cm. Les dimensions peuvent varier légèrement selon l’épaisseur et la précision des marges.",
+      "technique": "Deux faces contrastées, couture endroit contre endroit, pivot aux angles et surpiqûre",
+      "reuse": "Une face dans une chemise imprimée et l’autre dans une chute de coton uni",
+      "objective": "Réaliser un vrai sous-verre double-face de 10 × 10 cm environ : un côté A imprimé et un côté B contrasté, tous deux utilisables, avec angles nets et ouverture refermée.",
+      "result": "Un même dessous de verre d’environ 10 × 10 cm, avec deux faces finies et différentes. Retourne-le pour changer de décor : aucune couture d’assemblage ni marge brute ne doit apparaître.",
       "materials": [
-        "2 carrés de coton tissé de 12 × 12 cm (un pour chaque face)",
+        "1 carré de coton tissé imprimé de 12 × 12 cm : FACE A (marges de 1 cm comprises)",
+        "1 carré de coton tissé uni contrastant de 12 × 12 cm : FACE B (marges de 1 cm comprises)",
+        "Facultatif : 1 carré de molleton thermocollant H630 de 10 × 10 cm, à centrer sur l’envers de la face A pour donner de la tenue (ne protège pas des plats très chauds)",
         "Fil polyester ou coton assorti, aiguille universelle 80/12 en bon état",
-        "Épingles ou pinces, petite paire de ciseaux, règle et craie textile",
-        "Fer à repasser et chute de coton pour un essai"
+        "Épingles ou pinces, règle, craie textile et ciseaux à tissu",
+        "Fer à repasser ; deux petites chutes pour essayer la couture et la surpiqûre"
       ],
       "settings": "Janome Cherry 21 : point droit, longueur indicative 2,5 mm, pied universel, marge de couture de 1 cm. Faire un essai sur deux épaisseurs, puis piquer lentement aux angles.",
-      "tip": "Marquez les 4 angles à 1 cm des bords. Arrêtez-vous aiguille plantée dans le tissu, levez le pied, pivotez de 90° et rabaissez le pied.",
+      "tip": "Marque les coins à 1 cm pour pivoter précisément. Avant de piquer, vérifie que les endroits des deux tissus se font face : après retournement, chacun apparaîtra sur un côté du même sous-verre.",
       "safety": "Débranchez la machine avant de changer l’aiguille ; gardez les doigts à distance du pied et retirez les épingles avant de les atteindre.",
       "prep": [
-        "Laver et repasser les deux chutes si elles risquent de rétrécir.",
-        "Tracer une ligne de couture à 1 cm sur chaque côté et repérer une ouverture de 4 cm.",
-        "Faire un essai de point droit puis contrôler sa régularité au recto et au verso."
+        "Choisir deux tissus visiblement différents (par exemple : imprimé de saison pour A, coton uni noir ou crème pour B). Marquer A et B discrètement à la craie sur l’envers.",
+        "Laver si nécessaire, sécher puis repasser les tissus. Si tu veux plus de tenue, thermocoller le H630 de 10 × 10 cm au centre de l’envers de A, selon les consignes de sa notice.",
+        "Tracer une ligne de couture à 1 cm des bords et repérer une ouverture de 4 cm. Tester un point droit régulier sur deux épaisseurs."
       ],
       "steps": [
         {
-          "title": "Couper les deux faces",
-          "detail": "Découpez exactement deux carrés de 12 × 12 cm. Ces cotes comprennent les marges de 1 cm : un seul sous-verre demande deux pièces."
+          "title": "Choisir et découper deux faces vraiment différentes",
+          "detail": "Coupe un carré de 12 × 12 cm dans un coton imprimé (face A) et un second de 12 × 12 cm dans un coton uni contrastant (face B). Les marges de 1 cm sont comprises. Pose les deux carrés endroit vers toi : c’est l’aperçu des deux décors que tu pourras choisir."
         },
         {
-          "title": "Assembler endroit contre endroit",
-          "detail": "Superposez les carrés, les jolies faces l’une contre l’autre. Épinglez sans déformer ; marquez une ouverture de 4 cm sur un côté."
+          "title": "Préparer le molleton éventuel, puis assembler les endroits",
+          "detail": "Pour davantage de tenue, centre un H630 de 10 × 10 cm sur l’envers de A, fixe-le au fer selon la notice et laisse refroidir. Pose ensuite les carrés endroit contre endroit : les jolies faces A et B se regardent, avec les envers vers l’extérieur. Épingle et marque une ouverture de 4 cm sur un côté."
         },
         {
-          "title": "Piquer le contour",
-          "detail": "Piquez à 1 cm du bord en laissant l’ouverture. Arrêtez-vous aiguille en bas pour tourner les angles ; consolidez le début et la fin par quelques points arrière."
+          "title": "Piquer le contour sans fermer l’ouverture",
+          "detail": "Pique à 1 cm du bord, sauf sur les 4 cm réservés. Pour chaque angle, arrête-toi aiguille plantée, lève le pied, pivote de 90° puis continue. Fais quelques points arrière au début et à la fin."
         },
         {
-          "title": "Dégarnir les coins",
-          "detail": "Coupez très légèrement la marge en biais près de chaque coin, sans entamer la couture. Cela évite une boule de tissu une fois retourné."
+          "title": "Dégarnir les quatre angles",
+          "detail": "Coupe en biais l’excédent de marge à chaque coin, sans toucher la couture. Laisse un peu de tissu près des points pour que les angles restent solides."
         },
         {
-          "title": "Retourner et former les angles",
-          "detail": "Retournez par l’ouverture, aidez doucement les angles avec un outil non pointu, rentrez les marges de l’ouverture et repassez."
+          "title": "Retourner : faire apparaître les deux faces",
+          "detail": "Retourne l’ouvrage par l’ouverture. Les deux endroits deviennent extérieurs : d’un côté, l’imprimé A ; de l’autre, l’uni B. Forme doucement les angles avec un outil non pointu, rentre les marges de l’ouverture sur 1 cm et repasse des deux côtés."
         },
         {
-          "title": "Surpiquer et fermer",
-          "detail": "Surpiquez tout autour à 2–3 mm du bord pour tenir les épaisseurs et fermer l’ouverture. Gardez la même distance de l’angle au côté."
+          "title": "Fermer et surpiquer des deux côtés à la fois",
+          "detail": "Surpique tout le tour à 2 ou 3 mm du bord : cette même couture apparaît sur les deux faces et referme l’ouverture. Utilise un fil discret sur A et B ou choisis volontairement un contraste. Garde une distance régulière."
         },
         {
-          "title": "Contrôler la finition",
-          "detail": "Posez le sous-verre à plat, mesurez ses deux côtés et observez le tissu : pas de pli marqué ni d’ouverture résiduelle."
+          "title": "Tester réellement le côté A puis le côté B",
+          "detail": "Pose le dessous de verre face A vers le haut et place un verre dessus. Retourne ensuite le même ouvrage face B vers le haut et recommence. Vérifie que les deux côtés sont plats, propres, sans marge apparente ni ouverture. Tu as bien un objet réversible, pas deux sous-verres séparés."
         }
       ],
-      "bonus": "Réaliser un second sous-verre avec deux tissus contrastants et une surpiqûre discrète parfaitement parallèle.",
+      "bonus": "Fais une face Halloween (imprimé citrouilles ou coton noir) et une face utilisable toute l’année (coton crème, carreaux ou fleurs). Essaie une surpiqûre régulière qui reste jolie sur les deux côtés.",
       "mistakes": [
         [
           "Coins arrondis",
@@ -78,9 +97,9 @@
         ]
       ],
       "checkpoint": [
-        "Ai-je laissé l’ouverture avant de coudre tout le contour ?",
-        "Les quatre côtés finis mesurent-ils environ 10 cm ?",
-        "L’ouverture est-elle fermée par une couture régulière ?"
+        "Mes deux faces visibles sont-elles différentes (A imprimé, B uni contrastant) ?",
+        "Le dessous de verre fini mesure-t-il environ 10 × 10 cm, sans molleton ni marges apparents ?",
+        "Puis-je le retourner et poser un verre sur A comme sur B, avec une surpiqûre propre sur les deux côtés ?"
       ],
       "diagram": "coaster",
       "patchworkTitle": "Deux bandes verticales",
