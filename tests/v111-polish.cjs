@@ -32,8 +32,8 @@ async function main(){
    await page.getByText("L'atelier de Mathilde & Viera",{exact:false}).waitFor();
    const top=page.locator('.hero-actions');
    assert.equal(await top.locator('button').count(),2);
-   assert.equal(await top.locator('button').first().getAttribute('aria-label'),'Ouvrir le cours 2');
-   assert.equal(await top.locator('button').nth(1).getAttribute('aria-label'),'Ouvrir le patchwork 2');
+   assert.equal(await top.locator('button').first().getAttribute('aria-label'),'Revoir mes cours');
+   assert.equal(await top.locator('button').nth(1).getAttribute('aria-label'),'Voir ma couverture');
    assert.equal((await top.locator('button').first().innerText()).trim(),'');
    assert.equal((await top.locator('button').nth(1).innerText()).trim(),'');
    const images=await top.locator('img').all();assert.equal(images.length,2);
@@ -49,10 +49,10 @@ async function main(){
    }
    await page.screenshot({path:'tests/screenshots/v11-ajustements-'+width+'.png',fullPage:false});
    await top.locator('button').first().click();
-   assert.equal(await page.locator('#week-select').inputValue(),'2');
+   assert.equal(await page.locator('#week-select').inputValue(),'1');
    await page.locator(nav+' [data-page="home"]').click();
    await page.locator('.hero-actions .home-patch').click();
-   await page.getByRole('heading',{name:'Mes cours de patchwork'}).waitFor();assert.equal(await page.locator('#patch-week-select').inputValue(),'2');
+   await page.getByRole('heading',{name:'Mes cours de patchwork'}).waitFor();assert.equal(await page.evaluate(()=>state.patchWeek),0);
    const stored=await page.evaluate(()=>JSON.parse(localStorage.getItem('fil52.progress.v1')));
    assert.equal(stored.notes.m['1'],'Un souvenir de couture qui ne doit pas être effacé.');
    assert.deepEqual(stored.projectsDone.m,[1]);assert.deepEqual(stored.blocks.m,[1]);
