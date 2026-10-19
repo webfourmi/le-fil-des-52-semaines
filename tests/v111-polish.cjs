@@ -33,7 +33,7 @@ async function main(){
    const top=page.locator('.hero-actions');
    assert.equal(await top.locator('button').count(),2);
    assert.equal(await top.locator('button').first().getAttribute('aria-label'),'Revoir mes cours');
-   assert.equal(await top.locator('button').nth(1).getAttribute('aria-label'),'Voir ma couverture');
+   assert.equal(await top.locator('button').nth(1).getAttribute('aria-label'),'Ouvrir le cours 0 de patchwork');
    assert.equal((await top.locator('button').first().innerText()).trim(),'');
    assert.equal((await top.locator('button').nth(1).innerText()).trim(),'');
    const images=await top.locator('img').all();assert.equal(images.length,2);
