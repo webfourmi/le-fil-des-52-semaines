@@ -42,7 +42,7 @@ await page.evaluate(()=>{
     if(String(input).includes('data/editions.json')){
       return Promise.resolve(new Response(JSON.stringify({
         version:'0.8-test',
-        published:[1,2,3,4,5,6,7],
+        published:[1,2,3,4,5,6,7], approved:{sewing:[0,1,7]}, 
         issues:{
           7:{title:'Serviette de table',intro:'Essai de publication',steps:[{title:'Découper',detail:'Préparer les tissus'}],materials:['Chutes de coton']}
         }
@@ -52,7 +52,7 @@ await page.evaluate(()=>{
   };
   document.dispatchEvent(new Event('visibilitychange'));
 });
-await page.getByText('Le cours n° 07 est disponible !').waitFor({timeout:10000});
+await page.getByText('Le cours n° 07 est désormais validé !').waitFor({timeout:10000});
 await page.getByRole('button',{name:'Voir le cours',exact:true}).click();
 assert.equal(await page.locator('#week-select').inputValue(),'7');
 assert.ok(await page.getByText('Essai de publication').count());
@@ -89,7 +89,7 @@ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWid
 await context.setOffline(false);
 await page.locator('details.pwa-panel > summary').click();
 await page.locator('#pwa-check').click();
-await page.getByText('Ton atelier est à jour : aucun nouveau cours pour le moment.').waitFor({timeout:10000});
+await page.getByText('Ton atelier est à jour : aucun nouveau cours validé pour le moment.').waitFor({timeout:10000});
 assert.deepEqual(errors,[]);
 console.log('OK : manifeste, guide iPhone/Android, absence de débordement mobile.');
 await context.close();
