@@ -569,3 +569,9 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline-offset:2
 .halloween-feston-diagram svg{display:block;width:100%;height:auto;max-height:250px}
 .halloween-feston-diagram figcaption{font-size:.84rem;color:#5c675f;padding:9px 12px}
 @media(max-width:500px){.halloween-hand-content{padding:12px 14px 16px}.halloween-hand-variant>summary{padding:14px}}
+
+
+/* Lien imprimable du cours 2 et de la bibliothèque Patrons */
+.course-pattern-link{display:inline-flex;align-items:center;max-width:100%;background:#436a54;color:#fff!important;border:1px solid #436a54;border-radius:10px;padding:12px 16px;text-decoration:none;font-size:.92rem;font-weight:700;overflow-wrap:anywhere;margin:8px 0}
+.course-pattern-link:hover,.course-pattern-link:focus-visible{background:#365745}
+.sewing-course-pattern{background:#fffaf3}
