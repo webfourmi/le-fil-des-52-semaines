@@ -48,7 +48,7 @@ async function main(){
    await page.getByRole('heading',{name:/Bien avant nos machines/}).waitFor();
    if(width===390)await page.screenshot({path:'tests/screenshots/v11-voyage-mobile.png',fullPage:false});
    await page.locator(nav+' [data-page="journal"]').click();
-   await page.getByRole('heading',{name:'Mon journal de couture'}).waitFor();
+   await page.getByRole('heading',{name:'Mon journal d’atelier'}).waitFor();
    if(width===390)await page.screenshot({path:'tests/screenshots/v11-journal-mobile.png',fullPage:false});
    if(width>850){
      await page.locator(nav+' [data-page="personal"]').click();
