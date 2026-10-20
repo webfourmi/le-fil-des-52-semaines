@@ -38,7 +38,7 @@ async function start(browser, person, viewport={width:390,height:844}) {
 }
 async function journal(page){
   await page.locator('#bottomnav [data-page="journal"]').click();
-  await page.getByRole('heading',{name:'Mon journal de couture'}).waitFor();
+  await page.getByRole('heading',{name:'Mon journal d’atelier'}).waitFor();
 }
 async function main(){
   const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
@@ -52,10 +52,12 @@ async function main(){
     pass('Navigation mobile 390 px : cinq onglets et aucun débordement');
     await journal(p);
     await p.locator('[data-journal-complete="1"]').check();
+    await p.locator('[data-journal-kind="patchwork"]').click();
     await p.locator('[data-journal-block="1"]').check();
+    await p.locator('[data-journal-kind="sewing"]').click();
     await p.locator('[data-note="1"]').fill('Une chute de coton fleuri.');
     const img=await makeTestImage(p);
-    await p.locator('[data-gallery-upload="project"]').setInputFiles({
+    await p.locator('[data-journal-photo-upload]').setInputFiles({
       name:'coton.png',mimeType:'image/png',buffer:img
     });
     await p.locator('#journal-gallery img').first().waitFor({state:'visible',timeout:15000});
@@ -64,7 +66,9 @@ async function main(){
     await journal(p);
     await p.locator('#journal-gallery img').first().waitFor({state:'visible',timeout:15000});
     assert.ok(await p.locator('[data-journal-complete="1"]').isChecked());
+    await p.locator('[data-journal-kind="patchwork"]').click();
     assert.ok(await p.locator('[data-journal-block="1"]').isChecked());
+    await p.locator('[data-journal-kind="sewing"]').click();
     assert.equal(await p.locator('[data-note="1"]').inputValue(),'Une chute de coton fleuri.');
     pass('Photo, notes et coches conservées après rechargement');
     await p.getByRole('button',{name:'Sauvegarder mon journal'}).click();
