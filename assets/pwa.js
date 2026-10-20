@@ -3,7 +3,7 @@
 'use strict';
 let deferred=null, worker=null, waiting=null, updateAccepted=false;
 let previouslyControlled=false;
-const APP_BUILD='1.1.11';
+const APP_BUILD='1.1.12';
 const el=id=>document.getElementById(id);
 const updateUI=()=>{
  const install=el('pwa-install');
