@@ -44,7 +44,7 @@ async function saveSnapshot(page){
     const originalPhoto=await page.locator('#journal-gallery img').first().getAttribute('src');
     assert.ok(originalPhoto.startsWith('data:image/jpeg;'));
     const before=await saveSnapshot(page);
-    assert.equal(before.photos.length,1);
+    assert.equal(before.journalPhotos.length,1);
     assert.equal(before.data.notes['1'],note);
     await page.waitForFunction(()=>!!navigator.serviceWorker.controller,{timeout:15000});
     await context.setOffline(true);
@@ -57,8 +57,8 @@ async function saveSnapshot(page){
     const after=await saveSnapshot(page);
     assert.equal(after.profile,'m');
     assert.equal(after.data.notes['1'],note);
-    assert.equal(after.photos.length,1);
-    assert.equal(after.photos[0].dataUrl,before.photos[0].dataUrl);
+    assert.equal(after.journalPhotos.length,1);
+    assert.equal(after.journalPhotos[0].dataUrl,before.journalPhotos[0].dataUrl);
     console.log('OK : sauvegarde personnelle JSON téléchargeable sans Internet, photo comprise.');
     assert.deepEqual(errors,[],'Erreurs navigateur : '+errors.join(', '));
     await context.close();
