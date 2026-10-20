@@ -89,7 +89,7 @@ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWid
 await context.setOffline(false);
 await page.locator('details.pwa-panel > summary').click();
 await page.locator('#pwa-check').click();
-await page.getByText('Ton application (version 1.1.11) est à jour. Aucun nouveau cours validé pour le moment.').waitFor({timeout:10000});
+await page.getByText('Ton application (version 1.1.12) est à jour. Aucun nouveau cours validé pour le moment.').waitFor({timeout:10000});
 assert.match(await page.locator('#pwa-version').innerText(),/1\.1\.11/,'Version affichée dans l’atelier');
 const approvedBefore=await page.evaluate(()=>window.Fil52EditorialApproved.sewing.join(','));
 assert.equal(approvedBefore,'0,1');
