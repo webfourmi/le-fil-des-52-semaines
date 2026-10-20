@@ -1,4 +1,4 @@
-name: V1.1.9 - Halloween et patrons arrondis
+name: V1.1.10 - Recherche, Halloween et patrons
 on:
   pull_request:
     branches: [main]
@@ -21,6 +21,7 @@ jobs:
           sleep 2
       - run: node tests/v118-halloween-editorial.cjs
       - run: node tests/v119-patrons-arrondis.cjs
+      - run: node tests/v1110-search-patrons.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

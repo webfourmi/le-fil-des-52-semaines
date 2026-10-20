@@ -2,6 +2,14 @@
 
 Application de couture et patchwork organisée en **52 projets sans calendrier imposé** : projets de récupération, apprentissage de la **Janome Cherry 21**, patronnerie, 52 blocs de patchwork par personne, et rubriques culturelles documentées.
 
+## Nouveauté V1.1.10 : recherche, consultation des patrons et silhouettes Halloween
+
+- **Couture** et **Patchwork** disposent chacun d'une recherche par mots-clés sans tenir compte des majuscules ni des accents. La recherche figure juste au-dessus du sélecteur des 52 cours ou blocs et affiche des résultats cliquables.
+- La bibliothèque **Patrons** propose les 3 ateliers Halloween (sac à bonbons, mini-quilt, guirlande), avec consultation sur place et navigation latérale/inférieure conservée. Une page dédiée peut être ouverte pour imprimer à **100 %**, sans régler l'échelle dans l'aperçu.
+- **Chat** redessiné : assis de profil, une silhouette entière à découper, dos arrondi et queue recourbée ; **fantôme** redessiné : tête arrondie, petits bras ouverts, bas ondulé ; yeux et bouche à broder, non à découper.
+- **Halloween est « En cours d’écriture »**, mais ses trois ateliers et patrons restent consultables. Japon, Bengale et Corée demeurent validés.
+- Cache PWA mis à jour vers `fil52-shell-v1.1.10`.
+
 ## Nouveauté V1.1.9 : patrons arrondis et Halloween à la main
 
 - Le **cours 2** reste en cours d’écriture. Son dessous de verre réversible est désormais à **coins arrondis**, avec deux faces différentes, un patron vectoriel A4 de 12 × 12 cm, marge de 1 cm et encoches en V sur les courbes. Fiche : `assets/cours-02-patron-arrondis.html`. Les 7 cases d’étapes existantes restent les mêmes.
@@ -16,7 +24,7 @@ Statut éditorial **validé à 100 %** par la responsable du projet :
 - **Couture** : cours 0 (prise en main de la machine), cours 1 (marque-page).
 - **Patchwork** : cours 0 (préparation des fournitures).
 - **Voyage → Histoire** : fiche n°1 sur l'aiguille à chas.
-- **Voyage → Monde** : les trois articles Japon (sashiko/boro), Bengale (kantha), Corée (bojagi/jogakbo), ainsi que **États-Unis : Halloween, citrouilles, tissus et quilts**.
+- **Voyage → Monde** : les trois articles Japon (sashiko/boro), Bengale (kantha), Corée (bojagi/jogakbo). **États-Unis : Halloween, citrouilles, tissus et quilts** reste **en cours d’écriture**.
 
 **Tous les autres cours** portent le statut « En cours d’écriture ». Les brouillons consultables ne sont pas annoncés comme finalisés. Le statut éditorial ne modifie jamais les coches personnelles de Viera et Mathilde.
 
