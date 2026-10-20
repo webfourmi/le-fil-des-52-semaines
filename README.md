@@ -2,6 +2,16 @@
 
 Application de couture et patchwork organisée en **52 projets sans calendrier imposé** : projets de récupération, apprentissage de la **Janome Cherry 21**, patronnerie, 52 blocs de patchwork par personne, et rubriques culturelles documentées.
 
+## V1.1.13 : journal Couture, Patchwork et Voyage
+
+Le **journal** propose désormais trois onglets en haut : Couture, Patchwork, Voyage, puis un menu déroulant propre à la rubrique. Les 52 projets couture et les 52 blocs patchwork restent distincts ; l'onglet Voyage propose les articles disponibles dans Voyage → Monde et Histoire.
+
+Chaque réalisation dispose de son **album personnel de 1 à 5 photos** (ou aucune tant qu'elle n'est pas photographiée), avec ajout, suppression et bouton « Partager » pour **envoyer une photo choisie via le partage du téléphone ou télécharger une copie**. Ce partage externe ne crée **aucune galerie publique** ni transfert automatique vers le site. Les anciennes photos uniques des cours 1–52 restent visibles dans leur nouvel album.
+
+Le partage permanent **à l'intérieur de l'application entre deux appareils** exigerait des comptes ou invitations, un stockage sécurisé et des permissions explicites. Cette V1.1.13 **ne fournit pas de galerie synchronisée**, afin de ne rendre aucune photo publique par surprise.
+
+Les photos supplémentaires utilisent IndexedDB et les notes séparées Patchwork/Voyage sont conservées localement. La **sauvegarde JSON v6** inclut ces données et accepte les anciennes sauvegardes v2–v5. Les albums et notes de Viera et Mathilde restent indépendants.
+
 ## Nouveauté V1.1.12 : cinq vraies photos du marque-page
 
 Le cours **Couture 1** présente désormais cinq photographies authentiques fournies par la créatrice, dans l'ordre : (1) matériel et patron, (2) superposition/épinglage, (3) angles dégarnis, (4) surpiqûre à la Janome Cherry 21, (5) marque-page terminé. Les légendes sont spécifiques à chaque photographie.
