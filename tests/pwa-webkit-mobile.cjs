@@ -59,7 +59,7 @@ async function run(){
    const download=await pending;
    const backup=JSON.parse(await fs.readFile(await download.path(),'utf8'));
    assert.equal(backup.profile,'m');
-   assert.equal(backup.photos.length,1);
+   assert.equal(backup.journalPhotos.length,1);
    assert.equal(backup.data.notes['1'],'Essai WebKit et sauvegarde personnelle.');
    console.log('OK Safari WebKit : téléchargement JSON individuel avec photo');
    assert.deepEqual(errors,[],errors.join('; '));
