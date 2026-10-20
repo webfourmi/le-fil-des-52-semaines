@@ -16,8 +16,10 @@ const assert=require('node:assert/strict');
  assert.equal(await page.locator('.sewing-photo-gallery figure').count(),5);
  assert.equal(await page.locator('.patchwork-photo-gallery figure').count(),0);
  assert.equal(await page.locator('.patchwork-one,[data-lesson-patch]').count(),0);
- assert.equal(await page.locator('.lesson-photo-empty').count(),5);
- assert.equal(await page.locator('.lesson-photo-grid img, .lesson-photo-open').count(),0);
+ assert.equal(await page.locator('.lesson-photo-empty').count(),w===1?0:5);
+ assert.equal(await page.locator('.sewing-photo-gallery .lesson-photo-open img').count(),w===1?5:0);
+ if(w===1) assert.match(await page.locator('.sewing-photo-gallery').innerText(),/vraies photos/i);
+ assert.equal(await page.locator('.lesson-photo-grid img, .lesson-photo-open').count(),w===1?10:0);
  assert.equal(await page.locator('.sewing-photo-gallery .lesson-photo-grid').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),2);
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  }
@@ -48,7 +50,7 @@ const assert=require('node:assert/strict');
  assert.equal(await page.evaluate(()=>JSON.stringify(localStorage)),before);
  await page.waitForFunction(()=>!!navigator.serviceWorker.controller);
  await context.setOffline(true);await page.reload();await page.locator('#bottomnav [data-page="learn"]').click();
- for(let w=1;w<=6;w++){await page.locator('#week-select').selectOption(String(w));assert.equal(await page.locator('.lesson-photo-empty').count(),5)}
+ for(let w=1;w<=6;w++){await page.locator('#week-select').selectOption(String(w));assert.equal(await page.locator('.lesson-photo-empty').count(),w===1?0:5);if(w===1)assert.equal(await page.locator('.sewing-photo-gallery img').count(),5)}
  assert.deepEqual(errors,[]);console.log('OK : 36 emplacements, mobile, clavier, focus, stockage inchangé et hors connexion');
  }finally{await browser.close()}
 })().catch(e=>{console.error(e);process.exitCode=1});
