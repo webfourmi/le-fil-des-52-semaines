@@ -89,7 +89,28 @@ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWid
 await context.setOffline(false);
 await page.locator('details.pwa-panel > summary').click();
 await page.locator('#pwa-check').click();
-await page.getByText('Ton atelier est à jour : aucun nouveau cours validé pour le moment.').waitFor({timeout:10000});
+await page.getByText('Ton application (version 1.1.11) est à jour. Aucun nouveau cours validé pour le moment.').waitFor({timeout:10000});
+assert.match(await page.locator('#pwa-version').innerText(),/1\.1\.11/,'Version affichée dans l’atelier');
+const approvedBefore=await page.evaluate(()=>window.Fil52EditorialApproved.sewing.join(','));
+assert.equal(approvedBefore,'0,1');
+await page.evaluate(()=>{
+ const oldFetch=window.fetch;
+ window.fetch=(input,options)=>{
+  if(String(input).includes('data/editions.json')){
+   return Promise.resolve(new Response(JSON.stringify({
+    version:'0.9',appRelease:'1.1.12',
+    appReleaseNotes:'Nouveaux patrons et recherche sans validation de cours.',
+    published:[1,2,3,4,5,6],approved:{sewing:[0,1]}
+   }),{status:200,headers:{'Content-Type':'application/json'}}));
+  }
+  return oldFetch(input,options);
+ };
+ document.dispatchEvent(new Event('visibilitychange'));
+});
+await page.getByText('Nouvelle version de De fil en aiguille : 1.1.12.',{exact:false}).waitFor({timeout:10000});
+assert.ok(await page.getByRole('button',{name:'Mettre à jour',exact:true}).isVisible(),'Alerte app sans nouveau cours validé');
+assert.equal(await page.locator('#week-select').count(),0,'Aucune navigation imposée par la nouvelle version');
+
 assert.deepEqual(errors,[]);
 console.log('OK : manifeste, guide iPhone/Android, absence de débordement mobile.');
 await context.close();
