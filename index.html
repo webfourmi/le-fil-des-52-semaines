@@ -108,6 +108,7 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
 </style>
 <script defer src="./assets/gallery.js"></script>
 <script defer src="./assets/personal-gallery.js"></script>
+<script defer src="./assets/journal-photos.js"></script>
 <script defer src="./assets/halloween-voyage.js"></script>
 <script defer src="./assets/textile-travel.js"></script>
 <script defer src="./assets/lesson-guides.js"></script>
@@ -164,7 +165,7 @@ for(const kind of ['cultureFavorites','cultureRead']){
  if(!state[kind]||typeof state[kind]!=='object')state[kind]={m:[],f:[]};
  for(const person of ['m','f'])state[kind][person]=Array.isArray(state[kind][person])?[...new Set(state[kind][person].filter(v=>typeof v==='string'&&/^(world|history):[a-z0-9-]{1,40}$/.test(v)))]:[];
 }
-if(!state.names)state.names={m:'Viera',f:'Mathilde'};if(state.names.f==='Ma fille')state.names.f='Mathilde';if(!state.names.m||state.names.m==='Moi')state.names.m='Viera';if(!['m','f'].includes(localStorage.getItem('fil52.identity')))state.profile=null;else state.profile=localStorage.getItem('fil52.identity');state.ready=state.ready||{m:[],f:[]};state.projectsDone=state.projectsDone||{m:[],f:[]};state.ratings=state.ratings||{m:{},f:{}};state.personalProjects=state.personalProjects||{m:[],f:[]};for(const profile of ['m','f'])if(!Array.isArray(state.personalProjects[profile]))state.personalProjects[profile]=[];
+if(!state.names)state.names={m:'Viera',f:'Mathilde'};if(state.names.f==='Ma fille')state.names.f='Mathilde';if(!state.names.m||state.names.m==='Moi')state.names.m='Viera';if(!['m','f'].includes(localStorage.getItem('fil52.identity')))state.profile=null;else state.profile=localStorage.getItem('fil52.identity');state.ready=state.ready||{m:[],f:[]};state.projectsDone=state.projectsDone||{m:[],f:[]};state.ratings=state.ratings||{m:{},f:{}};state.personalProjects=state.personalProjects||{m:[],f:[]};state.journalNotes=state.journalNotes||{m:{},f:{}};state.journalRatings=state.journalRatings||{m:{},f:{}};for(const profile of ['m','f']){if(!state.journalNotes[profile]||typeof state.journalNotes[profile]!=='object')state.journalNotes[profile]={};if(!state.journalRatings[profile]||typeof state.journalRatings[profile]!=='object')state.journalRatings[profile]={};}for(const profile of ['m','f'])if(!Array.isArray(state.personalProjects[profile]))state.personalProjects[profile]=[];
 function save(){try{localStorage.setItem('fil52.progress.v1',JSON.stringify({...state,page:'home'}));}catch(e){toast('Stockage local indisponible : votre progression peut être perdue.')}}
 const el=id=>document.getElementById(id);
 const safe=s=>String(s??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -174,6 +175,7 @@ function chooseProfile(p){if(state.profile!==p)return;render()}
 function selectWeek(w){sewingSearchQuery='';state.week=+w;state.page='learn';save();render();scrollTo({top:0,behavior:'instant'})}
 function selectPatchWeek(w){patchSearchQuery='';const n=+w;if(!Number.isInteger(n)||n<0||n>52)return;state.patchWeek=n;state.page='quilt';quiltCoverOpen=false;dicoOpen=false;save();render();scrollTo({top:0,behavior:'instant'})}
 let quiltCoverOpen=false,patternKind='sewing';
+let journalKind='sewing',journalPick={sewing:null,patchwork:null,voyage:null};
 let sewingSearchQuery='',patchSearchQuery='',patternPreview='',patternSection='';
 const PATTERN_LIBRARY={
  coaster:{title:'Cours 2 · Dessous de verre à coins arrondis',url:'./assets/cours-02-patron-arrondis.html'},
