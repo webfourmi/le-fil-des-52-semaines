@@ -48,7 +48,7 @@ const assert=require('node:assert/strict');
  const before=await page.evaluate(()=>JSON.stringify(localStorage));
  // Visuel existant utilisé uniquement dans la session de test, sans modifier le contenu livré.
  await page.evaluate(()=>{Fil52LessonPhotos.lessons[1][0].image={src:'./assets/atelier.webp',alt:'Matériel de test',width:1,height:1};document.querySelector('.sewing-photo-gallery').outerHTML=Fil52LessonPhotos.render(1)});
- const open=page.getByRole('button',{name:/Agrandir/});await open.focus();await page.keyboard.press('Enter');
+ const open=page.getByRole('button',{name:/Agrandir/}).first();await open.focus();await page.keyboard.press('Enter');
  await page.getByRole('dialog').waitFor();
  assert.equal(await page.locator('dialog img').getAttribute('alt'),'Matériel de test');
  await page.keyboard.press('Escape');assert.ok(await open.evaluate(el=>el===document.activeElement));
