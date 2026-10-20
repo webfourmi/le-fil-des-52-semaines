@@ -21,7 +21,7 @@ async function launch(browser,profile){
 }
 async function toPersonal(page){
  await page.locator('#bottomnav [data-page="journal"]').click();
- await page.getByRole('button',{name:/Mes projets persos/}).click();
+ await page.getByRole('button',{name:/Mes projets personnels|Mes projets persos/}).click();
  await page.getByRole('heading',{name:'Projets persos'}).waitFor();
 }
 async function backupJSON(page){
@@ -104,7 +104,7 @@ async function main(){
   console.log('OK : isolement Mathilde / Viera et refus du mauvais profil');
   await p.locator('#bottomnav [data-page="journal"]').click();
   await p.waitForFunction(()=>document.querySelectorAll('#journal-gallery .journal-upload').length===1);
-  await p.getByRole('button',{name:/Mes projets persos/}).click();
+  await p.getByRole('button',{name:/Mes projets personnels|Mes projets persos/}).click();
   p.once('dialog',dialog=>dialog.accept());
   await p.locator('[data-personal-photo-delete]').first().click();
   await p.waitForFunction(()=>document.querySelectorAll('.personal-thumb img').length===1);
