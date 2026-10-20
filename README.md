@@ -2,6 +2,12 @@
 
 Application de couture et patchwork organisée en **52 projets sans calendrier imposé** : projets de récupération, apprentissage de la **Janome Cherry 21**, patronnerie, 52 blocs de patchwork par personne, et rubriques culturelles documentées.
 
+## Nouveauté V1.1.9 : patrons arrondis et Halloween à la main
+
+- Le **cours 2** reste en cours d’écriture. Son dessous de verre réversible est désormais à **coins arrondis**, avec deux faces différentes, un patron vectoriel A4 de 12 × 12 cm, marge de 1 cm et encoches en V sur les courbes. Fiche : `assets/cours-02-patron-arrondis.html`. Les 7 cases d’étapes existantes restent les mêmes.
+- L’atelier **Halloween, sac à bonbons** ajoute un visage corrigé et symétrique sur la citrouille, des éléments noirs séparés sur `assets/halloween-patrons.html`, et un parcours au choix **machine ou entièrement à la main**, avec schéma et explications du point de feston apparent, et point arrière pour les assemblages résistants.
+- PWA cache `fil52-shell-v1.1.9`.
+
 ## Publications libres et validation éditoriale
 
 L'application **n'impose aucune périodicité**. Les 52 emplacements numérotés de couture et patchwork restent accessibles comme structure pédagogique, mais de nouveaux articles et ateliers spéciaux peuvent être ajoutés à tout moment, une fois approuvés.
