@@ -46,7 +46,7 @@ async function main(){
    assert.equal(await p.locator('.lesson-figure svg').count(),1);
    assert.equal(await p.locator('.patchwork-one,[data-lesson-patch]').count(),0,'Les blocs restent dans le volet Patchwork');
    assert.equal(await p.locator('.lesson-problem').count(),3);
-   assert.equal(await p.locator('.lesson-checkpoints li').count(),3);
+   assert.equal(await p.locator('.lesson-checkpoints li').count(),week===2?4:3,'Quatre vérifications pour le cours avec patron et crantage');
    assert.equal(await p.locator('.lesson-patch-done').count(),0,'Aucune validation patchwork dans la couture');
    assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
   }
