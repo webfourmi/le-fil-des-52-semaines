@@ -566,7 +566,40 @@ async function deletePersonalProject(projectId){
   state.personalProjects[profile]=remaining;save();render();toast('Projet personnel supprimé.');
  }catch(e){toast('Suppression impossible : '+e.message)}
 }
-function journalPage(){let p=state.profile,w=state.week;let done=state.projectsDone[p].includes(w);return `<span class="eyebrow">Mes créations et mes souvenirs</span><h1>Mon journal de couture</h1><p class="lead">Un carnet personnel pour ${safe(state.names[p])}. Les cases et les notes ne concernent que tes créations.</p><div class="section card"><label for="journal-week"><b>Choisir un numéro</b></label><select class="selection" id="journal-week">${projects.map((x,i)=>`<option value="${i+1}" ${w===i+1?'selected':''}>N° ${i+1} · ${safe(x)}</option>`).join('')}</select><div class="section"><h3>N° ${w} · ${safe(projects[w-1])}</h3><label class="material"><input type="checkbox" data-journal-complete="${w}" ${done?'checked':''}> Projet couture terminé</label><label class="material"><input type="checkbox" data-journal-block="${w}" ${state.blocks[p].includes(w)?'checked':''}> Bloc de patchwork terminé</label><p class="small">Difficulté ressentie (facultatif)</p><select id="journal-rating" class="selection"><option value="">Non évaluée</option>${[1,2,3,4,5].map(v=>`<option value="${v}" ${state.ratings[p][w]===v?'selected':''}>${v} / 5</option>`).join('')}</select><h3 style="margin-top:20px">Mes notes</h3><textarea class="notes" data-note="${w}" placeholder="Tissus récupérés, réglages, difficultés, réussites, idées pour la prochaine fois...">${safe(state.notes[p][w]||'')}</textarea><p class="small">Notes et coches conservées sur ce navigateur.</p><div class="section"><h3>Ma galerie du rendez-vous</h3><p class="small">Une photo du projet et une du bloc patchwork (JPEG, PNG, WebP, maximum 12 Mo par photo avant réduction).</p><div id="journal-gallery" class="gallery-pair">Chargement des photos…</div></div><div class="actions"><button class="secondary" data-page="personal">✂ Mes projets persos ↗</button><button class="secondary" data-page="backup">Sauvegarder mon journal ↗</button></div></div></div>`}
+function journalEntry(){
+ const kind=journalKind;
+ if(kind==='sewing'){const n=+(journalPick.sewing||state.week||1);return {ref:'sewing:'+n,value:String(n),title:'Couture '+String(n).padStart(2,'0')+' · '+projects[n-1]}}
+ if(kind==='patchwork'){const n=+(journalPick.patchwork||((state.patchWeek>=1)?state.patchWeek:1));return {ref:'patchwork:'+n,value:String(n),title:'Patchwork '+String(n).padStart(2,'0')+' · '+blocks[n-1]}}
+ const items=[...cultureArticles('world'),...cultureArticles('history')];
+ const item=items.find(x=>x.id===journalPick.voyage)||items[0];
+ return {ref:'voyage:'+item.id,value:item.id,title:item.title};
+}
+function journalPage(){
+ const p=state.profile,kind=journalKind,entry=journalEntry(),n=+entry.value;
+ const group=kind==='sewing'?projects.map((title,i)=>({id:String(i+1),title:'Cours '+String(i+1).padStart(2,'0')+' · '+title}))
+  :kind==='patchwork'?blocks.map((title,i)=>({id:String(i+1),title:'Bloc '+String(i+1).padStart(2,'0')+' · '+title}))
+  :[...cultureArticles('world'),...cultureArticles('history')].map(x=>({id:x.id,title:x.title}));
+ const note=kind==='sewing'?state.notes[p][n]||'':state.journalNotes[p][entry.ref]||'';
+ const rating=kind==='sewing'?state.ratings[p][n]:state.journalRatings[p][entry.ref];
+ const completed=kind==='sewing'?state.projectsDone[p].includes(n):kind==='patchwork'?state.blocks[p].includes(n):state.cultureRead[p].includes(entry.value);
+ const checkType=kind==='sewing'?'data-journal-complete="'+n+'"':kind==='patchwork'?'data-journal-block="'+n+'"':'data-journal-voyage-read="'+safe(entry.value)+'"';
+ return `<span class="eyebrow">Mes créations et mes souvenirs</span><h1>Mon journal d’atelier</h1>
+ <p class="lead">Le carnet personnel de ${safe(state.names[p])}. Photos, notes et réalisations restent privées sur cet appareil tant que tu ne choisis pas de les partager.</p>
+ <div class="card section journal-workspace"><div class="journal-top-buttons" role="group" aria-label="Choisir une rubrique du journal">
+ ${[['sewing','✂ Couture'],['patchwork','▦ Patchwork'],['voyage','🌍 Voyage']].map(([k,label])=>`<button type="button" data-journal-kind="${k}" class="${kind===k?'active':''}" aria-pressed="${kind===k}">${label}</button>`).join('')}
+ </div>
+ <div class="journal-item-picker"><label for="journal-item"><b>${kind==='sewing'?'Choisir un projet couture':kind==='patchwork'?'Choisir un bloc patchwork':'Choisir un article Voyage'}</b></label>
+ <select class="selection" id="journal-item">${group.map(x=>`<option value="${safe(x.id)}" ${x.id===entry.value?'selected':''}>${safe(x.title)}</option>`).join('')}</select></div>
+ <div class="journal-editor"><h2>${safe(entry.title)}</h2>
+ <label class="material"><input type="checkbox" ${checkType} ${completed?'checked':''}> ${kind==='sewing'?'Projet couture terminé':kind==='patchwork'?'Bloc patchwork terminé':'Article découvert / terminé'}</label>
+ <label for="journal-rating" class="small">Difficulté ressentie (facultatif)</label>
+ <select id="journal-rating" class="selection"><option value="">Non évaluée</option>${[1,2,3,4,5].map(v=>`<option value="${v}" ${rating===v?'selected':''}>${v} / 5</option>`).join('')}</select>
+ <label for="journal-notes"><b>Mes notes</b></label><textarea id="journal-notes" class="notes" ${kind==='sewing'?'data-note="'+n+'"':'data-journal-other-note="'+safe(entry.ref)+'"'} placeholder="Tissus, techniques apprises, idées, impressions…">${safe(note)}</textarea>
+ <section class="journal-photos-section"><h3>Mes photos</h3><p class="small">De 1 à 5 photos de cette réalisation, facultatives. JPEG, PNG, WebP, 12 Mo par photo avant réduction. Elles sont conservées uniquement dans ton navigateur et incluses dans ta sauvegarde.</p>
+ <div id="journal-gallery" class="journal-photo-grid" aria-live="polite">Chargement de l’album…</div></section>
+ <div class="actions"><button class="secondary" data-page="personal">Mes projets personnels ↗</button><button class="secondary" data-page="backup">Sauvegarder mon journal ↗</button></div>
+ </div></div>`;
+}
 function printPattern(name){let target=el('print-'+name);if(!target)return;target.classList.add('active');window.print();setTimeout(()=>target.classList.remove('active'),600)}
 document.addEventListener('load',e=>{if(e.target instanceof HTMLImageElement&&e.target.closest('.photo-card'))e.target.classList.add('is-loaded');},true);
 document.addEventListener('error',e=>{const img=e.target;if(!(img instanceof HTMLImageElement)||!img.closest('.photo-card'))return;const wrap=document.createElement('div');wrap.className='photo-fallback';wrap.setAttribute('role','img');wrap.setAttribute('aria-label','Photo documentaire indisponible hors connexion ; ouvrez sa notice originale ci-dessous.');const mark=document.createElement('span');mark.textContent='▧';const label=document.createElement('small');label.textContent='Photographie documentaire à consulter sur la notice originale';wrap.append(mark,label);img.replaceWith(wrap);},true);
