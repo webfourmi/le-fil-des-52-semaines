@@ -98,7 +98,7 @@ await page.evaluate(()=>{
  window.fetch=(input,options)=>{
   if(String(input).includes('data/editions.json')){
    return Promise.resolve(new Response(JSON.stringify({
-    version:'0.9',appRelease:'1.1.12',
+    version:'0.9',appRelease:'1.1.13',
     appReleaseNotes:'Nouveaux patrons et recherche sans validation de cours.',
     published:[1,2,3,4,5,6],approved:{sewing:[0,1]}
    }),{status:200,headers:{'Content-Type':'application/json'}}));
@@ -107,7 +107,7 @@ await page.evaluate(()=>{
  };
  document.dispatchEvent(new Event('visibilitychange'));
 });
-await page.getByText('Nouvelle version de De fil en aiguille : 1.1.12.',{exact:false}).waitFor({timeout:10000});
+await page.getByText('Nouvelle version de De fil en aiguille : 1.1.13.',{exact:false}).waitFor({timeout:10000});
 assert.ok(await page.getByRole('button',{name:'Mettre à jour',exact:true}).isVisible(),'Alerte app sans nouveau cours validé');
 assert.equal(await page.locator('#week-select').count(),0,'Aucune navigation imposée par la nouvelle version');
 
