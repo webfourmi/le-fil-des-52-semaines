@@ -18,7 +18,20 @@ const assert=require('node:assert/strict');
  assert.equal(await page.locator('.patchwork-one,[data-lesson-patch]').count(),0);
  assert.equal(await page.locator('.lesson-photo-empty').count(),w===1?0:5);
  assert.equal(await page.locator('.sewing-photo-gallery .lesson-photo-open img').count(),w===1?5:0);
- if(w===1) assert.match(await page.locator('.sewing-photo-gallery').innerText(),/vraies photos/i);
+ if(w===1){
+   assert.match(await page.locator('.sewing-photo-gallery').innerText(),/vraies photos/i);
+   const images=page.locator('.sewing-photo-gallery .lesson-photo-grid img');
+   const paths=['01-materiel.webp','02-epinglage.webp','03-coins-degarnis.webp','04-surpiqure.webp','05-marque-page-termine.webp'];
+   for(let i=0;i<5;i++){
+    const src=await images.nth(i).getAttribute('src');
+    assert.ok(src.endsWith('/'+paths[i]),'Photo '+(i+1)+' dans le bon ordre');
+    const response=await page.request.get('http://127.0.0.1:8765/'+src.replace(/^\.\//,''));
+    assert.equal(response.status(),200,'Fichier photo '+(i+1)+' disponible');
+    const bytes=await response.body();
+    assert.equal(bytes.toString('ascii',0,4),'RIFF','Conteneur WebP');
+    assert.equal(bytes.toString('ascii',8,12),'WEBP','Format photo WebP');
+   }
+  }
  assert.equal(await page.locator('.lesson-photo-grid img, .lesson-photo-open').count(),w===1?10:0);
  assert.equal(await page.locator('.sewing-photo-gallery .lesson-photo-grid').evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),2);
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
