@@ -3,7 +3,7 @@
 'use strict';
 const captions={
 1:['Deux rectangles de coton de 8 × 22 cm et le matériel de couture','Épingler endroit contre endroit et réserver une ouverture de 5 cm','Piquer à 1 cm puis dégarnir les coins','Retourner, repasser et surpiquer pour fermer','Le marque-page réversible terminé, environ 6 × 20 cm','Bloc 1 : damier à quatre carrés'],
-2:['Deux carrés de coton de 12 × 12 cm et le matériel','Superposer les carrés endroit contre endroit','Piquer à 1 cm en laissant une ouverture','Retourner les coins, repasser et surpiquer','Le dessous de verre réversible terminé','Bloc 2 : deux bandes verticales'],
+2:['Patron A4 : deux pièces de 12 × 12 cm aux coins arrondis, faces A imprimée et B unie','Deux faces endroit contre endroit ; une ouverture de 4 cm sur un côté droit','Piquer à 1 cm en suivant les courbes, puis couper de petites encoches en V dans leurs marges','Retourner les arrondis, repasser puis surpiquer pour fermer','Le même dessous de verre aux coins arrondis, utilisé côté A puis côté B','Bloc 2 : deux bandes verticales'],
 3:['Le rectangle de coton de 15 × 19 cm et le matériel','Réaliser les ourlets des deux côtés','Replier les côtés pour former une ouverture croisée','Coudre les côtés puis retourner','L’étui terminé avec ses mouchoirs','Bloc 3 : bandes horizontales'],
 4:['La bande de coton de 45 × 10 cm et l’élastique','Plier et coudre le tube de tissu','Retourner et passer l’élastique','Assembler l’élastique puis fermer le tissu','Le chouchou terminé','Bloc 4 : carré central simple'],
 5:['Les deux faces de 13 × 16 cm et la lavande','Piquer le contour en réservant une ouverture','Dégarnir les coins puis retourner','Remplir de lavande et fermer à la main','Le sachet de lavande terminé','Bloc 5 : nine-patch à neuf carrés'],

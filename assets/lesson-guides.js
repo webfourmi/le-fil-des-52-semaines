@@ -20,7 +20,20 @@ function diagram(w,patch){
    '<polygon points="394,208 330,208 394,144" fill="'+A+'" stroke="#65766b" stroke-width="2"/>'+
    label(301,226,'4 coins cousus en diagonale');}
  }else{
-  if(w===2){shapes=rect(55,42,150,150,A)+rect(225,42,150,150,B)+label(131,218,'2 carrés 12 × 12 cm')+label(300,218,'puis piquer à 1 cm');shapes+=rect(418,63,125,125,C)+line(433,75,528,75,'6 4')+label(480,218,'retourner / surpiquer');}
+  if(w===2){
+   // Vue des deux côtés du MÊME dessous de verre, une fois assemblé puis retourné.
+   const flower=(x,y)=>'<g transform="translate('+x+' '+y+')"><circle r="9" fill="#c97c71" opacity=".9"/><circle cx="-8" cy="-3" r="7" fill="#e2a78e"/><circle cx="8" cy="-3" r="7" fill="#e2a78e"/><circle cx="0" cy="-9" r="7" fill="#e2a78e"/><circle r="4.5" fill="#fbe6b3"/></g>';
+   shapes='<rect x="72" y="30" width="165" height="165" rx="23" fill="#fae8d9" stroke="#65766b" stroke-width="2"/>'+
+    flower(112,73)+flower(196,76)+flower(150,140)+flower(105,170)+flower(211,151)+
+    '<rect x="82" y="40" width="145" height="145" rx="14" fill="none" stroke="#875f53" stroke-width="2.3" stroke-dasharray="5 4"/>'+
+    '<rect x="365" y="30" width="165" height="165" rx="23" fill="#85a99b" stroke="#65766b" stroke-width="2"/>'+
+    '<rect x="375" y="40" width="145" height="145" rx="14" fill="none" stroke="#304e41" stroke-width="2.3" stroke-dasharray="5 4"/>'+
+    '<path d="M259 105 H340 M331 96 L341 105 L331 114 M269 96 L259 105 L269 114" fill="none" stroke="#a15e4e" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>'+
+    label(300,83,'Retourne-moi !')+
+    label(154,220,'FACE A · coton imprimé')+
+    label(447,220,'FACE B · coton uni')+
+    label(301,244,'Un seul objet · deux faces utilisables');
+  }
   if(w===3){shapes=rect(55,28,170,167,C)+label(138,219,'15 × 19 cm')+rect(263,52,140,125,A)+line(277,96,390,96,'7 4')+label(332,219,'bords repliés')+rect(444,70,115,90,B)+line(501,70,501,160,'7 4')+label(500,219,'ouverture croisée');}
   if(w===4){shapes=rect(38,93,223,64,A)+line(38,143,261,143,'6 4')+label(150,219,'45 × 10 cm → tube')+
    '<ellipse cx="434" cy="122" rx="102" ry="67" fill="'+B+'" stroke="#65766b" stroke-width="2"/>'+
@@ -30,7 +43,7 @@ function diagram(w,patch){
   if(w===6){shapes=rect(83,28,150,173,A)+rect(267,28,150,173,B)+line(83,62,233,62,'5 4')+line(267,62,417,62,'5 4')+label(158,221,'2 faces · 22 × 27 cm')+label(341,221,'coulisse de 2 cm')+line(455,62,555,62,'5 4')+label(510,124,'2 cordons');}
  }
  if(!shapes)return '';
- return '<figure class="lesson-figure"><svg viewBox="0 0 600 250" role="img" aria-label="'+esc(title)+'" xmlns="http://www.w3.org/2000/svg">'+shapes+'</svg><figcaption>Schéma de principe, non à l’échelle. Utilise les cotes indiquées dans le texte pour découper.</figcaption></figure>';
+ return '<figure class="lesson-figure"><svg viewBox="0 0 600 250" role="img" aria-label="'+esc(title)+'" xmlns="http://www.w3.org/2000/svg">'+shapes+'</svg><figcaption>'+(w===2?'Vue du même sous-verre aux coins arrondis : face A à motifs ou face B unie, au choix. Les surpiqûres sont visibles des deux côtés.':'Schéma de principe, non à l’échelle. Utilise les cotes indiquées dans le texte pour découper.')+'</figcaption></figure>';
 }
 function list(items,ordered=false){return '<'+(ordered?'ol':'ul')+'>'+items.map(s=>'<li>'+esc(s)+'</li>').join('')+'</'+(ordered?'ol':'ul')+'>';}
 function renderPreparation(d,w){

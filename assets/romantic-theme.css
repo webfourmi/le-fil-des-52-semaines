@@ -553,3 +553,25 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline-offset:2
 
 /* Permettre le retour à la ligne du libellé « En cours d’écriture » sur 320 px. */
 #app .tag.orange{display:inline-block;max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.45;vertical-align:middle}
+
+
+/* Variantes Halloween à la main · esthétique folk art, ergonomie mobile */
+.halloween-hand-variant{border:1px solid #d3bfa1;background:#fff9f1;border-radius:14px;margin:22px 0;overflow:hidden}
+.halloween-hand-variant>summary{cursor:pointer;padding:15px 18px;list-style:none;display:grid;gap:5px}
+.halloween-hand-variant>summary::-webkit-details-marker{display:none}
+.halloween-hand-variant>summary strong{font-family:Georgia,serif;font-size:1.12rem;color:#85573d}
+.halloween-hand-variant>summary small{color:#687d69;font-size:.83rem}
+.halloween-hand-variant[open]>summary{border-bottom:1px solid #e2d7c4}
+.halloween-hand-content{padding:14px 19px 20px}
+.halloween-hand-content li{margin:12px 0;line-height:1.6}
+.halloween-hand-content h4{margin:17px 0 9px}
+.halloween-feston-diagram{margin:12px 0 16px;background:#faf5eb;border-radius:12px;overflow:hidden}
+.halloween-feston-diagram svg{display:block;width:100%;height:auto;max-height:250px}
+.halloween-feston-diagram figcaption{font-size:.84rem;color:#5c675f;padding:9px 12px}
+@media(max-width:500px){.halloween-hand-content{padding:12px 14px 16px}.halloween-hand-variant>summary{padding:14px}}
+
+
+/* Lien imprimable du cours 2 et de la bibliothèque Patrons */
+.course-pattern-link{display:inline-flex;align-items:center;max-width:100%;background:#436a54;color:#fff!important;border:1px solid #436a54;border-radius:10px;padding:12px 16px;text-decoration:none;font-size:.92rem;font-weight:700;overflow-wrap:anywhere;margin:8px 0}
+.course-pattern-link:hover,.course-pattern-link:focus-visible{background:#365745}
+.sewing-course-pattern{background:#fffaf3}

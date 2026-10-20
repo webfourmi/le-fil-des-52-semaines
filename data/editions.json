@@ -1,6 +1,23 @@
 {
   "version": "0.9",
-  "approved": {"sewing":[0,1],"patchwork":[0],"world":["japon","bengale","coree","halloween"],"history":["needle-01"]},
+  "approved": {
+    "sewing": [
+      0,
+      1
+    ],
+    "patchwork": [
+      0
+    ],
+    "world": [
+      "japon",
+      "bengale",
+      "coree",
+      "halloween"
+    ],
+    "history": [
+      "needle-01"
+    ]
+  },
   "published": [
     1,
     2,
@@ -11,76 +28,80 @@
   ],
   "issues": {
     "2": {
-      "title": "Dessous de verre réversible",
-      "intro": "Deux faces de coton, un contour régulier et une ouverture invisible : une première petite réalisation dont on est fière.",
+      "title": "Dessous de verre réversible à coins arrondis",
+      "intro": "Un seul dessous de verre, deux ambiances : face A imprimée et face B unie, sur un carré aux coins arrondis. On le retourne à volonté et on apprend à coudre puis dégarnir des courbes convexes.",
       "duration": "1 h à 1 h 30 (couture + bloc)",
-      "technique": "Endroit contre endroit, pivot aux angles, surpiqûre",
-      "reuse": "Deux morceaux de chemise en coton ou des chutes stables",
-      "objective": "Obtenir un sous-verre plat d’environ 10 × 10 cm, avec quatre angles nets et une ouverture refermée par surpiqûre.",
-      "result": "Un sous-verre d’environ 10 × 10 cm. Les dimensions peuvent varier légèrement selon l’épaisseur et la précision des marges.",
+      "technique": "Patron à taille réelle, courbes douces, encoches en V dans les arrondis, retournement et surpiqûre",
+      "reuse": "Une face dans une chemise imprimée et l’autre dans une chute de coton uni",
+      "objective": "Coudre un véritable dessous de verre réversible de 10 × 10 cm environ, aux coins arrondis, en suivant un patron A4 et en apprenant à dégarnir les marges courbes sans couper la piqûre.",
+      "result": "Un même dessous de verre d’environ 10 × 10 cm, aux quatre coins arrondis, fini des deux côtés : une face A imprimée et une face B unie contrastante, sans marges ni ouverture visibles. Rayon des arrondis finis : environ 5 mm.",
       "materials": [
-        "2 carrés de coton tissé de 12 × 12 cm (un pour chaque face)",
-        "Fil polyester ou coton assorti, aiguille universelle 80/12 en bon état",
-        "Épingles ou pinces, petite paire de ciseaux, règle et craie textile",
-        "Fer à repasser et chute de coton pour un essai"
+        "1 pièce FACE A de coton tissé imprimé : découpe 12 × 12 cm à coins arrondis, rayon 1,5 cm, marges incluses (patron A4).",
+        "1 pièce FACE B de coton tissé uni contrastant : même forme 12 × 12 cm à coins arrondis, marges incluses.",
+        "Facultatif : 1 pièce de molleton thermocollant H630 de 10 × 10 cm à coins arrondis, à centrer sur l’envers de A et à rogner de 2 mm au besoin pour éviter les coutures (ne protège pas des plats très chauds).",
+        "Fil polyester ou coton assorti, aiguille universelle 80/12 pour la Janome Cherry 21.",
+        "Ciseaux de couture, ciseaux fins pour les petites encoches, épingles ou pinces, règle, craie effaçable, fer et planche.",
+        "Le patron A4 à taille réelle, imprimé à 100 % après vérification du carré témoin de 5 × 5 cm."
       ],
-      "settings": "Janome Cherry 21 : point droit, longueur indicative 2,5 mm, pied universel, marge de couture de 1 cm. Faire un essai sur deux épaisseurs, puis piquer lentement aux angles.",
-      "tip": "Marquez les 4 angles à 1 cm des bords. Arrêtez-vous aiguille plantée dans le tissu, levez le pied, pivotez de 90° et rabaissez le pied.",
+      "settings": "Janome Cherry 21 : point droit, longueur indicative 2,5 mm, pied standard, marge de 1 cm comprise dans le patron. Dans les arrondis, avancer lentement sans pivot à angle droit. Tester d’abord sur deux chutes.",
+      "tip": "Sur les quatre arrondis convexes, on retire de minuscules encoches en V dans la marge, à 2 ou 3 mm de la couture, pour diminuer le volume après retournement. Ne jamais entamer les points. L’ouverture de 4 cm se place sur une portion droite.",
       "safety": "Débranchez la machine avant de changer l’aiguille ; gardez les doigts à distance du pied et retirez les épingles avant de les atteindre.",
       "prep": [
-        "Laver et repasser les deux chutes si elles risquent de rétrécir.",
-        "Tracer une ligne de couture à 1 cm sur chaque côté et repérer une ouverture de 4 cm.",
-        "Faire un essai de point droit puis contrôler sa régularité au recto et au verso."
+        "Imprimer le patron A4 à 100 %, sans ajuster à la page, puis mesurer le témoin : 5 × 5 cm exactement. Les lignes extérieures sont à découper, les pointillés indiquent la couture.",
+        "Choisir deux cotons visiblement différents : A à motifs, B uni. Laver si nécessaire, sécher et repasser. Marquer l’envers de chaque pièce.",
+        "Couper A et B avec le gabarit arrondi de 12 × 12 cm. Si souhaité, thermocoller le H630 de 10 × 10 cm sur l’envers de A selon la notice, puis rogner légèrement ses bords s’ils atteignent la ligne de couture.",
+        "Repérer sur la portion droite le début et la fin de l’ouverture de 4 cm. Faire un essai de point droit avant d’assembler."
       ],
       "steps": [
         {
-          "title": "Couper les deux faces",
-          "detail": "Découpez exactement deux carrés de 12 × 12 cm. Ces cotes comprennent les marges de 1 cm : un seul sous-verre demande deux pièces."
+          "title": "Reporter le patron et découper les deux faces arrondies",
+          "detail": "Imprime le patron A4 à taille réelle (100 %) et vérifie le carré de 5 cm. Découpe une FACE A en coton imprimé et une FACE B en coton uni selon la ligne continue : 12 × 12 cm hors tout, coins arrondis de rayon 1,5 cm. Les marges de 1 cm sont déjà comprises ; n’ajoute rien."
         },
         {
-          "title": "Assembler endroit contre endroit",
-          "detail": "Superposez les carrés, les jolies faces l’une contre l’autre. Épinglez sans déformer ; marquez une ouverture de 4 cm sur un côté."
+          "title": "Préparer le H630 facultatif et assembler les endroits",
+          "detail": "Si tu souhaites plus de tenue, fixe un H630 arrondi de 10 × 10 cm au centre de l’envers de A en suivant la notice, après essai sur une chute ; rogner 2 mm sur le pourtour s’il risque d’être pris dans la piqûre. Superpose A et B endroit contre endroit. Repère l’ouverture de retournement de 4 cm sur un côté droit."
         },
         {
-          "title": "Piquer le contour",
-          "detail": "Piquez à 1 cm du bord en laissant l’ouverture. Arrêtez-vous aiguille en bas pour tourner les angles ; consolidez le début et la fin par quelques points arrière."
+          "title": "Piquer les lignes droites et suivre les quatre courbes",
+          "detail": "Pique à 1 cm du bord en laissant ouverts les 4 cm indiqués sur le patron. Dans chaque coin arrondi, ralentis et fais légèrement tourner le tissu progressivement, en gardant le bord à 1 cm de l’aiguille. Ne marque pas de pivot à 90° comme pour un carré à angles droits. Sécurise la couture au début et à la fin."
         },
         {
-          "title": "Dégarnir les coins",
-          "detail": "Coupez très légèrement la marge en biais près de chaque coin, sans entamer la couture. Cela évite une boule de tissu une fois retourné."
+          "title": "Dégarnir et cranter les marges des arrondis",
+          "detail": "Dans la marge de chaque arrondi convexe, découpe 2 ou 3 petites encoches en V, espacées, pour retirer l’excès de tissu. Arrête chaque encoche à 2 ou 3 mm des points : ne coupe jamais la piqûre. C’est le geste utile ici ; les entailles droites correspondent plutôt aux courbes rentrantes. Laisse intactes les marges des parties droites."
         },
         {
-          "title": "Retourner et former les angles",
-          "detail": "Retournez par l’ouverture, aidez doucement les angles avec un outil non pointu, rentrez les marges de l’ouverture et repassez."
+          "title": "Retourner et révéler les deux côtés",
+          "detail": "Retourne l’ouvrage par l’ouverture : les deux endroits deviennent extérieurs, l’imprimé A d’un côté et l’uni B de l’autre. Masse délicatement les arrondis avec les doigts, rentre les marges de l’ouverture de 1 cm et repasse les deux faces sans étirer les bords."
         },
         {
-          "title": "Surpiquer et fermer",
-          "detail": "Surpiquez tout autour à 2–3 mm du bord pour tenir les épaisseurs et fermer l’ouverture. Gardez la même distance de l’angle au côté."
+          "title": "Fermer l’ouverture par une surpiqûre régulière",
+          "detail": "Surpique à 2 ou 3 mm du bord en suivant les arrondis sans à-coups. La couture traverse les deux faces, ferme l’ouverture et doit rester jolie côté A comme côté B. Ne tire pas le tissu et maintiens la même distance au bord."
         },
         {
-          "title": "Contrôler la finition",
-          "detail": "Posez le sous-verre à plat, mesurez ses deux côtés et observez le tissu : pas de pli marqué ni d’ouverture résiduelle."
+          "title": "Contrôler la vraie réversibilité",
+          "detail": "Pose un verre sur la face A imprimée. Retourne ensuite le même ouvrage et place le verre sur la face B unie. Vérifie les quatre courbes, l’absence de pli dans les coins, l’ouverture refermée et la surpiqûre propre des deux côtés. Un seul ouvrage, deux décors !"
         }
       ],
-      "bonus": "Réaliser un second sous-verre avec deux tissus contrastants et une surpiqûre discrète parfaitement parallèle.",
+      "bonus": "Fais une face Halloween (imprimé citrouilles ou coton noir) et une face utilisable toute l’année (coton crème, carreaux ou fleurs). Essaie une surpiqûre régulière qui reste jolie sur les deux côtés.",
       "mistakes": [
         [
-          "Coins arrondis",
-          "Arrêtez l’aiguille au point de pivot et dégarnissez les pointes avant le retournement."
+          "Coins arrondis qui tirent ou font des bosses",
+          "Vérifie les petites encoches en V dans les marges des courbes convexes, sans avoir entamé les points. Retourne doucement et repasse à nouveau."
         ],
         [
-          "Surpiqûre ondulée",
-          "Allez moins vite et prenez le bord du pied comme repère ; repassez avant de surpiquer."
+          "Surpiqûre irrégulière dans les courbes",
+          "Réduis la vitesse, garde 2 à 3 mm du bord et fais avancer le tissu graduellement plutôt que pivoter brusquement."
         ],
         [
           "Ouverture visible",
-          "Rentrez les deux marges sur exactement 1 cm et maintenez-les avant de surpiquer."
+          "Rentre les marges sur 1 cm de façon identique sur les deux faces, repasse, puis surpique régulièrement."
         ]
       ],
       "checkpoint": [
-        "Ai-je laissé l’ouverture avant de coudre tout le contour ?",
-        "Les quatre côtés finis mesurent-ils environ 10 cm ?",
-        "L’ouverture est-elle fermée par une couture régulière ?"
+        "J’ai imprimé le patron à 100 % et vérifié son carré témoin de 5 × 5 cm.",
+        "Les quatre coins sont-ils arrondis et les marges des courbes dégarnies sans couper la couture ?",
+        "Le dessous de verre mesure-t-il environ 10 × 10 cm, ouverture fermée et bords propres ?",
+        "Puis-je réellement utiliser le même dessous de verre face A puis face B ?"
       ],
       "diagram": "coaster",
       "patchworkTitle": "Deux bandes verticales",

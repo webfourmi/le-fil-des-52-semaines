@@ -40,11 +40,17 @@ const fs=require('node:fs/promises');
   assert.equal(await page.locator('.halloween-workshop').count(),3,'Trois ateliers');
   for(let i=1;i<=3;i++){
    const w=page.locator('.halloween-workshop[data-halloween-workshop="'+i+'"]');
-   await w.locator('summary').click();
+   await w.locator(':scope > summary').click();
    assert.ok(await w.locator('ol li').count()>=7,'Tutoriel complet n° '+i);
    assert.ok(await w.locator('ul li').count()>=4);
    assert.ok(await w.getByText('un seul ouvrage',{exact:false}).count());
   }
+  const sewingByHand=page.locator('.halloween-workshop[data-halloween-workshop="1"] .halloween-hand-variant');
+  assert.equal(await sewingByHand.count(),1,'Option entièrement cousue à la main présente');
+  await sewingByHand.locator(':scope > summary').click();
+  assert.ok(await sewingByHand.locator('.halloween-feston-diagram svg').count()===1,'Schéma du point de feston');
+  assert.ok(await sewingByHand.locator('ol li').count()>=7,'Pas à pas à la main complet');
+  assert.match(await sewingByHand.innerText(),/point arrière/i);
   const photos=await page.locator('.halloween-archive').evaluateAll(items=>items.map(e=>({alt:e.querySelector('img').alt,src:e.querySelector('img').src,credit:e.querySelector('figcaption').textContent,source:e.querySelector('a').href})));
   assert.ok(photos.every(p=>p.alt.length>15&&p.src.includes('commons.wikimedia.org')&&p.credit&&p.source.includes('commons.wikimedia.org')));
   await page.locator('.halloween-print-link').first().waitFor();
@@ -57,6 +63,8 @@ const fs=require('node:fs/promises');
   if(width===390)await page.screenshot({path:'tests/screenshots/v118-halloween-mobile.png',fullPage:false});
   await page.goto('http://127.0.0.1:8765/assets/halloween-patrons.html',{waitUntil:'load'});
   assert.equal(await page.locator('.sheet').count(),4);
+  assert.equal(await page.locator('.sheet').first().locator('path.placement').count(),4,'Les deux yeux, le nez et la bouche sont positionnés sur la citrouille');
+  assert.equal(await page.locator('.sheet').first().locator('path.cut').count()>=6,true,'La feuille a les pièces séparées et la citrouille');
   const dims=await page.evaluate(()=>{
     const pages=[...document.querySelectorAll('.sheet svg')];
     const witness=pages[0].querySelector('rect.cut').getBBox();

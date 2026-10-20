@@ -14,7 +14,7 @@ async function main(){
   await p.getByRole('heading',{name:'Mes cours'}).waitFor();
   assert.equal(await p.locator('#week-select option').count(),52,'Le programme conserve 52 semaines');
   const expected=[
-   [2,'Dessous de verre réversible',7,'Deux bandes verticales'],
+   [2,'Dessous de verre réversible à coins arrondis',7,'Deux bandes verticales'],
    [3,'Étui à mouchoirs',7,'Bandes horizontales'],
    [4,'Chouchou en tissu',8,'Carré central simple'],
    [5,'Sachet de lavande',8,'Nine-patch, neuf carrés'],
@@ -24,12 +24,29 @@ async function main(){
    await p.locator('#week-select').selectOption(String(week));
    await p.getByText('En cours d’écriture · N° '+String(week).padStart(2,'0')).waitFor();
    await p.getByRole('heading',{name:title,exact:true}).waitFor();
+   if(week===2){
+    const doc=await p.evaluate(()=>({data:upcomingEditions[2],approved:EDITORIAL_APPROVED.sewing.includes(2)}));
+    assert.equal(doc.approved,false,'Le cours 2 reste en cours d’écriture avant approbation');
+    assert.match(doc.data.materials[0],/FACE A/);
+    assert.match(doc.data.materials[1],/FACE B/);
+    assert.match(doc.data.steps[4].detail,/deux endroits deviennent extérieurs/);
+    assert.match(doc.data.steps[3].detail,/encoches en V/);
+    assert.match(doc.data.steps[2].detail,/sans pivot|sans à-coups|sans pivot à angle droit|pivoter brusquement|Ne marque pas de pivot/i);
+    assert.equal(await p.locator('.sewing-course-pattern a[href="./assets/cours-02-patron-arrondis.html"]').count(),1);
+    assert.match(doc.data.steps[6].detail,/Retourne ensuite le même ouvrage/);
+    assert.equal(doc.data.steps.length,7,'Numéros des étapes conservés pour les sauvegardes');
+    assert.match(await p.locator('.lesson-figure figcaption').first().innerText(),/même sous-verre aux coins arrondis/i);
+    const faces=await p.locator('.lesson-figure svg text').allTextContents();
+    assert.ok(faces.some(x=>x.includes('FACE A')&&x.includes('imprimé')),'Face A illustrée');
+    assert.ok(faces.some(x=>x.includes('FACE B')&&x.includes('uni')),'Face B illustrée');
+    assert.match(await p.locator('.editorial-head-status').innerText(),/En cours d’écriture/);
+   }
    assert.equal(await p.locator('[data-toggle="steps"]').count(),numSteps);
    assert.ok(await p.locator('[data-toggle="mat"]').count()>=4);
    assert.equal(await p.locator('.lesson-figure svg').count(),1);
    assert.equal(await p.locator('.patchwork-one,[data-lesson-patch]').count(),0,'Les blocs restent dans le volet Patchwork');
    assert.equal(await p.locator('.lesson-problem').count(),3);
-   assert.equal(await p.locator('.lesson-checkpoints li').count(),3);
+   assert.equal(await p.locator('.lesson-checkpoints li').count(),week===2?4:3,'Quatre vérifications pour le cours avec patron et crantage');
    assert.equal(await p.locator('.lesson-patch-done').count(),0,'Aucune validation patchwork dans la couture');
    assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
   }
