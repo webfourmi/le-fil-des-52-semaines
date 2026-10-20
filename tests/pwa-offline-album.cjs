@@ -37,7 +37,7 @@ async function saveSnapshot(page){
     await openJournal(page);
     const note='Carré patchwork à fleurs, à garder même hors ligne.';
     await page.locator('[data-note="1"]').fill(note);
-    await page.locator('[data-gallery-upload="project"]').setInputFiles({
+    await page.locator('[data-journal-photo-upload]').setInputFiles({
       name:'carre.png',mimeType:'image/png',buffer:await photoPNG(page)
     });
     await page.locator('#journal-gallery img').first().waitFor({state:'visible',timeout:15000});
