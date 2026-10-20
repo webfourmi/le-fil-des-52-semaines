@@ -1,4 +1,4 @@
-/* De fil en aiguille · Dossier documentaire Halloween USA validé.
+/* De fil en aiguille · Dossier documentaire Halloween USA en cours d’écriture.
  * Photos historiques réelles, identifiées par leurs notices patrimoniales.
  * L'article et les trois ateliers sont indépendants du parcours numéroté.
  */
@@ -64,8 +64,8 @@ const workshops=[
  'Fil assorti, aiguille universelle 80/12, fer, ciseaux, pinces et craie.',
  'Facultatif : thermocollant double face pour l’appliqué et 25 cm de cordon de suspension.'
  ],steps:[
- 'Découper les deux carrés de tissu. Imprimer la planche 2 à taille réelle et reporter les quatre motifs sur les chutes, sans marge de couture.',
- 'Composer le décor : lune en haut à gauche, chat sur la droite, citrouille en bas à gauche. Laisser au moins 2 cm jusqu’aux bords bruts.',
+ 'Découper les deux carrés de tissu. Imprimer la planche 2 à taille réelle et reporter les motifs sur les chutes sans marge : chat assis de profil en une seule pièce noire, lune, citrouille et étoile facultative.',
+ 'Composer le décor : lune en haut à gauche, chat noir de profil avec queue arrondie sur la droite, citrouille en bas à gauche. Laisser au moins 2 cm jusqu’aux bords bruts. Ne pas couper de petits détails à l’intérieur du chat.',
  'Bâtir ou thermocoller les silhouettes ; fixer chacune au petit zigzag. Pour la citrouille, broder les lignes de côtes au lieu de les découper.',
  'Centrer le H630 sur l’envers du devant et le thermocoller conformément à la notice du fabricant, après essai.',
  'Assembler endroit contre endroit à 1 cm du bord, en laissant 6 cm ouverts. Cranter prudemment les angles, retourner, repasser.',
@@ -79,8 +79,8 @@ const workshops=[
  'Fil assorti, aiguille universelle 80/12, règle, craie, pinces et fer.'
  ],steps:[
  'Imprimer la planche 3 à 100 % et contrôler le carré de 5 cm. Découper le triangle 16 × 19 cm sur le contour : marges déjà comprises.',
- 'Couper trois devants et trois dos. Imprimer les appliqués de la planche 4 et préparer une citrouille, un fantôme et une étoile.',
- 'Fixer un motif sur chaque devant, à 2 cm minimum des bords, avec la technique de petit zigzag testée sur une chute.',
+ 'Couper trois devants et trois dos. Imprimer les appliqués de la planche 4 et préparer une citrouille, un fantôme aux bras ouverts et une étoile. Le visage du fantôme en pointillés indique une broderie facultative, pas une découpe.',
+ 'Fixer un motif sur chaque devant, à 2 cm minimum des bords, avec un petit zigzag testé sur une chute. Pour le fantôme, broder ensuite les deux yeux et le sourire au point arrière, ou dessiner le visage au feutre textile adapté.',
  'Assembler chaque devant et son dos endroit contre endroit, piquer les deux côtés obliques à 1 cm et laisser le haut ouvert.',
  'Dégarnir sans sectionner la couture, retourner, former la pointe à l’aide d’un outil non tranchant et repasser.',
  'Replier la bande de 110 × 5 cm en biais double : rentrer les deux longs bords vers le centre puis replier en deux. Repasser.',
@@ -102,7 +102,7 @@ function render(){
  <section class="travel-chapter"><h3>2. Les costumes et la maison en fête</h3><p>Au cours des années 1900-1950, les fêtes d’enfants, les masques, les costumes improvisés et les décorations en papier se diffusent aux États-Unis. Certains musées conservent des objets en tissu, carton peint ou métal qui montrent comment les familles se déguisaient et décoraient leur intérieur. Les photos ci-dessus sont de véritables documents historiques, et non des images reconstituées.</p><p>Observe les matières et les détails : masques, chapeaux pointus, tissus récupérés et petits accessoires. Quels éléments pourrais-tu reproduire avec les coupons du placard, sans acheter de tissu neuf ?</p></section>
  <section class="travel-chapter"><h3>3. Bien avant les citrouilles : les quilts américains</h3><p>Le <b>patchwork</b> assemble des pièces de tissu par les coutures. L’<b>appliqué</b> fixe une silhouette découpée sur une étoffe de fond. Un <b>quilt</b> superpose habituellement un dessus, une couche intermédiaire et un dos reliés par matelassage. Les trois techniques se complètent mais ne sont pas synonymes.</p><p>Au XIXe siècle, des quilts américains présentent des motifs floraux, des oiseaux, des arbres, des bordures travaillées et parfois des signatures. Mary Malvina Cook Taft réalisa vers 1835-1840 un quilt avec un arbre de vie appliqué, conservé au Metropolitan Museum of Art. Notre motif de citrouille et de chat est, lui, une <b>interprétation Halloween contemporaine</b>, et non un motif ancien traditionnel.</p></section>
  <div class="halloween-archives halloween-archive-wide">${figure(photos[3],3)}</div>
- <section class="halloween-choice"><span class="eyebrow">À essayer dans notre atelier</span><h3>Trois créations, entièrement au choix</h3><p>Tu peux réaliser une, deux, les trois, ou aucune. Ces projets ne remplacent pas les cours numérotés ni les blocs de chacune des couvertures.</p><p><b>Patrons prêts à imprimer :</b> quatre planches A4 vectorielles aux dimensions réelles, avec visage de citrouille recentré, pièces noires séparées et chat assis à queue recourbée. Vérifie le carré témoin de 5 × 5 cm, et choisis <b>taille réelle / 100 %</b> à l’impression.</p><p><a class="primary halloween-print-link" href="./assets/halloween-patrons.html" target="_blank" rel="noopener noreferrer">✂ Ouvrir les quatre patrons Halloween ↗</a></p></section>
+ <section class="halloween-choice"><span class="eyebrow">À essayer dans notre atelier</span><h3>Trois créations, entièrement au choix</h3><p>Tu peux réaliser une, deux, les trois, ou aucune. Ces projets ne remplacent pas les cours numérotés ni les blocs de chacune des couvertures.</p><p><b>Patrons prêts à imprimer :</b> quatre planches A4 vectorielles aux dimensions réelles, avec visage de citrouille recentré, pièces noires séparées, chat assis de profil et fantôme à bras ouverts. Vérifie le carré témoin de 5 × 5 cm, et choisis <b>taille réelle / 100 %</b> à l’impression.</p><p><a class="primary halloween-print-link" href="./assets/halloween-patrons.html" target="_blank" rel="noopener noreferrer">✂ Ouvrir les quatre patrons Halloween ↗</a></p></section>
  <div class="halloween-workshops">${workshops.map(workshop).join('')}</div>
  <section class="travel-vocabulary"><h3>Quelques mots en anglais</h3><dl><div><dt>Quilt</dt><dd>Ouvrage textile matelassé.</dd></div><div><dt>Appliqué</dt><dd>Forme cousue sur un fond.</dd></div><div><dt>Jack-o’-lantern</dt><dd>Lanterne sculptée, souvent dans une citrouille.</dd></div><div><dt>Trick-or-treat</dt><dd>Formule de collecte de friandises, « des bonbons ou un sort ».</dd></div></dl></section>
  <section class="travel-chapter"><h3>Le savais-tu ? Trois questions</h3><details><summary>Dans quel légume taillait-on certaines anciennes lanternes irlandaises ?</summary><p>Le navet, et d’autres légumes-racines.</p></details><details><summary>Un quilt appliqué est-il obligatoirement fait de triangles ?</summary><p>Non. L’appliqué fixe une forme sur un tissu de fond, même si des patchworks assemblés existent aussi.</p></details><details><summary>Pourquoi parle-t-on de quilts historiques dans cette escale ?</summary><p>Ils montrent les techniques textiles américaines anciennes qui inspirent librement nos projets décoratifs modernes, sans être nécessairement liés à Halloween.</p></details></section>
