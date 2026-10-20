@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Patron A4 taille réelle : dessous de verre réversible à coins arrondis, couture n°2">
+<title>Patron A4 · Dessous de verre réversible à coins arrondis</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eee8df;color:#324c3b;font:16px/1.55 system-ui,Arial,sans-serif}
+header{margin:18px auto;max-width:840px;padding:19px 24px;background:#fffaf3;border-radius:14px}
+h1{margin:0 0 9px;font:2rem Georgia,serif}button{background:#476b57;border:0;color:white;border-radius:9px;padding:13px 18px;cursor:pointer;font:700 15px system-ui}
+.instructions{margin:8px 0 14px}.sheet{width:210mm;height:297mm;max-width:100%;margin:0 auto 30px;background:white;box-shadow:0 4px 20px #1f3c2625}
+.sheet svg{display:block;width:100%;height:100%}.text{font:4.2px system-ui,Arial,sans-serif;fill:#325043}.label{font:5px Georgia,serif;fill:#325043;font-weight:700}
+.cut{fill:none;stroke:#355243;stroke-width:.7}.seam{fill:none;stroke:#b9674b;stroke-width:.55;stroke-dasharray:2 1.2}.fine{stroke:#9aada0;stroke-width:.25}.stop{stroke:#b9674b;stroke-width:.55}
+@page{size:A4;margin:0}
+@media print{body{background:white}header{display:none}.sheet{margin:0;max-width:none;width:210mm;height:297mm;box-shadow:none;break-after:auto}}
+</style></head><body>
+<header><h1>✂ Cours 2 · Patron imprimable</h1><p><strong>Dessous de verre réversible à coins arrondis</strong> · pour un seul ouvrage. Coupe la pièce tissu deux fois : face A imprimée et face B unie contrastante. Le H630 est facultatif.</p><p class="instructions">Imprime <b>en A4 portrait, à 100 % / taille réelle</b>, sans « Ajuster à la page ». Mesure le carré témoin : il doit faire exactement <b>5 × 5 cm</b>. Le contour noir continu se coupe ; le pointillé terracotta montre la ligne de piqûre, sans ajout de marge.</p><button type="button" onclick="window.print()">Imprimer le patron A4</button></header>
+<main><section class="sheet" aria-label="Patron A4 à l’échelle réelle">
+<svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="297mm" viewBox="0 0 210 297" role="img" aria-label="Un carré de découpe de 12 centimètres à coins arrondis, un gabarit H630 de 10 centimètres et un carré témoin de 5 centimètres">
+<text x="17" y="15" class="label" font-size="6">DE FIL EN AIGUILLE · COUTURE N° 02</text>
+<text x="17" y="23" class="text">Dessous de verre réversible à coins arrondis · A4 · 100 %</text>
+<path class="fine" d="M17 29 H193"/>
+<!-- Échelle : 1 unité du viewBox = 1 millimètre sur une feuille A4 à 100 %. -->
+<rect id="carre-temoin" x="17" y="44" width="50" height="50" class="cut"/>
+<text x="42" y="70" class="text" text-anchor="middle">5 × 5 cm</text>
+<text x="17" y="101" class="text">Carré de contrôle</text>
+<text x="17" y="107" class="text">Mesurer avant découpe.</text>
+<text x="77" y="38" class="label">PIÈCE TISSU · COUPER 2 FOIS</text>
+<text x="77" y="44" class="text">Face A imprimée + face B unie</text>
+<!-- Découpe : 120 × 120 mm, rayon des 4 coins : 15 mm -->
+<rect id="patron-tissu" x="77" y="49" width="120" height="120" rx="15" ry="15" class="cut"/>
+<!-- Ligne de piqûre à 10 mm du bord : 100 × 100 mm, rayon résiduel 5 mm -->
+<rect id="ligne-piqure" x="87" y="59" width="100" height="100" rx="5" ry="5" class="seam"/>
+<!-- Marqueurs de l'ouverture de 40mm sur une portion DROITE de la couture haute -->
+<path d="M117 59 H157" stroke="white" stroke-width="2.2"/>
+<path d="M117 55 V63 M157 55 V63" class="stop"/>
+<text x="137" y="70" class="text" text-anchor="middle">Ouverture 4 cm</text>
+<text x="137" y="76" class="text" text-anchor="middle">NE PAS PIQUER</text>
+<text x="137" y="164" class="text" text-anchor="middle">Contour continu : découper</text>
+<text x="17" y="118" class="text">12 × 12 cm hors tout</text>
+<text x="17" y="124" class="text">Coins : rayon 1,5 cm</text>
+<text x="17" y="130" class="text">Marge de 1 cm incluse</text>
+<text x="17" y="136" class="text">Fini : env. 10 × 10 cm</text>
+<text x="17" y="149" class="text">Sur le tissu :</text>
+<text x="17" y="155" class="text">points en courbe</text>
+<text x="17" y="161" class="text">à piquer lentement</text>
+<path class="fine" d="M17 174 H193"/>
+<text x="54" y="181" class="label">H630 FACULTATIF · COUPER 1 FOIS</text>
+<!-- 100 × 100 mm, rayon 5 mm; rogner 2 mm si besoin d'éloigner du fil de couture -->
+<rect id="patron-h630" x="54" y="184" width="100" height="100" rx="5" ry="5" class="cut"/>
+<text x="165" y="203" class="text">H630 :</text>
+<text x="165" y="210" class="text">10 × 10 cm</text>
+<text x="165" y="217" class="text">facultatif</text>
+<text x="165" y="230" class="text">Sur l'envers</text>
+<text x="165" y="237" class="text">de la face A</text>
+<text x="165" y="250" class="text">Rogner 2 mm</text>
+<text x="165" y="257" class="text">au bord si</text>
+<text x="165" y="264" class="text">nécessaire.</text>
+<path class="fine" d="M17 289 H193"/>
+<text x="17" y="294" class="text">Noir = découpe · pointillé = piqûre · A4 à 100 %</text>
+<text x="193" y="294" text-anchor="end" class="text">1 / 1</text>
+</svg></section></main></body></html>
