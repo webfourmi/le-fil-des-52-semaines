@@ -42,7 +42,7 @@ const {chromium}=require('playwright'),fs=require('node:fs/promises');
    await page.locator('[data-journal-photo-upload]').setInputFiles(photo);
    await page.locator('.journal-photo-card').first().waitFor();
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),'Aucun débordement '+width);
-   await page.locator(nav+' [data-page="backup"]').click();
+   await page.getByRole('button',{name:/Sauvegarder mon journal/}).click();
    const pending=page.waitForEvent('download');
    await page.locator('#backup-export').click();
    const download=await pending,data=JSON.parse(await fs.readFile(await download.path(),'utf8'));
