@@ -575,3 +575,29 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline-offset:2
 .course-pattern-link{display:inline-flex;align-items:center;max-width:100%;background:#436a54;color:#fff!important;border:1px solid #436a54;border-radius:10px;padding:12px 16px;text-decoration:none;font-size:.92rem;font-weight:700;overflow-wrap:anywhere;margin:8px 0}
 .course-pattern-link:hover,.course-pattern-link:focus-visible{background:#365745}
 .sewing-course-pattern{background:#fffaf3}
+
+
+/* V1.1.10 · Rechercher avant de sélectionner un cours ou un bloc */
+.course-picker{width:min(100%,375px);flex:0 1 375px;min-width:0}
+.course-picker>label{display:block;font-size:.82rem;font-weight:700;color:#486758;margin:2px 0 7px}
+.course-picker>.course-select-label{margin-top:10px;color:#6d786e}
+.course-picker input[type="search"]{box-sizing:border-box;width:100%;min-width:0;min-height:46px;border:1px solid #bbcbc0;background:#fff;border-radius:12px;padding:11px 13px;color:#2b4b3b;font:inherit;font-size:1rem}
+.course-picker input[type="search"]:focus-visible{outline:3px solid #b1cdbb;outline-offset:2px}
+.course-picker>.selection{display:block;width:100%;max-width:100%;min-width:0;margin:0}
+.course-search-results{background:#fffaf2;border:1px solid #d3cbbd;border-radius:13px;max-height:290px;overflow-y:auto;margin:7px 0 10px;padding:7px;box-shadow:0 7px 20px #4b69551a}
+.course-search-results[hidden]{display:none}
+.course-search-count{margin:5px 8px 8px;line-height:1.4}
+.course-search-hits{display:grid;gap:4px}
+.course-search-hits button{min-height:43px;background:transparent;color:#345442;border:0;border-radius:8px;text-align:left;padding:6px 10px;display:grid;gap:2px;font:inherit;cursor:pointer}
+.course-search-hits button:hover,.course-search-hits button:focus-visible{background:#e8f0e7;outline:1px solid #a8c6ae}
+.course-search-hits .eyebrow{font-size:.7rem}
+@media(max-width:640px){.course-picker{width:100%;flex:auto;max-width:100%}.course-search-results{max-height:250px}}
+/* Consultation des patrons dans l'app : la navigation de gauche et du bas reste accessible. */
+.pattern-preview{min-width:0;padding:17px}
+.pattern-preview-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.pattern-preview-controls h2{font-family:Georgia,serif;font-size:1.4rem;margin:6px 0}
+.pattern-preview-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pattern-preview-actions button,.pattern-preview-actions a{min-height:44px;margin:0;display:inline-flex;align-items:center;justify-content:center}
+#pattern-preview-frame{display:block;width:100%;height:min(72vh,720px);min-height:420px;border:1px solid #d1dacf;background:white;border-radius:12px;box-sizing:border-box}
+@media(max-width:500px){.pattern-preview{padding:11px}.pattern-preview-actions{width:100%}.pattern-preview-actions button,.pattern-preview-actions a{flex:1 1 125px}#pattern-preview-frame{height:63vh;min-height:370px}}
+@media print{.pattern-preview{display:none!important}}
