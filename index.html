@@ -151,7 +151,7 @@ let upcomingEditions={};
 /* Validation éditoriale globale, distincte des progressions personnelles. */
 const EDITORIAL_APPROVED=Object.freeze({
  sewing:Object.freeze([0,1]),patchwork:Object.freeze([0]),
- world:Object.freeze(['japon','bengale','coree','halloween']),
+ world:Object.freeze(['japon','bengale','coree']),
  history:Object.freeze(['needle-01'])
 });
 window.Fil52EditorialApproved=EDITORIAL_APPROVED;
@@ -171,9 +171,37 @@ const safe=s=>String(s??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':
 function toast(t){let x=el('toast');x.textContent=t;x.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>x.classList.remove('show'),2700)}
 function selectIdentity(p){if(!['m','f'].includes(p))return;state.profile=p;localStorage.setItem('fil52.identity',p);save();render()}function page(p){if(!['learn','quilt'].includes(p))dicoOpen=false;state.page=p;render();scrollTo({top:0,behavior:'instant'})}
 function chooseProfile(p){if(state.profile!==p)return;render()}
-function selectWeek(w){state.week=+w;state.page='learn';save();render();scrollTo({top:0,behavior:'instant'})}
-function selectPatchWeek(w){const n=+w;if(!Number.isInteger(n)||n<0||n>52)return;state.patchWeek=n;state.page='quilt';quiltCoverOpen=false;dicoOpen=false;save();render();scrollTo({top:0,behavior:'instant'})}
+function selectWeek(w){sewingSearchQuery='';state.week=+w;state.page='learn';save();render();scrollTo({top:0,behavior:'instant'})}
+function selectPatchWeek(w){patchSearchQuery='';const n=+w;if(!Number.isInteger(n)||n<0||n>52)return;state.patchWeek=n;state.page='quilt';quiltCoverOpen=false;dicoOpen=false;save();render();scrollTo({top:0,behavior:'instant'})}
 let quiltCoverOpen=false,patternKind='sewing';
+let sewingSearchQuery='',patchSearchQuery='',patternPreview='',patternSection='';
+const PATTERN_LIBRARY={
+ coaster:{title:'Cours 2 · Dessous de verre à coins arrondis',url:'./assets/cours-02-patron-arrondis.html'},
+ halloween:{title:'Halloween · Patrons des trois ateliers',url:'./assets/halloween-patrons.html'}
+};
+function textForSearch(s){return String(s??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim()}
+function updateCourseSearch(kind){
+ const sewing=kind==='sewing',node=el(sewing?'sewing-search-results':'patch-search-results');
+ if(!node)return;
+ const query=(sewing?sewingSearchQuery:patchSearchQuery).trim();
+ if(!query){node.hidden=true;node.innerHTML='';return}
+ const words=textForSearch(query).split(/\s+/).filter(Boolean);
+ const all=sewing?projects:blocks;
+ const matches=all.map((title,i)=>({
+  id:i+1,title,body:textForSearch([title,i+1,sewing?'cours':'bloc',sewing?upcomingEditions[i+1]?.intro:upcomingEditions[i+1]?.patchworkTitle,
+   sewing?upcomingEditions[i+1]?.technique:upcomingEditions[i+1]?.patchCuts?.join(' ')].join(' '))
+ })).filter(x=>words.every(w=>x.body.includes(w)));
+ node.hidden=false;
+ node.innerHTML='<p class="small course-search-count">'+(matches.length?matches.length+' résultat'+(matches.length>1?'s':'')+' pour « '+safe(query)+' »':'Aucun projet correspondant à « '+safe(query)+' ». Essaie un autre mot.')+'</p>'+
+ '<div class="course-search-hits">'+matches.slice(0,10).map(x=>'<button type="button" data-course-match="'+kind+'" data-course-index="'+x.id+'"><span class="eyebrow">'+(sewing?'Cours':'Bloc')+' '+String(x.id).padStart(2,'0')+'</span><span>'+safe(x.title)+'</span></button>').join('')+'</div>'+
+ (matches.length>10?'<p class="small">Affichage des 10 premiers résultats. Précise ta recherche pour affiner.</p>':'');
+}
+function patternPreviewUrl(){
+ const entry=PATTERN_LIBRARY[patternPreview];if(!entry)return '';
+ const part=patternPreview==='halloween'&&['sac','mini','guirlande'].includes(patternSection)?'?atelier='+patternSection:'';
+ return entry.url+part;
+}
+
 function toggle(kind,p,v){const a=state[kind][p]||[];state[kind][p]=a.includes(v)?a.filter(x=>x!==v):[...a,v];save();render();}
 function material(n,txt){return `<div class="material"><input aria-label="Matériel: ${safe(txt)}" type="checkbox" data-toggle="mat" data-val="${n}" ${state.mat[state.profile].includes(n)?'checked':''}><span>${txt}</span></div>`}
 function listProfile(){return `<div class="tag">Carnet personnel : ${safe(state.names[state.profile])}</div>`}
