@@ -2,6 +2,12 @@
 
 Application de couture et patchwork organisée en **52 projets sans calendrier imposé** : projets de récupération, apprentissage de la **Janome Cherry 21**, patronnerie, 52 blocs de patchwork par personne, et rubriques culturelles documentées.
 
+## Nouveauté V1.1.12 : cinq vraies photos du marque-page
+
+Le cours **Couture 1** présente désormais cinq photographies authentiques fournies par la créatrice, dans l'ordre : (1) matériel et patron, (2) superposition/épinglage, (3) angles dégarnis, (4) surpiqûre à la Janome Cherry 21, (5) marque-page terminé. Les légendes sont spécifiques à chaque photographie.
+
+Les cinq fichiers WebP légers sont placés dans `assets/cours-01/` et mis en cache hors connexion. Les photos détaillées d'origine sont conservées dans le dossier de préparation de l'utilisatrice ; la galerie publique emploie des versions de prévisualisation légères. Le cours 1 reste **validé à 100 %**, et les photos du patchwork restent dans une galerie distincte.
+
 ## Nouveauté V1.1.10 : recherche, consultation des patrons et silhouettes Halloween
 
 - **Couture** et **Patchwork** disposent chacun d'une recherche par mots-clés sans tenir compte des majuscules ni des accents. La recherche figure juste au-dessus du sélecteur des 52 cours ou blocs et affiche des résultats cliquables.
