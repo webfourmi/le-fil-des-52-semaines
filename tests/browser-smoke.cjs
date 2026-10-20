@@ -81,8 +81,8 @@ async function main(){
     const data=JSON.parse(await fs.readFile(temp,'utf8'));
     assert.equal(data.profile,'m');
     assert.equal(data.data.notes['1'],'Une chute de coton fleuri.');
-    assert.equal(data.photos.length,1);
-    assert.ok(data.photos[0].dataUrl.startsWith('data:image/jpeg;'));
+    assert.equal(data.journalPhotos.length,1);
+    assert.ok(data.journalPhotos[0].dataUrl.startsWith('data:image/jpeg;'));
     pass('Fichier téléchargé : notes + progression + photo personnelle');
     const fille=await start(browser,'Mathilde');contexts.push(fille.context);
     await journal(fille.page);
