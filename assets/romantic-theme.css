@@ -601,3 +601,28 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline-offset:2
 #pattern-preview-frame{display:block;width:100%;height:min(72vh,720px);min-height:420px;border:1px solid #d1dacf;background:white;border-radius:12px;box-sizing:border-box}
 @media(max-width:500px){.pattern-preview{padding:11px}.pattern-preview-actions{width:100%}.pattern-preview-actions button,.pattern-preview-actions a{flex:1 1 125px}#pattern-preview-frame{height:63vh;min-height:370px}}
 @media print{.pattern-preview{display:none!important}}
+
+
+/* V1.1.13 : journal à trois rubriques et album de cinq photos */
+.journal-workspace{padding:18px}
+.journal-top-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:20px}
+.journal-top-buttons button{min-height:49px;white-space:normal;border:1px solid #b4c9b7;color:#345844;border-radius:14px;background:#f9f7f0;font-weight:700;padding:9px 10px}
+.journal-top-buttons button.active,.journal-top-buttons button[aria-pressed="true"]{background:#496b55;color:#fff;border-color:#496b55}
+.journal-item-picker{margin:14px 0 22px;max-width:600px}
+.journal-item-picker label,.journal-editor label[for]{display:block;margin:10px 0 8px}
+.journal-item-picker select{display:block;width:100%;max-width:100%;min-height:48px;box-sizing:border-box}
+.journal-editor{min-width:0}
+.journal-editor>.selection{display:block;max-width:300px;margin:8px 0 17px}
+.journal-editor>.notes{width:100%;box-sizing:border-box}
+.journal-photos-section{margin:24px 0 10px}
+.journal-photo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.journal-photo-card{border:1px solid #dcded3;background:#fffdfa;border-radius:14px;overflow:hidden;margin:0;min-width:0}
+.journal-photo-card img{display:block;width:100%;height:188px;object-fit:contain;background:#f1eee6}
+.journal-photo-card figcaption{font-size:.81rem;color:#4b6659;padding:8px 11px 0}
+.journal-photo-actions{display:flex;gap:6px;padding:8px;flex-wrap:wrap}
+.journal-photo-actions button{flex:1 1 95px;min-height:42px;font-size:.86rem}
+.journal-upload{border:1px dashed #a8bdad;border-radius:14px;background:#f7faf6;padding:12px;grid-column:1/-1}
+.journal-upload-label{display:inline-grid;gap:6px;cursor:pointer;font-weight:700;color:#355d47}
+.journal-upload-label input{display:block;width:100%;max-width:100%;font-size:.86rem}
+@media(max-width:520px){.journal-workspace{padding:12px}.journal-top-buttons{gap:5px}.journal-top-buttons button{font-size:.85rem;padding:8px 4px}.journal-photo-grid{gap:8px}.journal-photo-card img{height:145px}.journal-photo-actions{padding:6px}.journal-photo-actions button{font-size:.81rem}}
+@media(min-width:850px){.journal-photo-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}

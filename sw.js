@@ -1,8 +1,8 @@
 /* De fil en aiguille — cache PWA. Augmenter CACHE_VERSION pour chaque nouvelle version de l'application. */
-const CACHE_VERSION = 'fil52-shell-v1.1.12';
+const CACHE_VERSION = 'fil52-shell-v1.1.13';
 const CORE = [
   './','./index.html','./manifest.webmanifest','./data/editions.json',
-  './assets/backup.js','./assets/gallery.js','./assets/personal-gallery.js','./assets/halloween-voyage.js','./assets/halloween-patrons.html','./assets/cours-02-patron-arrondis.html','./assets/textile-travel.js','./assets/lesson-guides.js','./assets/patchwork-courses.js','./assets/patchwork-courses.css','./assets/machine-intro.js','./assets/lesson-photos.js','./assets/lesson-photos.css',
+  './assets/backup.js','./assets/gallery.js','./assets/personal-gallery.js','./assets/journal-photos.js','./assets/halloween-voyage.js','./assets/halloween-patrons.html','./assets/cours-02-patron-arrondis.html','./assets/textile-travel.js','./assets/lesson-guides.js','./assets/patchwork-courses.js','./assets/patchwork-courses.css','./assets/machine-intro.js','./assets/lesson-photos.js','./assets/lesson-photos.css',
   './assets/cours-01/01-materiel.webp','./assets/cours-01/02-epinglage.webp','./assets/cours-01/03-coins-degarnis.webp','./assets/cours-01/04-surpiqure.webp','./assets/cours-01/05-marque-page-termine.webp','./assets/travel-updates.css','./assets/atelier.webp',
   './assets/romantic-theme.css','./assets/romantic-botanical.svg','./assets/nav-history.svg','./assets/nav-home-simple.svg','./assets/nav-sewing-simple.svg','./assets/nav-patch-simple.svg','./assets/pwa-icon.svg','./assets/icon-app.svg','./assets/icon-couture.svg','./assets/icon-dico-couture.svg','./assets/icon-couverture.svg','./assets/icon-patchwork.svg','./assets/nav-world.svg','./assets/nav-journal.svg','./assets/nav-print.svg','./assets/nav-backup.svg','./assets/nav-personal.svg','./assets/pwa-icon-192.png','./assets/pwa-icon-512.png','./assets/pwa-icon-180.png','./assets/pwa.js'
 ];

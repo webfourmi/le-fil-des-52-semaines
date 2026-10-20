@@ -1,4 +1,4 @@
-name: V1.1.10 - Recherche, Halloween et patrons
+name: V1.1.13 - Journal à trois rubriques et albums photo
 on:
   pull_request:
     branches: [main]
@@ -22,6 +22,7 @@ jobs:
       - run: node tests/v118-halloween-editorial.cjs
       - run: node tests/v119-patrons-arrondis.cjs
       - run: node tests/v1110-search-patrons.cjs
+      - run: node tests/v1113-journal-albums.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

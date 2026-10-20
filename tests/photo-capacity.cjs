@@ -12,7 +12,7 @@ async function main(){
   await page.goto(url,{waitUntil:'domcontentloaded'});
   await page.getByRole('button',{name:'Viera',exact:true}).click();
   await page.locator('#bottomnav [data-page="journal"]').click();
-  await page.getByRole('button',{name:/Mes projets persos/}).click();
+  await page.getByRole('button',{name:/Mes projets personnels|Mes projets persos/}).click();
   await page.locator('#personal-new-name').fill('Patchwork photo : plusieurs étapes');
   await page.getByRole('button',{name:'Ajouter ce projet'}).click();
   const limit=await page.evaluate(()=>({max:Fil52PersonalPhotos.MAX_PHOTOS,per:Fil52PersonalPhotos.MAX_PER_PROJECT}));
@@ -33,14 +33,14 @@ async function main(){
   console.log('OK : 20 photos par projet, la 21e est refusée sans effacer les autres.');
   await page.reload({waitUntil:'domcontentloaded'});
   await page.locator('#bottomnav [data-page="journal"]').click();
-  await page.getByRole('button',{name:/Mes projets persos/}).click();
+  await page.getByRole('button',{name:/Mes projets personnels|Mes projets persos/}).click();
   await page.waitForFunction(()=>document.querySelectorAll('.personal-thumb img').length===20,{timeout:12000});
   console.log('OK : 20 photos conservées après réouverture mobile.');
   await page.getByRole('button',{name:'Sauvegarder mes créations'}).click();
   const waiting=page.waitForEvent('download',{timeout:15000});
   await page.locator('#backup-export').click();
   const download=await waiting,backup=JSON.parse(await fs.readFile(await download.path(),'utf8'));
-  assert.equal(backup.schema,5);
+  assert.equal(backup.schema,6);
   assert.equal(backup.personalPhotos.length,20);
   console.log('OK : le fichier JSON conserve les 20 photographies et reste au format V0.6.');
   assert.deepEqual(errors,[],errors.join('; '));

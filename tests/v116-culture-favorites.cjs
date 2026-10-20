@@ -62,7 +62,7 @@ const options=page=>page.locator('#culture-article-select').evaluate(select=>[..
      const oldRestored=Fil52Backup.applyBackup(state,oldParsed,'m');
      return {schema:generated.schema,exported:generated.data.cultureFavorites,read:generated.data.cultureRead,restored:restored.cultureFavorites.m,oldFavorites:oldRestored.cultureFavorites.m,oldRead:oldRestored.cultureRead.m};
    });
-   assert.equal(saved.schema,5,'Nouveau format JSON');
+   assert.equal(saved.schema,6,'Nouveau format JSON');
    assert.deepEqual(saved.exported,['world:bengale','history:needle-01']);
    assert.deepEqual(saved.read,['world:japon','history:needle-01']);
    assert.deepEqual(saved.restored,saved.exported,'Sauvegarde reconstituée');

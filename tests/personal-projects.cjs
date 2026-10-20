@@ -21,7 +21,7 @@ async function launch(browser,profile){
 }
 async function toPersonal(page){
  await page.locator('#bottomnav [data-page="journal"]').click();
- await page.getByRole('button',{name:/Mes projets persos/}).click();
+ await page.getByRole('button',{name:/Mes projets personnels|Mes projets persos/}).click();
  await page.getByRole('heading',{name:'Projets persos'}).waitFor();
 }
 async function backupJSON(page){
@@ -70,7 +70,7 @@ async function main(){
   assert.equal(await p.locator('[data-personal-notes]').inputValue(),'Veste réalisée hors programme de 52 semaines.');
   console.log('OK : projets libres, notes et photos hors connexion');
   const saved=await backupJSON(p);
-  assert.equal(saved.schema,5);assert.equal(saved.profile,'m');
+  assert.equal(saved.schema,6);assert.equal(saved.profile,'m');
   assert.equal(saved.data.personalProjects.length,1);
   assert.equal(saved.personalPhotos.length,2);
   assert.ok(saved.personalPhotos.every(x=>x.dataUrl.startsWith('data:image/jpeg')));
@@ -103,8 +103,8 @@ async function main(){
   assert.ok(await daughter.page.locator('#backup-restore').isDisabled());
   console.log('OK : isolement Mathilde / Viera et refus du mauvais profil');
   await p.locator('#bottomnav [data-page="journal"]').click();
-  await p.waitForFunction(()=>document.querySelectorAll('#journal-gallery .gallery-slot').length===2);
-  await p.getByRole('button',{name:/Mes projets persos/}).click();
+  await p.waitForFunction(()=>document.querySelectorAll('#journal-gallery .journal-upload').length===1);
+  await p.getByRole('button',{name:/Mes projets personnels|Mes projets persos/}).click();
   p.once('dialog',dialog=>dialog.accept());
   await p.locator('[data-personal-photo-delete]').first().click();
   await p.waitForFunction(()=>document.querySelectorAll('.personal-thumb img').length===1);

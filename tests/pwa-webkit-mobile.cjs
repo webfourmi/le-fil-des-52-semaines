@@ -43,7 +43,7 @@ async function run(){
    console.log('OK Safari WebKit : accueil et instructions iPhone');
    await page.locator('#bottomnav [data-page="journal"]').click();
    await page.locator('[data-note="1"]').fill('Essai WebKit et sauvegarde personnelle.');
-   await page.locator('[data-gallery-upload="block"]').setInputFiles({
+   await page.locator('[data-journal-photo-upload]').setInputFiles({
      name:'patchwork.png',mimeType:'image/png',buffer:await createPhoto(page)
    });
    await page.locator('#journal-gallery img').first().waitFor({state:'visible',timeout:12000});
@@ -59,7 +59,7 @@ async function run(){
    const download=await pending;
    const backup=JSON.parse(await fs.readFile(await download.path(),'utf8'));
    assert.equal(backup.profile,'m');
-   assert.equal(backup.photos.length,1);
+   assert.equal(backup.journalPhotos.length,1);
    assert.equal(backup.data.notes['1'],'Essai WebKit et sauvegarde personnelle.');
    console.log('OK Safari WebKit : téléchargement JSON individuel avec photo');
    assert.deepEqual(errors,[],errors.join('; '));

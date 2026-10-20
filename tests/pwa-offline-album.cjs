@@ -37,14 +37,14 @@ async function saveSnapshot(page){
     await openJournal(page);
     const note='Carré patchwork à fleurs, à garder même hors ligne.';
     await page.locator('[data-note="1"]').fill(note);
-    await page.locator('[data-gallery-upload="project"]').setInputFiles({
+    await page.locator('[data-journal-photo-upload]').setInputFiles({
       name:'carre.png',mimeType:'image/png',buffer:await photoPNG(page)
     });
     await page.locator('#journal-gallery img').first().waitFor({state:'visible',timeout:15000});
     const originalPhoto=await page.locator('#journal-gallery img').first().getAttribute('src');
     assert.ok(originalPhoto.startsWith('data:image/jpeg;'));
     const before=await saveSnapshot(page);
-    assert.equal(before.photos.length,1);
+    assert.equal(before.journalPhotos.length,1);
     assert.equal(before.data.notes['1'],note);
     await page.waitForFunction(()=>!!navigator.serviceWorker.controller,{timeout:15000});
     await context.setOffline(true);
@@ -57,8 +57,8 @@ async function saveSnapshot(page){
     const after=await saveSnapshot(page);
     assert.equal(after.profile,'m');
     assert.equal(after.data.notes['1'],note);
-    assert.equal(after.photos.length,1);
-    assert.equal(after.photos[0].dataUrl,before.photos[0].dataUrl);
+    assert.equal(after.journalPhotos.length,1);
+    assert.equal(after.journalPhotos[0].dataUrl,before.journalPhotos[0].dataUrl);
     console.log('OK : sauvegarde personnelle JSON téléchargeable sans Internet, photo comprise.');
     assert.deepEqual(errors,[],'Erreurs navigateur : '+errors.join(', '));
     await context.close();
