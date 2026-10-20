@@ -461,9 +461,85 @@ function culturePage(){
 }
 
 function render(){if(!state.profile){el('app').innerHTML=`<div class="card" style="max-width:620px;margin:55px auto;text-align:center"><span class="eyebrow">Bienvenue dans votre atelier</span><h1>Qui ouvre son carnet ?</h1><p>Les cours sont communs mais les progrès restent personnels sur chaque appareil.</p><div class="actions" style="justify-content:center"><button class="primary" data-identity="m">Viera</button><button class="secondary" data-identity="f">Mathilde</button></div><p class="small">Choisis ton espace une seule fois sur cet appareil.</p></div>`;for(const id of ['nav','bottomnav'])el(id).innerHTML='';return}let pageName=state.page;let fn={home:dashboard,learn,machine:machineIntro,quilt:patchwork,print:printPage,world:culturePage,backup:backupPage,journal:journalPage,personal:personalPage}[pageName]||dashboard;el('app').innerHTML=fn();if((pageName==='learn'||pageName==='quilt')&&dicoOpen)filterSewingGlossary();if(pageName==='learn'&&sewingSearchQuery)updateCourseSearch('sewing');if(pageName==='quilt'&&patchSearchQuery)updateCourseSearch('patchwork');if(pageName==='journal')renderGallery(state.profile,state.week);if(pageName==='personal')renderPersonalPhotos(state.profile);for(let id of ['nav','bottomnav']){const items=id==='bottomnav'?navItems.filter(([key])=>['home','learn','quilt','world','journal','print'].includes(key)):navItems;el(id).innerHTML=items.map(([k,t])=>`<button class="${(pageName===k||(pageName==='machine'&&k==='learn'))?'active':''}" data-page="${k}" aria-current="${(pageName===k||(pageName==='machine'&&k==='learn'))?'page':'false'}">${icons[k]}<span>${id==='bottomnav'?mobileNavLabels[k]||t:t}</span></button>`).join('');}}
-async function renderGallery(profile,week){const node=el('journal-gallery');if(!node)return;try{const photos=await Promise.all(['project','block'].map(kind=>Fil52Gallery.get(profile,week,kind)));if(!node.isConnected||profile!==state.profile||week!==state.week)return;node.replaceChildren();for(let i=0;i<2;i++){const kind=['project','block'][i],item=photos[i],card=document.createElement('div');card.className='gallery-slot';const title=document.createElement('h4');title.textContent=kind==='project'?'✂ Projet couture':'▦ Bloc patchwork';card.append(title);if(item){const img=document.createElement('img');img.src=item.dataUrl;img.alt='Ma réalisation cousue';card.append(img)}else{const empty=document.createElement('div');empty.className='gallery-placeholder';empty.textContent='Aucune photo';card.append(empty)}const input=document.createElement('input');input.type='file';input.accept='image/png,image/jpeg,image/webp';input.dataset.galleryUpload=kind;input.setAttribute('aria-label','Photographier '+title.textContent);card.append(input);if(item){const del=document.createElement('button');del.className='secondary';del.textContent='Supprimer cette photo';del.dataset.galleryDelete=kind;card.append(del)}node.append(card)}}catch(e){node.textContent='Galerie indisponible : '+e.message}}
-async function addGalleryPhoto(kind,file){if(!file)return;try{await Fil52Gallery.upsert(state.profile,state.week,kind,file);toast('Photo enregistrée localement.');renderGallery(state.profile,state.week)}catch(e){toast(e.message)}}
-async function deleteGalleryPhoto(kind){if(!confirm('Supprimer cette photo ?'))return;try{await Fil52Gallery.remove(state.profile,state.week,kind);renderGallery(state.profile,state.week)}catch(e){toast(e.message)}}
+function legacyJournalType(){return journalKind==='sewing'?'project':journalKind==='patchwork'?'block':null}
+async function journalAlbum(profile,entry){
+ const oldType=legacyJournalType();
+ const [old,photos]=await Promise.all([
+  oldType?Fil52Gallery.get(profile,+entry.value,oldType):Promise.resolve(null),
+  Fil52JournalPhotos.listFor(profile,entry.ref)
+ ]);
+ return {old,photos,oldType};
+}
+async function renderGallery(profile){
+ const node=el('journal-gallery');if(!node)return;
+ const entry=journalEntry(),ref=entry.ref,kind=journalKind;
+ try{
+  const {old,photos}=await journalAlbum(profile,entry);
+  if(!node.isConnected||state.page!=='journal'||state.profile!==profile||journalKind!==kind||journalEntry().ref!==ref)return;
+  node.replaceChildren();
+  const all=[...(old?[{id:'legacy',dataUrl:old.dataUrl}]:[]),...photos.map(x=>({id:x.photoId,dataUrl:x.dataUrl}))];
+  for(let i=0;i<all.length;i++){
+   const item=all[i],card=document.createElement('figure');card.className='journal-photo-card';
+   const img=document.createElement('img');img.src=item.dataUrl;img.alt='Photo '+(i+1)+' de '+entry.title;img.loading='lazy';
+   const cap=document.createElement('figcaption');cap.textContent='Photo '+(i+1)+' / '+all.length;
+   const actions=document.createElement('div');actions.className='journal-photo-actions';
+   const share=document.createElement('button');share.type='button';share.className='secondary';share.dataset.journalPhotoShare=item.id;share.textContent='Partager';
+   const del=document.createElement('button');del.type='button';del.className='secondary';del.dataset.journalPhotoDelete=item.id;del.textContent='Supprimer';
+   actions.append(share,del);card.append(img,cap,actions);node.append(card);
+  }
+  const area=document.createElement('div');area.className='journal-upload';
+  const info=document.createElement('p');info.className='small';info.textContent=all.length+' / 5 photos · '+(all.length===5?'Album complet':'Tu peux encore en ajouter '+(5-all.length)+'.');
+  area.append(info);
+  if(all.length<5){
+   const label=document.createElement('label');label.className='journal-upload-label';label.textContent='＋ Ajouter des photos';
+   const input=document.createElement('input');input.type='file';input.accept='image/jpeg,image/png,image/webp';input.multiple=true;
+   input.dataset.journalPhotoUpload='1';input.setAttribute('aria-label','Ajouter des photos de '+entry.title);
+   label.append(input);area.append(label);
+  }
+  const warning=document.createElement('p');warning.className='small';warning.textContent='Aucune photo n’est publiée automatiquement. « Partager » utilise les applications de ton appareil ou enregistre une copie.';
+  area.append(warning);node.append(area);
+ }catch(e){node.textContent='Album indisponible : '+e.message}
+}
+async function addJournalPhotos(files){
+ if(!files?.length)return;
+ const p=state.profile,entry=journalEntry(),kind=journalKind;
+ try{
+  const album=await journalAlbum(p,entry),existing=album.photos.length+(album.old?1:0);
+  if(files.length>5-existing)throw Error('Cinq photos maximum pour cette réalisation : il reste '+(5-existing)+' place(s).');
+  let n=0;for(const file of files){await Fil52JournalPhotos.add(p,entry.ref,file,album.old?1:0);n++;}
+  toast(n+' photo(s) ajoutée(s) au journal.');
+  if(state.page==='journal'&&journalKind===kind&&journalEntry().ref===entry.ref)renderGallery(p);
+ }catch(e){toast(e.message);if(state.page==='journal')renderGallery(p)}
+}
+async function deleteJournalPhoto(photoId){
+ if(!confirm('Supprimer cette photo de ton journal ?'))return;
+ const p=state.profile,entry=journalEntry();
+ try{
+  if(photoId==='legacy'){const type=legacyJournalType();if(!type)throw Error('Photo incorrecte.');await Fil52Gallery.remove(p,+entry.value,type);}
+  else await Fil52JournalPhotos.remove(p,entry.ref,photoId);
+  await renderGallery(p);
+ }catch(e){toast('Suppression impossible : '+e.message)}
+}
+async function shareJournalPhoto(photoId){
+ const p=state.profile,entry=journalEntry();
+ try{
+  const album=await journalAlbum(p,entry);
+  const dataUrl=photoId==='legacy'?album.old?.dataUrl:album.photos.find(x=>x.photoId===photoId)?.dataUrl;
+  if(!dataUrl)throw Error('Photo introuvable.');
+  const blob=await (await fetch(dataUrl)).blob();
+  const file=new File([blob],'fil-aiguille-'+entry.ref.replace(/[^a-z0-9-]/gi,'-')+'.jpg',{type:'image/jpeg'});
+  if(navigator.share&&navigator.canShare?.({files:[file]})){
+   try{await navigator.share({files:[file],title:'De fil en aiguille · '+entry.title});return}
+   catch(e){if(e.name==='AbortError')return}
+  }
+  const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=file.name;
+  document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
+  toast('Photo enregistrée : partage-la avec la personne de ton choix.');
+ }catch(e){toast('Partage impossible : '+e.message)}
+}
+// Compatibilité : les premières photos stockées avec l’ancien journal restent accessibles.
+async function addGalleryPhoto(kind,file){if(!file)return;try{await Fil52Gallery.upsert(state.profile,state.week,kind,file);renderGallery(state.profile)}catch(e){toast(e.message)}}
+async function deleteGalleryPhoto(kind){if(!confirm('Supprimer cette photo ?'))return;try{await Fil52Gallery.remove(state.profile,state.week,kind);renderGallery(state.profile)}catch(e){toast(e.message)}}
 function backupPage(){let p=state.profile;return `<span class="eyebrow">Mon journal personnel</span><h1>Sauvegarde de ${safe(state.names[p])}</h1><p class="lead">Cette sauvegarde contient mes progrès, mes notes, mes photos des 52 cours et tous mes projets persos avec leurs photographies. L'autre couturière conserve ses propres données chez elle.</p><div class="grid2 section"><section class="card backup-panel"><h2>↓ Enregistrer mon carnet</h2><p>Télécharger mon carnet et toutes ses photos dans un fichier JSON à déposer moi-même sur Google Drive.</p><button class="primary" id="backup-export">Télécharger ma sauvegarde</button><p class="small">Le fichier rassemble tes notes, tes coches et tes photographies. Tu dois ensuite le copier toi-même dans Google Drive. Il ne sera jamais transféré automatiquement.</p>
 <div class="tip"><b>Enregistrer dans Drive :</b> 1. Télécharger le fichier · 2. Ouvrir Google Drive · 3. Importer le fichier dans un dossier privé « Couture ». Pour changer d'appareil, télécharge-le depuis Drive et restaure-le ici.</div>
 <div class="actions"><a class="secondary" href="https://drive.google.com/drive/my-drive" target="_blank" rel="noopener noreferrer">Ouvrir mon Google Drive ↗</a></div></section><section class="card backup-panel"><h2>↑ Restaurer mon carnet</h2><input id="backup-file" class="backup-file" type="file" accept=".json,application/json" aria-label="Choisir une sauvegarde personnelle"><div id="backup-preview" class="backup-preview" hidden aria-live="polite"></div><p class="backup-warning">Seule une sauvegarde du même profil peut être importée. La restauration remplace les données de mon profil. Les anciens fichiers V0.3/V0.4 conservent mes projets persos actuels.</p><div class="backup-actions"><button class="primary" id="backup-restore" disabled>Restaurer mon carnet</button><button class="secondary" id="backup-cancel">Annuler</button></div></section></div><div class="card section"><h3>Deux maisons, le même atelier</h3><p>Les 52 cours, les patrons et les rubriques culturelles sont identiques sur les deux appareils. Les réalisations et les notes de Mathilde ne sont jamais modifiables depuis ton espace, et inversement. Pour changer d'appareil, importe ton propre fichier. Aucune connexion Google n’est nécessaire : télécharge puis importe le fichier depuis ton propre Drive.</p></div>`}
