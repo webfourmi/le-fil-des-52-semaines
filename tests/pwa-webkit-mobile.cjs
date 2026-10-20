@@ -43,7 +43,7 @@ async function run(){
    console.log('OK Safari WebKit : accueil et instructions iPhone');
    await page.locator('#bottomnav [data-page="journal"]').click();
    await page.locator('[data-note="1"]').fill('Essai WebKit et sauvegarde personnelle.');
-   await page.locator('[data-gallery-upload="block"]').setInputFiles({
+   await page.locator('[data-journal-photo-upload]').setInputFiles({
      name:'patchwork.png',mimeType:'image/png',buffer:await createPhoto(page)
    });
    await page.locator('#journal-gallery img').first().waitFor({state:'visible',timeout:12000});
