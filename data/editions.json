@@ -556,6 +556,6 @@
       ]
     }
   },
-  "appRelease": "1.3.4",
-  "appReleaseNotes": "Photo dès la création d’une fourniture, visionneuse du cours 1 corrigée et contrôle des mises à jour."
+  "appRelease": "1.3.5",
+  "appReleaseNotes": "Galeries photo en plein écran, zoom et navigation entre les images améliorés."
 }
