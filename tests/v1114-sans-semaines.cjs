@@ -30,7 +30,7 @@ const forbidden=/(52\s+semaines|52\s+rendez[- ]vous|rendez[- ]vous de 15 jours|c
    assert.match(await page.locator('.topline').innerText(),/à votre rythme/i);
    await page.locator(nav+' [data-page="learn"]').click();
    await clean('Cours de couture');
-   await page.locator('[data-page="machine"]').click();
+   await page.locator('[data-page="machine"]').first().click();
    await clean('Cours 0 machine');
    assert.match(await page.locator('.machine-intro').innerText(),/Premiers pas avec la machine/);
    await page.locator(nav+' [data-page="quilt"]').click();
