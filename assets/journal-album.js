@@ -4,6 +4,54 @@
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const norm=v=>String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 let renderToken=0;
+const thumbnails=new Map();
+let activeObserver=null;
+function compressThumbnail(source){
+ if(thumbnails.has(source))return Promise.resolve(thumbnails.get(source));
+ return new Promise(resolve=>{
+  const image=new Image();
+  image.onload=()=>{
+   try{
+    const side=320,canvas=document.createElement('canvas');canvas.width=side;canvas.height=side;
+    const context=canvas.getContext('2d');if(!context)throw Error('Canvas indisponible');
+    const ratio=Math.max(side/image.naturalWidth,side/image.naturalHeight);
+    const w=image.naturalWidth*ratio,h=image.naturalHeight*ratio;
+    context.drawImage(image,(side-w)/2,(side-h)/2,w,h);
+    const thumb=canvas.toDataURL('image/jpeg',0.76);
+    thumbnails.set(source,thumb);
+    if(thumbnails.size>70)thumbnails.delete(thumbnails.keys().next().value);
+    resolve(thumb);
+   }catch(e){resolve(source)}
+  };
+  image.onerror=()=>resolve(source);
+  image.src=source;
+ });
+}
+function hydrateThumbnails(grid,items){
+ activeObserver?.disconnect();
+ const buttons=[...grid.querySelectorAll('.journal-album-item')];
+ const pending=new Map(buttons.map((b,i)=>[b,items[i]?.cover]));
+ let running=0;
+ const queue=[];
+ function execute(){
+  while(running<2&&queue.length){
+   const button=queue.shift(),source=pending.get(button);
+   if(!source||!button.isConnected)continue;
+   pending.delete(button);running++;
+   compressThumbnail(source).then(thumb=>{
+    if(button.isConnected){const img=button.querySelector('img');if(img){img.src=thumb;delete img.dataset.thumbPending}}
+   }).finally(()=>{running--;execute()});
+  }
+ }
+ if(typeof IntersectionObserver==='function'){
+  activeObserver=new IntersectionObserver(entries=>{
+   for(const e of entries)if(e.isIntersecting){activeObserver?.unobserve(e.target);queue.push(e.target)}
+   execute();
+  },{rootMargin:'250px'});
+  buttons.forEach(b=>activeObserver.observe(b));
+ }else{queue.push(...buttons);execute()}
+}
+
 async function render(profile,state,projects,blocks,cultureArticles){
  const target=document.getElementById('journal-photo-overview'),token=++renderToken;
  if(!target)return;
@@ -51,13 +99,14 @@ async function render(profile,state,projects,blocks,cultureArticles){
    if(!found.length){grid.innerHTML='<p class="album-empty">Aucune photo ne correspond à cette recherche. Ouvre « Mon carnet » pour ajouter des photos à une réalisation.</p>'}
    for(const x of found){
     const b=document.createElement('button');b.type='button';b.className='journal-album-item';b.dataset.albumOpen=x.value;b.dataset.albumKind=x.kind;b.setAttribute('aria-label','Ouvrir '+x.title);
-    const image=document.createElement('img');image.loading='lazy';image.decoding='async';image.src=x.cover;image.alt='Photographie de '+x.title;
+    const image=document.createElement('img');image.loading='lazy';image.decoding='async';image.width=320;image.height=320;image.alt='Photographie de '+x.title;image.dataset.thumbPending='1';
     const meta=document.createElement('span');meta.className='album-meta';
     const title=document.createElement('b');title.textContent=x.title;
     const subtitle=document.createElement('small');subtitle.textContent=x.count+' photo'+(x.count>1?'s':'')+' · '+(x.kind==='personal'?'Création personnelle':x.kind==='voyage'?'Voyage':x.kind==='sewing'?'Couture':'Patchwork');
     meta.append(title,subtitle);b.append(image,meta);grid.append(b);
    }
    counter.textContent=found.length+' album(s) affiché(s).';
+   hydrateThumbnails(grid,found);
   }
   const field=target.querySelector('#album-filter');field.addEventListener('input',()=>display(field.value));
   display('');
