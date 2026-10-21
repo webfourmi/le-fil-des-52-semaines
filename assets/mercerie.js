@@ -54,5 +54,5 @@ function download(profile){
  const blob=new Blob([exportJSON(profile)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
  a.href=url;a.download='mercerie-'+(profile==='m'?'viera':'mathilde')+'.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
 }
-root.Fil52Mercerie={render,list,add,update,remove,photoFile,download,importJSON,exportJSON,validProfile};
+root.Fil52Mercerie={render,list,add,update,remove,photoFile,download,importJSON,exportJSON,validProfile,validateItems:items=>parse(JSON.stringify(items)),replace:save};
 })(globalThis);
