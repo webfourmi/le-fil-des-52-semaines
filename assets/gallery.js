@@ -1,6 +1,6 @@
-/* Galerie personnelle du Fil des 52 semaines.
+/* Galerie personnelle de De fil en aiguille.
  * Photos conservées localement dans IndexedDB, jamais envoyées au site.
- * Une photo de projet + une photo de bloc par semaine et par couturière.
+ * Une ancienne photo par projet et par bloc, pour chaque profil.
  */
 (function(root){
 'use strict';
@@ -8,7 +8,7 @@ const DB_NAME='fil52.galerie.v1',STORE='photos',MAX_FILE=12*1024*1024;
 const TYPES=['project','block'],PROFILE=['m','f'],MAX_DATAURL=420000;
 const invalid=(condition,msg)=>{if(!condition)throw Error(msg)};
 const key=(profile,week,type)=>profile+':'+type+':'+week;
-function check(profile,week,type){invalid(PROFILE.includes(profile),'Profil invalide.');invalid(Number.isInteger(week)&&week>=1&&week<=52,'Semaine invalide.');invalid(TYPES.includes(type),'Type de photo invalide.')}
+function check(profile,week,type){invalid(PROFILE.includes(profile),'Profil invalide.');invalid(Number.isInteger(week)&&week>=1&&week<=52,'Numéro de cours invalide.');invalid(TYPES.includes(type),'Type de photo invalide.')}
 let dbPromise=null;
 function db(){
  if(!root.indexedDB)return Promise.reject(Error('Ce navigateur ne permet pas la galerie locale.'));
