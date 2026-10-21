@@ -105,6 +105,8 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
  .bottomnav button.active .nav-art{box-shadow:0 0 0 2px #7e9e88,0 2px 7px #3044342b}
  .bottomnav button span{max-width:100%;overflow:hidden;text-overflow:clip;font-weight:650}
 }
+
+.search-inline-results{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px}.search-inline-results:empty{display:none}.search-inline-results button{max-width:100%;text-align:left}.journal-item-picker input[type=search],.culture-article-picker input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;background:white;font:inherit}.zoomable-photo{cursor:zoom-in}.photo-preview-overlay{position:fixed;inset:0;z-index:99999;background:rgba(10,14,13,.94);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:15px;gap:12px}.photo-preview-overlay>button{align-self:flex-end;flex:0 0 auto}.photo-preview-overlay>img{max-width:100%;max-height:calc(100dvh - 95px);width:auto;height:auto;object-fit:contain;border-radius:5px}
 </style>
 <script defer src="./assets/gallery.js"></script>
 <script defer src="./assets/personal-gallery.js"></script>
@@ -141,7 +143,7 @@ const navIcons={
  backup:'./assets/nav-backup.svg', personal:'./assets/nav-personal.svg'
 };
 const icons=Object.fromEntries(Object.entries(navIcons).map(([page,src])=>[page,'<img class="nav-art" src="'+src+'" alt="" aria-hidden="true" draggable="false" decoding="async">']));
-const navItems=[['home','Accueil'],['learn','Mes cours'],['quilt','Patchwork'],['world','Voyage textile'],['journal','Mon journal'],['print','Patrons'],['backup','Sauvegardes'],['personal','Projets persos']];
+const navItems=[['home','Accueil'],['learn','Mes cours'],['quilt','Patchwork'],['world','Voyage textile'],['journal','Mon journal'],['print','Patrons'],['backup','Sauvegardes']];
 const mobileNavLabels={home:'Accueil',learn:'Couture',quilt:'Patchwork',world:'Voyage',journal:'Journal',print:'Patrons'};
 const projects=[
 'Marque-page en tissu','Dessous de verre réversible à coins arrondis','Étui à mouchoirs','Chouchou','Sachet de lavande','Pochon à coulisse','Serviette de table','Housse de coussin portefeuille','Tote bag','Bandeau cheveux','Sac à vrac','Dessous de verre matelassé','Tablier simple','Trousse plate zippée','Porte-monnaie doublé','Étui à lunettes','Pochette arrondie','Guirlande de fanions','Écusson décoratif','Sac avec poche','Set de table bordé','Bandana réversible','Trousse à crayons roulée','Panière de rangement','Protège-livre','Mini-sac bandoulière','Jupe élastiquée','Short de pyjama','Haut sans manches','Gilet simple','Ourlet de pantalon','Tour de cou en jersey','T-shirt','Short cycliste','Pantalon fluide','Robe trapèze','Blouse à pinces','Haut à volants','Jupe boutonnée','Jupe portefeuille','Blouse à manches','Top col V','Chemisier col officier','Sac de voyage','Coussin passepoilé','Réparation textile','Ourlet de jean','Transformer une chemise','Sweat raglan','Veste kimono','Chemise complète','Création personnelle'];
@@ -260,7 +262,7 @@ function dashboard(){const course=homeNext('projectsDone'),patch=homeNext('block
   </div>
   <div class="hero-visual" role="img" aria-label="Ambiance d'atelier de couture et marque-pages en tissu, illustration d'ambiance"><div class="stitched-note">fait main<br><span>avec amour ♡</span></div><div class="hero-caption">L'atelier de Mathilde &amp; Viera <span>Édition automne 2026</span></div></div>
 </section><details class="pwa-panel" aria-label="Installer l’application"><summary><strong>✳ L’atelier dans votre poche</strong><span class="pwa-chevron" aria-hidden="true">⌄</span></summary><div class="pwa-inner"><p>Installe le carnet sur ton téléphone pour le retrouver directement sur ton écran d’accueil. Les mises à jour de l’application, des cours et des patrons sont vérifiées à son ouverture.</p><p class="small"><b>Avant l’installation :</b> télécharge une sauvegarde de ton carnet et de tes photos. Sur certains téléphones, l’application installée peut utiliser un stockage distinct de celui du navigateur.</p><div class="pwa-actions"><button class="secondary" type="button" data-page="backup">Sauvegarder mon carnet</button><button class="primary" id="pwa-install" type="button" hidden>Installer l’application</button><button class="secondary" id="pwa-help-toggle" type="button">Comment l’installer ?</button><button class="secondary" id="pwa-check" type="button">Vérifier les nouveautés</button></div><p id="pwa-version" class="small">Version de l’application : vérification…</p><div id="pwa-help" hidden><p><b>iPhone :</b> ouvre ce site dans Safari, touche <b>Partager</b>, puis <b>Sur l’écran d’accueil</b> et <b>Ajouter</b>. Si le journal est vide dans l’app installée, importe ta sauvegarde personnelle.</p><p><b>Android :</b> ouvre le site dans Chrome, puis le menu <b>⋮</b> et <b>Installer l’application</b> ou <b>Ajouter à l’écran d’accueil</b>.</p><p class="small">Aucune notification push n’est envoyée lorsque l’application est fermée. Les alertes apparaissent au retour dans l’application.</p></div></div></details>
-<section class="card section"><span class="eyebrow">MES CRÉATIONS LIBRES</span><h2>Projets persos</h2><p>Ajoute aussi les créations réalisées en dehors des cours guidés : photos, titres et notes restent dans ton carnet.</p><button class="secondary" data-page="personal">Ouvrir mes projets persos ↗</button></section>
+
 <div class="current-heading"><span class="eyebrow">PRENDRE LE FIL</span><h2>À ton rythme <span class="hand-drawn">✳</span></h2><p>Ton prochain cours et ton prochain carré restent ici jusqu’à leur validation.</p></div>
 <div class="feature-grid">
  <button class="feature-card feature-sew" ${course?'data-week="'+course+'"'+(progress.done?' data-resume-course="'+course+'"':''):'data-page="learn"'}><div class="feature-pattern brand-feature-icon" aria-hidden="true"><img src="./assets/icon-couture.svg" alt=""></div><div class="feature-info"><span class="eyebrow">${course?'Cours n° '+number(course):'À jour'}</span><h3>${course?safe(projects[course-1]):'Cours validés terminés'}</h3><p>${course?progress.done+' étape'+(progress.done>1?'s':'')+' sur '+progress.total:'Bravo ! Tes cours restent disponibles. Le prochain apparaîtra après sa publication.'}</p><span class="feature-link">${course?(progress.done?'Reprendre mon cours':'Ouvrir mon cours'):'Revoir mes cours'} <b>↗</b></span></div></button>
@@ -449,7 +451,7 @@ function culturePage(){
   <button type="button" class="culture-tab ${kind==='world'?'selected':''}" data-culture-tab="world" aria-label="Coutures du monde" title="Voyage autour du monde" aria-pressed="${kind==='world'}"><img src="./assets/nav-world.svg" alt="" aria-hidden="true" width="56" height="56"></button>
   <button type="button" class="culture-tab ${kind==='history'?'selected':''}" data-culture-tab="history" aria-label="Histoire de la couture" title="Voyage dans le temps" aria-pressed="${kind==='history'}"><img src="./assets/nav-history.svg" alt="" aria-hidden="true" width="56" height="56"></button>
  </nav>
- <section class="culture-article-picker" aria-label="Choisir un article">
+ <section class="culture-article-picker" aria-label="Choisir un article"><label for="travel-search"><b>Rechercher un voyage par mots-clés</b></label><input id="travel-search" type="search" value="${safe(travelSearchQuery)}" placeholder="Ex. Japon, indigo, aiguilles…" autocomplete="off"><div id="travel-search-results" class="search-inline-results" aria-live="polite"></div>
   <label for="culture-article-select"><b>${kind==='world'?'Coutures du monde':'Voyage dans le temps'} · choisir un article</b></label>
   <select id="culture-article-select" class="selection" aria-label="Choisir un article : favoris, non lus puis déjà lus">${menu}</select>
   <p class="small culture-status-hint">★ Favoris en premier · ○ Non lus ensuite · ✓ Déjà lus à la fin.</p>
@@ -460,7 +462,7 @@ function culturePage(){
  <div class="section card"><h3>Notre méthode documentaire</h3><p class="small">Nous privilégions des textes fondés sur les collections du Victoria and Albert Museum, du Metropolitan Museum of Art et d’autres musées. Les photographies représentent de vrais objets, accompagnés de leurs crédits et licences. Elles sont chargées depuis Wikimedia Commons et peuvent être indisponibles sans Internet.</p><ul class="source-list"><li><a href="https://commons.wikimedia.org/wiki/File:Aiguille_os_246.1_Global.jpg" target="_blank" rel="noopener">Muséum de Toulouse : aiguille magdalénienne, notice photographique</a></li><li><a href="https://commons.wikimedia.org/wiki/Category:Sashiko" target="_blank" rel="noopener">Wikimedia Commons : catégorie documentaire sashiko</a></li><li><a href="https://commons.wikimedia.org/wiki/File:Boro_textile_from_Japan,_with_sashiko.jpg" target="_blank" rel="noopener">Musées des cultures du monde (Suède) : textile boro avec sashiko</a></li><li><a href="https://commons.wikimedia.org/wiki/File:Sashiko_by_volunteers,_2012_-_Textile_Museum_of_Canada_-_DSC00807.JPG" target="_blank" rel="noopener">Textile Museum of Canada : motifs de sashiko exposés</a></li></ul></div>`;
 }
 
-function render(){if(!state.profile){el('app').innerHTML=`<div class="card" style="max-width:620px;margin:55px auto;text-align:center"><span class="eyebrow">Bienvenue dans votre atelier</span><h1>Qui ouvre son carnet ?</h1><p>Les cours sont communs mais les progrès restent personnels sur chaque appareil.</p><div class="actions" style="justify-content:center"><button class="primary" data-identity="m">Viera</button><button class="secondary" data-identity="f">Mathilde</button></div><p class="small">Choisis ton espace une seule fois sur cet appareil.</p></div>`;for(const id of ['nav','bottomnav'])el(id).innerHTML='';return}let pageName=state.page;let fn={home:dashboard,learn,machine:machineIntro,quilt:patchwork,print:printPage,world:culturePage,backup:backupPage,journal:journalPage,personal:personalPage}[pageName]||dashboard;el('app').innerHTML=fn();if((pageName==='learn'||pageName==='quilt')&&dicoOpen)filterSewingGlossary();if(pageName==='learn'&&sewingSearchQuery)updateCourseSearch('sewing');if(pageName==='quilt'&&patchSearchQuery)updateCourseSearch('patchwork');if(pageName==='journal')renderGallery(state.profile,state.week);if(pageName==='personal')renderPersonalPhotos(state.profile);for(let id of ['nav','bottomnav']){const items=id==='bottomnav'?navItems.filter(([key])=>['home','learn','quilt','world','journal','print'].includes(key)):navItems;el(id).innerHTML=items.map(([k,t])=>`<button class="${(pageName===k||(pageName==='machine'&&k==='learn'))?'active':''}" data-page="${k}" aria-current="${(pageName===k||(pageName==='machine'&&k==='learn'))?'page':'false'}">${icons[k]}<span>${id==='bottomnav'?mobileNavLabels[k]||t:t}</span></button>`).join('');}}
+function render(){if(state.page==='personal'){state.page='journal';journalKind='personal'}if(!state.profile){el('app').innerHTML=`<div class="card" style="max-width:620px;margin:55px auto;text-align:center"><span class="eyebrow">Bienvenue dans votre atelier</span><h1>Qui ouvre son carnet ?</h1><p>Les cours sont communs mais les progrès restent personnels sur chaque appareil.</p><div class="actions" style="justify-content:center"><button class="primary" data-identity="m">Viera</button><button class="secondary" data-identity="f">Mathilde</button></div><p class="small">Choisis ton espace une seule fois sur cet appareil.</p></div>`;for(const id of ['nav','bottomnav'])el(id).innerHTML='';return}let pageName=state.page;let fn={home:dashboard,learn,machine:machineIntro,quilt:patchwork,print:printPage,world:culturePage,backup:backupPage,journal:journalPage,personal:personalPage}[pageName]||dashboard;el('app').innerHTML=fn();if((pageName==='learn'||pageName==='quilt')&&dicoOpen)filterSewingGlossary();if(pageName==='learn'&&sewingSearchQuery)updateCourseSearch('sewing');if(pageName==='quilt'&&patchSearchQuery)updateCourseSearch('patchwork');if(pageName==='journal'){if(journalKind==='personal')renderPersonalPhotos(state.profile);else {renderGallery(state.profile,state.week);updateJournalSearch()}}if(pageName==='world')updateTravelSearch()for(let id of ['nav','bottomnav']){const items=id==='bottomnav'?navItems.filter(([key])=>['home','learn','quilt','world','journal','print'].includes(key)):navItems;el(id).innerHTML=items.map(([k,t])=>`<button class="${(pageName===k||(pageName==='machine'&&k==='learn'))?'active':''}" data-page="${k}" aria-current="${(pageName===k||(pageName==='machine'&&k==='learn'))?'page':'false'}">${icons[k]}<span>${id==='bottomnav'?mobileNavLabels[k]||t:t}</span></button>`).join('');}}
 function legacyJournalType(){return journalKind==='sewing'?'project':journalKind==='patchwork'?'block':null}
 async function journalAlbum(profile,entry){
  const oldType=legacyJournalType();
@@ -485,7 +487,7 @@ async function renderGallery(profile){
    const actions=document.createElement('div');actions.className='journal-photo-actions';
    const share=document.createElement('button');share.type='button';share.className='secondary';share.dataset.journalPhotoShare=item.id;share.textContent='Partager';
    const del=document.createElement('button');del.type='button';del.className='secondary';del.dataset.journalPhotoDelete=item.id;del.textContent='Supprimer';
-   actions.append(share,del);card.append(img,cap,actions);node.append(card);
+   actions.append(share,del);img.classList.add('zoomable-photo');img.tabIndex=0;img.title='Agrandir la photo';card.append(img,cap,actions);node.append(card);
   }
   const area=document.createElement('div');area.className='journal-upload';
   const info=document.createElement('p');info.className='small';info.textContent=all.length+' / 5 photos · '+(all.length===5?'Album complet':'Tu peux encore en ajouter '+(5-all.length)+'.');
@@ -597,7 +599,7 @@ function personalPage(){
 }
 async function renderPersonalPhotos(profile){
  const photos=await Fil52PersonalPhotos.list(profile).catch(e=>{toast('Photos personnelles : '+e.message);return null});
- if(!photos||profile!==state.profile||state.page!=='personal')return;
+ if(!photos||profile!==state.profile||!(state.page==='personal'||(state.page==='journal'&&journalKind==='personal')))return;
  for(const section of document.querySelectorAll('[data-personal-gallery]')){
   const projectId=section.dataset.personalGallery,items=photos.filter(x=>x.projectId===projectId);
   section.replaceChildren();
@@ -606,7 +608,7 @@ async function renderPersonalPhotos(profile){
    const card=document.createElement('div');card.className='personal-thumb';
    const image=document.createElement('img');image.src=item.dataUrl;image.alt='Photographie personnelle de couture';image.loading='lazy';
    const del=document.createElement('button');del.className='secondary';del.type='button';del.textContent='Supprimer la photo';del.dataset.personalPhotoDelete=item.photoId;del.dataset.personalProjectId=item.projectId;
-   card.append(image,del);section.append(card);
+   const share=document.createElement('button');share.type='button';share.className='secondary';share.textContent='Partager';share.dataset.personalPhotoShare=item.photoId;share.dataset.personalProjectId=item.projectId;image.classList.add('zoomable-photo');image.tabIndex=0;image.title='Agrandir la photo';card.append(image,share,del);section.append(card);
   }
   const upload=document.querySelector('[data-personal-upload="'+projectId+'"]');
   if(upload)upload.disabled=items.length>=Fil52PersonalPhotos.MAX_PER_PROJECT||photos.length>=Fil52PersonalPhotos.MAX_PHOTOS;
@@ -629,7 +631,7 @@ async function uploadPersonalPhotos(projectId,files){
   for(const file of list){await Fil52PersonalPhotos.add(profile,projectId,file);completed++}
   toast(completed+' photo(s) ajoutée(s).');
  }catch(e){toast(completed+' photo(s) ajoutée(s). '+e.message)}
- finally{if(input)input.value='';if(profile===state.profile&&state.page==='personal')renderPersonalPhotos(profile)}
+ finally{if(input)input.value='';if(profile===state.profile&&(state.page==='personal'||(state.page==='journal'&&journalKind==='personal')))renderPersonalPhotos(profile)}
 }
 async function deletePersonalPhoto(projectId,photoId){
  if(!confirm('Supprimer cette photographie de ton projet personnel ?'))return;
@@ -654,8 +656,52 @@ function journalEntry(){
  const item=items.find(x=>x.id===journalPick.voyage)||items[0];
  return {ref:'voyage:'+item.id,value:item.id,title:item.title};
 }
+
+function showSearchResults(node,items,key,label){
+ if(!node)return;node.replaceChildren();
+ if(!items.length){node.textContent='Aucun résultat pour ces mots-clés.';return}
+ for(const item of items.slice(0,30)){const b=document.createElement('button');b.type='button';b.className='secondary';b.dataset[key]=item.id;b.textContent=item.title;node.append(b)}
+}
+function updateJournalSearch(){
+ const node=el('journal-search-results');if(!node)return;
+ const query=textForSearch(journalSearchQuery);if(!query){node.replaceChildren();return}
+ const p=state.profile;
+ const choices=journalKind==='sewing'?projects.map((title,i)=>({id:String(i+1),title:'Cours '+(i+1)+' · '+title,keywords:state.notes[p][i+1]||''})):journalKind==='patchwork'?blocks.map((title,i)=>({id:String(i+1),title:'Patchwork '+(i+1)+' · '+title,keywords:state.journalNotes[p]['patchwork:'+(i+1)]||''})):[...cultureArticles('world'),...cultureArticles('history')].map(x=>({id:x.id,title:x.title,keywords:state.journalNotes[p]['voyage:'+x.id]||''}));
+ const terms=query.split(/\s+/).filter(Boolean);
+ showSearchResults(node,choices.filter(item=>terms.every(t=>textForSearch(item.title+' '+item.keywords).includes(t))),'journalSearchHit');
+}
+function updateTravelSearch(){
+ const node=el('travel-search-results');if(!node)return;
+ const query=textForSearch(travelSearchQuery);if(!query){node.replaceChildren();return}
+ const items=cultureArticles(cultureTab).map(item=>{const details=cultureTab==='world'?Fil52Travel.cards.find(x=>'world:'+x.id===item.id):null;return {id:item.id,title:item.title,keywords:[item.subtitle,details?.country,details?.lead,JSON.stringify(details?.sections||[]),JSON.stringify(details?.vocab||[])].join(' ')}});
+ const terms=query.split(/\s+/).filter(Boolean);
+ showSearchResults(node,items.filter(item=>terms.every(t=>textForSearch(item.title+' '+item.keywords).includes(t))),'travelSearchHit');
+}
+function openPhotoPreview(img){
+ document.getElementById('photo-preview-overlay')?.remove();
+ const overlay=document.createElement('div');overlay.id='photo-preview-overlay';overlay.className='photo-preview-overlay';overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label','Photo agrandie');
+ const photo=document.createElement('img');photo.src=img.currentSrc||img.src;photo.alt=img.alt;
+ const close=document.createElement('button');close.className='secondary';close.type='button';close.textContent='✕ Fermer';close.setAttribute('aria-label','Fermer la photo');close.onclick=()=>overlay.remove();overlay.onclick=e=>{if(e.target===overlay)overlay.remove()};
+ overlay.append(close,photo);document.body.append(overlay);close.focus();
+}
+async function sharePersonalPhoto(projectId,photoId){
+ try{
+  const row=(await Fil52PersonalPhotos.list(state.profile)).find(x=>x.projectId===projectId&&x.photoId===photoId);if(!row)throw Error('Photo introuvable.');
+  const blob=await(await fetch(row.dataUrl)).blob();
+  const title=state.personalProjects[state.profile].find(x=>x.id===projectId)?.title||'Création personnelle';
+  const file=new File([blob],'creation-personnelle-'+photoId+'.jpg',{type:'image/jpeg'});
+  if(navigator.share&&navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file],title:'De fil en aiguille · '+title});return}catch(e){if(e.name==='AbortError')return}}
+  const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=file.name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
+  toast('Photo enregistrée pour partage.');
+ }catch(e){toast('Partage impossible : '+e.message)}
+}
+
+function journalTabs(){return [['sewing','✂ Couture'],['patchwork','▦ Patchwork'],['voyage','🌍 Voyage'],['personal','♡ Créations persos']].map(([k,label])=>`<button type="button" data-journal-kind="${k}" class="${journalKind===k?'active':''}" aria-pressed="${journalKind===k}">${label}</button>`).join('')}
+let journalSearchQuery='',travelSearchQuery='';
 function journalPage(){
- const p=state.profile,kind=journalKind,entry=journalEntry(),n=+entry.value;
+ const p=state.profile,kind=journalKind;
+ if(kind==='personal')return `<span class="eyebrow">Mes créations et mes souvenirs</span><h1>Mon journal d’atelier</h1><div class="card section journal-workspace"><div class="journal-top-buttons" role="group" aria-label="Choisir une rubrique du journal">${journalTabs()}</div></div>${personalPage()}`;
+ const entry=journalEntry(),n=+entry.value;
  const group=kind==='sewing'?projects.map((title,i)=>({id:String(i+1),title:'Cours '+String(i+1).padStart(2,'0')+' · '+title}))
   :kind==='patchwork'?blocks.map((title,i)=>({id:String(i+1),title:'Bloc '+String(i+1).padStart(2,'0')+' · '+title}))
   :[...cultureArticles('world'),...cultureArticles('history')].map(x=>({id:x.id,title:x.title}));
@@ -666,9 +712,9 @@ function journalPage(){
  return `<span class="eyebrow">Mes créations et mes souvenirs</span><h1>Mon journal d’atelier</h1>
  <p class="lead">Le carnet personnel de ${safe(state.names[p])}. Photos, notes et réalisations restent privées sur cet appareil tant que tu ne choisis pas de les partager.</p>
  <div class="card section journal-workspace"><div class="journal-top-buttons" role="group" aria-label="Choisir une rubrique du journal">
- ${[['sewing','✂ Couture'],['patchwork','▦ Patchwork'],['voyage','🌍 Voyage']].map(([k,label])=>`<button type="button" data-journal-kind="${k}" class="${kind===k?'active':''}" aria-pressed="${kind===k}">${label}</button>`).join('')}
+ ${journalTabs()}
  </div>
- <div class="journal-item-picker"><label for="${kind==='sewing'?'journal-week':'journal-item'}"><b>${kind==='sewing'?'Choisir un projet couture':kind==='patchwork'?'Choisir un bloc patchwork':'Choisir un article Voyage'}</b></label>
+ <div class="journal-item-picker"><label for="journal-search"><b>Rechercher dans mon journal</b></label><input id="journal-search" type="search" autocomplete="off" value="${safe(journalSearchQuery)}" placeholder="Mot-clé, titre, note, tissu…" aria-label="Rechercher dans le journal"><div id="journal-search-results" class="search-inline-results" aria-live="polite"></div><label for="${kind==='sewing'?'journal-week':'journal-item'}"><b>${kind==='sewing'?'Choisir un projet couture':kind==='patchwork'?'Choisir un bloc patchwork':'Choisir un article Voyage'}</b></label>
  <select class="selection" id="${kind==='sewing'?'journal-week':'journal-item'}">${group.map(x=>`<option value="${safe(x.id)}" ${x.id===entry.value?'selected':''}>${safe(x.title)}</option>`).join('')}</select></div>
  <div class="journal-editor"><h2>${safe(entry.title)}</h2>
  <label class="material"><input type="checkbox" ${checkType} ${completed?'checked':''}> ${kind==='sewing'?'Projet couture terminé':kind==='patchwork'?'Bloc patchwork terminé':'Article découvert / terminé'}</label>
@@ -677,16 +723,22 @@ function journalPage(){
  <label for="journal-notes"><b>Mes notes</b></label><textarea id="journal-notes" class="notes" ${kind==='sewing'?'data-note="'+n+'"':'data-journal-other-note="'+safe(entry.ref)+'"'} placeholder="Tissus, techniques apprises, idées, impressions…">${safe(note)}</textarea>
  <section class="journal-photos-section"><h3>Mes photos</h3><p class="small">De 1 à 5 photos de cette réalisation, facultatives. JPEG, PNG, WebP, 12 Mo par photo avant réduction. Elles sont conservées uniquement dans ton navigateur et incluses dans ta sauvegarde.</p>
  <div id="journal-gallery" class="journal-photo-grid" aria-live="polite">Chargement de l’album…</div></section>
- <div class="actions"><button class="secondary" data-page="personal">Mes projets personnels ↗</button><button class="secondary" data-page="backup">Sauvegarder mon journal ↗</button></div>
+ <div class="actions"><button class="secondary" data-page="backup">Sauvegarder mon journal ↗</button></div>
  </div></div>`;
 }
 function printPattern(name){let target=el('print-'+name);if(!target)return;target.classList.add('active');window.print();setTimeout(()=>target.classList.remove('active'),600)}
 document.addEventListener('load',e=>{if(e.target instanceof HTMLImageElement&&e.target.closest('.photo-card'))e.target.classList.add('is-loaded');},true);
 document.addEventListener('error',e=>{const img=e.target;if(!(img instanceof HTMLImageElement)||!img.closest('.photo-card'))return;const wrap=document.createElement('div');wrap.className='photo-fallback';wrap.setAttribute('role','img');wrap.setAttribute('aria-label','Photo documentaire indisponible hors connexion ; ouvrez sa notice originale ci-dessous.');const mark=document.createElement('span');mark.textContent='▧';const label=document.createElement('small');label.textContent='Photographie documentaire à consulter sur la notice originale';wrap.append(mark,label);img.replaceWith(wrap);},true);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('photo-preview-overlay')?.remove();if((e.key==='Enter'||e.key===' ')&&e.target.matches('img.zoomable-photo')){e.preventDefault();openPhotoPreview(e.target)}});
+document.addEventListener('input',e=>{if(e.target.id==='journal-search'){journalSearchQuery=e.target.value;updateJournalSearch()}if(e.target.id==='travel-search'){travelSearchQuery=e.target.value;updateTravelSearch()}});
 document.addEventListener('submit',e=>{if(e.target.id==='personal-new-form'){e.preventDefault();newPersonalProject()}});
 document.addEventListener('click',e=>{
  const tab=e.target.closest('[data-journal-kind]');
- if(tab){if(['sewing','patchwork','voyage'].includes(tab.dataset.journalKind)){journalKind=tab.dataset.journalKind;render()}return}
+ if(tab){if(['sewing','patchwork','voyage','personal'].includes(tab.dataset.journalKind)){journalKind=tab.dataset.journalKind;render()}return}
+ const photoZoom=e.target.closest('img.zoomable-photo');if(photoZoom){openPhotoPreview(photoZoom);return}
+ const personalShare=e.target.closest('[data-personal-photo-share]');if(personalShare){sharePersonalPhoto(personalShare.dataset.personalProjectId,personalShare.dataset.personalPhotoShare);return}
+ const journalSearchHit=e.target.closest('[data-journal-search-hit]');if(journalSearchHit){journalPick[journalKind]=journalSearchHit.dataset.journalSearchHit;if(journalKind==='sewing')state.week=+journalPick.sewing;render();return}
+ const travelSearchHit=e.target.closest('[data-travel-search-hit]');if(travelSearchHit){cultureSelection[cultureTab]=travelSearchHit.dataset.travelSearchHit;render();return}
  const photoDelete=e.target.closest('[data-journal-photo-delete]');if(photoDelete){deleteJournalPhoto(photoDelete.dataset.journalPhotoDelete);return}
  const photoShare=e.target.closest('[data-journal-photo-share]');if(photoShare){shareJournalPhoto(photoShare.dataset.journalPhotoShare);return}
  const courseMatch=e.target.closest('[data-course-match]');if(courseMatch){const n=Number(courseMatch.dataset.courseIndex);if(courseMatch.dataset.courseMatch==='sewing'&&n>=1&&n<=52)selectWeek(n);else if(courseMatch.dataset.courseMatch==='patchwork'&&n>=1&&n<=52)selectPatchWeek(n);return}
