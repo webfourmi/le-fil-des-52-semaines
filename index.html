@@ -254,10 +254,6 @@ function dashboard(){const course=homeNext('projectsDone'),patch=homeNext('block
     <div class="hero-meta"><span class="edition-dot"></span> L’ATELIER À TON RYTHME <span class="issue">${course?'Cours n° '+number(course):'Cours validés terminés'}</span></div>
     <h1>Petits points,<br><em>grandes idées.</em></h1>
     
-    <div class="hero-actions">
-      <button class="primary home-course hero-icon-link" ${course?'data-week="'+course+'"'+(progress.done?' data-resume-course="'+course+'"':''):'data-page="learn"'} aria-label="${course?'Ouvrir le cours '+course:'Revoir mes cours'}" title="${course?'Cours '+course:'Revoir mes cours'}"><img src="./assets/nav-sewing-simple.svg" alt="" aria-hidden="true" width="60" height="60"></button>
-      <button class="secondary home-patch hero-icon-link" ${patch?'data-home-patch="'+patch+'"':'data-patch-zero'} aria-label="${patch?'Ouvrir le patchwork '+patch:'Ouvrir le cours 0 de patchwork'}" title="${patch?'Patchwork '+patch:'Cours 0 · Préparation au patchwork'}"><img src="./assets/nav-patch-simple.svg" alt="" aria-hidden="true" width="60" height="60"></button>
-    </div>
     <div class="hero-foot"><span>✦</span> Avec la Janome Cherry 21 <span class="sep">·</span> Des idées à explorer librement</div>
   </div>
   <div class="hero-visual" role="img" aria-label="Ambiance d'atelier de couture et marque-pages en tissu, illustration d'ambiance"><div class="stitched-note">fait main<br><span>avec amour ♡</span></div><div class="hero-caption">L'atelier de Mathilde &amp; Viera <span>Édition automne 2026</span></div></div>
