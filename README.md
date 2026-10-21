@@ -2,6 +2,12 @@
 
 Application de couture et patchwork organisée en **52 projets sans calendrier imposé** : projets de récupération, apprentissage de la **Janome Cherry 21**, patronnerie, 52 blocs de patchwork par personne, et rubriques culturelles documentées.
 
+## V1.1.14 : une application sans calendrier imposé
+
+Les textes de l’accueil, du cours 0 couture, des fiches de patchwork, du journal, des menus de recherche et du pied de page ne présentent plus le projet comme une succession de semaines ou une quinzaine programmée. Le programme suit désormais uniquement l'avancement réel des cours, sans dates fixes. Les **numéros de cours** et les **52 blocs** prévus pour chaque couverture restent disponibles, car ils désignent la structure de l'ouvrage et non sa durée.
+
+**Compatibilité :** aucune migration destructrice. Le nom du dépôt GitHub, l'URL historique, l'ID de la PWA, les clés de stockage et le format des anciennes sauvegardes restent identiques pour conserver les raccourcis installés, les photos et les progressions personnelles. La nouvelle version porte le numéro `1.1.14`.
+
 ## V1.1.13 : journal Couture, Patchwork et Voyage
 
 Le **journal** propose désormais trois onglets en haut : Couture, Patchwork, Voyage, puis un menu déroulant propre à la rubrique. Les 52 projets couture et les 52 blocs patchwork restent distincts ; l'onglet Voyage propose les articles disponibles dans Voyage → Monde et Histoire.

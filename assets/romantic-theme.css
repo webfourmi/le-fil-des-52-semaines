@@ -495,7 +495,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline-offset:2
 }
 
 
-/* V1.1.7 · De fil en aiguille : une quinzaine, quatre découvertes */
+/* Habillage historique : éléments éditoriaux désormais sans calendrier imposé */
 #app .cadence-panel{
  margin:18px 0 25px;
  padding:23px 25px;

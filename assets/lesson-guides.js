@@ -7,7 +7,7 @@ const line=(x,y,X,Y,dash='')=>'<line x1="'+x+'" y1="'+y+'" x2="'+X+'" y2="'+Y+'"
 const label=(x,y,s)=>'<text x="'+x+'" y="'+y+'" font-family="sans-serif" font-size="15" fill="#334b40" text-anchor="middle">'+esc(s)+'</text>';
 const A='#d3a190',B='#8eada0',C='#eedbc3',D='#738f80';
 function diagram(w,patch){
- let shapes='',title=patch?'Schéma du bloc de patchwork, rendez-vous '+w:'Schéma des gestes du projet couture, rendez-vous '+w;
+ let shapes='',title=patch?'Schéma du bloc de patchwork n° '+w:'Schéma des gestes du projet couture n° '+w;
  if(patch){
   if(w===2){shapes=rect(175,25,126,170,A)+rect(301,25,126,170,B)+line(301,25,301,195,'5 4')+label(301,220,'2 bandes verticales · bloc brut 21,5 cm');}
   if(w===3){shapes=rect(180,25,240,85,A)+rect(180,110,240,85,B)+line(180,110,420,110,'5 4')+label(300,220,'2 bandes horizontales · bloc brut 21,5 cm');}
@@ -76,7 +76,7 @@ function renderPatchwork(d,w,p,done,checkedSteps=[]){
  '<h4>Montage du bloc · étapes à cocher</h4>'+patchStepChecklist(d.patchSteps,w,checkedSteps)+
  '<div class="tip"><b>Astuce de précision :</b> '+esc(d.patchTip)+'</div>'+
  '<button class="secondary lesson-patch-done" type="button" data-quilt-person="'+esc(p)+'" data-quilt-block="'+w+'" aria-pressed="'+(complete?'true':'false')+'">'+(complete?'✓ Bloc n° '+w+' terminé · décocher':'□ Marquer mon bloc n° '+w+' comme terminé')+'</button>'+
- '<p class="small">Cette coche est personnelle et se retrouvera aussi dans ta couverture des 52 blocs.</p></section>'+root.Fil52LessonPhotos.renderPatchwork(w);
+ '<p class="small">Cette coche est personnelle et se retrouvera aussi dans ta couverture personnelle.</p></section>'+root.Fil52LessonPhotos.renderPatchwork(w);
 }
 
 function renderFirstPatchwork(p,done,checkedSteps=[]){

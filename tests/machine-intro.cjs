@@ -19,5 +19,5 @@ const {chromium}=require('playwright');const assert=require('node:assert/strict'
  for(const box of await page.locator('[data-toggle="steps"]').all())await box.check();assert.match(await page.locator('.course-resume').innerText(),/Revoir/);
  await page.locator('#bottomnav [data-page="home"]').click();assert.equal(await page.locator('.home-course').getAttribute('data-week'),'1');assert.equal(await page.locator('.home-patch').getAttribute('data-patch-zero'),'');assert.deepEqual(errors,[]);await context.setOffline(false);
  const other=await browser.newContext({viewport:{width:320,height:740}});const q=await other.newPage();await q.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});await q.getByRole('button',{name:'Mathilde',exact:true}).click();await q.locator('#bottomnav [data-page="learn"]').click();await q.locator('.machine-intro-entry button').click();assert.equal(await q.locator('[data-val="90000"]').isChecked(),false);await other.close();
- console.log('OK : cours 0, neuf étapes, reprise, sources Janome, sauvegarde inchangée, hors connexion et 52 semaines préservées');
+ console.log('OK : cours 0, neuf étapes, reprise, sources Janome, sauvegarde inchangée, hors connexion et identité De fil en aiguille préservée');
  }finally{await browser.close()}})().catch(e=>{console.error(e);process.exitCode=1});

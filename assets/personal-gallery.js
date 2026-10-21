@@ -1,4 +1,4 @@
-/* Photos des créations libres, isolées des 52 cours et des autres profils.
+/* Photos des créations libres, isolées des cours guidés et des autres profils.
  * Stockage privé IndexedDB. Aucune transmission réseau.
  */
 (function(root){
