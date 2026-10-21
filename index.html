@@ -111,6 +111,13 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
 .journal-view-switch{display:flex;flex-wrap:wrap;gap:9px;margin:18px 0}.journal-view-switch button{border-radius:14px;border:1px solid var(--line);padding:12px 16px;background:var(--cream);color:var(--ink);font:inherit;cursor:pointer}.journal-view-switch button.active{background:var(--green,#436854);color:#fff}.journal-album-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,190px),1fr));gap:16px;margin-top:18px}.journal-album-item{border:1px solid var(--line);background:var(--cream);border-radius:16px;padding:0;overflow:hidden;text-align:left;cursor:pointer;color:inherit;font:inherit}.journal-album-item img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}.journal-album-item .album-meta{display:block;padding:12px}.journal-album-item b,.journal-album-item small{display:block}.journal-album-item small{opacity:.8;margin-top:5px}.journal-album-item:focus-visible{outline:3px solid #436854}.album-empty{text-align:center;padding:20px}.album-count{font-size:.9rem}
 
 .backup-needs-attention{border-left:3px solid #ae7c42;padding-left:10px}.journal-album-item img[data-thumb-pending]{background:var(--cream);min-height:190px}
+
+/* Les messages flottants restent au-dessus de la navigation fixe sur mobile. */
+#toast{z-index:110;max-width:min(420px,calc(100vw - 28px));box-sizing:border-box;overflow-wrap:anywhere;white-space:normal}
+@media(max-width:850px){
+ #toast{left:14px;right:14px;bottom:calc(104px + env(safe-area-inset-bottom));width:auto;text-align:center;max-height:calc(100dvh - 150px);overflow-y:auto}
+ .pwa-notice{bottom:calc(104px + env(safe-area-inset-bottom));max-height:calc(100dvh - 150px);overflow-y:auto}
+}
 </style>
 <script defer src="./assets/gallery.js"></script>
 <script defer src="./assets/personal-gallery.js"></script>
