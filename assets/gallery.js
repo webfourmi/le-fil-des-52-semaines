@@ -5,7 +5,7 @@
 (function(root){
 'use strict';
 const DB_NAME='fil52.galerie.v1',STORE='photos',MAX_FILE=12*1024*1024;
-const TYPES=['project','block'],PROFILE=['m','f'],MAX_DATAURL=420000;
+const TYPES=['project','block'],PROFILE=['m','f'],MAX_DATAURL=1200000;
 const invalid=(condition,msg)=>{if(!condition)throw Error(msg)};
 const key=(profile,week,type)=>profile+':'+type+':'+week;
 function check(profile,week,type){invalid(PROFILE.includes(profile),'Profil invalide.');invalid(Number.isInteger(week)&&week>=1&&week<=52,'Numéro de cours invalide.');invalid(TYPES.includes(type),'Type de photo invalide.')}
@@ -49,12 +49,12 @@ async function compress(file){
  invalid(['image/jpeg','image/png','image/webp'].includes(file.type),'Format accepté : JPEG, PNG ou WebP.');
  const im=await decodeImage(file);
  invalid(im.naturalWidth>0&&im.naturalHeight>0,'Photo illisible.');
- const scale=Math.min(1,960/Math.max(im.naturalWidth,im.naturalHeight));
+ const scale=Math.min(1,1800/Math.max(im.naturalWidth,im.naturalHeight));
  const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(im.naturalWidth*scale));canvas.height=Math.max(1,Math.round(im.naturalHeight*scale));
  const ctx=canvas.getContext('2d');invalid(ctx,'Canvas non disponible.');
  ctx.fillStyle='#ffffff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(im,0,0,canvas.width,canvas.height);
  let output='';
- for(const quality of [.78,.65,.50,.38]){output=canvas.toDataURL('image/jpeg',quality);if(output.length<=MAX_DATAURL)break}
+ for(const quality of [.88,.80,.70,.60,.50]){output=canvas.toDataURL('image/jpeg',quality);if(output.length<=MAX_DATAURL)break}
  invalid(output.startsWith('data:image/jpeg;base64,')&&output.length<=MAX_DATAURL,'L’image reste trop grande après réduction.');
  return output;
 }
