@@ -1,4 +1,4 @@
-/* Sauvegardes personnelles du Fil des 52 semaines. Aucune donnée transférée. */
+/* Sauvegardes personnelles de De fil en aiguille. Aucune donnée transférée. */
 (function(root){
   'use strict';
   const FORMAT='le-fil-des-52-semaines.personnel',SCHEMA=6,MAX_FILE_SIZE=320*1024*1024;
@@ -18,7 +18,7 @@
     check(plain(value)&&Object.keys(value).length<=52,'Notes invalides.');
     const result={};
     for(const [k,v] of Object.entries(value)){
-      check(/^(?:[1-9]|[1-4][0-9]|5[0-2])$/.test(k)&&typeof v==='string'&&v.length<=12000,'Note incorrecte pour la semaine '+k+'.');
+      check(/^(?:[1-9]|[1-4][0-9]|5[0-2])$/.test(k)&&typeof v==='string'&&v.length<=12000,'Note incorrecte pour le numéro '+k+'.');
       result[k]=v;
     }
     return result;
@@ -27,7 +27,7 @@
     check(plain(value)&&Object.keys(value).length<=52,'Évaluations invalides.');
     const result={};
     for(const [k,v] of Object.entries(value)){
-      check(/^(?:[1-9]|[1-4][0-9]|5[0-2])$/.test(k)&&Number.isInteger(v)&&v>=1&&v<=5,'Évaluation incorrecte pour la semaine '+k+'.');
+      check(/^(?:[1-9]|[1-4][0-9]|5[0-2])$/.test(k)&&Number.isInteger(v)&&v>=1&&v<=5,'Évaluation incorrecte pour le numéro '+k+'.');
       result[k]=v;
     }
     return result;
