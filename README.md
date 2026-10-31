@@ -1,4 +1,13 @@
-# De fil en aiguille · V1.1.8
+# De fil en aiguille
+
+## V1.3.6 : bibliothèque des techniques de couture
+
+- **Couture → Techniques** : accès en haut de la rubrique, à côté de « Mes cours » ; sans nouveau bouton dans la barre inférieure.
+- **Recherche par mots-clés** : titres, descriptions et termes techniques, sans distinction entre majuscules et accents.
+- **Première fiche illustrée** : « La sous-doublure », image originale fournie par l’utilisatrice, convertie en WebP **1024 × 1536** pour conserver une bonne lecture à l’agrandissement. Image dans `assets/techniques/sous-doublure.webp` et catalogue extensible dans `assets/sewing-techniques.js`.
+- Visionneuse plein écran avec zoom et option de téléchargement de la fiche. Fiche incluse dans le cache PWA pour un usage après installation et téléchargement de la version.
+- Aucune modification des profils, journaux, photos personnelles ou sauvegardes.
+
 
 Application de couture et patchwork organisée en **52 projets sans calendrier imposé** : projets de récupération, apprentissage de la **Janome Cherry 21**, patronnerie, 52 blocs de patchwork par personne, et rubriques culturelles documentées.
 
