@@ -556,6 +556,6 @@
       ]
     }
   },
-  "appRelease": "1.3.6",
-  "appReleaseNotes": "Nouvelle rubrique Couture → Techniques : fiches illustrées consultables, recherche par mots-clés et première fiche La sous-doublure."
+  "appRelease": "1.3.7",
+  "appReleaseNotes": "Bibliothèque Couture → Techniques enrichie d’une deuxième fiche illustrée : La doublure en couture. Recherche, affichage plein écran et téléchargement disponibles."
 }
