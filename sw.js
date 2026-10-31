@@ -1,5 +1,5 @@
 /* De fil en aiguille — cache PWA. Augmenter CACHE_VERSION pour chaque nouvelle version de l'application. */
-const CACHE_VERSION = 'fil52-shell-v1.3.7';
+const CACHE_VERSION = 'fil52-shell-v1.3.8';
 const CORE = [
   './','./index.html','./manifest.webmanifest','./data/editions.json',
   './assets/backup.js','./assets/gallery.js','./assets/personal-gallery.js','./assets/journal-photos.js','./assets/mercerie.js','./assets/journal-album.js','./assets/halloween-voyage.js','./assets/halloween-patrons.html','./assets/cours-02-patron-arrondis.html','./assets/textile-travel.js','./assets/lesson-guides.js','./assets/patchwork-courses.js','./assets/patchwork-courses.css','./assets/machine-intro.js','./assets/lesson-photos.js','./assets/lesson-photos.css','./assets/sewing-techniques.js','./assets/techniques/sous-doublure.webp','./assets/techniques/doublure.jpg',
