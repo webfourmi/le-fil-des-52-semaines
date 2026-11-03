@@ -238,7 +238,7 @@ function updateCourseSearch(kind){
   id:i+1,title,body:textForSearch([title,i+1,sewing?'cours':'bloc',sewing?upcomingEditions[i+1]?.intro:upcomingEditions[i+1]?.patchworkTitle,
    sewing?upcomingEditions[i+1]?.technique:upcomingEditions[i+1]?.patchCuts?.join(' ')].join(' '))
  })).filter(x=>words.every(w=>x.body.includes(w)));
- if(sewing && words.every(w=>'chien teckel cale porte butoir porte atelier bonus patron tissu poids lest'.includes(w))){
+ if(sewing && words.every(w=>'chien teckel cale porte cale-porte butoir de porte atelier bonus patron tissu poids lest'.includes(w))){
   matches.push({id:'dog',title:'Cale-porte en forme de chien',bonus:true});
  }
  node.hidden=false;
