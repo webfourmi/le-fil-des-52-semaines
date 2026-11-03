@@ -50,7 +50,7 @@ const {chromium}=require('playwright');
    assert.ok(dims.dog[0]>0&&dims.dog[0]+dims.dog[2]<210,'Silhouette complète dans la feuille');
    const pouch=await frame.locator('#poche-lest-coupe').evaluate(x=>{const b=x.getBBox();return[b.width,b.height]});
    assert.deepEqual(pouch,[120,120],'Poche 12 × 12 cm marges incluses');
-   assert.equal(await frame.locator('path.bar[d="M72 229 H152"]').count(),1,'Ouverture du corps exactement 8 cm');
+   assert.equal(await frame.locator('path.bar[d="M72 213.25 H152"]').count(),1,'Ouverture du corps exactement 8 cm');
    assert.ok(await page.locator(nav+' [data-page="learn"]').isVisible(),'Barre visible pendant consultation du patron');
    await page.locator('[data-pattern-preview-close]').click();
    assert.equal(await page.locator('#pattern-preview-frame').count(),0);
