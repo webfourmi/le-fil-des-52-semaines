@@ -1,0 +1,23 @@
+/* Atelier bonus : cale-porte chien */
+.dog-course{display:grid;gap:18px;max-width:1040px;margin-inline:auto}
+.dog-course .lead{max-width:830px}
+.dog-course-hero{border-radius:20px;overflow:hidden;margin:0;background:#f3eee5;box-shadow:0 7px 22px rgba(50,64,48,.09)}
+.dog-course-hero svg{display:block;width:100%;height:auto}
+.dog-course-hero figcaption{font-size:.85rem;color:#627266;background:#fff9ef;padding:10px 15px}
+.dog-course-meta{display:flex;gap:9px;flex-wrap:wrap}
+.dog-course-meta span{border-radius:30px;border:1px solid #c9d5c7;background:#f4f8f2;padding:7px 12px;font-size:.82rem;color:#43604b}
+.dog-course .card.section{padding:clamp(15px,3vw,27px)}
+.dog-course .card p,.dog-course .card li{line-height:1.65}
+.dog-materials{padding-left:1.3rem;display:grid;gap:8px}
+.dog-steps{counter-reset:dog-steps;list-style:none;padding:0;margin:18px 0;display:grid;gap:16px}
+.dog-steps li{border:1px solid #e0e6dc;border-radius:13px;background:#fffdf8;padding:16px 16px 13px 62px;position:relative}
+.dog-steps li::before{counter-increment:dog-steps;content:counter(dog-steps);position:absolute;left:16px;top:15px;border-radius:50%;width:32px;height:32px;background:#d9e6d8;color:#315442;display:grid;place-items:center;font-weight:700}
+.dog-steps strong{font-family:Georgia,serif;font-size:1.1rem}
+.dog-steps p{margin:8px 0 0}
+.dog-technique-figure{background:#fbf7f0;border:1px solid #eaded0;border-radius:14px;padding:10px}
+.dog-technique-figure svg{display:block;width:100%;height:auto}
+.bonus-project-entry{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:#fbf5e9;border:1px solid #e5d9c2}
+.bonus-project-entry h3{margin:5px 0}
+.bonus-project-entry p{margin:0}
+.bonus-project-entry button{min-height:44px}
+@media(max-width:550px){.dog-course-meta{flex-direction:column;align-items:flex-start}.dog-steps li{padding-left:51px}.dog-steps li::before{left:9px;top:13px}}
