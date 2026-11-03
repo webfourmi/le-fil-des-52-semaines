@@ -11,24 +11,26 @@ const steps=[
 ['Retourner et lester','Retourne le corps sur l’endroit par l’ouverture de 8 cm. Place la poche lestée tout en bas, centrée dans la base, sans forcer sur les coutures. Ajoute progressivement 60 à 100 g de ouate dans la tête, le dos et autour de la poche pour conserver une jolie silhouette.'],
 ['Fermer et tester','Rentre les marges de l’ouverture sur 1 cm puis ferme au point invisible (point d’échelle). Pose le chien au sol et teste-le sur une porte intérieure légère. Si le lest ne suffit pas, adapte le poids en fabriquant une poche correctement dimensionnée. Ne bloque jamais une porte coupe-feu ou une issue de secours.']
 ];
-const dogIllustration=`<svg viewBox="0 0 660 355" role="img" aria-label="Cale-porte textile original : chien teckel roux à oreilles sombres et petit foulard vert, posé devant une porte" xmlns="http://www.w3.org/2000/svg">
+const dogIllustration=`<svg viewBox="0 0 660 355" role="img" aria-label="Le nouveau teckel du patron : tête arrondie, museau allongé, pattes courtes, oreilles tombantes et queue relevée" xmlns="http://www.w3.org/2000/svg">
 <defs><linearGradient id="dogcoat" x1="0" x2="1"><stop stop-color="#c98c58"/><stop offset="1" stop-color="#aa6a46"/></linearGradient></defs>
 <rect width="660" height="355" rx="21" fill="#f3eee5"/>
-<path d="M560 0V324" stroke="#d0c6b9" stroke-width="9"/><rect x="556" y="0" width="80" height="320" fill="#e4d6c6" opacity=".55"/><ellipse cx="338" cy="321" rx="246" ry="23" fill="#b6ad9f" opacity=".28"/>
-<path d="M132 204 C141 160 167 146 216 145 L458 147 Q513 147 515 193 L513 267 Q504 307 470 304 L454 303 L454 314 L413 314 L408 290 L237 293 L234 313 L183 313 L181 272 Q158 262 132 240 Z" fill="url(#dogcoat)" stroke="#915d47" stroke-width="5"/>
-<path d="M140 176 Q153 150 139 132 C133 111 115 105 88 115 L58 137 Q48 143 55 153 Q68 164 97 153 L143 155Z" fill="#d9a273" stroke="#915d47" stroke-width="5"/>
-<path d="M95 128 C108 128 130 133 139 154 Q149 192 133 222 Q119 231 109 210 L107 147Z" fill="#795743" stroke="#654735" stroke-width="4"/>
-<circle cx="92" cy="135" r="5" fill="#2c302e"/><ellipse cx="56" cy="151" rx="11" ry="7" fill="#343335"/>
-<path d="M171 192 Q205 205 220 175" stroke="#5a795f" stroke-width="17" fill="none" stroke-linecap="round"/>
-<path d="M466 166 Q508 171 526 142 Q535 123 519 113" fill="none" stroke="#9b674c" stroke-width="14" stroke-linecap="round"/>
-<path d="M195 288V306 M428 286V306" stroke="#7d5645" stroke-width="3" opacity=".6"/>
-<path d="M255 285 Q327 290 390 287" stroke="#e7bb90" stroke-width="6" opacity=".5" fill="none"/>
-<text x="38" y="43" fill="#506a55" font-size="16" font-family="Georgia,serif">Petit teckel de garde</text><text x="38" y="65" fill="#64756a" font-size="12" font-family="system-ui,sans-serif">Toile épaisse, feutrine, poche de lest intérieure</text>
+<path d="M590 0V330" stroke="#d0c6b9" stroke-width="10"/><rect x="590" y="0" width="70" height="330" fill="#e4d6c6" opacity=".55"/>
+<ellipse cx="286" cy="328" rx="230" ry="17" fill="#aa9988" opacity=".22"/>
+<g transform="translate(20 -210) scale(2.5)">
+<path d="M 18.25 127.15 C 22.10 126.10 28.40 126.10 33.65 124.35 C 39.95 122.25 40.30 114.20 48.00 110.00 C 53.60 106.85 60.95 106.50 66.90 108.25 C 76.35 111.05 81.95 119.80 82.65 128.55 C 83.00 136.60 80.90 139.75 86.15 145.00 C 93.85 153.40 106.80 156.90 118.35 157.60 C 136.55 159.70 152.30 152.70 164.20 154.45 C 169.80 155.15 173.65 157.95 177.15 161.10 C 183.10 167.40 186.25 172.30 188.00 177.90 C 189.40 185.25 187.30 191.20 182.40 197.50 C 178.20 202.75 178.55 208.00 176.45 210.80 C 174.70 213.60 170.85 213.25 166.65 213.25 L 46.60 213.25 C 44.50 212.90 44.50 210.80 46.25 207.65 C 49.05 203.10 52.90 201.35 52.55 198.55 C 52.20 195.75 47.65 193.65 45.20 188.05 C 41.70 180.70 42.75 175.45 44.85 167.40 C 46.60 160.75 49.40 151.65 46.25 147.80 C 43.80 144.65 38.20 144.65 34.35 143.95 C 25.25 142.90 20.70 138.70 18.60 133.10 C 16.85 128.90 17.20 127.85 18.25 127.15 Z" fill="url(#dogcoat)" stroke="#915d47" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/>
+<g transform="translate(13 19) scale(.35)">
+<path d="M469 406 C484 387 493 356 492 329 C491 322 488 310 493 311 C501 310 513 329 515 345 C519 372 505 405 488 422" fill="none" stroke="#9d694c" stroke-width="14" stroke-linecap="round"/>
+<path d="M125 272 C137 285 131 308 122 331 C110 354 108 373 119 386 C130 400 156 394 176 381 C196 367 200 345 199 329" fill="none" stroke="#6f4b3d" stroke-width="8" stroke-linecap="round"/>
+<circle cx="98" cy="298" r="5" fill="#2e3430"/><path d="M15 309 Q20 312 21 319 Q14 329 15 309Z" fill="#2e3430"/>
+<path d="M17 329 Q26 338 32 333" fill="none" stroke="#78503a" stroke-width="3"/>
+<path d="M105 546 Q107 552 107 555 M119 544 Q118 551 118 555 M136 544 Q132 552 132 555 M427 545 Q425 552 425 555 M443 545 Q440 551 440 555" stroke="#734d3d" stroke-width="2.5" fill="none"/>
+</g></g>
+<text x="520" y="40" fill="#506a55" font-size="16" font-family="Georgia,serif" text-anchor="end">Petit teckel de garde</text>
 </svg>`;
 function render(){
  return `<div class="dog-course"><span class="eyebrow">Couture · Projet bonus indépendant</span><h1>Cale-porte en forme de chien</h1>
  <p class="lead">Un petit teckel en tissu, tout rond et bien lesté, pour empêcher une porte intérieure légère de se refermer. Une création qui permet d'apprendre les courbes, le rembourrage et la fermeture au point invisible.</p>
- <figure class="dog-course-hero">${dogIllustration}<figcaption>Illustration d'intention originale : le patron et le prototype sont à essayer avant validation définitive.</figcaption></figure>
+ <figure class="dog-course-hero">${dogIllustration}<figcaption>Illustration de la nouvelle silhouette du patron. Un prototype en tissu reste recommandé pour vérifier les proportions et le lest.</figcaption></figure>
  <div class="dog-course-meta"><span>Niveau : intermédiaire débutante</span><span>Durée indicative : 2 h à 3 h</span><span>Pièce unique · sans calendrier</span></div>
  <div class="card section dog-course-actions"><h2>Le patron à imprimer</h2><p>Deux pages A4 vectorielles, silhouette de chien à découper deux fois en miroir, oreilles, queue et poche de lest. Les marges de 1 cm sont comprises là où elles sont nécessaires, avec un carré de contrôle de 5 × 5 cm.</p><div class="actions"><a class="primary course-pattern-link" href="./assets/patron-cale-porte-chien.html" data-pattern-preview="dog" rel="noopener noreferrer">✂ Consulter le patron A4</a><button type="button" class="secondary" data-dog-add-personal>Ajouter à mes projets persos</button></div></div>
  <section class="card section"><h2>Matériel pour un seul cale-porte</h2><ul class="dog-materials">

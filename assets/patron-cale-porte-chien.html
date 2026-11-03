@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Patron A4 · Cale-porte chien · Silhouette finale · De fil en aiguille</title>
+<title>Patron A4 · Cale-porte chien · Silhouette validée · De fil en aiguille</title>
 <meta name="description" content="Patron original A4 à taille réelle : teckel cale-porte à silhouette harmonieuse, oreilles tombantes, queue séparée et poche de lest.">
 <style>
 *{box-sizing:border-box}body{margin:0;background:#eae9e1;color:#304e40;font:16px/1.55 system-ui,-apple-system,Arial,sans-serif}
@@ -25,7 +25,7 @@ a{color:#315f4c;font-weight:700}
 <h1>Patron A4 · Le petit teckel de garde</h1>
 <p><b>Version améliorée : silhouette plus naturelle, petites pattes et oreilles souples.</b> Les deux planches sont dessinées en vecteurs à dimensions réelles, et non à partir d'une image redimensionnée.</p>
 <p>Imprime en A4 portrait à <b>100 %</b>, sans « Ajuster à la page ». Vérifie le carré témoin <b>5 × 5 cm</b> de la première planche. Les marges de 1 cm du corps et de la poche sont déjà comprises dans les gabarits. Les oreilles et la queue, en feutrine appliquée, sont coupées sans marge.</p>
-<p>Dimensions indicatives à plat avant montage : 18 × 15 cm. Pour former un cale-porte stable, place la poche de lest au fond et suis le tutoriel pour créer une petite base. Le contour du corps <b>ne comprend pas la queue</b>, qui est une pièce distincte fixée dans la couture arrière.</p>
+<p>Dimensions indicatives à plat avant montage : environ 18 × 11 cm. Pour former un cale-porte stable, place la poche de lest au fond et suis le tutoriel pour créer une petite base. Le contour du corps <b>ne comprend pas la queue</b>, qui est une pièce distincte fixée dans la couture arrière.</p>
 <button type="button" onclick="window.print()">⎙ Imprimer les deux planches A4</button></header>
 <main>
 <section class="sheet" aria-label="Patron page 1 : corps amélioré du chien">
@@ -36,32 +36,33 @@ a{color:#315f4c;font-weight:700}
 <text x="15" y="36" class="label">CORPS · COUPER 2 FOIS EN MIROIR</text>
 <text x="15" y="43" class="txt">Toile ou jean souple · marges de couture de 1 cm INCLUSES</text>
 <text x="15" y="50" class="small">Trait continu : découper · Piqûre : à 1 cm du bord (sauf ouverture de retournement).</text>
-<!-- Un seul contour de découpe; la queue et les oreilles sont des pièces séparées, planche 2. -->
-<path id="chien-corps" class="cut" d="M16 118 C14 114 16 108 20 105 C25 102 36 103 46 98 C55 93 57 83 66 81 C77 78 88 82 93 91 C98 100 96 111 94 119 C92 126 96 133 106 138 C116 143 132 144 151 141 C167 138 180 140 187 147 C194 155 194 166 193 180 C192 194 187 204 182 211 C178 216 182 223 184 225 C185 228 182 229 176 229 L163 229 C159 229 158 226 156 221 L153 229 L64 229 Q64 224 60 221 C59 226 57 229 51 229 L43 229 Q34 229 38 220 C45 209 52 195 55 181 C58 169 55 159 58 146 C60 136 54 129 43 127 C33 126 25 128 18 124 Q14 122 16 118 Z"/>
-<!-- Repères décoratifs et broderie : ne PAS découper. -->
-<ellipse cx="23" cy="115" rx="3.7" ry="3" class="guide"/>
-<circle cx="56" cy="100" r="2" class="guide"/>
-<path d="M21 121 Q25 124 32 122" class="guide"/>
-<path id="chien-oreille-emplacement" d="M68 93 Q76 88 82 98 C87 108 84 126 78 138 Q72 147 63 145 C54 141 58 125 60 111 C61 103 63 96 68 93 Z" class="guide"/>
-<path d="M44 223 Q44 226 44 229 M49 221 Q49 225 49 229 M170 222 Q170 226 170 229 M175 221 Q175 225 175 229" class="guide"/>
-<!-- Point de fixation de la queue : pas un morceau du contour à découper. -->
-<path d="M183 143 L188 150 M181 144 L186 151" class="bar"/>
-<path d="M105 101 Q91 106 79 116" class="guide"/>
-<text x="105" y="92" class="txt">Oreille en appliqué</text>
-<path d="M157 115 Q174 127 185 145" class="guide"/>
-<text x="140" y="107" class="txt">Queue cousue au dos</text>
-<!-- Repère de l'ouverture : 80 mm exactement, sur le dessous rectiligne. -->
-<path d="M72 229 H152" class="bar" stroke-width="1.8" stroke-dasharray="2.1 1.4"/>
-<path d="M72 224 V234 M152 224 V234" class="bar"/>
-<text x="112" y="238" text-anchor="middle" class="txt">Ouverture de retournement : 8 cm</text>
+<!-- Le contour ci-dessous est redessiné d'après la silhouette teckel validée : tête haute et museau allongé, dos incurvé, poitrail et pieds courts. -->
+<path id="chien-corps" class="cut" d="M 18.25 127.15 C 22.10 126.10 28.40 126.10 33.65 124.35 C 39.95 122.25 40.30 114.20 48.00 110.00 C 53.60 106.85 60.95 106.50 66.90 108.25 C 76.35 111.05 81.95 119.80 82.65 128.55 C 83.00 136.60 80.90 139.75 86.15 145.00 C 93.85 153.40 106.80 156.90 118.35 157.60 C 136.55 159.70 152.30 152.70 164.20 154.45 C 169.80 155.15 173.65 157.95 177.15 161.10 C 183.10 167.40 186.25 172.30 188.00 177.90 C 189.40 185.25 187.30 191.20 182.40 197.50 C 178.20 202.75 178.55 208.00 176.45 210.80 C 174.70 213.60 170.85 213.25 166.65 213.25 L 46.60 213.25 C 44.50 212.90 44.50 210.80 46.25 207.65 C 49.05 203.10 52.90 201.35 52.55 198.55 C 52.20 195.75 47.65 193.65 45.20 188.05 C 41.70 180.70 42.75 175.45 44.85 167.40 C 46.60 160.75 49.40 151.65 46.25 147.80 C 43.80 144.65 38.20 144.65 34.35 143.95 C 25.25 142.90 20.70 138.70 18.60 133.10 C 16.85 128.90 17.20 127.85 18.25 127.15 Z"/>
+<!-- L'oreille, l'oeil, la truffe, les doigts et la queue dessinés en gris sont des repères visuels, pas des lignes de découpe. -->
+<g transform="translate(13 19) scale(.35)">
+ <path id="chien-oreille-emplacement" d="M125 272 C137 285 131 308 122 331 C110 354 108 373 119 386 C130 400 156 394 176 381 C196 367 200 345 199 329" fill="none" stroke="#666f67" stroke-width="2.8"/>
+ <path id="chien-queue-position" d="M469 406 C484 387 493 356 492 329 C491 322 488 310 493 311 C501 310 513 329 515 345 C519 372 505 405 488 422" fill="none" stroke="#a66e4a" stroke-width="2.5" stroke-dasharray="6 5"/>
+ <circle cx="98" cy="298" r="5.5" fill="#4c594f"/>
+ <path d="M15 309 Q20 312 21 319 Q14 329 15 309Z" fill="#4c594f"/>
+ <path d="M17 329 Q26 338 32 333" fill="none" stroke="#748176" stroke-width="2.4"/>
+ <path d="M105 546 Q107 552 107 555 M119 544 Q118 551 118 555 M136 544 Q132 552 132 555 M427 545 Q425 552 425 555 M443 545 Q440 551 440 555" fill="none" stroke="#8e948b" stroke-width="2.4"/>
+</g>
+<text x="99" y="92" class="txt">Oreille tombante en appliqué</text>
+<path d="M104 96 Q91 103 74 123" class="guide"/>
+<text x="141" y="109" class="txt">Queue cousue au dos</text>
+<path d="M157 113 Q174 125 179 159" class="guide"/>
+<!-- 80 mm réels, sur le segment droit de la base à y=213.25 mm -->
+<path d="M72 213.25 H152" class="bar" stroke-width="1.8" stroke-dasharray="2.1 1.4"/>
+<path d="M72 209 V217 M152 209 V217" class="bar"/>
+<text x="112" y="227" text-anchor="middle" class="txt">Ouverture de retournement : 8 cm</text>
 <rect id="temoin-cinq-cm" x="16" y="238" width="50" height="50" class="cut"/>
 <text x="41" y="261" text-anchor="middle" class="label">5 × 5 cm</text>
 <text x="41" y="267" text-anchor="middle" class="small">CONTRÔLE</text>
-<text x="76" y="252" class="txt">1. Imprimer à 100 %, sans ajustement.</text>
-<text x="76" y="261" class="txt">2. Couper une face et sa copie retournée.</text>
-<text x="76" y="270" class="txt">3. Marquer les 8 cm non cousus du dessous.</text>
-<text x="76" y="279" class="small">Traits gris = broderie, oreilles, doigts de pattes.</text>
-<text x="76" y="285" class="small">Ils ne se découpent pas. Queue sur planche 2.</text>
+<text x="75" y="252" class="txt">1. Imprimer à 100 %, sans ajustement.</text>
+<text x="75" y="261" class="txt">2. Couper une face et sa copie retournée.</text>
+<text x="75" y="270" class="txt">3. Marquer les 8 cm non cousus du dessous.</text>
+<text x="75" y="279" class="small">Gris = broderie et appliqués, NE PAS couper.</text>
+<text x="75" y="285" class="small">Queue et oreilles : voir planche 2.</text>
 </svg></section>
 <section class="sheet" aria-label="Patron page 2 : oreilles, queue et poche de lest">
 <svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="297mm" viewBox="0 0 210 297" role="img" aria-label="Deux oreilles tombantes à appliquer, une queue souple en feutrine, deux carrés de douze centimètres pour la poche de lest">
@@ -70,13 +71,13 @@ a{color:#315f4c;font-weight:700}
 <path d="M15 27 H195" stroke="#cad3c8" stroke-width=".3"/>
 <text x="15" y="36" class="label">OREILLE · COUPER 2 FOIS DANS LA FEUTRINE</text>
 <text x="15" y="43" class="small">Une sur chaque côté, en miroir. Sans marge (appliqué).</text>
-<!-- Oreille tombante arrondie, d'environ 3,2 × 5,5 cm : ne pas ajouter de marge. -->
-<path id="chien-oreille" class="cut" d="M46 62 C53 57 63 61 67 67 C72 76 72 94 65 106 C60 115 49 115 43 107 C37 100 38 84 40 74 C41 69 43 65 46 62 Z"/>
-<path d="M51 67 Q62 84 55 105" class="guide"/>
+<!-- Oreille tombante arrondie, d'environ 3 × 4,5 cm : ne pas ajouter de marge. -->
+<path id="chien-oreille" class="cut" d="M42 65 C49 59 58 62 63 68 C68 76 69 90 64 98 C58 107 47 107 42 101 C37 94 37 80 39 71 C39 69 40 67 42 65 Z"/>
+<path d="M49 68 Q57 84 52 99" class="guide"/>
 <text x="107" y="36" class="label">QUEUE · COUPER 1 FOIS DANS LA FEUTRINE</text>
 <text x="107" y="43" class="small">Glisser la base dans la couture arrière.</text>
-<!-- Queue ronde, facile à maintenir dans la couture, sans marge supplémentaire. -->
-<path id="chien-queue" class="cut" d="M120 106 C132 101 146 91 154 73 C159 64 166 64 169 69 C175 78 170 95 156 107 C147 116 136 119 122 120 Q116 119 118 112 Q119 108 120 106 Z"/>
+<!-- Queue dressée en feutrine, semblable au dessin validé, avec un pied large à glisser dans la couture arrière. -->
+<path id="chien-queue" class="cut" d="M125 117 C136 102 143 85 142 69 Q142 63 146 65 C152 73 155 85 152 95 C148 109 139 119 126 122 Q122 122 125 117 Z"/>
 <path d="M117 117 H128" class="guide"/>
 <text x="15" y="136" class="label">POCHE DE LEST · COUPER 2 FOIS DANS LE COTON SOLIDE</text>
 <text x="15" y="144" class="txt">12 × 12 cm · marges comprises · assemblage à 1 cm du bord</text>
