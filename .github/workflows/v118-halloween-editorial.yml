@@ -1,4 +1,4 @@
-name: V1.1.14 - Parcours sans semaines imposées
+name: V1.3.9 - Projet bonus cale-porte chien
 on:
   pull_request:
     branches: [main]
@@ -24,6 +24,7 @@ jobs:
       - run: node tests/v1110-search-patrons.cjs
       - run: node tests/v1113-journal-albums.cjs
       - run: node tests/v1114-sans-semaines.cjs
+      - run: node tests/v139-cale-porte-chien.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
