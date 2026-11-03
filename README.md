@@ -1,5 +1,19 @@
 # De fil en aiguille
 
+## V1.3.9 : projet bonus « Cale-porte en forme de chien »
+
+- Nouveau projet **Couture → Mes cours → Projet bonus**, indépendant des cours numérotés et toujours **« En cours d’écriture »** jusqu'à validation de l'utilisatrice.
+- Petit teckel original en toile épaisse, oreilles en feutrine et queue recourbée. Tutoriel de 8 étapes : couper deux profils en miroir, broder le visage, coudre une poche de lest, assembler le corps, cranter les courbes, former deux coins en boîte pour le dessous plat, remplir et fermer au point invisible.
+- **Patron A4 vectoriel en deux pages** : corps à couper deux fois, oreilles, queue et carrés de 12 × 12 cm pour la poche. Géométrie au millimètre et contrôle 5 × 5 cm, impression à 100 %.
+- Patron accessible dans **Patrons**, en aperçu au sein de l'application pour garder la navigation visible, et imprimable séparément.
+- Recherche **« chien », « teckel », « cale-porte »** dans Couture pour ouvrir directement le projet bonus.
+- Bouton **« Ajouter à mes projets persos »** : ajoute un carnet personnel pour l’ouvrage à la demande, sans doublon et sans toucher à celui de l'autre profil. Photos et notes utilisent les fonctions existantes.
+- Cache PWA `fil52-shell-v1.3.9`, disponible hors connexion après mise à jour.
+- **Sécurité :** poche de lest intérieure fermée, pas de boutons pour les yeux ; ne jamais utiliser sur porte coupe-feu ou issue de secours. Ne pas présenter ce patron original comme un modèle industriel ou déjà validé physiquement.
+
+Références pratiques (utilisées pour le choix du lest et les coutures, sans reproduire leurs patrons) : [Hello Sewing](https://hellosewing.com/door-stopper/), [Gütermann France](https://consumer.guetermann.com/wp-content/uploads/2024/03/Instructions-BUTOIR-DE-PORTE__FR.pdf).
+
+
 ## V1.3.6 : bibliothèque des techniques de couture
 
 - **Couture → Techniques** : accès en haut de la rubrique, à côté de « Mes cours » ; sans nouveau bouton dans la barre inférieure.
