@@ -360,7 +360,7 @@ function bonusPage(){
  <p class="small">Les prochains projets bonus seront ajoutés ici, sans modifier la progression des cours.</p>`;
 }
 function updateBonusSearch(){
- const words=textForSearch(bonusSearchQuery).split(/\\s+/).filter(Boolean),cards=[...document.querySelectorAll('[data-bonus-project]')];let count=0;
+ const words=textForSearch(bonusSearchQuery).split(/\s+/).filter(Boolean),cards=[...document.querySelectorAll('[data-bonus-project]')];let count=0;
  for(const card of cards){const ok=(!bonusSelected||card.dataset.bonusProject===bonusSelected)&&words.every(w=>textForSearch(card.dataset.bonusKeywords).includes(w));card.hidden=!ok;if(ok)count++}
  const node=el('bonus-project-count');if(node)node.textContent=count+' projet'+(count>1?'s':'')+' affiché'+(count>1?'s':'')+'.';
  const empty=el('bonus-empty');if(empty)empty.hidden=count!==0;
