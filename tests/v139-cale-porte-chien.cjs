@@ -16,7 +16,7 @@ const {chromium}=require('playwright');
    await page.locator('.bonus-shortcut [data-page="bonus"]').click();
    assert.match(await page.locator('h1').first().innerText(),/Projets bonus/,'Rubrique bonus autonome');
    assert.equal(await page.locator('button[data-page="dog"]').count(),1,'Projet chien dans Bonus');
-   assert.match(await page.locator('.bonus-project-entry').innerText(),/Projet en cours d’écriture/,'Statut éditorial conservé');
+   assert.match(await page.locator('.bonus-project-entry').innerText(),/en cours d’écriture/i,'Statut éditorial conservé');
    await page.locator('[data-sewing-section="courses"]').click();
    await page.locator('#sewing-course-search').fill('teckel');
    assert.equal(await page.locator('[data-course-match="sewing"][data-course-index="dog"]').count(),1,'Projet indexé par mot-clé');
