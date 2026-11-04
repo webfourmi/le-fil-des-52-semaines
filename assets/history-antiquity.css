@@ -1,0 +1,32 @@
+/* Histoire de la couture n°02 : lecture et fiches romaines */
+.antiquity-article{max-width:940px;margin-inline:auto;padding:clamp(16px,3vw,36px);overflow:hidden}
+.antiquity-head{padding-bottom:17px;border-bottom:1px solid #e2d3c2}
+.antiquity-head h2{font-size:clamp(1.9rem,4vw,3.1rem);margin:0 0 9px}
+.antiquity-subtitle{font:italic clamp(1.12rem,2vw,1.45rem) Georgia,serif;color:#95615a;margin:0 0 7px}
+.antiquity-lead{font:italic clamp(1.05rem,2vw,1.19rem)/1.78 Georgia,serif;color:#59594a;margin:23px 0 26px;padding:15px 20px;background:#f7ede2;border-left:4px solid #bd8777;border-radius:0 13px 13px 0}
+.antiquity-toc{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0 28px}
+.antiquity-toc b{font-size:.87rem}
+.antiquity-toc a{padding:6px 10px;border-radius:22px;border:1px solid #e4d3c3;background:#fffdf8;font-size:.79rem;text-decoration:none}
+.antiquity-chapter{margin:35px 0 44px;scroll-margin-top:20px}
+.antiquity-chapter h3,.antiquity-patterns h3{font-size:clamp(1.4rem,2.6vw,1.93rem);margin:8px 0 15px}
+.antiquity-chapter p,.antiquity-patterns p{line-height:1.88;margin-bottom:14px}
+.antiquity-era{text-transform:uppercase;letter-spacing:.1em;color:#986257;font-size:.73rem;font-weight:800}
+.antiquity-figure{margin:24px 0;border:1px solid #e3d2c1;border-radius:16px;overflow:hidden;background:#eee8df}
+.antiquity-figure img{display:block;width:100%;height:auto;max-height:525px;object-fit:contain;background:#eae4dc}
+.antiquity-figure-narrow{max-width:620px;margin-inline:auto}
+.antiquity-figure figcaption{font-size:.81rem;line-height:1.64;color:#655e53;padding:12px 15px;background:#fffaf3}
+.antiquity-reference{font-size:.87rem;color:#706659;border-left:3px solid #ddc2ae;padding-left:12px}
+.antiquity-patterns{margin-top:47px;background:#f7efe5;padding:clamp(15px,3vw,26px);border:1px solid #e3cfc0;border-radius:20px;scroll-margin-top:20px}
+.antiquity-pattern-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:22px 0}
+.antiquity-pattern-card{border:1px solid #dec9b7;background:#fffdf9;padding:15px;border-radius:16px;min-width:0}
+.antiquity-pattern-card h4{font-size:1.27rem;color:#8b433a;margin-bottom:13px}
+.antiquity-pattern-card img{width:100%;height:auto;display:block;background:#fff7ed;border:1px solid #e2c8b7;border-radius:12px;margin-bottom:14px}
+.antiquity-pattern-card p{font-size:.9rem;line-height:1.73}
+.antiquity-pattern-actions{display:flex;flex-wrap:wrap;align-items:center;gap:13px}
+.antiquity-pattern-actions p{margin:0;flex:1;min-width:190px}
+.antiquity-footer{margin-top:34px;padding:20px 0 3px;border-top:1px solid #e2d3c2}
+.antiquity-footer h3{font-size:1.35rem}
+.antiquity-footer .source-list{font-size:.86rem;line-height:1.85}
+.antiquity-conclusion{font:italic 1.11rem/1.8 Georgia,serif;border-top:1px dashed #decbb5;padding-top:18px;margin:23px 0 0}
+@media(max-width:760px){.antiquity-pattern-grid{grid-template-columns:1fr}.antiquity-pattern-card{padding:13px}.antiquity-figure img{max-height:430px}.antiquity-article{padding:17px}.antiquity-toc{gap:6px}}
+@media(max-width:370px){.antiquity-patterns{margin-left:-5px;margin-right:-5px;padding:12px}.antiquity-toc a{font-size:.73rem}}
