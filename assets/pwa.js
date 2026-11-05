@@ -31,6 +31,7 @@ async function loadReleaseNotes(){
 async function showReleaseNotes(hasUpdate=false,version=''){
  const notes=await loadReleaseNotes();
  const selected=(notes.history||[notes]).find(r=>r.version===version)||notes;
+ if(selected.version===APP_BUILD){try{localStorage.setItem('fil52.changelog.seenVersion',APP_BUILD)}catch(_){}}
  document.getElementById('pwa-changelog-overlay')?.remove();
  const overlay=document.createElement('div');overlay.id='pwa-changelog-overlay';overlay.className='pwa-changelog-overlay';
  overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-labelledby','pwa-changelog-title');
@@ -195,7 +196,12 @@ document.addEventListener('DOMContentLoaded',()=>{
    }
    previouslyControlled=true;
  });
- updateUI();register();loadReleaseNotes().then(()=>checkEdition());
+ updateUI();register();loadReleaseNotes().then(()=>{
+   checkEdition();
+   // Après l'installation, présenter une seule fois le contenu de la version fraîchement reçue.
+   let last='';try{last=localStorage.getItem('fil52.changelog.seenVersion')||''}catch(_){}
+   if(last!==APP_BUILD)showReleaseNotes(false,APP_BUILD).catch(()=>{});
+ });
  new MutationObserver(()=>updateUI()).observe(el('app'),{childList:true,subtree:false});
  document.addEventListener('visibilitychange',()=>{if(!document.hidden){checkEdition();worker?.update().catch(()=>{})}});
 });
