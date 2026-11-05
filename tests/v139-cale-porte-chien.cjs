@@ -15,6 +15,7 @@ const {chromium}=require('playwright');
    assert.match(await page.locator('.pwa-changelog-dialog').innerText(),/1.3.16/,'Présentation automatique de la version');
    await page.getByRole('button',{name:'Fermer',exact:true}).click();
    // Les nouveautés restent consultables et affichent un véritable historique.
+   await page.locator('details.pwa-panel summary').click();
    await page.locator('#pwa-changelog-open').click();
    await page.locator('#pwa-changelog-overlay').waitFor();
    assert.match(await page.locator('#pwa-changelog-title').innerText(),/nouveautés/i,'Titre de la liste des changements');
