@@ -255,7 +255,7 @@ window.addEventListener('popstate',event=>{
  document.getElementById('photo-preview-overlay')?.remove();
  render();window.scrollTo({top:Math.max(0,event.state.scrollY||0),behavior:'instant'});
 });
-function selectIdentity(p){if(!['m','f'].includes(p))return;state.profile=p;localStorage.setItem('fil52.identity',p);save();render();history.replaceState({fil52View:atelierView(),scrollY:0},'')}
+function selectIdentity(p){if(!['m','f'].includes(p))return;state.profile=p;localStorage.setItem('fil52.identity',p);save();render();document.dispatchEvent(new Event('fil52-identity-ready'));history.replaceState({fil52View:atelierView(),scrollY:0},'')}
 function page(p){const previous=atelierView();if(!['learn','quilt'].includes(p))dicoOpen=false;if(p==='learn')sewingTechniquesOpen=false;state.page=p;atelierPush(previous);render();scrollTo({top:0,behavior:'instant'})}
 function chooseProfile(p){if(state.profile!==p)return;render()}
 function selectWeek(w){const previous=atelierView();sewingTechniquesOpen=false;sewingSearchQuery='';state.week=+w;state.page='learn';save();atelierPush(previous);render();scrollTo({top:0,behavior:'instant'})}
