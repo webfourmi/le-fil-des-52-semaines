@@ -3,13 +3,61 @@
 'use strict';
 let deferred=null, worker=null, waiting=null, updateAccepted=false;
 let previouslyControlled=false;
-const APP_BUILD='1.3.9';
+const APP_BUILD='1.3.16';
 const el=id=>document.getElementById(id);
 const updateUI=()=>{
  const install=el('pwa-install');
  if(install)install.hidden=!deferred;
  const version=el('pwa-version');if(version)version.textContent='Version de l’application : '+APP_BUILD;
 };
+/* Notes de version, consultables même sans nouvelle installation. */
+const FALLBACK_RELEASE={version:APP_BUILD,title:'Nouveautés de l’atelier',changes:[
+ 'Affichage automatique de la liste des nouveautés à chaque nouvelle version.',
+ 'Historique des mises à jour accessible depuis « Vérifier les nouveautés ».'
+]};
+let latestNotes=FALLBACK_RELEASE;
+async function loadReleaseNotes(){
+ try{
+  const response=await fetch('./data/changelog.json',{cache:'no-store'});
+  if(!response.ok)throw Error('Notes indisponibles');
+  const data=await response.json();
+  if(!Array.isArray(data.releases)||!data.releases.length)throw Error('Format invalide');
+  const release=data.releases.find(r=>r.version===data.current)||data.releases[0];
+  if(!release||!Array.isArray(release.changes))throw Error('Notes incomplètes');
+  latestNotes={...release,history:data.releases};
+ }catch(_){latestNotes=FALLBACK_RELEASE}
+ return latestNotes;
+}
+async function showReleaseNotes(hasUpdate=false,version=''){
+ const notes=await loadReleaseNotes();
+ const selected=(notes.history||[notes]).find(r=>r.version===version)||notes;
+ document.getElementById('pwa-changelog-overlay')?.remove();
+ const overlay=document.createElement('div');overlay.id='pwa-changelog-overlay';overlay.className='pwa-changelog-overlay';
+ overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-labelledby','pwa-changelog-title');
+ const panel=document.createElement('section');panel.className='pwa-changelog-dialog';
+ const heading=document.createElement('h2');heading.id='pwa-changelog-title';heading.textContent='✂ Les nouveautés de De fil en aiguille';
+ const info=document.createElement('p');info.className='small';info.textContent='Version '+selected.version+(hasUpdate?' · mise à jour disponible':' · journal des améliorations');
+ const title=document.createElement('h3');title.textContent=selected.title||'Les nouveautés';
+ const list=document.createElement('ul');list.className='pwa-changelog-list';
+ for(const change of selected.changes){const item=document.createElement('li');item.textContent=String(change);list.append(item)}
+ const buttons=document.createElement('div');buttons.className='pwa-actions';
+ const close=document.createElement('button');close.type='button';close.className='secondary';close.textContent=hasUpdate?'Plus tard':'Fermer';
+ close.addEventListener('click',()=>overlay.remove());buttons.append(close);
+ if(hasUpdate){
+  const update=document.createElement('button');update.type='button';update.className='primary';update.textContent='Installer la mise à jour';
+  update.addEventListener('click',()=>{overlay.remove();releaseUpdate()});buttons.append(update);
+ }
+ if(Array.isArray(notes.history)&&notes.history.length>1){
+  const historyHeading=document.createElement('p');historyHeading.className='small';historyHeading.textContent='Versions précédentes :';
+  const versions=document.createElement('select');versions.className='selection';versions.setAttribute('aria-label','Choisir une version à consulter');
+  for(const rel of notes.history){const opt=document.createElement('option');opt.value=rel.version;opt.textContent='Version '+rel.version;opt.selected=rel.version===selected.version;versions.append(opt)}
+  versions.addEventListener('change',()=>showReleaseNotes(hasUpdate,versions.value));
+  panel.append(heading,info,title,list,historyHeading,versions,buttons);
+ }else panel.append(heading,info,title,list,buttons);
+ overlay.append(panel);overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove()});
+ overlay.addEventListener('keydown',e=>{if(e.key==='Escape')overlay.remove()});
+ document.body.append(overlay);close.focus();
+}
 const notice=(message,action,click)=>{
  const box=el('pwa-notice');if(!box)return;
  el('pwa-notice-message').textContent=message;
@@ -57,7 +105,7 @@ async function checkEdition(showCurrent=false){
   if(!Array.isArray(d.published)||!d.published.length||!d.published.every(n=>Number.isInteger(n)&&n>0&&n<=52))throw Error('Éditions invalides');
   // La version technique évolue même lorsque seuls les articles, patrons ou recherches changent.
   if(typeof d.appRelease==='string'&&d.appRelease.trim()&&d.appRelease!==APP_BUILD){
-    notice('Nouvelle version de De fil en aiguille : '+d.appRelease+'. '+(d.appReleaseNotes||'De nouvelles améliorations sont disponibles.'),'Mettre à jour',requestAppUpdate);
+    notice('Nouvelle version de De fil en aiguille : '+d.appRelease+'. Consulte les nouveautés avant de l’installer.','Voir les nouveautés',()=>showReleaseNotes(true,d.appRelease));
     return 'app-update';
   }
   const approved=Array.isArray(d.approved?.sewing)?d.approved.sewing.filter(n=>Number.isInteger(n)&&n>=1&&d.published.includes(n)):[1];
@@ -74,7 +122,7 @@ async function checkEdition(showCurrent=false){
     return 'new';
   } else {
     if(!seen)localStorage.setItem('fil52.seen.latest',String(newest));
-    if(showCurrent)notice('Ton application (version '+APP_BUILD+') est à jour. Aucun nouveau cours validé pour le moment.');
+    if(showCurrent)notice('Ton application (version '+APP_BUILD+') est à jour. Tu peux consulter les dernières nouveautés.','Voir les nouveautés',()=>showReleaseNotes(false));
     return 'current';
   }
  }catch(_){
@@ -121,13 +169,15 @@ function register(){
 function showWorker(w){
  if(updateAccepted)return;
  waiting=w;
- notice('Une nouvelle version de l’application est prête.','Mettre à jour',releaseUpdate);
+ notice('Une nouvelle version de l’application est prête.','Voir les nouveautés',()=>showReleaseNotes(true));
+ showReleaseNotes(true).catch(()=>{});
 }
 document.addEventListener('DOMContentLoaded',()=>{
  document.addEventListener('click',e=>{
   if(e.target.closest('#pwa-install')) install();
   else if(e.target.closest('#pwa-help-toggle')) showGuide();
   else if(e.target.closest('#pwa-check')) checkUpdates();
+  else if(e.target.closest('#pwa-changelog-open')) showReleaseNotes(false);
  });
  el('pwa-notice-close')?.addEventListener('click',dismiss);
  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;updateUI()});
@@ -145,7 +195,7 @@ document.addEventListener('DOMContentLoaded',()=>{
    }
    previouslyControlled=true;
  });
- updateUI();register();checkEdition();
+ updateUI();register();loadReleaseNotes().then(()=>checkEdition());
  new MutationObserver(()=>updateUI()).observe(el('app'),{childList:true,subtree:false});
  document.addEventListener('visibilitychange',()=>{if(!document.hidden){checkEdition();worker?.update().catch(()=>{})}});
 });
