@@ -1,7 +1,7 @@
 /* De fil en aiguille — cache PWA. Augmenter CACHE_VERSION pour chaque nouvelle version de l'application. */
-const CACHE_VERSION = 'fil52-shell-v1.3.15';
+const CACHE_VERSION = 'fil52-shell-v1.3.16';
 const CORE = [
-  './','./index.html','./manifest.webmanifest','./data/editions.json',
+  './','./index.html','./manifest.webmanifest','./data/editions.json','./data/changelog.json',
   './assets/history-antiquity.js','./assets/history-antiquity.css','./assets/patron-toge-romaine.svg','./assets/patron-tunique-romaine.svg','./assets/patrons-romains.html',
   './assets/backup.js','./assets/gallery.js','./assets/personal-gallery.js','./assets/journal-photos.js','./assets/mercerie.js','./assets/journal-album.js','./assets/halloween-voyage.js','./assets/halloween-patrons.html','./assets/cours-02-patron-arrondis.html','./assets/textile-travel.js','./assets/lesson-guides.js','./assets/patchwork-courses.js','./assets/patchwork-courses.css','./assets/machine-intro.js','./assets/lesson-photos.js','./assets/lesson-photos.css','./assets/sewing-techniques.js','./assets/projet-cale-porte-chien.js','./assets/projet-cale-porte-chien.css','./assets/patron-cale-porte-chien.html','./assets/techniques/sous-doublure.webp','./assets/techniques/doublure.jpg',
   './assets/cours-01/01-materiel.webp','./assets/cours-01/02-epinglage.webp','./assets/cours-01/03-coins-degarnis.webp','./assets/cours-01/04-surpiqure.webp','./assets/cours-01/05-marque-page-termine.webp','./assets/travel-updates.css','./assets/atelier.webp',
@@ -25,7 +25,7 @@ self.addEventListener('fetch', event => {
   if(event.request.method!=='GET') return;
   const url=new URL(event.request.url);
   if(url.origin!==self.location.origin || !url.href.startsWith(base)) return;
-  if(event.request.mode==='navigate' || url.pathname.endsWith('/data/editions.json')){
+  if(event.request.mode==='navigate' || url.pathname.endsWith('/data/editions.json') || url.pathname.endsWith('/data/changelog.json')){
     event.respondWith((async () => {
       try {
         const response=await fetch(event.request, {cache:'no-store'});
