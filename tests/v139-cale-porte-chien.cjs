@@ -10,6 +10,10 @@ const {chromium}=require('playwright');
    page.on('pageerror',error=>errors.push(error.message));
    await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
    await page.getByRole('button',{name:'Viera',exact:true}).click();
+   // La nouvelle version présente aussi les changements automatiquement une seule fois.
+   await page.locator('#pwa-changelog-overlay').waitFor();
+   assert.match(await page.locator('.pwa-changelog-dialog').innerText(),/1.3.16/,'Présentation automatique de la version');
+   await page.getByRole('button',{name:'Fermer',exact:true}).click();
    // Les nouveautés restent consultables et affichent un véritable historique.
    await page.locator('#pwa-changelog-open').click();
    await page.locator('#pwa-changelog-overlay').waitFor();
