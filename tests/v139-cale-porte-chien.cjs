@@ -10,6 +10,22 @@ const {chromium}=require('playwright');
    page.on('pageerror',error=>errors.push(error.message));
    await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded'});
    await page.getByRole('button',{name:'Viera',exact:true}).click();
+   // La nouvelle version présente aussi les changements automatiquement une seule fois.
+   await page.locator('#pwa-changelog-overlay').waitFor();
+   assert.match(await page.locator('.pwa-changelog-dialog').innerText(),/1.3.16/,'Présentation automatique de la version');
+   await page.getByRole('button',{name:'Fermer',exact:true}).click();
+   // Les nouveautés restent consultables et affichent un véritable historique.
+   await page.locator('details.pwa-panel summary').click();
+   await page.locator('#pwa-changelog-open').click();
+   await page.locator('#pwa-changelog-overlay').waitFor();
+   assert.match(await page.locator('#pwa-changelog-title').innerText(),/nouveautés/i,'Titre de la liste des changements');
+   assert.ok(await page.locator('.pwa-changelog-list li').count()>=3,'Liste explicite des nouveautés');
+   assert.equal(await page.locator('.pwa-changelog-dialog select option').count()>=3,true,'Anciennes versions disponibles');
+   await page.locator('.pwa-changelog-dialog select').selectOption('1.3.14');
+   await page.getByRole('heading',{name:/Navigation mobile/i}).waitFor();
+   assert.match(await page.locator('.pwa-changelog-dialog h3').innerText(),/Navigation mobile/i,'Historique des anciennes versions');
+   await page.getByRole('button',{name:'Fermer',exact:true}).click();
+   assert.equal(await page.locator('#pwa-changelog-overlay').count(),0,'Panneau refermable');
    const nav=width<=850?'#bottomnav':'#nav';
    await page.locator(nav+' [data-page="learn"]').click();
    assert.equal(await page.locator('.bonus-shortcut').count(),0,'Pas de raccourci Bonus en doublon');
