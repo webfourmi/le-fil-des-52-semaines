@@ -200,7 +200,11 @@ document.addEventListener('DOMContentLoaded',()=>{
    checkEdition();
    // Après l'installation, présenter une seule fois le contenu de la version fraîchement reçue.
    let last='';try{last=localStorage.getItem('fil52.changelog.seenVersion')||''}catch(_){}
-   if(last!==APP_BUILD)showReleaseNotes(false,APP_BUILD).catch(()=>{});
+   if(last!==APP_BUILD){
+     const display=()=>showReleaseNotes(false,APP_BUILD).catch(()=>{});
+     if(document.querySelector('[data-identity]'))document.addEventListener('fil52-identity-ready',display,{once:true});
+     else display();
+   }
  });
  new MutationObserver(()=>updateUI()).observe(el('app'),{childList:true,subtree:false});
  document.addEventListener('visibilitychange',()=>{if(!document.hidden){checkEdition();worker?.update().catch(()=>{})}});
