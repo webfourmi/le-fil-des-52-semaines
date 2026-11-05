@@ -22,6 +22,7 @@ const {chromium}=require('playwright');
    assert.ok(await page.locator('.pwa-changelog-list li').count()>=3,'Liste explicite des nouveautés');
    assert.equal(await page.locator('.pwa-changelog-dialog select option').count()>=3,true,'Anciennes versions disponibles');
    await page.locator('.pwa-changelog-dialog select').selectOption('1.3.14');
+   await page.getByRole('heading',{name:/Navigation mobile/i}).waitFor();
    assert.match(await page.locator('.pwa-changelog-dialog h3').innerText(),/Navigation mobile/i,'Historique des anciennes versions');
    await page.getByRole('button',{name:'Fermer',exact:true}).click();
    assert.equal(await page.locator('#pwa-changelog-overlay').count(),0,'Panneau refermable');
