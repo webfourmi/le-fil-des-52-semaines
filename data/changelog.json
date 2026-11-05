@@ -1,0 +1,60 @@
+{
+  "current": "1.3.16",
+  "releases": [
+    {
+      "version": "1.3.16",
+      "date": "2026-11-05",
+      "title": "Un journal des nouveautés à chaque mise à jour",
+      "changes": [
+        "La liste détaillée des changements s'affiche avant l'installation d'une mise à jour.",
+        "Le bouton « Vérifier les nouveautés » permet de relire les dernières améliorations.",
+        "Un historique des versions est disponible dans le panneau des nouveautés."
+      ]
+    },
+    {
+      "version": "1.3.15",
+      "date": "2026-11-04",
+      "title": "Histoire de la couture dans l'Antiquité",
+      "changes": [
+        "Ajout du contenu consacré à la couture dans l'Antiquité.",
+        "Ajout des patrons de la toge romaine et de la tunique, avec liens depuis l'atelier."
+      ]
+    },
+    {
+      "version": "1.3.14",
+      "date": "2026-11-04",
+      "title": "Navigation mobile améliorée",
+      "changes": [
+        "Suppression du raccourci Bonus en doublon sous « Mes cours ».",
+        "Le bouton Retour du téléphone retrouve la page précédente de l'application."
+      ]
+    },
+    {
+      "version": "1.3.13",
+      "date": "2026-11-04",
+      "title": "Recherche dans les projets Bonus",
+      "changes": [
+        "Ajout d'une barre de recherche par mots-clés dans Bonus.",
+        "Ajout d'un menu déroulant pour choisir les projets bonus."
+      ]
+    },
+    {
+      "version": "1.3.12",
+      "date": "2026-11-04",
+      "title": "Projets Bonus et cale-porte chien",
+      "changes": [
+        "Nouvelle rubrique Bonus dans Couture.",
+        "Cale-porte chien : ajout d'un dessous triangulaire séparé et d'un mode d'emploi provisoire.",
+        "Projet chien conservé « en cours d’écriture »."
+      ]
+    },
+    {
+      "version": "1.3.11",
+      "date": "2026-11-03",
+      "title": "Silhouette du cale-porte chien",
+      "changes": [
+        "Correction du patron du teckel et des pièces associées."
+      ]
+    }
+  ]
+}
