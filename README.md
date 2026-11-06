@@ -1,3 +1,10 @@
+## V1.3.19 : atelier étui Kantha validé
+
+- Suite pratique intégrée à l'article Bengale, sans dupliquer son contenu historique.
+- Fleur du Bengale, étui doublé, coulisses séparées et deux cordons symétriques.
+- Patron A4, schémas vectoriels et tutoriel affichés sur la page Voyage textile → Bengale.
+- Statut éditorial validé, jamais inscrit sur les images.
+
 # De fil en aiguille
 
 ## V1.3.9 : projet bonus « Cale-porte en forme de chien »
