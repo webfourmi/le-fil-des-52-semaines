@@ -557,6 +557,6 @@
       ]
     }
   },
-  "appRelease": "1.3.18",
-  "appReleaseNotes": "La technique Ourlet invisible utilise maintenant la deuxième image originale validée, lisible en zoom."
+  "appRelease": "1.3.20",
+  "appReleaseNotes": "La notification de mise à jour ne revient plus après installation ; les anciennes versions restent dans l’historique."
 }
