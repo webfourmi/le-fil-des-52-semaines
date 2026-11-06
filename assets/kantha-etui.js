@@ -2,7 +2,7 @@
 (function(root){
 'use strict';
 function render(){
-return \`
+return `
 <section class="kantha-atelier" aria-label="Atelier étui à lunettes Kantha">
 <header><span class="eyebrow">Atelier créatif · Bengale</span><h3>Fleur du Bengale : mon étui à lunettes Kantha</h3><p>Après le petit carré d'observation, transformons nos points avant en un étui souple, brodé et doublé. Ce modèle contemporain s'inspire du réemploi et du piquage Kantha, sans prétendre reproduire un objet historique.</p><p><strong>Projet validé</strong> · Débutant + · 2 à 3 heures · Dimensions finales approximatives : 10 × 19 cm.</p></header>
 <div class="kantha-visual"><svg viewBox="0 0 760 350" role="img" aria-label="Étui à lunettes brodé, fermé par deux cordons avec une fleur et des lignes de broderie">
@@ -51,7 +51,7 @@ return \`
 <text x="77" y="60" fill="#a85d42" font-size="18">A : départ</text><text x="80" y="284" fill="#a85d42" font-size="18">A : retour</text><text x="592" y="58" fill="#4c7d73" font-size="18">B : retour</text><text x="592" y="284" fill="#4c7d73" font-size="18">B : départ</text><text x="380" y="316" text-anchor="middle" fill="#665e54" font-size="16">Vue de dessus, coutures latérales volontairement écartées pour montrer le trajet.</text></svg>
 <ol><li>Fixe une épingle à nourrice au <b>cordon A</b>. Entre dans la coulisse du devant par la gauche, ressors à droite, puis traverse la coulisse du dos de droite à gauche. Les deux extrémités se retrouvent à gauche : fais un nœud.</li><li>Avec le <b>cordon B</b>, effectue le parcours inverse : entre dans le dos à droite, sors à gauche, puis passe dans le devant vers la droite. Noue les deux extrémités à droite.</li><li>Tire doucement sur les deux nœuds : le bord supérieur se fronce et ferme l'étui. Pour rouvrir, écarte les deux lèvres de la coulisse.</li></ol>
 <p class="kantha-note"><b>Contrôle :</b> les cordons doivent pouvoir coulisser sans bloquer. Si la monture est particulièrement large, augmente les largeurs des panneaux et des coulisses avant de couper. Cet étui souple ne remplace pas une coque rigide contre les chocs.</p></section>
-</section>\`;
+</section>`;
 }
 root.Fil52KanthaEtui={render};
 })(globalThis);
