@@ -165,6 +165,7 @@ function render(selectedId){
  '<section class="travel-vocabulary"><h3>Petit lexique</h3><dl>'+item.vocab.map(([word,definition])=>'<div><dt>'+word+'</dt><dd>'+definition+'</dd></div>').join('')+'</dl></section>'+
  '<section class="travel-workshop"><span class="eyebrow">À essayer dans notre atelier</span><h3>'+item.workshop.title+'</h3><p><b>Durée indicative : '+item.workshop.minutes+'.</b> <b>Matériel :</b> '+item.workshop.material+'</p><ol>'+item.workshop.steps.map(x=>'<li>'+x+'</li>').join('')+'</ol><p class="small">'+item.workshop.note+'</p></section>'+
  (item.videos.length?'<section class="travel-videos"><h3>Voir les gestes en vidéo</h3><p class="small">Liens externes : connexion Internet nécessaire. Ouverture dans un nouvel onglet.</p>'+item.videos.map(video=>'<article><h4><a target="_blank" rel="noopener noreferrer" href="'+video.url+'">'+video.title+' ↗</a></h4><p class="small">'+video.author+' · '+video.language+'</p><p>'+video.look+'</p></article>').join('')+'</section>':'')+
+ (item.id==='bengale' && root.Fil52KanthaEtui ? root.Fil52KanthaEtui.render() : '')+
  '<p class="travel-sources"><b>Pour aller plus loin :</b> '+item.resources.map(([label,url])=>'<a target="_blank" rel="noopener noreferrer" href="'+url+'">'+label+' ↗</a>').join(' · ')+'</p></div></article>').join('');
 }
 root.Fil52Travel={cards,render};
