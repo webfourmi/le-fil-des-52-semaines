@@ -3,7 +3,8 @@
 'use strict';
 let deferred=null, worker=null, waiting=null, updateAccepted=false;
 let previouslyControlled=false;
-const APP_BUILD='1.3.19';
+const APP_BUILD='1.3.20';
+const compareVersions=(a,b)=>{const x=String(a).split('.').map(Number),y=String(b).split('.').map(Number);for(let i=0;i<Math.max(x.length,y.length);i++){const diff=(x[i]||0)-(y[i]||0);if(diff)return diff}return 0};
 const el=id=>document.getElementById(id);
 const updateUI=()=>{
  const install=el('pwa-install');
@@ -105,7 +106,7 @@ async function checkEdition(showCurrent=false){
   const d=await response.json();
   if(!Array.isArray(d.published)||!d.published.length||!d.published.every(n=>Number.isInteger(n)&&n>0&&n<=52))throw Error('Éditions invalides');
   // La version technique évolue même lorsque seuls les articles, patrons ou recherches changent.
-  if(typeof d.appRelease==='string'&&d.appRelease.trim()&&d.appRelease!==APP_BUILD){
+  if(typeof d.appRelease==='string'&&/^\d+(?:\.\d+)*$/.test(d.appRelease)&&compareVersions(d.appRelease,APP_BUILD)>0){
     notice('Nouvelle version de De fil en aiguille : '+d.appRelease+'. Consulte les nouveautés avant de l’installer.','Voir les nouveautés',()=>showReleaseNotes(true,d.appRelease));
     return 'app-update';
   }
@@ -123,7 +124,7 @@ async function checkEdition(showCurrent=false){
     return 'new';
   } else {
     if(!seen)localStorage.setItem('fil52.seen.latest',String(newest));
-    if(showCurrent)notice('Ton application (version '+APP_BUILD+') est à jour. Tu peux consulter les dernières nouveautés.','Voir les nouveautés',()=>showReleaseNotes(false));
+    if(showCurrent)notice('Ton application (version '+APP_BUILD+') est à jour.','Voir l’historique',()=>showReleaseNotes(false));
     return 'current';
   }
  }catch(_){
@@ -168,7 +169,7 @@ function register(){
  }).catch(()=>{});
 }
 function showWorker(w){
- if(updateAccepted)return;
+ if(updateAccepted||waiting===w)return;
  waiting=w;
  notice('Une nouvelle version de l’application est prête.','Voir les nouveautés',()=>showReleaseNotes(true));
  showReleaseNotes(true).catch(()=>{});
