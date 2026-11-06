@@ -12,7 +12,7 @@ const {chromium}=require('playwright');
    await page.getByRole('button',{name:'Viera',exact:true}).click();
    // La nouvelle version présente aussi les changements automatiquement une seule fois.
    await page.locator('#pwa-changelog-overlay').waitFor();
-   assert.match(await page.locator('.pwa-changelog-dialog').innerText(),/1.3.16/,'Présentation automatique de la version');
+   assert.match(await page.locator('.pwa-changelog-dialog').innerText(),/1.3.20/,'Présentation automatique de la version');
    await page.getByRole('button',{name:'Fermer',exact:true}).click();
    // Les nouveautés restent consultables et affichent un véritable historique.
    await page.locator('details.pwa-panel summary').click();
@@ -26,6 +26,12 @@ const {chromium}=require('playwright');
    assert.match(await page.locator('.pwa-changelog-dialog h3').innerText(),/Navigation mobile/i,'Historique des anciennes versions');
    await page.getByRole('button',{name:'Fermer',exact:true}).click();
    assert.equal(await page.locator('#pwa-changelog-overlay').count(),0,'Panneau refermable');
+   // Une version installée et consultée ne doit pas se réafficher.
+   await page.reload({waitUntil:'domcontentloaded'});
+   await page.locator('#app h1').first().waitFor();
+   assert.equal(await page.locator('#pwa-changelog-overlay').count(),0,'La notification ne revient pas après recharge');
+   assert.equal(await page.evaluate(()=>localStorage.getItem('fil52.changelog.seenVersion')),'1.3.20','Version consultée mémorisée');
+
    const nav=width<=850?'#bottomnav':'#nav';
    await page.locator(nav+' [data-page="learn"]').click();
    assert.equal(await page.locator('.bonus-shortcut').count(),0,'Pas de raccourci Bonus en doublon');
