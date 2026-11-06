@@ -1,3 +1,9 @@
+## V1.3.21 : Vietnam du Nord, article et marque-page validés
+
+- Nouvelle escale `vietnam` dans Coutures du monde, sur les broderies Hmong et Dao rouges.
+- Atelier marque-page brodé original, patron et fiche SVG lisible sur mobile.
+- Images sans aucune mention de validation ou de statut éditorial.
+
 ## V1.3.19 : atelier étui Kantha validé
 
 - Suite pratique intégrée à l'article Bengale, sans dupliquer son contenu historique.
