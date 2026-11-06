@@ -154,6 +154,7 @@ const enrichments={
  }
 };
 for(const item of cards){const extra=enrichments[item.id];item.sections.push(...extra.sections);item.resources.push(...extra.resources);item.videos=extra.videos;}
+if(root.Fil52Vietnam)cards.push(root.Fil52Vietnam);
 cards.push({id:'halloween',country:'États-Unis',title:'Halloween : citrouilles, tissus et quilts',era:'Archives américaines et trois projets facultatifs'});
 function render(selectedId){
  if(selectedId==='halloween')return root.Fil52Halloween.render();
@@ -161,7 +162,8 @@ function render(selectedId){
  return '<section class="section travel-intro"><span class="eyebrow">Voyage textile · Coutures du monde</span><h2>Le monde vu à travers ses coutures</h2><p>Chaque escale explore un savoir-faire textile, son histoire, des photographies d’objets identifiés, un vocabulaire et un petit atelier libre à partir de chutes.</p><p class="small">Choisis une escale dans le menu. Les photographies historiques peuvent nécessiter Internet ; les textes restent accessibles hors connexion après installation.</p></section>'+
  cards.filter(item=>!selectedId||item.id===selectedId).map(item=>'<article class="card section travel-article" data-travel="'+item.id+'"><header class="travel-article-heading"><span class="culture-label">Escale · '+item.country+'</span><h2>'+item.title+'</h2><small>'+item.era+'</small></header><div class="travel-content"><p class="travel-lead">'+item.lead+'</p>'+
  item.sections.map(([title,body])=>'<section class="travel-chapter"><h3>'+title+'</h3><p>'+body+'</p></section>').join('')+
- '<div class="travel-gallery">'+item.photos.map(imageCard).join('')+'</div>'+
+ '<div class="travel-gallery">'+item.photos.map(imageCard).join('')+'</div>'++
+ (item.id==='vietnam'?'<figure class="vietnam-tutorial-figure"><a href="./assets/vietnam-marque-page.svg" target="_blank" rel="noopener noreferrer"><img src="./assets/vietnam-marque-page.svg" loading="lazy" alt="Fiche illustrée détaillée du marque-page brodé Vietnam, motif, fournitures et montage"></a><figcaption>Fiche illustrée du projet : toucher pour agrandir, ouvrir ou imprimer.</figcaption></figure>':'')
  '<section class="travel-vocabulary"><h3>Petit lexique</h3><dl>'+item.vocab.map(([word,definition])=>'<div><dt>'+word+'</dt><dd>'+definition+'</dd></div>').join('')+'</dl></section>'+
  '<section class="travel-workshop"><span class="eyebrow">À essayer dans notre atelier</span><h3>'+item.workshop.title+'</h3><p><b>Durée indicative : '+item.workshop.minutes+'.</b> <b>Matériel :</b> '+item.workshop.material+'</p><ol>'+item.workshop.steps.map(x=>'<li>'+x+'</li>').join('')+'</ol><p class="small">'+item.workshop.note+'</p></section>'+
  (item.videos.length?'<section class="travel-videos"><h3>Voir les gestes en vidéo</h3><p class="small">Liens externes : connexion Internet nécessaire. Ouverture dans un nouvel onglet.</p>'+item.videos.map(video=>'<article><h4><a target="_blank" rel="noopener noreferrer" href="'+video.url+'">'+video.title+' ↗</a></h4><p class="small">'+video.author+' · '+video.language+'</p><p>'+video.look+'</p></article>').join('')+'</section>':'')+
