@@ -557,6 +557,6 @@
       ]
     }
   },
-  "appRelease": "1.3.17",
-  "appReleaseNotes": "Ajout de la technique illustrée Ourlet invisible avec ma Janome Cherry 21."
+  "appRelease": "1.3.18",
+  "appReleaseNotes": "La technique Ourlet invisible utilise maintenant la deuxième image originale validée, lisible en zoom."
 }
