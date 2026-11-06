@@ -417,7 +417,7 @@ function sewingTechniqueLibrary(){
    <div class="technique-image-frame"><img class="zoomable-photo" src="${safe(f.image)}" alt="${safe(f.alt)}" tabindex="0" loading="lazy" decoding="async" title="Ouvrir la fiche en plein écran"></div>
    <div class="technique-card-info"><span class="eyebrow">Fiche technique illustrée</span><h2>${safe(f.title)}</h2><p class="small"><i>${safe(f.subtitle)}</i></p><p>${safe(f.description)}</p>
    <p class="small">Touche l'image pour la consulter en plein écran. Tu peux agrandir les détails avec les doigts.</p>
-   <div class="actions"><button type="button" class="secondary" data-technique-open="${safe(f.id)}">🔎 Agrandir la fiche</button><a class="secondary" href="${safe(f.image)}" download="fiche-${safe(f.id)}.${f.image.toLowerCase().endsWith('.jpg')?'jpg':'webp'}">↓ Enregistrer l'image</a></div>
+   <div class="actions"><button type="button" class="secondary" data-technique-open="${safe(f.id)}">🔎 Agrandir la fiche</button><a class="secondary" href="${safe(f.image)}" download="fiche-${safe(f.id)}.${f.image.split('.').pop().toLowerCase()}">↓ Enregistrer l'image</a></div>
    </div>
   </article>`).join('')}
   </div>

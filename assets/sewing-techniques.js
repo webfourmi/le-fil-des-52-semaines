@@ -19,6 +19,15 @@ const records=Object.freeze([
   keywords:'doublure doubler doublé doublée couture vestimentaire sous-doublure sous doublure entoilage veste robe manteau jupe fourreau aisance ourlet parementure encolure manches tissu intérieur viscose cupro coton soie polyester doublure en fourreau',
   image:'./assets/techniques/doublure.jpg',
   alt:'Fiche illustrée La doublure en couture : définition, comparaison avec la sous-doublure et l’entoilage, montage en six étapes, choix des tissus, avantages et inconvénients.'
+ }),
+ Object.freeze({
+  id:'ourlet-invisible',
+  title:'L’ourlet invisible',
+  subtitle:'Technique ma machine · Janome Cherry 21 · Validé',
+  description:'Ourlet invisible avec le pied G : réglages E ou F, pliage, couture, avantages, limites et dépannage.',
+  keywords:'ourlet invisible janome cherry 21 machine pied G point E point F réglages tension longueur pli accordéon surfilage repassage jupe pantalon robe',
+  image:'./assets/techniques/ourlet-invisible.svg',
+  alt:'Ourlet invisible sur Janome Cherry 21 : réglages, pied G, six étapes, coupe, avantages et dépannage.'
  })
 ]);
 root.Fil52Techniques={list:()=>records};
