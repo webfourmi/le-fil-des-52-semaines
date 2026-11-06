@@ -28,7 +28,7 @@ const {chromium}=require('playwright');
    assert.equal(await page.locator('#pwa-changelog-overlay').count(),0,'Panneau refermable');
    // Une version installée et consultée ne doit pas se réafficher.
    await page.reload({waitUntil:'domcontentloaded'});
-   await page.locator('#bottomnav, #nav').first().waitFor();
+   await page.locator('#app h1').first().waitFor();
    assert.equal(await page.locator('#pwa-changelog-overlay').count(),0,'La notification ne revient pas après recharge');
    assert.equal(await page.evaluate(()=>localStorage.getItem('fil52.changelog.seenVersion')),'1.3.20','Version consultée mémorisée');
 
