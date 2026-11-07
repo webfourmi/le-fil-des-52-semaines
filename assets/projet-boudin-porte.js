@@ -40,6 +40,50 @@ function render(){
  <li>Janome Cherry 21 : point droit, longueur indicative <b>2,5 mm</b>, aiguille 80/12 ou 90/14 suivant l’épaisseur ; tester sur une chute.</li>
  </ul><p class="small">Préférer les chutes textiles ou un rembourrage synthétique à des graines, sensibles à l’humidité. Si tu choisis un lest complémentaire, il doit être enfermé dans une poche intérieure résistante.</p></section>
  <section class="card section"><h2>Réalisation pas à pas</h2><ol class="dog-steps">${steps.map(([title,body])=>`<li><strong>${title}</strong><p>${body}</p></li>`).join('')}</ol></section>
+ <section class="card section" id="boudin-teckel">
+ <span class="eyebrow">Variante du projet · ✎ Projet en cours d’écriture</span>
+ <h2>🐕 Boudin de porte teckel : tête intégrée, quatre petites pattes et queue relevée</h2>
+ <p>Le corps reste un boudin anti-courant d’air allongé, mais la tête de teckel est <b>prise directement dans la couture de l’extrémité avant</b> : aucune tête simplement fixée en surface. Quatre petites pattes souples sont prises dans les coutures latérales du corps, deux à l’avant et deux à l’arrière. La queue légèrement relevée est prise dans la couture de l’embout arrière.</p>
+ <figure class="dog-course-hero">
+ <svg viewBox="0 0 800 265" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schéma d'un long boudin de porte en teckel brun, tête et museau allongés à gauche, oreilles tombantes, quatre petites pattes et queue relevée à droite">
+ <rect width="800" height="265" rx="18" fill="#f4eee5"/>
+ <rect x="47" y="17" width="700" height="200" fill="#eadac2" stroke="#c2ad90" stroke-width="3"/><path d="M47 215H747" stroke="#816f60" stroke-width="4"/>
+ <path d="M193 173Q155 142 122 150 Q102 154 89 168 L59 174Q43 179 51 191Q62 201 89 198L106 208Q130 218 152 208L193 199Z" fill="#c48d6b" stroke="#835b48" stroke-width="4"/>
+ <path d="M134 157Q120 183 123 203Q147 217 160 191L169 161Z" fill="#95644f" stroke="#70483e" stroke-width="3"/>
+ <circle cx="106" cy="176" r="4" fill="#3a302a"/><ellipse cx="59" cy="183" rx="10" ry="7" fill="#493c34"/>
+ <rect x="175" y="172" width="495" height="47" rx="23" fill="#c48d6b" stroke="#835b48" stroke-width="4"/>
+ <path d="M183 183Q425 164 653 186" fill="none" stroke="#e9b89a" stroke-width="5" opacity=".8"/>
+ <g fill="#af765a" stroke="#815542" stroke-width="3">
+ <path d="M219 204Q213 229 221 236L249 236Q255 227 245 207Z"/>
+ <path d="M271 204Q265 226 274 233L301 233Q306 223 296 208Z"/>
+ <path d="M572 204Q566 225 574 232L601 232Q608 223 595 207Z"/>
+ <path d="M627 204Q622 227 633 235L660 235Q667 223 649 207Z"/></g>
+ <path d="M666 183Q692 165 709 141Q725 123 735 128Q742 139 726 153Q708 176 674 194Z" fill="#b47a5e" stroke="#815542" stroke-width="4"/>
+ <path d="M192 198Q431 212 669 200" stroke="#915d48" stroke-width="2" fill="none" stroke-dasharray="4 5"/>
+ <path d="M0 239H800" stroke="#c5b6a0" stroke-width="5"/>
+ </svg>
+ <figcaption>Schéma de la variante : quatre pattes courtes, museau de teckel et queue légèrement relevée. Illustration non à l’échelle, sans mention de statut sur le dessin.</figcaption></figure>
+ <h3>Pièces supplémentaires pour un seul ouvrage</h3>
+ <ul>
+  <li><b>Corps modifié :</b> deux demi-tubes à assembler, chacun de 11 cm de hauteur (marges de 1 cm comprises). Pour une porte de 83 cm, commencer par deux bandes de 72 × 11 cm ; la longueur devra être confirmée selon la projection réelle du museau.</li>
+  <li><b>Tête intégrée :</b> deux profils en miroir et une bande centrale pour former le dessus du crâne et le museau ; prévoir deux oreilles souples, avec deux épaisseurs chacune.</li>
+  <li><b>Quatre pattes courtes :</b> découper huit pièces (deux par patte), avec extrémités arrondies ; les pièces du gabarit comprennent 1 cm de marge.</li>
+  <li><b>Queue :</b> deux pièces symétriques avec une légère courbe vers le haut, à assembler et retourner avant montage.</li>
+  <li><b>Arrière :</b> un seul embout rond au lieu de deux, puisque la tête remplace l’embout avant.</li>
+ </ul>
+ <h3>Montage de la variante teckel</h3>
+ <ol class="dog-steps">
+  <li><strong>Préparer les pattes.</strong><p>Assembler chacune des quatre pattes endroit contre endroit, laisser la base ouverte, dégarnir les arrondis, retourner et garnir très légèrement de ouate. Garder les pattes courtes et souples pour qu’elles ne soulèvent pas le boudin et ne créent pas un passage d’air dessous.</p></li>
+  <li><strong>Former les oreilles et la queue.</strong><p>Coudre chaque oreille en deux épaisseurs et la retourner. Coudre les deux pièces de queue, retourner et ne garnir que la base si nécessaire pour obtenir une courbe douce.</p></li>
+  <li><strong>Assembler la tête de teckel.</strong><p>Broder les yeux et le nez sur les côtés avant assemblage. Coudre la bande centrale du bout du museau vers le crâne avec les deux profils miroir, en prenant les oreilles dans la couture prévue. Laisser l’arrière du cou ouvert. Le périmètre du cou doit être ajusté à celui du corps avant la coupe définitive.</p></li>
+  <li><strong>Positionner les quatre pattes.</strong><p>Placer une patte avant et une patte arrière sur chaque côté du corps, entre les deux demi-tubes endroit contre endroit. Oriente les pattes vers l’intérieur pendant la couture, parties arrondies cachées entre les tissus. Prévoir environ 6 à 8 cm depuis les extrémités, en vérifiant la position sur le modèle.</p></li>
+  <li><strong>Assembler le long corps.</strong><p>Coudre les deux longues coutures latérales à 1 cm, en maintenant les quatre pattes dans les coutures. Laisser une ouverture d’environ 12 cm sur un côté pour retourner et rembourrer. Les pattes ressortent après retournement.</p></li>
+  <li><strong>Insérer la queue et fermer l’arrière.</strong><p>Glisser la base ouverte de la queue dans la couture de l’embout arrière, à la position supérieure du tube, endroit contre endroit. Épingler puis coudre le cercle à 1 cm. La queue se redresse après retournement.</p></li>
+  <li><strong>Intégrer la tête.</strong><p>Aligner les repères du cou avec ceux de l’extrémité avant du corps. Piquer endroit contre endroit tout autour, à 1 cm. Faire un montage d’essai sur toile : la forme et le périmètre exact du cou doivent être vérifiés avant toute validation du patron.</p></li>
+  <li><strong>Retourner, rembourrer et fermer.</strong><p>Retourner par l’ouverture latérale. Rembourrer régulièrement le corps contre les courants d’air ; remplir légèrement la tête pour préserver le long museau. Fermer l’ouverture au point invisible, puis essayer le boudin devant la porte et contrôler qu’aucune patte ne crée de jour au sol.</p></li>
+ </ol>
+ <p class="small"><b>Patron provisoire :</b> le gabarit imprimable comporte les pattes et la queue. Les profils de tête et leur raccord au tube nécessitent encore un essai de montage à la toile avant d’être considérés comme un patron de coupe fiable. Cette variante n’est pas validée.</p>
+ </section>
  <section class="card section"><h2>Variante décorative</h2><p>Pour une petite touche de patchwork, assemble trois bandes de tissus contrastés sur la longueur, puis recoupe le panneau obtenu aux dimensions du rectangle. Surpique éventuellement les jonctions avant de monter le tube. Une toile unie à chaque embout donnera une finition nette.</p><p class="small">Les mesures, le confort de rembourrage et le glissement sur le sol restent à vérifier sur un premier exemplaire avant validation du projet.</p></section>
  <div class="actions"><button type="button" class="secondary" data-page="bonus">← Retour aux projets bonus</button></div>
  </div>`;
