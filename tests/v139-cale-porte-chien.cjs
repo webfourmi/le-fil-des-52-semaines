@@ -12,7 +12,7 @@ const {chromium}=require('playwright');
    await page.getByRole('button',{name:'Viera',exact:true}).click();
    // La nouvelle version présente aussi les changements automatiquement une seule fois.
    await page.locator('#pwa-changelog-overlay').waitFor();
-   assert.match(await page.locator('.pwa-changelog-dialog').innerText(),/1.3.23/,'Présentation automatique de la version');
+   assert.match(await page.locator('.pwa-changelog-dialog').innerText(),/1.3.24/,'Présentation automatique de la version');
    await page.getByRole('button',{name:'Fermer',exact:true}).click();
    // Les nouveautés restent consultables et affichent un véritable historique.
    await page.locator('details.pwa-panel summary').click();
@@ -127,7 +127,7 @@ const {chromium}=require('playwright');
    assert.equal(await page.locator('#pattern-preview-frame').count(),0);
    await page.locator('[data-bonus-pattern="draftstopper"] [data-pattern-preview="draftstopper"]').click();
    const draft=page.frameLocator('#pattern-preview-frame');
-   assert.equal(await draft.locator('.sheet').count(),2,'Deux planches A4 pour le boudin et le teckel');
+   assert.equal(await draft.locator('.sheet').count(),4,'Quatre planches A4 avec tête complète du teckel');
    const measures=await draft.locator('svg').first().evaluate(svg=>{
     const circle=svg.querySelector('#boudin-embout').getBBox(),witness=svg.querySelector('#boudin-temoin').getBBox();
     return {circle:[circle.width,circle.height],witness:[witness.width,witness.height],units:svg.getAttribute('width')};
@@ -142,6 +142,33 @@ const {chromium}=require('playwright');
    assert.deepEqual(pieces.test,[50,50],'Deuxième carré de contrôle à 5 cm');
    assert.equal(pieces.units,'210mm','Deuxième planche A4 à l’échelle');
    assert.deepEqual([pieces.paws,pieces.tail,pieces.ear],[1,1,1],'Gabarits patte, queue et oreille présents');
+   // Égalité des coutures tête/bande de dessus et raccord du cou au corps.
+   const tete=await draft.locator('svg').nth(2).evaluate(svg=>{
+    const left=svg.querySelector('#teckel-tete-gauche'),right=svg.querySelector('#teckel-tete-droite');
+    const upper=left.querySelector('[data-teckel-haut-piqure]').getTotalLength();
+    const seam=left.querySelector('path.cut').getBBox();
+    const neck=svg.querySelector('#teckel-tete-gauche path[stroke="#2f7959"]').getTotalLength();
+    return {hasLeft:!!left,hasRight:!!right,upper,neck,box:[seam.x,seam.y,seam.width,seam.height],units:svg.getAttribute('width')};
+   });
+   assert.ok(tete.hasLeft&&tete.hasRight,'Deux profils tête en miroir');
+   assert.ok(tete.upper>140&&tete.upper<150,'Courbe supérieure de tête dans les dimensions attendues');
+   assert.equal(tete.neck,60,'Côté de cou = 60 mm');
+   assert.ok(tete.box[0]>20&&tete.box[0]+tete.box[2]<185,'Profil entier sur A4');
+   assert.equal(tete.units,'210mm','Profils à taille réelle A4');
+   const gusset=await draft.locator('svg').nth(3).evaluate(svg=>{
+    const witness=svg.querySelector('#teckel-tete-temoin').getBBox();
+    return {
+      width:svg.getAttribute('width'),
+      witness:[witness.width,witness.height],
+      left:svg.querySelector('#teckel-gousset-cote1').getTotalLength(),
+      right:svg.querySelector('#teckel-gousset-cote2').getTotalLength(),
+      neck:svg.querySelector('path[stroke="#2f7959"]').getTotalLength()
+    };
+   });
+   assert.deepEqual(gusset.witness,[50,50],'Carré de contrôle tête 5 × 5 cm');
+   assert.equal(gusset.width,'210mm','Bande de tête à taille réelle A4');
+   assert.ok(Math.abs(gusset.left-tete.upper)<0.5&&Math.abs(gusset.right-tete.upper)<0.5,'Coutures latérales et dessus de tête de même longueur');
+   assert.ok(Math.abs(tete.neck*2+gusset.neck-180)<0.1,'Cou de 18 cm raccordable au tube fini');
    await page.locator('[data-pattern-preview-close]').click();
 
    await page.locator(nav+' [data-page="learn"]').click();
