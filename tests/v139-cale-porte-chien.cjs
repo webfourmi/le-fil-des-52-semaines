@@ -61,7 +61,7 @@ const {chromium}=require('playwright');
    assert.equal(await page.locator('[data-bonus-project="dog"]:visible').count(),1,'Menu choisit le chien');
    await page.locator('#bonus-select').selectOption('');
    assert.equal(await page.locator('[data-bonus-project="dog"]:visible').count(),1,'Option tous les projets');
-   assert.match(await page.locator('.bonus-project-entry').innerText(),/en cours d’écriture/i,'Statut éditorial conservé');
+   assert.match(await page.locator('[data-bonus-project="dog"]').innerText(),/en cours d’écriture/i,'Statut éditorial conservé');
    await page.locator('#bonus-search').fill('courant air');
    assert.equal(await page.locator('[data-bonus-project="draftstopper"]:visible').count(),1,'Boudin retrouvé par deux mots-clés');
    assert.equal(await page.locator('[data-bonus-project="dog"]:visible').count(),0,'Recherche discrimine les projets');
