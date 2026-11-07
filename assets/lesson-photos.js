@@ -21,6 +21,8 @@ const photosCoursUn=[
 photosCoursUn.forEach(([file,alt,width,height],i)=>{
  lessons[1][i].image={src:'./assets/cours-01/'+file,alt,width,height};
 });
+// Photo fournie pour le damier du cours patchwork 1 (quatre tissus Halloween).
+lessons[1][5].image={src:'./assets/patchwork-01/bloc-01-halloween.jpg',alt:'Bloc 1 damier Halloween : deux carrés de coton clair et deux carrés noirs imprimés, disposés en diagonale',width:1536,height:1437};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 // Les chemins locaux garantissent la compatibilité GitHub Pages et le cache PWA.
 function source(src){return typeof src==='string' && /^\.\/assets\/[a-zA-Z0-9_./-]+\.(webp|avif|png|jpe?g)$/.test(src) && !src.includes('..')?src:'';}
@@ -39,9 +41,10 @@ document.addEventListener('click',event=>{
  const button=event.target.closest('[data-lesson-photo]');if(!button)return;
  const [w,i]=button.dataset.lessonPhoto.split(':'),slot=lessons[w]?.[i],img=slot?.image;
  if(!source(img?.src))return;
- if(!dialog){dialog=document.createElement('dialog');dialog.className='lesson-photo-dialog';dialog.setAttribute('aria-label','Photo du cours agrandie');document.body.append(dialog);dialog.addEventListener('cancel',event=>{event.preventDefault();close()});dialog.addEventListener('click',event=>{if(event.target===dialog||event.target.closest('[data-close-photo]'))close()});}
+ if(!dialog){dialog=document.createElement('dialog');dialog.className='lesson-photo-dialog';dialog.setAttribute('aria-label','Photo du cours agrandie');document.body.append(dialog);dialog.addEventListener('cancel',event=>{event.preventDefault();close()});dialog.addEventListener('click',event=>{const zoom=event.target.closest('[data-zoom-photo]');if(zoom){const active=dialog.classList.toggle('photo-zoomed');zoom.setAttribute('aria-pressed',String(active));zoom.textContent=active?'Ajuster à l’écran':'Voir les détails à 100 %';return;}if(event.target===dialog||event.target.closest('[data-close-photo]'))close()});}
  opener=button;
- dialog.innerHTML='<button type="button" class="secondary" data-close-photo autofocus>Fermer la photo</button><figure><img src="'+esc(source(img.full)||img.src)+'" alt="'+esc(img.alt||slot.caption)+'"><figcaption>'+esc(slot.caption)+'</figcaption></figure>';
+ dialog.classList.remove('photo-zoomed');
+ dialog.innerHTML='<div class="lesson-photo-actions"><button type="button" class="secondary" data-close-photo autofocus>Fermer la photo</button><button type="button" class="secondary" data-zoom-photo aria-pressed="false">Voir les détails à 100 %</button></div><figure><img src="'+esc(source(img.full)||img.src)+'" alt="'+esc(img.alt||slot.caption)+'"><figcaption>'+esc(slot.caption)+'</figcaption></figure>';
  dialog.showModal();dialog.querySelector('button').focus();
 });
 // Une ressource absente doit rester honnête et lisible, même hors connexion.
