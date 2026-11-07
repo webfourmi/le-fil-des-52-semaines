@@ -12,7 +12,7 @@ const {chromium}=require('playwright');
    await page.getByRole('button',{name:'Viera',exact:true}).click();
    // La nouvelle version présente aussi les changements automatiquement une seule fois.
    await page.locator('#pwa-changelog-overlay').waitFor();
-   assert.match(await page.locator('.pwa-changelog-dialog').innerText(),/1.3.22/,'Présentation automatique de la version');
+   assert.match(await page.locator('.pwa-changelog-dialog').innerText(),/1.3.23/,'Présentation automatique de la version');
    await page.getByRole('button',{name:'Fermer',exact:true}).click();
    // Les nouveautés restent consultables et affichent un véritable historique.
    await page.locator('details.pwa-panel summary').click();
@@ -30,7 +30,7 @@ const {chromium}=require('playwright');
    await page.reload({waitUntil:'domcontentloaded'});
    await page.locator('#app h1').first().waitFor();
    assert.equal(await page.locator('#pwa-changelog-overlay').count(),0,'La notification ne revient pas après recharge');
-   assert.equal(await page.evaluate(()=>localStorage.getItem('fil52.changelog.seenVersion')),'1.3.22','Version consultée mémorisée');
+   assert.equal(await page.evaluate(()=>localStorage.getItem('fil52.changelog.seenVersion')),'1.3.23','Version consultée mémorisée');
 
    const nav=width<=850?'#bottomnav':'#nav';
    await page.locator(nav+' [data-page="learn"]').click();
@@ -69,7 +69,11 @@ const {chromium}=require('playwright');
    assert.equal(await page.locator('[data-bonus-project="draftstopper"]:visible').count(),1,'Sélection du boudin dans le menu déroulant');
    await page.locator('[data-bonus-project="draftstopper"] [data-page="draftstopper"]').click();
    assert.match(await page.locator('h1').first().innerText(),/Boudin de porte/,'Tutoriel Bonus boudin accessible');
-   assert.equal(await page.locator('.dog-steps>li').count(),8,'Huit étapes de couture du boudin');
+   assert.equal(await page.locator('.dog-course > .card:not(#boudin-teckel) .dog-steps>li').count(),8,'Huit étapes du modèle simple');
+   assert.equal(await page.locator('#boudin-teckel .dog-steps>li').count(),8,'Huit étapes de la variante à tête intégrée');
+   assert.match(await page.locator('#boudin-teckel').innerText(),/quatre petites pattes/i,'Quatre pattes prévues');
+   assert.match(await page.locator('#boudin-teckel').innerText(),/queue relevée/i,'Queue relevée prévue');
+   assert.equal(await page.locator('#boudin-teckel svg').count(),1,'Illustration de la variante teckel');
    assert.match(await page.locator('.dog-course').innerText(),/84 × 20 cm/,'Dimensions exemple cohérentes');
    assert.match(await page.locator('.dog-course').innerText(),/en cours d’écriture/i,'Statut du projet boudin');
    await page.goBack();
@@ -123,14 +127,21 @@ const {chromium}=require('playwright');
    assert.equal(await page.locator('#pattern-preview-frame').count(),0);
    await page.locator('[data-bonus-pattern="draftstopper"] [data-pattern-preview="draftstopper"]').click();
    const draft=page.frameLocator('#pattern-preview-frame');
-   assert.equal(await draft.locator('.sheet').count(),1,'Patron A4 du boudin en une planche');
-   const measures=await draft.locator('svg').evaluate(svg=>{
+   assert.equal(await draft.locator('.sheet').count(),2,'Deux planches A4 pour le boudin et le teckel');
+   const measures=await draft.locator('svg').first().evaluate(svg=>{
     const circle=svg.querySelector('#boudin-embout').getBBox(),witness=svg.querySelector('#boudin-temoin').getBBox();
     return {circle:[circle.width,circle.height],witness:[witness.width,witness.height],units:svg.getAttribute('width')};
    });
    assert.ok(Math.abs(measures.circle[0]-77.3)<0.2&&Math.abs(measures.circle[1]-77.3)<0.2,'Embout imprimable de 7,7 cm');
    assert.deepEqual(measures.witness,[50,50],'Carré de contrôle 5 cm du boudin');
    assert.equal(measures.units,'210mm','A4 à taille réelle pour le boudin');
+   const pieces=await draft.locator('svg').nth(1).evaluate(svg=>{
+    const test=svg.querySelector('#teckel-temoin-5cm').getBBox();
+    return {units:svg.getAttribute('width'),test:[test.width,test.height],paws:svg.querySelectorAll('#teckel-patte').length,tail:svg.querySelectorAll('#teckel-queue').length,ear:svg.querySelectorAll('#teckel-oreille').length};
+   });
+   assert.deepEqual(pieces.test,[50,50],'Deuxième carré de contrôle à 5 cm');
+   assert.equal(pieces.units,'210mm','Deuxième planche A4 à l’échelle');
+   assert.deepEqual([pieces.paws,pieces.tail,pieces.ear],[1,1,1],'Gabarits patte, queue et oreille présents');
    await page.locator('[data-pattern-preview-close]').click();
 
    await page.locator(nav+' [data-page="learn"]').click();
