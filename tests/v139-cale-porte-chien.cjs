@@ -30,7 +30,7 @@ const {chromium}=require('playwright');
    await page.reload({waitUntil:'domcontentloaded'});
    await page.locator('#app h1').first().waitFor();
    assert.equal(await page.locator('#pwa-changelog-overlay').count(),0,'La notification ne revient pas après recharge');
-   assert.equal(await page.evaluate(()=>localStorage.getItem('fil52.changelog.seenVersion')),'1.3.23','Version consultée mémorisée');
+   assert.equal(await page.evaluate(()=>localStorage.getItem('fil52.changelog.seenVersion')),'1.3.24','Version consultée mémorisée');
 
    const nav=width<=850?'#bottomnav':'#nav';
    await page.locator(nav+' [data-page="learn"]').click();
