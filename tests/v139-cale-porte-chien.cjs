@@ -75,6 +75,7 @@ const {chromium}=require('playwright');
    await page.goBack();
    await page.locator('#bonus-select').waitFor();
    assert.equal(await page.evaluate(()=>state.page),'bonus','Retour Android Boudin vers Bonus');
+   await page.locator('#bonus-select').selectOption('');
 
    await page.locator('[data-sewing-section="courses"]').click();
    await page.locator('#sewing-course-search').fill('teckel');
