@@ -9,7 +9,7 @@ const A='#d3a190',B='#8eada0',C='#eedbc3',D='#738f80';
 function diagram(w,patch){
  let shapes='',title=patch?'Schéma du bloc de patchwork n° '+w:'Schéma des gestes du projet couture n° '+w;
  if(patch){
-  if(w===2){shapes=rect(175,25,126,170,A)+rect(301,25,126,170,B)+line(301,25,301,195,'5 4')+label(301,220,'2 bandes verticales · bloc brut 21,5 cm');}
+  if(w===2){shapes=rect(205,15,95,190,A)+rect(300,15,95,190,B)+line(300,15,300,205,'5 4')+label(300,232,'2 bandes verticales · bloc brut 21,5 × 21,5 cm');}
   if(w===3){shapes=rect(180,25,240,85,A)+rect(180,110,240,85,B)+line(180,110,420,110,'5 4')+label(300,220,'2 bandes horizontales · bloc brut 21,5 cm');}
   if(w===4){shapes=rect(180,24,240,180,A)+rect(245,67,110,95,B)+label(300,220,'Carré central + 4 bandes');}
   if(w===5){for(let r=0;r<3;r++)for(let c=0;c<3;c++)shapes+=rect(210+c*61,23+r*61,61,61,(r+c)%2===0?A:B);shapes+=label(301,225,'9 carrés alternés · équerrez à 21,5 cm');}
@@ -43,7 +43,7 @@ function diagram(w,patch){
   if(w===6){shapes=rect(83,28,150,173,A)+rect(267,28,150,173,B)+line(83,62,233,62,'5 4')+line(267,62,417,62,'5 4')+label(158,221,'2 faces · 22 × 27 cm')+label(341,221,'coulisse de 2 cm')+line(455,62,555,62,'5 4')+label(510,124,'2 cordons');}
  }
  if(!shapes)return '';
- return '<figure class="lesson-figure"><svg viewBox="0 0 600 250" role="img" aria-label="'+esc(title)+'" xmlns="http://www.w3.org/2000/svg">'+shapes+'</svg><figcaption>'+(w===2?'Vue du même sous-verre aux coins arrondis : face A à motifs ou face B unie, au choix. Les surpiqûres sont visibles des deux côtés.':'Schéma de principe, non à l’échelle. Utilise les cotes indiquées dans le texte pour découper.')+'</figcaption></figure>';
+ return '<figure class="lesson-figure"><svg viewBox="0 0 600 250" role="img" aria-label="'+esc(title)+'" xmlns="http://www.w3.org/2000/svg">'+shapes+'</svg><figcaption>'+(patch&&w===2?'Bloc 2 : deux bandes de même largeur assemblées verticalement pour former un carré brut de 21,5 × 21,5 cm.':!patch&&w===2?'Vue du même dessous de verre aux coins arrondis : face A à motifs ou face B unie, au choix. Les surpiqûres sont visibles des deux côtés.':'Schéma de principe, non à l’échelle. Utilise les cotes indiquées dans le texte pour découper.')+'</figcaption></figure>';
 }
 function list(items,ordered=false){return '<'+(ordered?'ol':'ul')+'>'+items.map(s=>'<li>'+esc(s)+'</li>').join('')+'</'+(ordered?'ol':'ul')+'>';}
 function renderPreparation(d,w){
