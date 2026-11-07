@@ -1,6 +1,17 @@
 {
-  "current": "1.3.23",
+  "current": "1.3.24",
   "releases": [
+    {
+      "version": "1.3.24",
+      "date": "2026-11-07",
+      "title": "Patron complet de la tête de teckel",
+      "changes": [
+        "Deux nouveaux patrons A4 de tête : profils gauche/droit en miroir et bande du dessus du crâne et du museau.",
+        "Repères de couture et marges de 1 cm : vérification des longueurs de piqûre pour assembler la bande centrale aux profils.",
+        "Jonction du cou de 18 cm adaptée au boudin, et mesures du corps recalculées pour une porte de 83 cm.",
+        "Instructions de montage précisées. Projet toujours en cours d’écriture, montage sur toile conseillé."
+      ]
+    },
     {
       "version": "1.3.23",
       "date": "2026-11-07",
