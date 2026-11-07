@@ -1091,7 +1091,7 @@ document.addEventListener('input',e=>{const a=e.target;
 });
 window.Fil52OpenEdition=(d,week)=>{if(!Array.isArray(d.published)||!d.published.includes(week))return;upcomingEditions=d.issues||{};state.published=[...new Set([1,...d.published])];state.edition=String(d.version||'0.1');selectWeek(week);};
 if(location.protocol.startsWith('http'))fetch('./data/editions.json',{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject()).then(d=>{if(Array.isArray(d.published)&&d.published.every(n=>Number.isInteger(n)&&n>=1&&n<=52)){const incoming=[...new Set([1,...d.published])];const nextVersion=String(d.version||'0.1');const changed=state.edition!==nextVersion||incoming.length!==state.published.length||incoming.some(n=>!state.published.includes(n));upcomingEditions=d.issues||{};state.published=incoming;state.edition=nextVersion;if((changed||state.page==='home'||state.page==='quilt'||(state.page==='learn'&&state.week>1&&!!upcomingEditions[state.week]))&&!document.activeElement?.matches('textarea[data-note],textarea[data-personal-notes],input[data-personal-title],#personal-new-name'))render();}}).catch(()=>{});
-render();
+document.addEventListener('DOMContentLoaded',render);
 if(state.profile)history.replaceState({fil52View:atelierView(),scrollY:0},'');
 </script>
 </body>
