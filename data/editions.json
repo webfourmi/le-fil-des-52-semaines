@@ -558,6 +558,6 @@
       ]
     }
   },
-  "appRelease": "1.3.20",
-  "appReleaseNotes": "La notification de mise à jour ne revient plus après installation ; les anciennes versions restent dans l’historique."
+  "appRelease": "1.3.22",
+  "appReleaseNotes": "Nouveau projet bonus : boudin de porte anti-courant d’air, patron sur mesure et mode d’emploi (en cours d’écriture)."
 }
