@@ -69,7 +69,7 @@ const {chromium}=require('playwright');
    assert.equal(await page.locator('[data-bonus-project="draftstopper"]:visible').count(),1,'Sélection du boudin dans le menu déroulant');
    await page.locator('[data-bonus-project="draftstopper"] [data-page="draftstopper"]').click();
    assert.match(await page.locator('h1').first().innerText(),/Boudin de porte/,'Tutoriel Bonus boudin accessible');
-   assert.equal(await page.locator('.dog-course > .card .dog-steps>li').count(),8,'Huit étapes du modèle simple');
+   assert.equal(await page.locator('.dog-course > .card:not(#boudin-teckel) .dog-steps>li').count(),8,'Huit étapes du modèle simple');
    assert.equal(await page.locator('#boudin-teckel .dog-steps>li').count(),8,'Huit étapes de la variante à tête intégrée');
    assert.match(await page.locator('#boudin-teckel').innerText(),/quatre petites pattes/i,'Quatre pattes prévues');
    assert.match(await page.locator('#boudin-teckel').innerText(),/queue relevée/i,'Queue relevée prévue');
