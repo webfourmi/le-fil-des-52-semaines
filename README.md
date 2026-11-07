@@ -1,3 +1,9 @@
+## V1.3.26 : correction du schéma du bloc 2 de patchwork
+
+- Dessin de deux bandes verticales formant un carré, rapport largeur/hauteur de 1:1.
+- Suppression de la légende sur le dessous de verre dans le cours de patchwork ; conservation dans le cours de couture.
+- Statut éditorial du bloc 2 inchangé : projet en cours d’écriture.
+
 ## V1.3.21 : Vietnam du Nord, article et marque-page validés
 
 - Nouvelle escale `vietnam` dans Coutures du monde, sur les broderies Hmong et Dao rouges.
