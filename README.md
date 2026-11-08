@@ -1,3 +1,10 @@
+## V1.3.30 : cours patchwork 2 validé, couture 2 photographié
+
+- Cours de patchwork 2 explicitement approuvé, sans changer l'avancement individuel des couvertures.
+- Six photos haute définition originales ajoutées dans les étapes du cours couture 2, avec zoom sur mobile. Les photos suivent les gestes du dessous de verre : coupe, H630, piqûre, dégarnissage, surpiqûre et finition.
+- Couture 2 : **Projet en cours d’écriture**. Aucun changement de statut éditorial sans validation.
+- Cache PWA renouvelé et historique des nouveautés mis à jour.
+
 ## V1.3.29 : photos de couture corrigées et pattemouille
 
 - Remplacement des images de piqûre et de repassage du cours patchwork 2 : tissus superposés pour la piqûre, marges ouvertes et repassées sur l’envers.
