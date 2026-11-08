@@ -21,6 +21,8 @@ const photosCoursUn=[
 photosCoursUn.forEach(([file,alt,width,height],i)=>{
  lessons[1][i].image={src:'./assets/cours-01/'+file,alt,width,height};
 });
+// Photographie originale fournie pour le cours patchwork n° 2, conservée dans sa définition native.
+lessons[2][5].image={src:'./assets/patchwork-02/bloc-02-reel.jpg',alt:'Véritable bloc de patchwork 2 photographié : tissu gris clair à gauche et chats porte-bonheur japonais à droite, couture centrale verticale',width:1514,height:1536};
 // Photo fournie pour le damier du cours patchwork 1 (quatre tissus Halloween).
 lessons[1][5].image={src:'./assets/patchwork-01/bloc-01-halloween.jpg',alt:'Bloc 1 damier Halloween : deux carrés de coton clair et deux carrés noirs imprimés, disposés en diagonale',width:1536,height:1437};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
