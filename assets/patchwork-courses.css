@@ -1,1 +1,22 @@
 .patch-course-list{margin-top:30px}.patch-course{padding:0;overflow:hidden}.patch-course>summary{display:grid;gap:6px;position:relative;padding:20px 48px 20px 20px;cursor:pointer;list-style:none}.patch-course>summary::-webkit-details-marker{display:none}.patch-course>summary::after{content:'+';position:absolute;right:20px;top:24px;font-size:26px}.patch-course[open]>summary::after{content:'−'}.patch-course>summary strong{font-family:Georgia,serif;font-size:1.25rem;line-height:1.3;overflow-wrap:anywhere}.patch-course>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset:-4px}.patch-course-content{padding:0 20px 20px}.patch-course-content>.card{box-shadow:none;border:0;background:transparent}.patch-course-content h3{margin-top:15px}.patch-course-content li{margin-bottom:8px}@media(max-width:600px){.patch-course>summary{padding:16px 42px 16px 16px}.patch-course-content{padding:0 12px 16px}.patch-course-content>.card{padding:14px 10px}}@media print{.patch-course:not([open]){display:none}}
+
+/* Cours patchwork 2 : véritables photos et illustrations de carnet créatif. */
+.patchwork-two-cover{max-width:590px;margin:18px auto 22px;background:#fff9ee;border:1px solid #e3d3bc;border-radius:17px;overflow:hidden;box-shadow:0 6px 22px #5a433216}
+.patchwork-two-photo{min-width:0;margin:14px 0;border:1px solid #e4d7c8;border-radius:15px;background:#fffaf1;overflow:hidden}
+.patchwork-two-cover figcaption,.patchwork-two-photo figcaption{padding:10px 13px;color:#586458;font-size:.87rem;line-height:1.45}
+.patchwork-two-photo-open{display:block;cursor:zoom-in;width:100%;padding:0;border:0;background:#eee5d6;border-radius:0;line-height:0}
+.patchwork-two-photo-open:focus-visible{outline:3px solid #a96b4e;outline-offset:-3px}
+.patchwork-two-photo-open img{display:block;width:100%;height:auto;object-fit:contain;max-height:590px}
+.patchwork-two-cover .patchwork-two-photo-open img{max-height:690px}
+.patchwork-two .patchwork-one-steps{padding-left:clamp(20px,3vw,34px)}
+.patchwork-two .patchwork-one-steps>li{margin-bottom:22px}
+.patchwork-two-step-photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:12px 0 6px}
+.patchwork-two-step-photos .patchwork-two-photo{margin:0}
+.patchwork-two-step-photos:has(> :only-child){grid-template-columns:minmax(0,min(440px,100%))}
+.patchwork-two-dialog{box-sizing:border-box;max-width:min(95vw,950px);width:auto;max-height:94vh;border:1px solid #a69888;border-radius:17px;padding:14px;background:#fffaf2;color:#2b4239;overflow:auto}
+.patchwork-two-dialog::backdrop{background:#101915bb}
+.patchwork-two-dialog-tools{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;position:sticky;top:0;background:#fffaf2;z-index:1;padding:2px}
+.patchwork-two-dialog img{display:block;max-width:100%;max-height:calc(94vh - 95px);width:auto;height:auto;object-fit:contain;margin:0 auto}
+.patchwork-two-dialog.zoom-full img{max-width:none;max-height:none;width:auto;height:auto}
+@media(max-width:560px){.patchwork-two-step-photos{grid-template-columns:minmax(0,1fr)}.patchwork-two .patchwork-one-steps{padding-left:21px}.patchwork-two-photo-open img{max-height:none}.patchwork-two-cover{margin:12px auto 18px}.patchwork-two-dialog{padding:9px}}
+@media print{.patchwork-two-dialog{display:none}.patchwork-two-photo-open{background:white}.patchwork-two-step-photos{grid-template-columns:repeat(2,minmax(0,1fr))}.patchwork-two-photo-open img{max-height:120mm;page-break-inside:avoid}}
