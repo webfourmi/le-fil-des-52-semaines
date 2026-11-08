@@ -23,6 +23,20 @@ photosCoursUn.forEach(([file,alt,width,height],i)=>{
 });
 // Photographie originale fournie pour le cours patchwork n° 2, conservée dans sa définition native.
 lessons[2][5].image={src:'./assets/patchwork-02/bloc-02-reel.jpg',alt:'Véritable bloc de patchwork 2 photographié : tissu gris clair à gauche et chats porte-bonheur japonais à droite, couture centrale verticale',width:1514,height:1536};
+// Photographies originales du cours couture 2, correspondant aux étapes du dessous de verre.
+lessons[2][0].caption="Deux pièces de coton à coins arrondis : face A bleue à motif d'oiseau, face B claire unie.";
+lessons[2][0].image={src:'./assets/cours-02/photo-1.jpg',alt:"Tissus découpés à coins arrondis, imprimé bleu à oiseau et tissu clair",width:1450,height:782};
+lessons[2][1].caption="H630 positionné sur l’envers de la face imprimée, en laissant les marges de couture libres.";
+lessons[2][1].image={src:'./assets/cours-02/photo-2.jpg',alt:"Envers du tissu imprimé avec molleton thermocollant H630 centré",width:1363,height:1450};
+lessons[2][2].caption="Piqûre du contour à la machine, avec une ouverture de retournement sur le côté droit.";
+lessons[2][2].image={src:'./assets/cours-02/photo-3.jpg',alt:"Dessous de verre à coins arrondis en cours de piqûre sur la machine à coudre",width:1087,height:1450};
+lessons[2][3].caption="Petites encoches dans les marges des arrondis, à distance de la ligne de couture.";
+lessons[2][3].image={src:'./assets/cours-02/photo-4.jpg',alt:"Envers de la pièce bleue, molleton H630 et marges de couture crantées dans les courbes",width:1450,height:1088};
+lessons[2][4].caption="Surpiqûre de finition au bord, après retournement de l’ouvrage.";
+lessons[2][4].image={src:'./assets/cours-02/photo-5.jpg',alt:"Dessous de verre imprimé bleu sous le pied de la machine pour la surpiqûre",width:1087,height:1450};
+lessons[2][6]={id:'week-2-photo-6',role:'Résultat final',caption:"Dessous de verre terminé, côté imprimé bleu avec l’oiseau et surpiqûre visible.",image:null};
+lessons[2][6].image={src:'./assets/cours-02/photo-6.jpg',alt:"Dessous de verre terminé, coton bleu à oiseau et bord arrondi surpiqué",width:1087,height:1450};
+
 // Photo fournie pour le damier du cours patchwork 1 (quatre tissus Halloween).
 lessons[1][5].image={src:'./assets/patchwork-01/bloc-01-halloween.jpg',alt:'Bloc 1 damier Halloween : deux carrés de coton clair et deux carrés noirs imprimés, disposés en diagonale',width:1536,height:1437};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -30,10 +44,10 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 function source(src){return typeof src==='string' && /^\.\/assets\/[a-zA-Z0-9_./-]+\.(webp|avif|png|jpe?g)$/.test(src) && !src.includes('..')?src:'';}
 function render(w,patchwork=false){
  const all=lessons[w];if(!all)return '';
- const slots=patchwork?all.slice(5):all.slice(0,5),title=patchwork?'Photos du patchwork':'Photos du cours couture';
+ const indices=patchwork?[5]:(w===2?[0,1,2,3,4,6]:[0,1,2,3,4]),slots=indices.map(i=>all[i]).filter(Boolean),title=patchwork?'Photos du patchwork':'Photos du cours couture';
  return '<section class="card section lesson-gallery '+(patchwork?'patchwork-photo-gallery':'sewing-photo-gallery')+'" aria-label="'+title+', projet n° '+w+'"><h3>'+title+'</h3><p class="small">'+(patchwork?'Le carré terminé, avant son assemblage dans la couverture.':'Le matériel, les étapes clés et le résultat du projet couture.')+(slots.some(slot=>slot.image)?' Voici les vraies photos de cet ouvrage, dans l’ordre des étapes.':' Les vraies photos seront ajoutées prochainement.')+'</p><div class="lesson-photo-grid">'+slots.map((slot,i)=>{
  const img=slot.image,src=source(img?.src);
- const media=src?'<button type="button" class="lesson-photo-open" data-lesson-photo="'+w+':'+(patchwork?i+5:i)+'" aria-label="'+esc('Agrandir : '+slot.caption)+'"><img loading="lazy" decoding="async" src="'+esc(src)+'" alt="'+esc(img.alt||slot.caption)+'"'+(Number.isInteger(img.width)&&img.width>0?' width="'+img.width+'"':'')+(Number.isInteger(img.height)&&img.height>0?' height="'+img.height+'"':'')+'></button>':'<div class="lesson-photo-empty">Photo à venir</div>';
+ const media=src?'<button type="button" class="lesson-photo-open" data-lesson-photo="'+w+':'+indices[i]+'" aria-label="'+esc('Agrandir : '+slot.caption)+'"><img loading="lazy" decoding="async" src="'+esc(src)+'" alt="'+esc(img.alt||slot.caption)+'"'+(Number.isInteger(img.width)&&img.width>0?' width="'+img.width+'"':'')+(Number.isInteger(img.height)&&img.height>0?' height="'+img.height+'"':'')+'></button>':'<div class="lesson-photo-empty">Photo à venir</div>';
  return '<figure>'+media+'<figcaption><b>'+esc(slot.role)+'</b><span>'+esc(slot.caption)+'</span></figcaption></figure>';
  }).join('')+'</div></section>';
 }
@@ -56,5 +70,10 @@ document.addEventListener('error',event=>{
  if(button){const empty=document.createElement('div');empty.className='lesson-photo-empty';empty.textContent='Photo indisponible';button.replaceWith(empty);}
  else if(img.closest('.lesson-photo-dialog')){const message=document.createElement('p');message.textContent='Photo indisponible hors connexion ou introuvable.';img.replaceWith(message);}
 },true);
-root.Fil52LessonPhotos={lessons,render,renderPatchwork:w=>render(w,true)};
+function renderSewingStep2(stepIndex){
+ const index=[0,1,2,3,-1,4,6][stepIndex];if(index===undefined||index<0)return '';
+ const slot=lessons[2][index],img=slot?.image,src=source(img?.src);if(!src)return '';
+ return '<figure class="sewing-two-photo"><button type="button" class="lesson-photo-open sewing-two-photo-open" data-lesson-photo="2:'+index+'" aria-label="'+esc('Agrandir : '+slot.caption)+'"><img loading="lazy" decoding="async" src="'+esc(src)+'" alt="'+esc(img.alt)+'" width="'+img.width+'" height="'+img.height+'"></button><figcaption>'+esc(slot.caption)+'</figcaption></figure>';
+}
+root.Fil52LessonPhotos={lessons,render,renderPatchwork:w=>render(w,true),renderSewingStep2};
 })(globalThis);
