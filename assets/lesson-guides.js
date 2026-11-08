@@ -66,6 +66,7 @@ function patchStepChecklist(steps,w,checked){
  }).join('')+'</div>';
 }
 function renderPatchwork(d,w,p,done,checkedSteps=[]){
+ if(w===2)return renderSecondPatchwork(p,done,checkedSteps);
  if(!d.patchCuts?.length)return '';
  const complete=done.includes(w);
  return '<section class="card section lesson-extra" data-lesson-patch="'+w+'">'+
@@ -77,6 +78,52 @@ function renderPatchwork(d,w,p,done,checkedSteps=[]){
  '<div class="tip"><b>Astuce de précision :</b> '+esc(d.patchTip)+'</div>'+
  '<button class="secondary lesson-patch-done" type="button" data-quilt-person="'+esc(p)+'" data-quilt-block="'+w+'" aria-pressed="'+(complete?'true':'false')+'">'+(complete?'✓ Bloc n° '+w+' terminé · décocher':'□ Marquer mon bloc n° '+w+' comme terminé')+'</button>'+
  '<p class="small">Cette coche est personnelle et se retrouvera aussi dans ta couverture personnelle.</p></section>'+root.Fil52LessonPhotos.renderPatchwork(w);
+}
+
+/* Cours 2 : même niveau de détail que le bloc 1. Les identifiants historiques
+   60200, 60201 et 60202 gardent leur sens pour préserver les coches existantes. */
+function renderSecondPatchwork(p,done,checkedSteps=[]){
+ const complete=done.includes(2);
+ const tasks=[
+  [60203,'Choisir et préparer les deux tissus','Prends deux cotons tissés non extensibles de poids comparable, l’un clair, l’autre foncé ou imprimé. Deux chutes suffisent, à condition qu’elles permettent chacune de couper une bande de 11,5 × 21,5 cm. Lave si nécessaire, sèche et repasse à plat. Repère l’endroit de chaque tissu.'],
+  [60204,'Imprimer et vérifier le gabarit','Ouvre le gabarit A4 ci-dessous. Imprime à 100 %, sans « Adapter à la page » et sans mise à l’échelle. Mesure le carré témoin : il doit faire exactement 5 × 5 cm. Puis contrôle le rectangle extérieur : 11,5 × 21,5 cm. Seul le trait plein est un trait de coupe : ne coupe ni les pointillés de marge ni le carré témoin.'],
+  [60205,'Tracer et couper deux bandes identiques','Sur l’envers de chaque tissu, reporte le rectangle extérieur une fois, en respectant si possible le droit-fil. Coupe une bande dans le tissu A et une dans le tissu B. Contrôle leur largeur de 11,5 cm, leur longueur de 21,5 cm et leurs angles droits. Les marges de couture de 7,5 mm sont déjà incluses : ne les ajoute pas.'],
+  [60200,'Disposer les bandes puis les placer endroit contre endroit','Pose les deux bandes côte à côte, dans le sens de la hauteur, tissu A à gauche et tissu B à droite, pour visualiser le futur carré. Rabats la bande B sur A, <b>endroit contre endroit</b>, en superposant leurs grands bords de 21,5 cm. Aligne les extrémités et maintiens avec quelques pinces ou épingles sans étirer.'],
+  [60201,'Tester et piquer la couture centrale','Sur deux chutes, règle la machine au point droit (longueur indicative de 2 à 2,5 mm) et teste une marge de <b>7,5 mm</b>, mesurée à la règle. Le bord du pied n’est pas forcément à 7,5 mm : trace la ligne sur l’envers si besoin. Pique sur toute la longueur de 21,5 cm, retire les épingles avant le pied et ne tire pas le tissu. Arrête proprement les extrémités.'],
+  [60206,'Ouvrir et repasser sans déformer','Pose le fer brièvement sur la couture encore fermée, puis ouvre les bandes. Couche les deux marges vers le tissu le plus foncé ou, pour un imprimé clair, vers celui sur lequel elles se voient le moins. Repose le fer sans le faire glisser. Ne surpique pas le contour et ne replie pas les bords bruts : ils serviront pour assembler la couverture.'],
+  [60202,'Mesurer le vrai carré obtenu','Mesure le bloc à plat, après refroidissement : <b>21,5 × 21,5 cm</b>, marges extérieures comprises. Contrôle les quatre angles droits et la couture verticale, droite et parallèle aux bords. Calcul : 11,5 + 11,5 − 2 × 0,75 = 21,5 cm. Une fois intégré dans la couverture, le bloc présentera 20 × 20 cm visibles.'],
+  [60207,'Photographier et ranger le bloc','Photographie ton carré, de préférence bien à plat et de face, puis ajoute-le si tu le souhaites à ton journal de patchwork. Range-le sans le retailler, avec une étiquette « Bloc 2 ». Quand tu es satisfait du résultat, utilise le bouton « Marquer mon bloc n° 2 comme terminé ». Cette coche est personnelle.']
+ ];
+ const steps=tasks.map(([id,title,body],i)=>'<li><label class="patch-step-label"><input type="checkbox" data-toggle="steps" data-val="'+id+'" aria-label="Bloc 2 étape '+(i+1)+'" '+(checkedSteps.includes(id)?'checked':'')+'><span><h4>'+esc(title)+'</h4><p>'+body+'</p></span></label></li>').join('');
+ return `<section class="card section lesson-extra patchwork-two" aria-label="Tutoriel détaillé du bloc 2">
+ <span class="eyebrow">Fiche technique du n° 02 · pour un seul bloc</span>
+ <h2>Deux bandes verticales</h2>
+ <p>Avec seulement deux rectangles, tu vas réaliser un carré bicolore parfaitement droit. Ce bloc prolonge le damier n° 1 : même marge de couture de 7,5 mm, mais un seul assemblage à réaliser. Compte environ 30 à 45 minutes pour mesurer, couper, coudre et repasser soigneusement.</p>
+ <div class="grid2"><div class="info"><b>À découper pour un seul bloc</b><br>1 bande A de <b>11,5 × 21,5 cm</b> et 1 bande B de <b>11,5 × 21,5 cm</b>. Choisis deux tissus contrastants ; toutes les marges sont comprises.</div><div class="info"><b>Résultat attendu</b><br>1 carré <b>brut de 21,5 × 21,5 cm</b>, avec une couture au milieu. La partie visible dans la couverture mesurera <b>20 × 20 cm</b>.</div></div>
+ <h3>Le matériel à préparer</h3>
+ <ul>
+ <li>Deux coupons de coton tissé non extensible, clair et foncé ou deux motifs contrastants, assez grands pour découper 11,5 × 21,5 cm dans chacun ; des chutes de récupération conviennent.</li>
+ <li>Fil assorti, canette, aiguille universelle 80/12 pour un coton courant, pied standard et machine à coudre Janome Cherry 21.</li>
+ <li>Règle, équerre ou règle patchwork, crayon textile effaçable, ciseaux à tissu ou cutter rotatif avec règle et tapis adapté.</li>
+ <li>Épingles ou pinces, fer à repasser, surface protégée et gabarit A4 du bloc 2.</li>
+ </ul>
+ <p class="tip"><b>Important :</b> les dimensions de coupe comprennent déjà la marge de <b>7,5 mm</b>. Pour l’assemblage central, tu couds sur le grand côté des bandes, pas sur leur petit côté. Ne reprends pas la marge de 1 cm des cours de couture.</p>
+ <h3>Disposition avant couture</h3>
+ ${diagram(2,true)}
+ <p>Sur l’endroit, la <b>bande A est à gauche</b> et la <b>bande B à droite</b>. Leur couture est verticale. Le dessin montre le bloc <b>carré</b>, et non deux bandes allongées constituant un rectangle.</p>
+ <h3>Patron à taille réelle : gabarit A4 du bloc 2</h3>
+ <p>Le patron comporte <b>un rectangle de 11,5 × 21,5 cm à reproduire deux fois</b>, les repères de couture à 7,5 mm et un carré témoin de 5 × 5 cm. Aucun assemblage de feuilles n’est nécessaire. Les traits intérieurs sont des repères, pas des pièces à découper.</p>
+ <div class="actions"><a class="primary course-pattern-link" href="./assets/patchwork-02-gabarit.html" data-pattern-preview="patchwork2" rel="noopener noreferrer">👁 Voir et imprimer le gabarit A4 à 100 %</a><a class="secondary" href="./assets/patchwork-02-gabarit.html" target="_blank" rel="noopener noreferrer">Ouvrir la planche seule ↗</a></div>
+ <h3>Le montage, pas à pas</h3><ol class="patchwork-one-steps">${steps}</ol>
+ <h3>Si le résultat ne correspond pas</h3>
+ <details class="lesson-problem"><summary>Le bloc est trop étroit ou trop large</summary><p>Mesure les deux bandes d’origine et la marge réellement piquée. Au-delà de 7,5 mm, tu perds de la largeur ; en deçà, le carré devient trop grand. Découds et recommence la couture si la coupe est juste. Ne retaille pas un bloc trop petit.</p></details>
+ <details class="lesson-problem"><summary>La couture centrale est de travers</summary><p>Vérifie que les grands bords ont été bien alignés, sans décalage, et que les coins sont droits. Découds si nécessaire, rebâtis et repique en guidant le tissu sans tirer. Trace un trait de couture à 7,5 mm pour retrouver une ligne régulière.</p></details>
+ <details class="lesson-problem"><summary>Les bords ondulent après repassage</summary><p>Laisse refroidir à plat. Repose le fer en le soulevant plutôt qu’en le faisant glisser ; ne tire pas les bandes. Si les tissus n’ont pas le même poids ou le même retrait, utilise deux chutes plus semblables pour l’essai suivant.</p></details>
+ <h3>Avant de ranger ton deuxième carré</h3>
+ <ul class="lesson-checkpoints"><li>Les deux tissus forment un carré avec une seule ligne de couture verticale.</li><li>Le bloc mesure 21,5 × 21,5 cm avec quatre angles droits, sans plis ni déformation.</li><li>Le contour reste brut ; les marges extérieures de 7,5 mm sont réservées à la couverture.</li><li>Le gabarit imprimé a été vérifié grâce au carré témoin de 5 × 5 cm.</li></ul>
+ <div class="actions"><a class="primary course-pattern-link" href="./assets/patchwork-02-gabarit.html" data-pattern-preview="patchwork2">⎙ Imprimer le gabarit du bloc 2</a><button class="secondary lesson-patch-done" type="button" data-quilt-person="${esc(p)}" data-quilt-block="2" aria-pressed="${complete?'true':'false'}">${complete?'✓ Bloc n° 2 terminé · décocher':'□ Marquer mon bloc n° 2 comme terminé'}</button></div>
+ <p class="small">Le gabarit est celui d’un seul ouvrage, et ta progression est conservée dans ton carnet personnel. Le cours reste en cours d’écriture jusqu’à validation éditoriale.</p>
+ </section>${root.Fil52LessonPhotos.renderPatchwork(2)`;
 }
 
 function renderFirstPatchwork(p,done,checkedSteps=[]){
