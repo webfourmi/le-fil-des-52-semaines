@@ -1,3 +1,10 @@
+## V1.3.27 : cours 2 de patchwork complété
+
+- Gabarit du bloc « Deux bandes verticales » en une seule page A4, 115 × 215 mm, à découper deux fois (une bande par tissu), contrôle 50 × 50 mm et marges 7,5 mm incluses.
+- Matériel pour un seul bloc, huit étapes détaillées, progression conservée, dépannage, contrôles du carré brut de 21,5 cm.
+- Patron consultable depuis le cours et dans la bibliothèque « Patrons → Patchwork », aperçu intégré et impression à 100 %.
+- **Statut : projet en cours d’écriture.** Pas de validation sans accord explicite.
+
 ## V1.3.26 : correction du schéma du bloc 2 de patchwork
 
 - Dessin de deux bandes verticales formant un carré, rapport largeur/hauteur de 1:1.
