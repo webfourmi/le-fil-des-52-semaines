@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gabarit A4 · Bloc patchwork 02 · Deux bandes verticales</title>
+<style>
+:root{color-scheme:light}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f6f3ec;color:#263d34;margin:0;line-height:1.5}
+.screen-header{max-width:840px;margin:24px auto 14px;padding:0 18px}
+h1{font-family:Georgia,serif;font-size:clamp(1.35rem,3vw,2rem);margin:.2em 0}
+p{margin:8px 0}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin:15px 0}
+button{border:0;border-radius:9px;background:#345a46;color:white;padding:12px 17px;font-weight:700;cursor:pointer}
+.note{background:#fff8ea;border-left:4px solid #b78355;padding:10px 13px;border-radius:4px}
+.sheet{margin:0 auto 25px;width:210mm;max-width:calc(100% - 24px);background:white;box-shadow:0 10px 30px #23312625;overflow:hidden}
+.sheet svg{width:100%;height:auto;display:block}
+.print-only{display:none}
+@media print{
+ @page{size:A4 portrait;margin:0}
+ html,body{background:white;margin:0;padding:0;width:210mm;height:297mm}
+ .screen-header{display:none!important}
+ .sheet{display:block;box-shadow:none;margin:0;padding:0;width:210mm!important;max-width:none;min-height:297mm;overflow:hidden;page-break-after:avoid}
+ .sheet svg{width:210mm!important;height:297mm!important;max-width:none}
+ .print-only{display:block}
+}
+</style>
+</head>
+<body>
+<header class="screen-header">
+ <p>De fil en aiguille · Cours de patchwork 2</p>
+ <h1>Gabarit à taille réelle : deux bandes verticales</h1>
+ <p>Imprime cette <b>unique page A4</b> à <b>100 % / taille réelle</b>, sans « Adapter à la page ». Vérifie ensuite à la règle que le carré témoin mesure bien <b>5 × 5 cm</b>.</p>
+ <p class="note"><b>Coupe :</b> reproduis le rectangle extérieur <b>deux fois</b>, une fois dans chaque tissu. La ligne continue est la découpe ; les pointillés indiquent les marges de 7,5 mm et ne doivent pas être découpés. Le carré de contrôle se trouve à l'intérieur du gabarit pour tenir sur une seule feuille.</p>
+ <div class="actions"><button type="button" onclick="window.print()">⎙ Imprimer le gabarit A4</button></div>
+</header>
+<main class="sheet">
+ <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 297" width="210mm" height="297mm" role="img" aria-label="Gabarit A4 à taille réelle, rectangle de coupe de 115 par 215 millimètres et carré témoin de 50 millimètres">
+  <rect x="0" y="0" width="210" height="297" fill="#fff"/>
+  <g font-family="Arial,Helvetica,sans-serif" fill="#242e2a">
+   <text x="13" y="11" font-size="5.2" font-weight="bold">DE FIL EN AIGUILLE · PATCHWORK N° 02</text>
+   <text x="13" y="18" font-size="4.3">Deux bandes verticales · patron A4 à taille réelle</text>
+   <text x="13" y="26" font-size="3.5">DÉCOUPER 2 RECTANGLES IDENTIQUES : un clair + un foncé · 11,5 × 21,5 cm</text>
+  </g>
+  <!-- Le contour plein seul constitue le tracé de coupe, 115 × 215 mm. -->
+  <rect x="47.5" y="34" width="115" height="215" fill="none" stroke="#171717" stroke-width=".48"/>
+  <!-- Repère interne d'une marge de 7,5 mm sur les quatre côtés, non à découper. -->
+  <rect x="55" y="41.5" width="100" height="200" fill="none" stroke="#777" stroke-width=".35" stroke-dasharray="2 1.5"/>
+  <g fill="#283b33" font-family="Arial,Helvetica,sans-serif" text-anchor="middle">
+   <text x="105" y="77" font-size="5.1" font-weight="bold">BANDE A / BANDE B</text>
+   <text x="105" y="84" font-size="3.8">À couper 1 fois dans chaque tissu</text>
+   <text x="105" y="94" font-size="5.4" font-weight="bold">11,5 × 21,5 cm</text>
+   <text x="105" y="100" font-size="3.6">marges de 7,5 mm comprises</text>
+   <text x="105" y="119" font-size="3.3">Bord long : assembler les deux bandes</text>
+   <text x="105" y="125" font-size="3.3">endroit contre endroit à 7,5 mm.</text>
+  </g>
+  <!-- Carré de contrôle 50 × 50 mm placé à l'intérieur du patron, sans coupe. -->
+  <rect x="80" y="152" width="50" height="50" fill="none" stroke="#5d756b" stroke-width=".5" stroke-dasharray="1.2 1.2"/>
+  <g fill="#37483f" font-family="Arial,Helvetica,sans-serif" text-anchor="middle">
+   <text x="105" y="173" font-size="4.4" font-weight="bold">CARRÉ TÉMOIN</text>
+   <text x="105" y="180" font-size="5.5" font-weight="bold">5 × 5 cm</text>
+   <text x="105" y="187" font-size="3.4">Ne pas découper</text>
+  </g>
+  <g fill="#253931" font-family="Arial,Helvetica,sans-serif">
+   <text x="15" y="137" font-size="3.4" transform="rotate(-90 15 137)">Grand côté : 21,5 cm</text>
+   <text x="105" y="255" font-size="3.6" text-anchor="middle">Largeur de coupe : 11,5 cm</text>
+   <text x="13" y="266" font-size="3.7">Trait plein : découper · pointillés : marge de couture, ne pas couper.</text>
+   <text x="13" y="273" font-size="3.7">Après assemblage : 11,5 + 11,5 − 1,5 = 21,5 cm.</text>
+   <text x="13" y="280" font-size="3.7">Bloc brut : 21,5 × 21,5 cm · bloc fini dans la couverture : 20 × 20 cm.</text>
+   <text x="13" y="289" font-size="3.6" font-weight="bold">IMPRESSION : A4 · taille réelle 100 % · sans ajustement.</text>
+  </g>
+ </svg>
+</main>
+</body>
+</html>
