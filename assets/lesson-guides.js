@@ -123,7 +123,7 @@ function renderSecondPatchwork(p,done,checkedSteps=[]){
  <ul class="lesson-checkpoints"><li>Les deux tissus forment un carré avec une seule ligne de couture verticale.</li><li>Le bloc mesure 21,5 × 21,5 cm avec quatre angles droits, sans plis ni déformation.</li><li>Le contour reste brut ; les marges extérieures de 7,5 mm sont réservées à la couverture.</li><li>Le gabarit imprimé a été vérifié grâce au carré témoin de 5 × 5 cm.</li></ul>
  <div class="actions"><a class="primary course-pattern-link" href="./assets/patchwork-02-gabarit.html" data-pattern-preview="patchwork2">⎙ Imprimer le gabarit du bloc 2</a><button class="secondary lesson-patch-done" type="button" data-quilt-person="${esc(p)}" data-quilt-block="2" aria-pressed="${complete?'true':'false'}">${complete?'✓ Bloc n° 2 terminé · décocher':'□ Marquer mon bloc n° 2 comme terminé'}</button></div>
  <p class="small">Le gabarit est celui d’un seul ouvrage, et ta progression est conservée dans ton carnet personnel. Le cours reste en cours d’écriture jusqu’à validation éditoriale.</p>
- </section>${root.Fil52LessonPhotos.renderPatchwork(2)`;
+ </section>${root.Fil52LessonPhotos.renderPatchwork(2)}`;
 }
 
 function renderFirstPatchwork(p,done,checkedSteps=[]){
