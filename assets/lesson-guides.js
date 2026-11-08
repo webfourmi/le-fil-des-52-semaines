@@ -9,7 +9,7 @@ const A='#d3a190',B='#8eada0',C='#eedbc3',D='#738f80';
 function diagram(w,patch){
  let shapes='',title=patch?'Schéma du bloc de patchwork n° '+w:'Schéma des gestes du projet couture n° '+w;
  if(patch){
-  if(w===2){shapes=rect(205,15,95,190,A)+rect(300,15,95,190,B)+line(300,15,300,205,'5 4')+label(300,232,'2 bandes verticales · bloc brut 21,5 × 21,5 cm');}
+  if(w===2){shapes=rect(205,15,95,190,A)+rect(300,15,95,190,B)+line(300,15,300,205,'5 4')+label(252,113,'A · clair')+label(348,113,'B · foncé')+label(300,232,'2 bandes verticales · bloc brut 21,5 × 21,5 cm');}
   if(w===3){shapes=rect(180,25,240,85,A)+rect(180,110,240,85,B)+line(180,110,420,110,'5 4')+label(300,220,'2 bandes horizontales · bloc brut 21,5 cm');}
   if(w===4){shapes=rect(180,24,240,180,A)+rect(245,67,110,95,B)+label(300,220,'Carré central + 4 bandes');}
   if(w===5){for(let r=0;r<3;r++)for(let c=0;c<3;c++)shapes+=rect(210+c*61,23+r*61,61,61,(r+c)%2===0?A:B);shapes+=label(301,225,'9 carrés alternés · équerrez à 21,5 cm');}
