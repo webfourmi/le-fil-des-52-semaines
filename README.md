@@ -1,3 +1,10 @@
+## V1.3.29 : photos de couture corrigées et pattemouille
+
+- Remplacement des images de piqûre et de repassage du cours patchwork 2 : tissus superposés pour la piqûre, marges ouvertes et repassées sur l’envers.
+- Consigne textuelle du repassage corrigée dans le cours 2.
+- Nouvelle entrée « Pattemouille » dans le dictionnaire couture ; conseil de repassage ajouté sous la fiche technique de l’ourlet invisible.
+- Cours patchwork 2 : **projet en cours d’écriture**.
+
 ## V1.3.28 : illustrations du cours de patchwork 2
 
 - Photographie originale `assets/patchwork-02/bloc-02-reel.jpg` affichée dans la galerie de l’ouvrage, résolution native conservée.
