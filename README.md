@@ -1,3 +1,10 @@
+## V1.3.32 : trois projets bonus de Noël
+
+- Botte de Noël personnalisée, guirlande de cinq étoiles rembourrées, pochon cadeau à double coulisse.
+- Tutoriels détaillés et patrons A4 accessibles dans Bonus et Patrons → Couture.
+- Patron pochon : plan coté non à l’échelle, pièces de 26 × 35 cm à tracer à la règle. Gabarits botte et étoiles en taille réelle avec carré témoin 5 cm.
+- Chaque projet : **Projet en cours d’écriture**, non validé.
+
 ## Version 1.3.31 (9 novembre 2026)
 
 - Cours 2 couture « Dessous de verre réversible à coins arrondis » : **Validé** explicitement, avec ses six photos et son gabarit.
