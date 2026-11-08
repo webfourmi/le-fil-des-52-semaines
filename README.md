@@ -1,3 +1,11 @@
+## V1.3.28 : illustrations du cours de patchwork 2
+
+- Photographie originale `assets/patchwork-02/bloc-02-reel.jpg` affichée dans la galerie de l’ouvrage, résolution native conservée.
+- Sept images d’ambiance et d’explications au fil du tutoriel : ouverture, découpe, disposition, superposition, piqûre, repassage, contrôle.
+- Photographies et illustrations agrandissables à l’écran sur téléphone ; pas de schéma vectoriel dans le corps du cours n° 2.
+- Bibliothèque des patrons et cours : bouton « Imprimer gabarit A4 ». La consigne d’impression à taille réelle reste présente dans la fiche.
+- Statut : **Projet en cours d’écriture** en attente de validation de l’utilisatrice.
+
 ## V1.3.27 : cours 2 de patchwork complété
 
 - Gabarit du bloc « Deux bandes verticales » en une seule page A4, 115 × 215 mm, à découper deux fois (une bande par tissu), contrôle 50 × 50 mm et marges 7,5 mm incluses.
