@@ -94,10 +94,22 @@ function renderSecondPatchwork(p,done,checkedSteps=[]){
   [60202,'Mesurer le vrai carré obtenu','Mesure le bloc à plat, après refroidissement : <b>21,5 × 21,5 cm</b>, marges extérieures comprises. Contrôle les quatre angles droits et la couture verticale, droite et parallèle aux bords. Calcul : 11,5 + 11,5 − 2 × 0,75 = 21,5 cm. Une fois intégré dans la couverture, le bloc présentera 20 × 20 cm visibles.'],
   [60207,'Photographier et ranger le bloc','Photographie ton carré, de préférence bien à plat et de face, puis ajoute-le si tu le souhaites à ton journal de patchwork. Range-le sans le retailler, avec une étiquette « Bloc 2 ». Quand tu es satisfait du résultat, utilise le bouton « Marquer mon bloc n° 2 comme terminé ». Cette coche est personnelle.']
  ];
- const steps=tasks.map(([id,title,body],i)=>'<li><label class="patch-step-label"><input type="checkbox" data-toggle="steps" data-val="'+id+'" aria-label="Bloc 2 étape '+(i+1)+'" '+(checkedSteps.includes(id)?'checked':'')+'><span><h4>'+esc(title)+'</h4><p>'+body+'</p></span></label></li>').join('');
+ const stepImages={
+  60205:[['etape-1-decoupe.webp','Découper deux rectangles de 11,5 × 21,5 cm dans deux tissus contrastants']],
+  60200:[['etape-2-disposition.webp','Prévisualiser les bandes côte à côte'],['etape-3-superposition.webp','Superposer les bandes endroit contre endroit, puis pincer le grand côté']],
+  60201:[['etape-4-couture.webp','Piquer à 7,5 mm sur le grand bord des bandes superposées']],
+  60206:[['etape-5-repassage.webp','Déplier et coucher la couture vers le tissu imprimé']],
+  60202:[['etape-6-controle.webp','Contrôler le carré brut de 21,5 × 21,5 cm']]
+ };
+ const photo=(file,caption)=>'<figure class="patchwork-two-photo"><button type="button" class="patchwork-two-photo-open" data-patch2-zoom aria-label="Agrandir l’illustration : '+esc(caption)+'"><img loading="lazy" decoding="async" src="./assets/patchwork-02/'+esc(file)+'" alt="'+esc(caption)+'" width="950" height="1187"></button><figcaption>'+esc(caption)+'</figcaption></figure>';
+ const steps=tasks.map(([id,title,body],i)=>'<li><label class="patch-step-label"><input type="checkbox" data-toggle="steps" data-val="'+id+'" aria-label="Bloc 2 étape '+(i+1)+'" '+(checkedSteps.includes(id)?'checked':'')+'><span><h4>'+esc(title)+'</h4><p>'+body+'</p></span></label>'+((stepImages[id]||[]).length?'<div class="patchwork-two-step-photos">'+stepImages[id].map(([file,caption])=>photo(file,caption)).join('')+'</div>':'')+'</li>').join('');
  return `<section class="card section lesson-extra patchwork-two" aria-label="Tutoriel détaillé du bloc 2">
  <span class="eyebrow">Fiche technique du n° 02 · pour un seul bloc</span>
  <h2>Deux bandes verticales</h2>
+ <figure class="patchwork-two-cover">
+  <button type="button" class="patchwork-two-photo-open" data-patch2-zoom aria-label="Agrandir l’illustration d’ouverture du bloc 2"><img loading="lazy" decoding="async" width="950" height="1187" src="./assets/patchwork-02/illustration-bloc.webp" alt="Illustration de carnet créatif : deux bandes verticales et un carré de patchwork de 21,5 cm"></button>
+  <figcaption>Notre inspiration : deux tissus contrastants pour former un carré de patchwork.</figcaption>
+ </figure>
  <p>Avec seulement deux rectangles, tu vas réaliser un carré bicolore parfaitement droit. Ce bloc prolonge le damier n° 1 : même marge de couture de 7,5 mm, mais un seul assemblage à réaliser. Compte environ 30 à 45 minutes pour mesurer, couper, coudre et repasser soigneusement.</p>
  <div class="grid2"><div class="info"><b>À découper pour un seul bloc</b><br>1 bande A de <b>11,5 × 21,5 cm</b> et 1 bande B de <b>11,5 × 21,5 cm</b>. Choisis deux tissus contrastants ; toutes les marges sont comprises.</div><div class="info"><b>Résultat attendu</b><br>1 carré <b>brut de 21,5 × 21,5 cm</b>, avec une couture au milieu. La partie visible dans la couverture mesurera <b>20 × 20 cm</b>.</div></div>
  <h3>Le matériel à préparer</h3>
@@ -109,11 +121,10 @@ function renderSecondPatchwork(p,done,checkedSteps=[]){
  </ul>
  <p class="tip"><b>Important :</b> les dimensions de coupe comprennent déjà la marge de <b>7,5 mm</b>. Pour l’assemblage central, tu couds sur le grand côté des bandes, pas sur leur petit côté. Ne reprends pas la marge de 1 cm des cours de couture.</p>
  <h3>Disposition avant couture</h3>
- ${diagram(2,true)}
- <p>Sur l’endroit, la <b>bande A est à gauche</b> et la <b>bande B à droite</b>. Leur couture est verticale. Le dessin montre le bloc <b>carré</b>, et non deux bandes allongées constituant un rectangle.</p>
+ <p>Sur l’endroit, la bande <b>A est à gauche</b> et la bande <b>B à droite</b>, avant superposition. Les illustrations montrent les gestes en gros plan ; les dimensions de coupe et la marge de 7,5 mm sont données dans le gabarit et les explications. Le bloc assemblé doit être <b>carré</b>.</p>
  <h3>Patron à taille réelle : gabarit A4 du bloc 2</h3>
  <p>Le patron comporte <b>un rectangle de 11,5 × 21,5 cm à reproduire deux fois</b>, les repères de couture à 7,5 mm et un carré témoin de 5 × 5 cm. Aucun assemblage de feuilles n’est nécessaire. Les traits intérieurs sont des repères, pas des pièces à découper.</p>
- <div class="actions"><a class="primary course-pattern-link" href="./assets/patchwork-02-gabarit.html" data-pattern-preview="patchwork2" rel="noopener noreferrer">👁 Voir et imprimer le gabarit A4 à 100 %</a><a class="secondary" href="./assets/patchwork-02-gabarit.html" target="_blank" rel="noopener noreferrer">Ouvrir la planche seule ↗</a></div>
+ <div class="actions"><a class="primary course-pattern-link" href="./assets/patchwork-02-gabarit.html" data-pattern-preview="patchwork2" rel="noopener noreferrer">⎙ Imprimer gabarit A4</a><a class="secondary" href="./assets/patchwork-02-gabarit.html" target="_blank" rel="noopener noreferrer">Ouvrir la planche seule ↗</a></div>
  <h3>Le montage, pas à pas</h3><ol class="patchwork-one-steps">${steps}</ol>
  <h3>Si le résultat ne correspond pas</h3>
  <details class="lesson-problem"><summary>Le bloc est trop étroit ou trop large</summary><p>Mesure les deux bandes d’origine et la marge réellement piquée. Au-delà de 7,5 mm, tu perds de la largeur ; en deçà, le carré devient trop grand. Découds et recommence la couture si la coupe est juste. Ne retaille pas un bloc trop petit.</p></details>
@@ -121,7 +132,7 @@ function renderSecondPatchwork(p,done,checkedSteps=[]){
  <details class="lesson-problem"><summary>Les bords ondulent après repassage</summary><p>Laisse refroidir à plat. Repose le fer en le soulevant plutôt qu’en le faisant glisser ; ne tire pas les bandes. Si les tissus n’ont pas le même poids ou le même retrait, utilise deux chutes plus semblables pour l’essai suivant.</p></details>
  <h3>Avant de ranger ton deuxième carré</h3>
  <ul class="lesson-checkpoints"><li>Les deux tissus forment un carré avec une seule ligne de couture verticale.</li><li>Le bloc mesure 21,5 × 21,5 cm avec quatre angles droits, sans plis ni déformation.</li><li>Le contour reste brut ; les marges extérieures de 7,5 mm sont réservées à la couverture.</li><li>Le gabarit imprimé a été vérifié grâce au carré témoin de 5 × 5 cm.</li></ul>
- <div class="actions"><a class="primary course-pattern-link" href="./assets/patchwork-02-gabarit.html" data-pattern-preview="patchwork2">⎙ Imprimer le gabarit du bloc 2</a><button class="secondary lesson-patch-done" type="button" data-quilt-person="${esc(p)}" data-quilt-block="2" aria-pressed="${complete?'true':'false'}">${complete?'✓ Bloc n° 2 terminé · décocher':'□ Marquer mon bloc n° 2 comme terminé'}</button></div>
+ <div class="actions"><a class="primary course-pattern-link" href="./assets/patchwork-02-gabarit.html" data-pattern-preview="patchwork2">⎙ Imprimer gabarit A4</a><button class="secondary lesson-patch-done" type="button" data-quilt-person="${esc(p)}" data-quilt-block="2" aria-pressed="${complete?'true':'false'}">${complete?'✓ Bloc n° 2 terminé · décocher':'□ Marquer mon bloc n° 2 comme terminé'}</button></div>
  <p class="small">Le gabarit est celui d’un seul ouvrage, et ta progression est conservée dans ton carnet personnel. Le cours reste en cours d’écriture jusqu’à validation éditoriale.</p>
  </section>${root.Fil52LessonPhotos.renderPatchwork(2)}`;
 }
@@ -158,6 +169,25 @@ function renderFirstPatchwork(p,done,checkedSteps=[]){
   return open+decorated+close;
  });
 }
+
+/* Agrandissement des illustrations du bloc 2 sans modifier les photographies personnelles. */
+let patch2Dialog;
+document.addEventListener('click',event=>{
+ const opener=event.target.closest('[data-patch2-zoom]');if(!opener)return;
+ const img=opener.querySelector('img');if(!img||!img.currentSrc)return;
+ if(!patch2Dialog){
+  patch2Dialog=document.createElement('dialog');patch2Dialog.className='patchwork-two-dialog';patch2Dialog.setAttribute('aria-label','Illustration du cours de patchwork 2 agrandie');
+  document.body.append(patch2Dialog);
+  patch2Dialog.addEventListener('click',e=>{
+   if(e.target===patch2Dialog||e.target.closest('[data-close-patch2]'))patch2Dialog.close();
+   const zoom=e.target.closest('[data-toggle-patch2-zoom]');if(zoom){const active=patch2Dialog.classList.toggle('zoom-full');zoom.textContent=active?'Ajuster à l’écran':'Zoom 100 %';}
+  });
+ }
+ patch2Dialog.classList.remove('zoom-full');
+ patch2Dialog.innerHTML='<div class="patchwork-two-dialog-tools"><button type="button" class="secondary" data-close-patch2>Fermer</button><button type="button" class="secondary" data-toggle-patch2-zoom>Zoom 100 %</button></div><img src="'+esc(img.getAttribute('src'))+'" alt="'+esc(img.alt)+'">';
+ patch2Dialog.showModal();
+ patch2Dialog.querySelector('[data-close-patch2]').focus();
+});
 
 root.Fil52LessonGuides={renderFirstPatchwork,renderPreparation,renderTroubleshooting,renderPatchwork,diagram};
 })(globalThis);
