@@ -19,6 +19,8 @@ const introSteps=[["Choisir les tissus","Trouve deux cotons tissés non extensib
 function stepIds(w,issues){
  if(w===0)return introSteps.map((_,i)=>60000+i);
  if(w===1)return Array.from({length:9},(_,i)=>60100+i);
+ // Les trois premières coches existantes du bloc 2 restent reliées aux mêmes gestes.
+ if(w===2)return [60203,60204,60205,60200,60201,60206,60202,60207];
  const steps=issues[w]?.patchSteps||[];
  return steps.map((_,i)=>60000+w*100+i);
 }
