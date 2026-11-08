@@ -1,3 +1,9 @@
+## Version 1.3.31 (9 novembre 2026)
+
+- Cours 2 couture « Dessous de verre réversible à coins arrondis » : **Validé** explicitement, avec ses six photos et son gabarit.
+- Projets bonus Noël : suggestions à l’étude, aucun projet publié sans choix de l’utilisatrice.
+- Autres cours non validés inchangés.
+
 ## V1.3.30 : cours patchwork 2 validé, couture 2 photographié
 
 - Cours de patchwork 2 explicitement approuvé, sans changer l'avancement individuel des couvertures.
