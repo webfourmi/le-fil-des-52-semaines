@@ -8,3 +8,11 @@
 .lesson-photo-dialog.photo-zoomed figcaption{max-width:80vw;white-space:normal}
 .patchwork-photo-gallery .lesson-photo-grid{grid-template-columns:minmax(0,1fr)}
 .patchwork-photo-gallery .lesson-photo-open img{height:auto;max-height:390px;aspect-ratio:1536/1437;object-fit:contain}
+
+/* Couture 2 : photos reelles inserees dans le cours, nettes et agrandissables. */
+.sewing-two-photo{width:min(100%,530px);margin:14px 0 16px;border:1px solid #dfd6c9;border-radius:14px;overflow:hidden;background:#fffaf2;box-shadow:0 4px 18px #5d473515}
+.sewing-two-photo-open{width:100%;height:auto;min-height:0;padding:0;border:0;cursor:zoom-in;background:#f4f0e8}
+.sewing-two-photo-open img{display:block;width:100%;height:auto;max-height:470px;object-fit:contain}
+.sewing-two-photo figcaption{padding:11px 14px;font-size:.87rem;line-height:1.5;color:#59685b}
+.sewing-two-photo-open:focus-visible{outline:3px solid #b37f58;outline-offset:-3px}
+@media(max-width:600px){.sewing-two-photo-open img{max-height:none}.sewing-two-photo{max-width:100%;margin:10px 0 13px}}
