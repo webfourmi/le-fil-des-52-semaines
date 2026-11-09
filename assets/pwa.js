@@ -116,8 +116,11 @@ async function checkEdition(showCurrent=false){
   const seen=Math.min(prev,newest);
   if(prev!==seen)localStorage.setItem('fil52.seen.latest',String(seen));
   if(newest>seen&&seen>0){
+   // Ne notifier qu'une seule fois : l'affichage compte comme « vu », même si la personne ferme la bannière.
+   // Avant, seule l'action « Voir le cours » enregistrait la version, et la notification revenait à chaque ouverture.
+   localStorage.setItem('fil52.seen.latest',String(newest));
    notice('Le cours n° '+String(newest).padStart(2,'0')+' est désormais validé !','Voir le cours',()=>{
-     dismiss();localStorage.setItem('fil52.seen.latest',String(newest));
+     dismiss();
      if(typeof window.Fil52OpenEdition==='function')window.Fil52OpenEdition(d,newest);
      else location.reload();
    });
