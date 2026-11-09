@@ -1,3 +1,11 @@
+## V1.3.35 : finition du patron de botte de Noël
+
+- Pli du tissu séparé du patron : aucune ligne de coupe ne suit le pli, les deux pièces sont découpées en miroir.
+- Revers dimensionné pour l'ouverture de la botte (17 × 9 cm avant piqûre de 1 cm).
+- Ligne de couture pointillée sur le contour, avec le haut ouvert.
+- Notification de validation des cours mémorisée dès la première annonce, sans revenir en boucle.
+- Projet botte de Noël encore en cours d’écriture.
+
 ## V1.3.34 : notification de validation unique + patron de découpe de la botte
 
 - L'alerte de validation d'un cours est enregistrée comme vue à son premier affichage, pas uniquement quand on clique « Voir le cours ».
