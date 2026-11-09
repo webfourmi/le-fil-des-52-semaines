@@ -1,3 +1,9 @@
+## V1.3.33 : accueil patchwork synchronisé avec les validations
+
+- Mise en évidence des blocs 1 et 2 validés avec accès direct depuis l'accueil.
+- Carte du prochain bloc validé à réaliser. Si tous les blocs publiés et validés sont terminés, renvoi vers les blocs, sans retour artificiel au cours 0.
+- Statuts des couvertures conservés indépendamment pour chaque utilisatrice. Aucun cours en cours d’écriture n’est marqué comme validé.
+
 ## V1.3.32 : trois projets bonus de Noël
 
 - Botte de Noël personnalisée, guirlande de cinq étoiles rembourrées, pochon cadeau à double coulisse.
