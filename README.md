@@ -1,3 +1,10 @@
+## V1.3.34 : notification de validation unique + patron de découpe de la botte
+
+- L'alerte de validation d'un cours est enregistrée comme vue à son premier affichage, pas uniquement quand on clique « Voir le cours ».
+- Botte de Noël : le patron imprimable montre le pli séparé de la silhouette. Pour obtenir deux pièces en miroir, couper le patron en entier dans deux épaisseurs de tissu endroit contre endroit. Ne jamais aligner le bord de la silhouette sur le pli.
+- Patron A4 imprimé à taille réelle uniquement avec impression 100 % et carré témoin 5 × 5 cm effectivement mesuré.
+- Bonus botte : **Projet en cours d’écriture**.
+
 ## V1.3.33 : accueil patchwork synchronisé avec les validations
 
 - Mise en évidence des blocs 1 et 2 validés avec accès direct depuis l'accueil.
