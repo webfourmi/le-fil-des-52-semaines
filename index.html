@@ -155,6 +155,7 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
 </style>
 <style>
 [data-bonus-project][hidden],#bonus-empty[hidden]{display:none!important}
+.home-approved-patch-list .weektile{border-left:4px solid #7ba08a}.home-approved-patch-list .weektile small{color:#55685a}.home-patch-approved-heading{margin-top:25px}
 .bonus-project-filters{display:grid;gap:8px}
 .bonus-project-filters .course-select-label{margin-top:8px}
 .sewing-section-tabs{flex-wrap:wrap}
@@ -312,9 +313,16 @@ function listProfile(){return `<div class="tag">Carnet personnel : ${safe(state.
 function miniQuilt(p){const b=state.blocks[p];let i=0;return `<div class="micro ${p==='f'?'daughter':''}">${Array.from({length:56},(_,cell)=>{let row=Math.floor(cell/7),col=cell%7,corner=(row===0||row===7)&&(col===0||col===6);if(corner)return `<span class="corner"></span>`;i++;return `<span class="${b.includes(i)?'done':''}"></span>`}).join('')}</div>`}
 function profileCard(p){let n=state.blocks[p].length;return `<div class="card profilecard ${p==='f'?'daughter':''}"><div class="profiletop"><div><span class="eyebrow">Couverture personnelle</span><h3>${safe(state.names[p])}</h3></div><div class="circleicon">${p==='m'?'✿':'✦'}</div></div><div><span class="stat">${n}</span><span class="small"> blocs terminés</span></div><div class="progressbar"><span style="width:${n/52*100}%"></span></div>${miniQuilt(p)}<button class="secondary" style="margin-top:15px" data-page="quilt">Voir ma couverture ↗</button></div>`}
 function weekCard(w){return `<button class="weektile ${w===state.week?'sel':''} ${state.published.includes(w)?'published':''}" data-week="${w}"><span class="eyebrow">N° ${String(w).padStart(2,'0')}</span><strong>${safe(projects[w-1])}</strong><small>${editorialIsApproved('sewing',w)?'✓ Validé à 100 %':'✎ En cours d’écriture'}</small></button>`}
+function homeApproved(kind){
+ const category=kind==='blocks'?'patchwork':'sewing';
+ return state.published.filter(w=>editorialIsApproved(category,w)&&(w===1||upcomingEditions[w]?.steps?.length)).sort((a,b)=>a-b);
+}
 function homeNext(kind){
- const available=state.published.filter(w=>(kind==='blocks'?editorialIsApproved('patchwork',w):editorialIsApproved('sewing',w)) && (w===1||upcomingEditions[w]?.steps?.length)).sort((a,b)=>a-b);
- return available.find(w=>!state[kind][state.profile].includes(w))||null;
+ return homeApproved(kind).find(w=>!state[kind][state.profile].includes(w))||null;
+}
+function homePatchTile(w){
+ const done=state.blocks[state.profile].includes(w);
+ return '<button type="button" class="weektile published home-patch-tile" data-home-patch="'+w+'" aria-label="Ouvrir le bloc de patchwork '+w+' '+safe(blocks[w-1])+'"><span class="eyebrow">Bloc n° '+String(w).padStart(2,'0')+'</span><strong>'+safe(blocks[w-1])+'</strong><small>'+ (done?'✓ Réalisé dans ma couverture':'✓ Cours validé · À réaliser')+'</small></button>';
 }
 function openHomePatch(w){
  selectPatchWeek(w);
@@ -349,7 +357,7 @@ function resumeCourse(w){
 }
 
 function machineIntro(){return '<div class="editorial-head-status">'+editorialBadge('sewing',0)+'</div>'+Fil52MachineIntro.render(state.steps[state.profile],courseResumeButton(0));}
-function dashboard(){const course=homeNext('projectsDone'),patch=homeNext('blocks'),number=w=>String(w).padStart(2,'0'),progress=course?courseProgress(course):null;return `<section class="hero hero-editorial">
+function dashboard(){const course=homeNext('projectsDone'),patch=homeNext('blocks'),approvedPatches=homeApproved('blocks'),number=w=>String(w).padStart(2,'0'),progress=course?courseProgress(course):null;return `<section class="hero hero-editorial">
   <div class="hero-copy">
     <div class="hero-meta"><span class="edition-dot"></span> L’ATELIER À TON RYTHME <span class="issue">${course?'Cours n° '+number(course):'Cours validés terminés'}</span></div>
     <h1>Petits points,<br><em>grandes idées.</em></h1>
@@ -362,8 +370,10 @@ function dashboard(){const course=homeNext('projectsDone'),patch=homeNext('block
 <div class="current-heading"><span class="eyebrow">PRENDRE LE FIL</span><h2>À ton rythme <span class="hand-drawn">✳</span></h2><p>Ton prochain cours et ton prochain carré restent ici jusqu’à leur validation.</p></div>
 <div class="feature-grid">
  <button class="feature-card feature-sew" ${course?'data-week="'+course+'"'+(progress.done?' data-resume-course="'+course+'"':''):'data-page="learn"'}><div class="feature-pattern brand-feature-icon" aria-hidden="true"><img src="./assets/icon-couture.svg" alt=""></div><div class="feature-info"><span class="eyebrow">${course?'Cours n° '+number(course):'À jour'}</span><h3>${course?safe(projects[course-1]):'Cours validés terminés'}</h3><p>${course?progress.done+' étape'+(progress.done>1?'s':'')+' sur '+progress.total:'Bravo ! Tes cours restent disponibles. Le prochain apparaîtra après sa publication.'}</p><span class="feature-link">${course?(progress.done?'Reprendre mon cours':'Ouvrir mon cours'):'Revoir mes cours'} <b>↗</b></span></div></button>
- <button class="feature-card feature-patch" ${patch?'data-home-patch="'+patch+'"':'data-patch-zero'}><div class="feature-pattern brand-feature-icon" aria-hidden="true"><img src="./assets/icon-patchwork.svg" alt=""></div><div class="feature-info"><span class="eyebrow">${patch?'Patchwork n° '+number(patch):'Cours 0 validé'}</span><h3>${patch?safe(blocks[patch-1]):'Premiers pas en patchwork'}</h3><p>${patch?'Le pas à pas de ton prochain carré pour la couverture.':'Les autres cours sont en cours d’écriture. Le cours préparatoire 0 est validé.'}</p><span class="feature-link">${patch?'Ouvrir mon patchwork':'Ouvrir le cours 0'} <b>↗</b></span></div></button>
+ <button class="feature-card feature-patch" ${patch?'data-home-patch="'+patch+'"':'data-page="quilt"'}><div class="feature-pattern brand-feature-icon" aria-hidden="true"><img src="./assets/icon-patchwork.svg" alt=""></div><div class="feature-info"><span class="eyebrow">${patch?'Patchwork n° '+number(patch):approvedPatches.length?'Blocs validés terminés':'Premiers pas en patchwork'}</span><h3>${patch?safe(blocks[patch-1]):approvedPatches.length?'Mes blocs de patchwork':'Découvrir le patchwork'}</h3><p>${patch?'Le bloc '+number(patch)+' est validé. '+(state.blocks[state.profile].length?'Tu peux reprendre ta couverture à ton rythme.':'Commence ton prochain carré à ton rythme.'):approvedPatches.length?'Tu as réalisé tous les blocs validés pour le moment ('+approvedPatches.length+'). Ils restent consultables dans tes cours.':'Le cours préparatoire est disponible. Les prochains blocs apparaîtront après validation.'}</p><span class="feature-link">${patch?'Ouvrir le bloc '+number(patch):approvedPatches.length?'Revoir mes blocs validés':'Découvrir le cours préparatoire'} <b>↗</b></span></div></button>
 </div>
+<div class="sectionline home-patch-approved-heading"><div><span class="eyebrow">PATCHWORK · COURS DISPONIBLES</span><h2>Mes blocs validés <span class="hand-drawn">✦</span></h2><p class="small">Les cours validés restent accessibles, même lorsque ton bloc est terminé. Ta couverture conserve ses propres coches.</p></div><button class="ghost" type="button" data-page="quilt">Tous mes blocs ↗</button></div>
+<div class="preview-list home-approved-patch-list">${approvedPatches.map(homePatchTile).join('')||'<p class="small">Le cours préparatoire est disponible. Les nouveaux blocs apparaîtront ici après validation.</p>'}</div>
 <div class="sectionline personal-head"><div><span class="eyebrow">NOTRE PARCOURS, NOS CRÉATIONS</span><h2>Ma couverture, mon parcours <span class="hand-drawn">♡</span></h2><p class="lead">Les mêmes leçons pour toutes les deux, mais tu coches uniquement tes propres réalisations.</p></div><button class="ghost" data-page="quilt">Toutes les cases ↗</button></div>
 <div class="grid2 profile-featured">${profileCard(state.profile)}</div>
 <div class="sectionline"><div><span class="eyebrow">VOTRE CARNET</span><h2>Les prochains numéros</h2></div><button class="ghost" data-page="learn">Parcourir les cours ↗</button></div><div class="preview-list">${state.published.filter(w=>(w===1||upcomingEditions[w]?.steps?.length)&&!state.projectsDone[state.profile].includes(w)).sort((a,b)=>a-b).slice(0,4).map(weekCard).join('')||'<p class="small">Tous les cours publiés sont validés. Les suivants apparaîtront après leur publication.</p>'}</div>
