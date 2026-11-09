@@ -1,6 +1,17 @@
 {
-  "current": "1.3.35",
+  "current": "1.3.36",
   "releases": [
+    {
+      "version": "1.3.36",
+      "date": "2026-11-09",
+      "title": "Botte de Noël : patron complet sur deux pages A4",
+      "changes": [
+        "Patron de la botte désormais sur deux feuilles A4 à taille réelle : silhouette sur la première page, revers 17 × 9 cm et bande d’attache 18 × 3 cm sur la deuxième.",
+        "Lignes de découpe et repères de couture distingués, marges indiquées et carré témoin de 5 × 5 cm sur chaque feuille.",
+        "Aucune nouvelle photographie ni illustration décorative n’a été ajoutée : le futur tutoriel illustré sera construit à partir des photos personnelles fournies.",
+        "Le projet bonus botte de Noël reste « Projet en cours d’écriture »."
+      ]
+    },
     {
       "version": "1.3.35",
       "date": "2026-11-09",
