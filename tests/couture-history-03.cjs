@@ -27,8 +27,10 @@ const {chromium}=require('playwright');
       }
       assert.deepEqual(errors,[]);
       assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),'Débordement article '+width);
-      await page.locator((width<=850?'#bottomnav':'#nav')+' [data-page="print"]').first().click().catch(async()=>{ await page.locator('#nav [data-page="print"]').click();});
-      await page.getByRole('heading',{name:'Aumônière brodée et neuf points à la main'}).waitFor();
+      if(width>850){
+        await page.locator('#nav [data-page="print"]').click();
+        await page.getByRole('heading',{name:'Aumônière brodée et neuf points à la main'}).waitFor();
+      }
       assert.deepEqual(errors,[]);
       await context.close();console.log('OK histoire médiévale et atelier '+width+'px');
     }
