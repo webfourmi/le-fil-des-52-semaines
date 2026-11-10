@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-labelledby="ttl desc"><title id="ttl">Fleur gothique originale à quatre pétales</title><desc id="desc">Motif symétrique : quatre longs pétales de forme ogivale autour d'un médaillon rond, à broder au point de tige, au point fendu et au point de Bayeux.</desc>
+<rect x="0" y="0" width="300" height="300" rx="12" fill="#f8f2e9"/>
+<g stroke="#924b4d" stroke-width="3" fill="#fffaf1" stroke-linejoin="round">
+<path d="M145 126 C105 55 126 23 150 20 C174 23 195 55 155 126 Z"/>
+<path d="M174 145 C245 105 277 126 280 150 C277 174 245 195 174 155 Z"/>
+<path d="M155 174 C195 245 174 277 150 280 C126 277 105 245 145 174 Z"/>
+<path d="M126 155 C55 195 23 174 20 150 C23 126 55 105 126 145 Z"/></g>
+<circle cx="150" cy="150" r="25" fill="#fff9ed" stroke="#b49250" stroke-width="3"/>
+<g stroke="#bfa473" stroke-width="1.7" fill="none" stroke-dasharray="4 4">
+<path d="M150 45V122 M255 150H178 M150 255V178 M45 150H122"/></g>
+</svg>

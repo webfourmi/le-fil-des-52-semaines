@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 430" role="img" aria-labelledby="ttl desc"><title id="ttl">L'atelier du tailleur médiéval</title><desc id="desc">Illustration graphique originale d'un artisan médiéval cousant une tunique à la main, avec étoffes et grandes forces.</desc>
+<rect width="760" height="430" fill="#f8f1e5"/><path d="M0 345H760" stroke="#ceb79b" stroke-width="6"/>
+<rect x="42" y="39" width="350" height="251" rx="8" fill="#eee0cb" stroke="#b89d81" stroke-width="5"/>
+<path d="M85 72H180V255H85Z" fill="#aa6b60" stroke="#855148" stroke-width="3"/><path d="M91 75Q132 98 174 75 M91 105Q135 118 174 105" stroke="#e5c0a2" fill="none" stroke-width="3"/>
+<path d="M228 65H350V258H228Z" fill="#749088" stroke="#5c6d62" stroke-width="3"/><path d="M239 97H337M239 122H337M239 147H337" stroke="#b0c1ae" stroke-width="4"/>
+<rect x="420" y="263" width="297" height="22" rx="5" fill="#a57959"/><rect x="455" y="279" width="15" height="90" fill="#a57959"/><rect x="673" y="279" width="15" height="90" fill="#a57959"/>
+<path d="M538 279V338" stroke="#8b5f43" stroke-width="2.5"/>
+<path d="M528 191Q560 153 603 190L623 273Q573 293 519 268Z" fill="#a86856" stroke="#75493d" stroke-width="4"/>
+<path d="M536 202L568 234L606 205" stroke="#e3bba5" stroke-width="3" fill="none"/>
+<circle cx="534" cy="131" r="43" fill="#f1d2ad" stroke="#926f56" stroke-width="3"/>
+<path d="M496 129Q490 68 541 71Q575 79 573 116Q552 104 532 102Q515 124 496 129Z" fill="#664d3f"/>
+<path d="M544 151Q541 181 532 194L565 190L581 170Z" fill="#bd8961"/>
+<path d="M501 177Q482 187 466 235L492 249L526 214Z" fill="#a86856" stroke="#75493d" stroke-width="3"/>
+<path d="M580 187Q604 196 619 228L597 239L560 216Z" fill="#a86856" stroke="#75493d" stroke-width="3"/>
+<path d="M491 240L529 269 M596 235L566 268" stroke="#be9377" stroke-width="18" stroke-linecap="round"/>
+<path d="M527 273L575 279L567 370H513Z" fill="#6f766f" stroke="#4f5b51" stroke-width="3"/>
+<path d="M520 368L482 390H534M563 368L602 391H555" stroke="#5a5047" stroke-width="12" stroke-linecap="round" fill="none"/>
+<g stroke="#6b5d55" stroke-width="5" fill="none"><ellipse cx="643" cy="240" rx="16" ry="11"/><ellipse cx="683" cy="240" rx="16" ry="11"/><path d="M650 240L675 207 M679 240L650 207"/></g>
+<path d="M555 245Q566 252 580 245" fill="none" stroke="#ead3a0" stroke-width="2" stroke-dasharray="3 3"/>
+<text x="31" y="412" fill="#67584b" font-size="17" font-family="Georgia,serif">Évocation originale d'un atelier du XVe siècle, sans prétention de restitution exacte</text>
+</svg>
