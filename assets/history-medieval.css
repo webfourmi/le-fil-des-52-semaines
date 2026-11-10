@@ -1,0 +1,56 @@
+/* De fil en aiguille : Histoire médiévale n°03 et atelier aumônière. */
+.medieval-article,.medieval-workshop{max-width:940px;margin-inline:auto;padding:clamp(17px,3vw,35px);overflow:hidden}
+.medieval-leadhead{border-bottom:1px solid #e2d3c2;padding-bottom:16px}
+.medieval-leadhead h2{font-size:clamp(1.9rem,4vw,3.2rem);margin:5px 0 9px}
+.medieval-deck{font:italic clamp(1.15rem,2.5vw,1.55rem) Georgia,serif;color:#955d56;margin:0 0 7px}
+.medieval-opening{font:italic clamp(1.06rem,2vw,1.2rem)/1.83 Georgia,serif;color:#55554c;background:#f8efe5;border-left:4px solid #bf9175;padding:16px 20px;margin:24px 0}
+.medieval-era{display:block;color:#965c55;letter-spacing:.12em;text-transform:uppercase;font-size:.74rem;font-weight:800;margin-bottom:8px}
+.medieval-toc{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:19px 0 30px}
+.medieval-toc strong{font-size:.82rem;margin-right:6px}
+.medieval-toc a{font-size:.78rem;line-height:1.45;border-radius:24px;padding:7px 11px;background:#fffdfa;border:1px solid #e0d1c4;text-decoration:none}
+.medieval-chapter{margin:36px 0 46px;scroll-margin-top:24px}
+.medieval-chapter h3,.medieval-workshop-section h3{font-size:clamp(1.42rem,2.7vw,1.97rem);margin:0 0 16px}
+.medieval-chapter p,.medieval-workshop p,.medieval-workshop li{line-height:1.82}
+.medieval-chapter p{margin:0 0 15px}
+.medieval-aside{background:#f6f0e5;border-left:4px solid #aa8f6b;border-radius:0 12px 12px 0;padding:12px 16px;color:#55584d;font-size:.94rem;line-height:1.72;margin:20px 0}
+.medieval-figure{margin:22px auto 25px;border:1px solid #e2ccbb;border-radius:16px;overflow:hidden;background:#f5ece0;max-width:790px}
+.medieval-figure img{width:100%;max-height:510px;object-fit:contain;display:block;background:#f0e5d8}
+.medieval-figure figcaption{padding:12px 15px;font-size:.8rem;line-height:1.65;color:#695e55;background:#fffaf3}
+.medieval-figure-half{max-width:640px}.medieval-figure-pouch{max-width:450px}
+.medieval-figure-pouch img{max-height:550px}
+.medieval-source-note{color:#6c675a;border-left:3px solid #dcc3a7;padding-left:13px;font-size:.86rem}
+.medieval-closing{border-top:1px dashed #d9c4ac;padding-top:24px}
+.medieval-workshop{margin-top:24px}
+.medieval-workshop-head{border-bottom:1px solid #e4d0c2;padding-bottom:20px}
+.medieval-workshop-head h2{font-size:clamp(1.64rem,3.2vw,2.45rem)}
+.medieval-workshop-hero{display:grid;grid-template-columns:minmax(180px,.65fr) 1fr;gap:23px;align-items:center;margin:24px 0;background:#f7efe3;border-radius:16px;padding:14px}
+.medieval-workshop-hero img{width:100%;display:block;border-radius:12px}
+.medieval-workshop-hero h3{font-size:1.48rem}
+.medieval-workshop-hero p{font-size:.96rem}
+.medieval-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:14px 0 28px}
+.medieval-actions a{text-align:center}
+.medieval-workshop-section{margin:29px 0 36px;scroll-margin-top:20px}
+.medieval-workshop-section ul{padding-left:23px}
+.medieval-workshop-section li{margin-bottom:10px}
+.medieval-point-guide>p{margin-bottom:16px}
+.medieval-stitch-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:22px 0}
+.medieval-stitch-card{background:#fffbf5;border:1px solid #e5d3c4;border-radius:15px;padding:15px;min-width:0}
+.medieval-stitch-heading{display:flex;gap:12px;align-items:start;margin-bottom:10px}
+.medieval-stitch-heading>span{font:700 1.1rem Georgia,serif;color:#7c5746;background:#f4e7d7;display:grid;place-items:center;width:39px;height:39px;flex:0 0 39px;border-radius:11px}
+.medieval-stitch-heading h4{font-size:1.06rem;margin:1px 0 2px}
+.medieval-stitch-heading p{font-size:.78rem;line-height:1.35;color:#826b60;margin:0}
+.medieval-stitch-card>p{font-size:.9rem;line-height:1.7;margin:10px 0}
+.medieval-exercise{border-top:1px dashed #e1c9b7;padding-top:10px;color:#5b6255}
+.medieval-sewing-steps{padding-left:8px;list-style:none;counter-reset:medievalstep}
+.medieval-sewing-steps li{counter-increment:medievalstep;position:relative;padding:13px 16px 16px 57px;background:#fffaf3;border:1px solid #e7d5c7;border-radius:14px;margin:13px 0}
+.medieval-sewing-steps li:before{content:counter(medievalstep);position:absolute;top:14px;left:13px;width:32px;height:32px;border-radius:50%;background:#d6e4d7;color:#375745;display:grid;place-items:center;font-weight:800}
+.medieval-sewing-steps h4{font-size:1.06rem;margin:0 0 5px}
+.medieval-sewing-steps p{font-size:.93rem;margin:0}
+.medieval-variants{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.medieval-variants article{padding:17px;background:#f8f2e8;border:1px solid #e7d1c0;border-radius:14px}
+.medieval-variants h4{margin:0 0 8px;font-size:1.11rem}
+.medieval-photo-list{padding-left:24px;columns:2;column-gap:40px}
+.medieval-photo-list li{break-inside:avoid;margin:0 0 12px}
+.medieval-workshop-footer{border-top:1px solid #e4d1c1;margin-top:27px;padding-top:16px;line-height:1.75;font-size:.84rem}
+@media(max-width:760px){.medieval-workshop-hero,.medieval-stitch-grid,.medieval-variants{grid-template-columns:1fr}.medieval-workshop-hero img{max-height:280px;object-fit:contain}.medieval-photo-list{columns:1}.medieval-article,.medieval-workshop{padding:17px}.medieval-figure img{max-height:450px}}
+@media(max-width:370px){.medieval-article,.medieval-workshop{padding:12px}.medieval-figure{margin-left:-4px;margin-right:-4px}.medieval-sewing-steps li{padding-left:53px}.medieval-toc a{font-size:.74rem}}
