@@ -1,3 +1,10 @@
+## v1.3.40 · Cours 3 et menu Patrons
+
+- Cours couture 3 « Étui à mouchoirs » complété, patron A4 en taille réelle 15 × 19 cm et carré témoin 5 × 5 cm.
+- Menu déroulant Patrons : Cours de couture, Patchwork et Bonus, avec conservation des anciens modèles et ajout du cours 3.
+- Liste des prises de vue prévue pour les futures photographies personnelles du cours 3.
+- **Cours 3 en cours d’écriture** en attente de validation explicite.
+
 ## V1.3.35 : finition du patron de botte de Noël
 
 - Pli du tissu séparé du patron : aucune ligne de coupe ne suit le pli, les deux pièces sont découpées en miroir.
