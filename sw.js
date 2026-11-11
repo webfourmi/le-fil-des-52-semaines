@@ -1,5 +1,5 @@
 /* De fil en aiguille — cache PWA. Augmenter CACHE_VERSION pour chaque nouvelle version de l'application. */
-const CACHE_VERSION = 'fil52-shell-v1.3.40';
+const CACHE_VERSION = 'fil52-shell-v1.3.41';
 const CORE = [
   './','./index.html','./manifest.webmanifest','./data/editions.json','./data/changelog.json',
   './assets/history-medieval.js','./assets/history-medieval.css','./assets/aumoniere-medievale.js','./assets/aumoniere-medievale-patron.html','./assets/aumoniere-fleur.svg','./assets/aumoniere-points.svg','./assets/medieval-tailleur.svg',
