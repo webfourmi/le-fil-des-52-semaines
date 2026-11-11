@@ -1,6 +1,18 @@
 {
-  "current": "1.3.39",
+  "current": "1.3.40",
   "releases": [
+    {
+      "version": "1.3.40",
+      "date": "2026-11-11",
+      "title": "Cours couture 3 et bibliothèque de patrons réorganisée",
+      "changes": [
+        "Cours de couture 3 « Étui à mouchoirs » relu : fournitures pour un ouvrage, sept étapes détaillées, double ourlet de 5 + 5 mm, chevauchement central de 2 cm et dimensions finales d’environ 13 × 7,5 cm.",
+        "Nouveau patron A4 à taille réelle du rectangle de 15 × 19 cm, repères des ourlets, carré témoin 5 × 5 cm et impression à 100 %, accessible directement depuis le cours et la bibliothèque.",
+        "Rubrique Patrons : menu déroulant « Cours de couture / Patchwork / Bonus », qui sépare les patrons des cours, des blocs et des projets bonus, y compris Noël, Halloween et histoire.",
+        "Cours 3 : liste des sept photographies à prendre pour enrichir ensuite le tutoriel avec des images réelles.",
+        "Le cours de couture 3 conserve le statut « En cours d’écriture ». Les cours et blocs précédemment validés restent inchangés."
+      ]
+    },
     {
       "version": "1.3.39",
       "date": "2026-11-10",
