@@ -138,75 +138,81 @@
     },
     "3": {
       "title": "Étui à mouchoirs",
-      "intro": "Un rectangle de coton devient une petite pochette à ouverture croisée. Cette séance apprend les ourlets doubles et le pliage précis.",
-      "duration": "1 h à 1 h 30 (couture + bloc)",
+      "intro": "Un rectangle de coton devient un étui à mouchoirs à ouverture croisée. Cette séance permet d’apprendre les ourlets doubles, la symétrie des plis et le chevauchement précis des deux lèvres.",
+      "duration": "1 h à 1 h 30 pour un étui",
       "technique": "Ourlet double, plis symétriques, coutures latérales",
       "reuse": "Un morceau de drap ou de chemise en coton non extensible",
-      "objective": "Fabriquer un étui simple d’environ 13 × 7,5 cm, adapté à un petit paquet de mouchoirs pliés.",
-      "result": "Environ 13 × 7,5 cm après couture. Présente d’abord le paquet de mouchoirs prévu : ajuste la largeur si son format est atypique.",
+      "objective": "Réaliser un petit étui de 13 × 7,5 cm environ, à ouverture croisée, pour des mouchoirs pliés. Vérifier les dimensions du paquet avant la coupe.",
+      "result": "Environ 13 × 7,5 cm une fois retourné. Le modèle convient à quelques mouchoirs pliés ; vérifier le format du paquet utilisé.",
       "materials": [
-        "1 rectangle de coton tissé de 15 × 19 cm",
-        "Fil assorti, aiguille universelle 80/12",
-        "Règle, craie ou feutre effaçable, fer à repasser",
-        "Épingles ou pinces et un paquet de mouchoirs pour l’essayage"
+        "1 rectangle de coton tissé non extensible de 15 × 19 cm (marges déjà comprises), un coupon de récupération convient",
+        "Fil assorti et canette ; aiguille universelle 80/12 selon le coton",
+        "Règle, équerre, crayon textile effaçable, ciseaux, épingles ou pinces",
+        "Fer à repasser et pattemouille si le tissu est fragile",
+        "Quelques mouchoirs pliés pour vérifier le format de l’étui"
       ],
-      "settings": "Point droit, longueur 2,5 mm sur un essai ; ourlets des deux petits côtés par 2 replis de 5 mm ; coutures latérales à 1 cm.",
-      "tip": "L’ouverture croisée doit être centrée avant de coudre les deux côtés. Tracez une ligne médiane sur le tissu et comparez le recouvrement à droite et à gauche.",
+      "settings": "Point droit, longueur indicative de 2,5 mm après essai sur une chute. Double ourlet de 5 mm + 5 mm sur chacun des deux bords de 15 cm ; coutures finales sur les deux autres bords à 1 cm.",
+      "tip": "Fais d’abord les deux ourlets identiques, puis plie le rectangle avec l’endroit à l’intérieur. Les deux bords ourlés doivent se chevaucher de 2 cm au centre, sans créer de fente. Une fois la poche retournée, cette superposition devient l’ouverture croisée.",
       "safety": "Repasser les petits ourlets avant de piquer évite de devoir approcher les doigts trop près de l’aiguille.",
       "prep": [
-        "Marquer les deux petits côtés de 15 cm qui seront ourlés.",
-        "Repérer l’endroit et l’envers avec une petite épingle de couleur.",
-        "Essayer les doubles replis sur une chute et conserver la même largeur sur les deux extrémités."
+        "Vérifier que le rectangle du patron mesure exactement 15 × 19 cm et que le carré témoin imprimé mesure 5 × 5 cm.",
+        "Sur le rectangle, reconnaître les deux bords de 15 cm à ourler. Les repères de 5 et 10 mm figurent sur le gabarit.",
+        "Essayer un double ourlet de 5 mm sur une chute et prévoir le paquet de mouchoirs pour le contrôle final."
       ],
       "steps": [
         {
-          "title": "Tracer et découper",
-          "detail": "Coupez un rectangle de 15 × 19 cm, bien d’équerre ; la dimension 19 cm correspond à la longueur à plier."
+          "title": "Imprimer, vérifier et découper",
+          "detail": "Imprime le gabarit A4 à 100 %, sans adaptation, et mesure son carré témoin de 5 × 5 cm. Découpe un rectangle de coton de 15 × 19 cm bien d’équerre. Les marges et les replis sont compris dans ces dimensions. Repère l’endroit du tissu."
         },
         {
-          "title": "Former deux ourlets de 5 mm",
-          "detail": "Sur chacun des côtés de 15 cm, repliez 5 mm puis à nouveau 5 mm sur l’envers. Repassez les deux petits ourlets."
+          "title": "Marquer les doubles ourlets",
+          "detail": "Sur chacun des deux petits côtés de 15 cm, marque un premier repli de 5 mm puis un second repli de 5 mm vers l’envers, afin d’enfermer le bord brut. Presse chaque pli au fer ; utilise une pattemouille si nécessaire."
         },
         {
-          "title": "Piquer les ourlets",
-          "detail": "Cousez près du pli intérieur. Les ourlets doivent être de largeur identique pour que l’ouverture soit régulière."
+          "title": "Piquer les deux bords ourlés",
+          "detail": "Au point droit d’essai de 2,5 mm, pique près du pli intérieur de chaque ourlet, sans étirer le tissu. Vérifie que les deux ourlets sont réguliers : chacun a consommé 1 cm de tissu. La longueur utile restante entre les deux bords ourlés est donc de 17 cm."
         },
         {
-          "title": "Former l’ouverture croisée",
-          "detail": "Posez le rectangle endroit vers vous. Ramenez les bords ourlés vers le centre, l’un sur l’autre, avec environ 2 cm de chevauchement. Ajustez pour former une poche d’environ 7,5 cm de hauteur avant coutures latérales."
+          "title": "Former la poche et l’ouverture croisée",
+          "detail": "Pose le rectangle à plat, endroit vers toi, les deux bords ourlés à gauche et à droite. Ramène les bords ourlés vers le milieu, l’un puis l’autre, de manière à ce qu’ils se recouvrent de 2 cm. Les jolies faces se touchent pendant ce pliage : l’envers reste visible à l’extérieur. Ajuste le pliage pour obtenir 7,5 cm de largeur de poche (17 cm utiles moins 2 cm de recouvrement, le tout divisé par deux). L’ouverture doit rester centrée."
         },
         {
-          "title": "Maintenir et coudre les côtés",
-          "detail": "Épinglez les deux côtés non ourlés ; piquez à 1 cm sur ces deux bords. Renforcez à la rencontre des deux lèvres de l’ouverture."
+          "title": "Maintenir puis coudre les deux côtés",
+          "detail": "Épingle les deux côtés non ourlés, chacun formé des épaisseurs repliées. Vérifie le recouvrement central de 2 cm et l’absence de décalage. Pique à 1 cm de chacun de ces deux côtés : cela ramène la hauteur de 15 à environ 13 cm. Renforce les points aux endroits où les lèvres ourlées rejoignent la couture, sans refermer l’ouverture centrale. Surfile les marges si nécessaire."
         },
         {
-          "title": "Retourner et repasser",
-          "detail": "Retournez sur l’endroit par l’ouverture centrale et formez délicatement les coins. Aplatissez l’étui au fer."
+          "title": "Retourner et mettre en forme",
+          "detail": "Passe l’étui sur l’endroit par son ouverture croisée centrale. Dégage délicatement les quatre coins avec un outil non pointu. Aplatis au fer sur l’envers du tissu si nécessaire, sans écraser les ourlets."
         },
         {
-          "title": "Essayer et corriger",
-          "detail": "Glissez quelques mouchoirs. Si le paquet force, réduisez le remplissage ou notez l’ajustement à prévoir pour le prochain étui."
+          "title": "Contrôler et personnaliser",
+          "detail": "Vérifie que l’étui mesure environ 13 × 7,5 cm et que ses deux lèvres restent bien croisées. Glisse quelques mouchoirs pliés et vérifie que l’ouverture reprend sa place. Pour une variante, ajoute un petit ruban décoratif avant assemblage, ou utilise un tissu différent sur chaque face après avoir préparé un panneau de mêmes dimensions."
         }
       ],
-      "bonus": "Créer un second étui bicolore en assemblant deux tissus avant de former les ourlets.",
+      "bonus": "Créer un étui bicolore en assemblant des chutes pour former un panneau final de 15 × 19 cm, en évitant une couture épaisse au niveau du croisement.",
       "mistakes": [
         [
-          "Fente décentrée",
-          "Pliez et mesurez les deux côtés avant de piquer ; une couture épinglée peut encore être corrigée."
+          "Ouverture décentrée",
+          "Avant de piquer les côtés, mesure la largeur du pliage (7,5 cm) et le recouvrement central (2 cm). Repositionne les bords ourlés si nécessaire."
         ],
         [
-          "Mouchoirs coincés",
-          "Vérifiez la taille du paquet dès le début : les dimensions indiquées correspondent à un modèle compact."
+          "Étui trop large ou trop étroit",
+          "Contrôle la longueur utile de 17 cm après ourlets. Le calcul avec 2 cm de recouvrement donne 7,5 cm de largeur finale."
         ],
         [
-          "Ourlets qui roulent",
-          "Repassez le premier puis le deuxième pli, au lieu de les former directement sous le pied."
+          "Mouchoirs difficiles à glisser",
+          "Essaie le format du mouchoir avant la coupe. Un paquet très épais nécessite un modèle agrandi, avec des marges identiques."
+        ],
+        [
+          "Ourlets irréguliers",
+          "Repasse chaque pli de 5 mm séparément et pique près du second repli plutôt que de guider les deux replis sous le pied en une seule opération."
         ]
       ],
       "checkpoint": [
-        "Les deux ourlets mesurent-ils chacun environ 1 cm au total ?",
-        "L’ouverture est-elle centrée avec un recouvrement d’environ 2 cm ?",
-        "Le paquet de mouchoirs se glisse-t-il facilement ?"
+        "Le rectangle initial mesure-t-il bien 15 × 19 cm, marges comprises ?",
+        "Les deux petits bords ont-ils chacun un ourlet double de 5 + 5 mm ?",
+        "Les deux lèvres se recouvrent-elles de 2 cm, au centre de l’étui ?",
+        "L’étui retourné mesure-t-il environ 13 × 7,5 cm ?"
       ],
       "diagram": "tissue",
       "patchworkTitle": "Bandes horizontales",
@@ -234,6 +240,15 @@
           "title": "Janome : quatre vérifications en cas de machine bloquée",
           "url": "https://www.janome.fr/blog/quatre-choses-a-verifier-avant-de-sinquieter-si-votre-machine-ne-coud-plus--n287"
         }
+      ],
+      "photoChecklist": [
+        "Le rectangle découpé et la règle indiquant 15 × 19 cm",
+        "Le double ourlet de 5 mm + 5 mm avant piqûre",
+        "Les deux petits bords ourlés",
+        "Les deux lèvres croisées de 2 cm, endroit du tissu à l’intérieur",
+        "Les deux coutures latérales avant retournement",
+        "L’étui retourné avec son ouverture centrée",
+        "Le résultat final avec des mouchoirs"
       ]
     },
     "4": {
