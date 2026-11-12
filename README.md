@@ -1,3 +1,9 @@
+## V1.3.43 · Cours couture 3 validé et photographié
+
+- Étui à mouchoirs à ouverture croisée : **cours 3 validé à 100 %**, statut synchronisé dans Cours et Patrons.
+- Cinq photographies personnelles (coupe, ourlets, pliage, couture, résultat) placées dans les étapes concernées, agrandissables sur mobile.
+- Patron A4 et progression individuelle conservés. Aucune photo de remplacement générée.
+
 ## v1.3.40 · Cours 3 et menu Patrons
 
 - Cours couture 3 « Étui à mouchoirs » complété, patron A4 en taille réelle 15 × 19 cm et carré témoin 5 × 5 cm.
