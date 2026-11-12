@@ -37,6 +37,23 @@ lessons[2][4].image={src:'./assets/cours-02/photo-5.jpg',alt:"Dessous de verre i
 lessons[2][6]={id:'week-2-photo-6',role:'Résultat final',caption:"Dessous de verre terminé, côté imprimé bleu avec l’oiseau et surpiqûre visible.",image:null};
 lessons[2][6].image={src:'./assets/cours-02/photo-6.jpg',alt:"Dessous de verre terminé, coton bleu à oiseau et bord arrondi surpiqué",width:1087,height:1450};
 
+
+// Photographies réelles du cours couture 3, prises par la couturière, conservées lisibles et zoomables.
+lessons[3][0].role="Découpe";
+lessons[3][0].caption="Rectangle de coton imprimé découpé et contrôlé à la règle avant de réaliser les ourlets.";
+lessons[3][0].image={src:'./assets/cours-03/photo-1.jpg',alt:"Rectangle de coton blanc imprimé de personnages, avec une règle d’écolier sur deux côtés",width:1050,height:1400};
+lessons[3][1].role="Ourlets";
+lessons[3][1].caption="Sur l’envers du tissu, les deux petits bords sont repliés et piqués pour former les ourlets doubles.";
+lessons[3][1].image={src:'./assets/cours-03/photo-2.jpg',alt:"Envers du coton imprimé, avec les deux bords opposés repliés et cousus",width:1050,height:1400};
+lessons[3][2].role="Ouverture croisée";
+lessons[3][2].caption="Les bords ourlés sont rabattus l’un sur l’autre vers le centre, puis maintenus avec des épingles.";
+lessons[3][2].image={src:'./assets/cours-03/photo-3.jpg',alt:"Tissu replié à ouverture centrale croisée et maintenu avec des épingles, une règle contrôlant le pliage",width:1050,height:1400};
+lessons[3][3].role="Couture des côtés";
+lessons[3][3].caption="Les épaisseurs sont maintenues avec une épingle ; la couture latérale fixe le pliage.";
+lessons[3][3].image={src:'./assets/cours-03/photo-4.jpg',alt:"Gros plan de l’envers du tissu replié et cousu sur le côté, épingle jaune et découd-vite visibles",width:1050,height:1400};
+lessons[3][4].role="Résultat final";
+lessons[3][4].caption="L’étui terminé, retourné sur l’endroit, avec son ouverture croisée centrale.";
+lessons[3][4].image={src:'./assets/cours-03/photo-5.jpg',alt:"Étui à mouchoirs terminé en coton imprimé coloré, ouverture centrale croisée visible",width:1050,height:1400};
 // Photo fournie pour le damier du cours patchwork 1 (quatre tissus Halloween).
 lessons[1][5].image={src:'./assets/patchwork-01/bloc-01-halloween.jpg',alt:'Bloc 1 damier Halloween : deux carrés de coton clair et deux carrés noirs imprimés, disposés en diagonale',width:1536,height:1437};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -75,5 +92,11 @@ function renderSewingStep2(stepIndex){
  const slot=lessons[2][index],img=slot?.image,src=source(img?.src);if(!src)return '';
  return '<figure class="sewing-two-photo"><button type="button" class="lesson-photo-open sewing-two-photo-open" data-lesson-photo="2:'+index+'" aria-label="'+esc('Agrandir : '+slot.caption)+'"><img loading="lazy" decoding="async" src="'+esc(src)+'" alt="'+esc(img.alt)+'" width="'+img.width+'" height="'+img.height+'"></button><figcaption>'+esc(slot.caption)+'</figcaption></figure>';
 }
-root.Fil52LessonPhotos={lessons,render,renderPatchwork:w=>render(w,true),renderSewingStep2};
+function renderSewingStep3(stepIndex){
+ const index=[0,-1,1,2,3,-1,4][stepIndex];
+ if(index===undefined||index<0)return '';
+ const slot=lessons[3][index],img=slot?.image,src=source(img?.src);if(!src)return '';
+ return '<figure class="sewing-two-photo"><button type="button" class="lesson-photo-open sewing-two-photo-open" data-lesson-photo="3:'+index+'" aria-label="'+esc('Agrandir : '+slot.caption)+'"><img loading="lazy" decoding="async" src="'+esc(src)+'" alt="'+esc(img.alt)+'" width="'+img.width+'" height="'+img.height+'"></button><figcaption>'+esc(slot.caption)+'</figcaption></figure>';
+}
+root.Fil52LessonPhotos={lessons,render,renderPatchwork:w=>render(w,true),renderSewingStep2,renderSewingStep3};
 })(globalThis);
