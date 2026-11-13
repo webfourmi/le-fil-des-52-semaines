@@ -1,6 +1,17 @@
 {
-  "current": "1.3.45",
+  "current": "1.3.46",
   "releases": [
+    {
+      "version": "1.3.46",
+      "date": "2026-11-13",
+      "title": "Patron A4 du bloc patchwork 4 : carré central simple",
+      "changes": [
+        "Patron ajouté à la fiche du bloc 4 et à la bibliothèque Patchwork, avec aperçu et retour au cours.",
+        "Trois gabarits à taille réelle : carré central de 11,5 cm, bandes de 6,5 × 11,5 cm et de 6,5 × 21,5 cm. Marges de 7,5 mm incluses.",
+        "Trois pages A4 avec carrés témoins de 5 cm, quantités, droit-fil, repères de couture, schéma et instructions de montage. PDF téléchargeable et disponible hors connexion.",
+        "Le bloc reste en cours d’écriture. Aucune validation éditoriale, coche personnelle ni publication de nouveau bloc."
+      ]
+    },
     {
       "version": "1.3.45",
       "date": "2026-11-13",
