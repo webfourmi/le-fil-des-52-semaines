@@ -21,6 +21,9 @@ const photosCoursUn=[
 photosCoursUn.forEach(([file,alt,width,height],i)=>{
  lessons[1][i].image={src:'./assets/cours-01/'+file,alt,width,height};
 });
+// Photographie originale du bloc 3. Gardée en définition native pour le zoom.
+lessons[3][5].caption='Bloc 3 terminé : bande supérieure crème à motifs floraux dorés, bande inférieure rouge avec des sapins de Noël.';
+lessons[3][5].image={src:'./assets/patchwork-03/bloc-03-reel.jpg',full:'./assets/patchwork-03/bloc-03-reel.jpg',alt:'Photographie personnelle du bloc 3 : deux bandes horizontales assemblées, coton crème et doré en haut, coton rouge à sapins en bas',width:1536,height:1475};
 // Photographie originale fournie pour le cours patchwork n° 2, conservée dans sa définition native.
 lessons[2][5].image={src:'./assets/patchwork-02/bloc-02-reel.jpg',alt:'Véritable bloc de patchwork 2 photographié : tissu gris clair à gauche et chats porte-bonheur japonais à droite, couture centrale verticale',width:1514,height:1536};
 // Photographies originales du cours couture 2, correspondant aux étapes du dessous de verre.
