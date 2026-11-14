@@ -3,7 +3,7 @@
 'use strict';
 let deferred=null, worker=null, waiting=null, updateAccepted=false;
 let previouslyControlled=false;
-const APP_BUILD='1.3.47';
+const APP_BUILD='1.3.48';
 const compareVersions=(a,b)=>{const x=String(a).split('.').map(Number),y=String(b).split('.').map(Number);for(let i=0;i<Math.max(x.length,y.length);i++){const diff=(x[i]||0)-(y[i]||0);if(diff)return diff}return 0};
 const el=id=>document.getElementById(id);
 const updateUI=()=>{
