@@ -593,6 +593,6 @@
       ]
     }
   },
-  "appRelease": "1.3.61",
-  "appReleaseNotes": "Couture : le Dictionnaire et les Patrons rejoignent la barre du haut, avec leurs icônes illustrées dans le style du carnet. Ils sont accessibles depuis Cours, Techniques et Bonus. Suppression de la seconde barre d’icônes et du raccourci Cours 0. Le cours 0 reste accessible dans la liste de choix des cours. Sur téléphone, les sept icônes sont réparties sur deux lignes pour rester lisibles et faciles à toucher."
+  "appRelease": "1.3.62",
+  "appReleaseNotes": "Patchwork : les icônes Recherche et Choix rejoignent la barre des outils existants, dans le même style illustré. La barre de recherche et la liste de choix des cours sont masquées par défaut. Chaque icône affiche ou referme son menu au clic. Les accès au cours préparatoire, à la couverture personnelle, au dictionnaire et aux patrons sont conservés. Sur téléphone, les six icônes se répartissent sur deux lignes."
 }

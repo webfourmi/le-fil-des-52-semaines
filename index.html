@@ -212,6 +212,10 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
 #app .sewing-section-tabs{display:grid;grid-template-columns:repeat(7,minmax(0,78px));gap:10px}
 #app .sewing-section-tabs button{width:100%;max-width:78px;min-width:0}
 @media(max-width:600px){#app .sewing-section-tabs{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;max-width:360px}#app .sewing-section-tabs button{width:100%;padding:4px;font-size:.68rem;max-width:78px}#app .sewing-section-tabs button img{width:58px;height:58px}}
+/* Patchwork : tous les outils dans la même barre. */
+#app nav.sewing-course-tools.patchwork-tools{grid-template-columns:repeat(6,minmax(0,1fr));max-width:620px;gap:10px;margin:18px 0 22px}
+#app .patch-picker[hidden],#app #patch-search-panel[hidden],#app #patch-choice-panel[hidden]{display:none!important}
+@media(max-width:600px){#app nav.sewing-course-tools.patchwork-tools{grid-template-columns:repeat(3,minmax(0,1fr));max-width:360px;gap:8px}}
 </style>
 <style>
 [data-bonus-project][hidden],#bonus-empty[hidden]{display:none!important}
@@ -244,7 +248,7 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
 <script defer src="./assets/noel-bonus.js"></script><script defer src="./assets/thanksgiving-dindon.js"></script>
 <link rel="stylesheet" href="./assets/noel-bonus.css">
 <script defer src="./assets/backup.js?v=1.3.60"></script>
-<script defer src="./assets/pwa.js?v=1.3.61"></script>
+<script defer src="./assets/pwa.js?v=1.3.62"></script>
 <style>
 .pattern-category-picker{max-width:440px;margin:14px 0 20px;display:grid;gap:7px}.pattern-category-picker select{width:100%;font-size:1rem}
 #patterns-sewing[data-pattern-view="sewing"] .patterncard[data-pattern-group="bonus"],#patterns-sewing[data-pattern-view="bonus"] .patterncard[data-pattern-group="course"]{display:none}
@@ -340,6 +344,7 @@ function page(p){const previous=atelierView();if(!['learn','quilt'].includes(p))
 function chooseProfile(p){if(state.profile!==p)return;render()}
 function selectWeek(w){const previous=atelierView();sewingTechniquesOpen=false;sewingSearchQuery='';state.week=+w;state.page='learn';save();atelierPush(previous);render();scrollTo({top:0,behavior:'instant'})}
 function selectPatchWeek(w){patchSearchQuery='';const n=+w;if(!Number.isInteger(n)||n<0||n>52)return;const previous=atelierView();state.patchWeek=n;state.page='quilt';quiltCoverOpen=false;dicoOpen=false;save();atelierPush(previous);render();scrollTo({top:0,behavior:'instant'})}
+let patchPickerOpen='';
 let quiltCoverOpen=false,patternKind='sewing';
 let journalKind='sewing',journalPick={sewing:null,patchwork:null,voyage:null};
 let sewingSearchQuery='',patchSearchQuery='',patternPreview='',patternSection='';
@@ -629,13 +634,16 @@ function lessonDetail(){let p=state.profile;let c=courseProgress(1).done;return 
 function quiltLarge(p){let index=0;const arr=state.blocks[p];return `<div class="quilt ${p==='f'?'daughter':''}" aria-label="Couverture de ${safe(state.names[p])}">${Array.from({length:56},(_,pos)=>{const r=Math.floor(pos/7),c=pos%7,corner=(r===0||r===7)&&(c===0||c===6);if(corner)return `<div class="block corner" title="Carré uni"></div>`;index++;return `<button class="block ${arr.includes(index)?'done':''}" data-quilt-person="${p}" data-quilt-block="${index}" title="Bloc ${index} : ${safe(blocks[index-1])}${arr.includes(index)?' (terminé)':''}" aria-pressed="${arr.includes(index)}">${index}</button>`;}).join('')}</div>`}
 function patchwork(){
  const w=state.patchWeek,p=state.profile,progress=state.blocks[p].length;
- return `<div class="weektop patch-weektop"><div><span class="eyebrow">Mes blocs personnels</span><h1>Mes cours de patchwork</h1></div><div class="course-picker"><label for="patch-course-search">Rechercher un bloc patchwork</label><input id="patch-course-search" type="search" autocomplete="off" placeholder="Ex. étoile, carré, triangles…" value="${safe(patchSearchQuery)}" aria-controls="patch-search-results" aria-label="Recherche par mots-clés parmi les blocs de patchwork"><div id="patch-search-results" class="course-search-results" role="region" aria-live="polite" aria-label="Résultats de recherche des blocs" hidden></div><label for="patch-week-select" class="course-select-label">Ou choisir un bloc</label><select id="patch-week-select" class="selection" aria-label="Choisir un cours de patchwork">${blocks.map((name,i)=>`<option value="${i+1}" ${w===i+1?'selected':''}>Bloc ${String(i+1).padStart(2,'0')} · ${safe(name)}${editorialIsApproved('patchwork',i+1)?'':' · Projet en cours d’écriture'}</option>`).join('')}</select></div></div><div class="editorial-head-status">${editorialBadge('patchwork',w)}</div>
- <nav class="sewing-course-tools patchwork-tools" aria-label="Outils des cours de patchwork">
+ return ` <nav class="sewing-course-tools patchwork-tools" aria-label="Outils des cours de patchwork">
  <button type="button" class="sewing-tool ${w===0?'selected':''}" data-patch-zero title="Cours patchwork 0" aria-label="Ouvrir le cours préparatoire de patchwork"><span class="sewing-tool-art"><img src="${navIcons.quilt}" alt="" aria-hidden="true"><span class="sewing-tool-zero" aria-hidden="true">0</span></span></button>
  <button type="button" class="sewing-tool ${quiltCoverOpen?'selected':''}" data-patch-cover aria-expanded="${quiltCoverOpen?'true':'false'}" aria-controls="patch-cover-panel" title="Ma couverture" aria-label="Afficher ma couverture personnelle"><span class="sewing-tool-art"><img src="./assets/icon-couverture.svg" alt="" aria-hidden="true"></span></button>
  <button type="button" class="sewing-tool ${dicoOpen?'selected':''}" data-dico-toggle aria-expanded="${dicoOpen?'true':'false'}" aria-controls="dico-couture" title="Dico couture" aria-label="Ouvrir le dictionnaire de couture"><span class="sewing-tool-art"><img src="./assets/icon-dico-couture.svg" alt="" aria-hidden="true"></span></button>
  <button type="button" class="sewing-tool" data-pattern-kind="patchwork" title="Patrons patchwork" aria-label="Ouvrir les patrons de patchwork"><span class="sewing-tool-art"><img src="${navIcons.print}" alt="" aria-hidden="true"></span></button>
+ <button type="button" class="sewing-tool ${patchPickerOpen==='search'?'selected':''}" data-patch-panel="search" aria-label="Rechercher un bloc patchwork" title="Rechercher un bloc" aria-expanded="${patchPickerOpen==='search'}" aria-controls="patch-search-panel"><span class="sewing-tool-art"><img src="./assets/nav-travel-search.svg" alt="" aria-hidden="true"></span></button>
+ <button type="button" class="sewing-tool ${patchPickerOpen==='choice'?'selected':''}" data-patch-panel="choice" aria-label="Choisir un cours de patchwork" title="Choisir un cours" aria-expanded="${patchPickerOpen==='choice'}" aria-controls="patch-choice-panel"><span class="sewing-tool-art"><img src="./assets/nav-travel-choice.svg" alt="" aria-hidden="true"></span></button>
  </nav>
+ <div class="weektop patch-weektop"><div><span class="eyebrow">Mes blocs personnels</span><h1>Mes cours de patchwork</h1></div><div class="course-picker patch-picker" ${patchPickerOpen?'':'hidden'}><div id="patch-search-panel" ${patchPickerOpen==='search'?'':'hidden'}><label for="patch-course-search">Rechercher un bloc patchwork</label><input id="patch-course-search" type="search" autocomplete="off" placeholder="Ex. étoile, carré, triangles…" value="${safe(patchSearchQuery)}" aria-controls="patch-search-results" aria-label="Recherche par mots-clés parmi les blocs de patchwork"><div id="patch-search-results" class="course-search-results" role="region" aria-live="polite" aria-label="Résultats de recherche des blocs" hidden></div></div><div id="patch-choice-panel" ${patchPickerOpen==='choice'?'':'hidden'}><label for="patch-week-select" class="course-select-label">Ou choisir un bloc</label><select id="patch-week-select" class="selection" aria-label="Choisir un cours de patchwork">${blocks.map((name,i)=>`<option value="${i+1}" ${w===i+1?'selected':''}>Bloc ${String(i+1).padStart(2,'0')} · ${safe(name)}${editorialIsApproved('patchwork',i+1)?'':' · Projet en cours d’écriture'}</option>`).join('')}</select></div></div></div><div class="editorial-head-status">${editorialBadge('patchwork',w)}</div>
+
  ${dicoOpen?sewingGlossary():''}
  ${quiltCoverOpen?`<section class="card section patch-cover-panel" id="patch-cover-panel"><span class="eyebrow">Couverture personnelle</span><h2>La couverture de ${safe(state.names[p])}</h2><p>${progress} blocs achevés · Carrés de 20 × 20 cm, avec quatre carrés unis aux angles. Disposition : 7 colonnes sur 8 rangées.</p><div class="progressbar"><span style="width:${progress/52*100}%"></span></div>${quiltLarge(p)}<p class="small">Appuie sur un carré pour le marquer terminé. Les coches sont propres à ${safe(state.names[p])} et synchronisées avec le cours du bloc.</p></section>`:''}
  ${Fil52PatchworkCourses.renderSelected(w,blocks,state.published,upcomingEditions,p,state.blocks[p],state.steps[p])}
@@ -1230,6 +1238,7 @@ document.addEventListener('click',e=>{
  }
  if(e.target.closest('[data-pattern-preview-close]')){patternPreview='';patternSection='';render();return}
  const patternKindButton=e.target.closest('[data-pattern-kind]');if(patternKindButton){patternKind=patternKindButton.dataset.patternKind;patternPreview='';patternSection='';page('print');return}
+ const patchTool=e.target.closest('[data-patch-panel]');if(patchTool){const panel=patchTool.dataset.patchPanel;patchPickerOpen=patchPickerOpen===panel?'':panel;render();const target=patchPickerOpen?el('patch-'+patchPickerOpen+'-panel')?.querySelector('input,select'):document.querySelector('[data-patch-panel="'+panel+'"]');target?.focus({preventScroll:true});return}
  const patchZero=e.target.closest('[data-patch-zero]');if(patchZero){selectPatchWeek(0);return}
  const patchCover=e.target.closest('[data-patch-cover]');if(patchCover){quiltCoverOpen=!quiltCoverOpen;render();document.querySelector(quiltCoverOpen?'#patch-cover-panel':'[data-patch-cover]')?.focus({preventScroll:true});return}
  

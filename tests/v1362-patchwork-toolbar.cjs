@@ -1,0 +1,31 @@
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict'),http=require('node:http'),fs=require('node:fs'),path=require('node:path');
+const {execFileSync}=require('node:child_process');
+const root=path.resolve(__dirname,'..'),baseline=new Map();let old=false;
+const mime={'.html':'text/html','.js':'text/javascript','.json':'application/json','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.webp':'image/webp'};
+const server=http.createServer((req,res)=>{try{const file=decodeURIComponent(new URL(req.url,'http://localhost').pathname).replace(/^\//,'')||'index.html',target=path.resolve(root,file);if(!target.startsWith(root+path.sep))throw Error();let bytes;if(old){if(!baseline.has(file))baseline.set(file,execFileSync('git',['show','c959354:'+file],{cwd:root,maxBuffer:20e6,stdio:['ignore','pipe','ignore']}));bytes=baseline.get(file)}else bytes=fs.readFileSync(target);res.writeHead(200,{'Content-Type':(mime[path.extname(file)]||'application/octet-stream')+'; charset=utf-8','Cache-Control':'no-store'});res.end(bytes)}catch{res.writeHead(404);res.end()}});
+(async()=>{
+ await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port+'/';
+ const browser=await chromium.launch({headless:true,channel:process.env.TEST_BROWSER_CHANNEL||undefined});
+ try{
+  for(const width of [1366,390,320]){
+   const context=await browser.newContext({viewport:{width,height:844},isMobile:width<600,hasTouch:width<600}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+   await page.goto(url);await page.getByRole('button',{name:'Viera',exact:true}).click();const nav=width<600?'#bottomnav':'#nav';await page.locator(nav+' [data-page="quilt"]').click();
+   assert.equal(await page.locator('.patchwork-tools button').count(),6);assert.equal(await page.locator('#patch-course-search').isVisible(),false);assert.equal(await page.locator('#patch-week-select').isVisible(),false);
+   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.screenshot({path:'../patchwork-barre-'+width+'.png',fullPage:false});
+   await page.locator('[data-patch-panel="search"]').click();assert.equal(await page.locator('#patch-course-search').evaluate(x=>x===document.activeElement),true);await page.locator('#patch-course-search').fill('damier');assert.ok(await page.locator('[data-course-match="patchwork"]').count()>0);await page.locator('[data-course-match="patchwork"][data-course-index="1"]').click();
+   await page.locator('[data-patch-panel="search"]').click();assert.equal(await page.locator('#patch-course-search').isVisible(),false);
+   await page.locator('[data-patch-panel="choice"]').click();assert.equal(await page.locator('#patch-week-select').evaluate(x=>x===document.activeElement),true);await page.locator('#patch-week-select').selectOption('2');assert.equal(await page.evaluate(()=>state.patchWeek),2);await page.locator('[data-patch-panel="choice"]').click();assert.equal(await page.locator('#patch-week-select').isVisible(),false);
+   await page.locator('[data-patch-cover]').click();assert.equal(await page.locator('#patch-cover-panel').isVisible(),true);const block=page.locator('#patch-cover-panel [data-quilt-block="1"]');await block.click();assert.equal(await block.getAttribute('aria-pressed'),'true');await page.locator('[data-patch-cover]').click();assert.equal(await page.locator('#patch-cover-panel').count(),0);
+   await page.locator('.patchwork-tools [data-dico-toggle]').click();await page.locator('#dico-search').fill('droit-fil');assert.ok(await page.locator('.sewing-term:visible').count()>0);await page.locator('.patchwork-tools [data-dico-toggle]').click();
+   await page.locator('.patchwork-tools [data-pattern-kind="patchwork"]').click();assert.equal(await page.locator('#pattern-category-select').inputValue(),'patchwork');await page.goBack();await page.locator('[data-patch-zero]').click();assert.equal(await page.evaluate(()=>state.patchWeek),0);
+   await page.waitForFunction(()=>!!navigator.serviceWorker.controller);await page.reload();await page.locator(nav+' [data-page="quilt"]').click();assert.equal(await page.locator('#patch-course-search').isVisible(),false);assert.equal(await page.locator('#patch-week-select').isVisible(),false);assert.equal(await page.evaluate(()=>state.blocks.m.includes(1)),true);
+   await context.setOffline(true);await page.reload();await page.locator(nav+' [data-page="quilt"]').click();await page.locator('[data-patch-panel="choice"]').click();await page.locator('#patch-week-select').selectOption('1');assert.equal(await page.evaluate(()=>state.patchWeek),1);assert.equal(await page.evaluate(()=>state.blocks.m.includes(1)),true);
+   assert.deepEqual(errors,[]);await context.close();console.log('OK Patchwork toolbar, hidden menus, search, choice, cover, dictionary, patterns, offline '+width+'px');
+  }
+  old=true;const context=await browser.newContext({viewport:{width:390,height:844}}),page=await context.newPage();await page.goto(url);await page.getByRole('button',{name:'Viera',exact:true}).click();await page.waitForFunction(()=>!!navigator.serviceWorker.controller);await page.evaluate(()=>window.beforeUpdate=true);
+  old=false;await page.evaluate(async()=>{await (await navigator.serviceWorker.ready).update()});await page.getByRole('button',{name:'Installer la mise à jour',exact:true}).waitFor();assert.match(await page.locator('#pwa-changelog-overlay').innerText(),/1\.3\.62/);assert.match(await page.locator('#pwa-changelog-overlay').innerText(),/Patchwork/);assert.equal(await page.evaluate(()=>window.beforeUpdate),true);
+  await page.getByRole('button',{name:'Installer la mise à jour',exact:true}).click();await page.waitForFunction(()=>!window.beforeUpdate);await page.waitForFunction(()=>document.querySelector('#pwa-version')?.textContent.includes('1.3.62'));
+  for(let i=0;i<2;i++){await page.reload();await page.waitForTimeout(1000);assert.equal(await page.locator('#pwa-changelog-overlay').count(),0);assert.equal(await page.locator('#pwa-notice').isVisible(),false)}await context.close();console.log('OK PWA update 1.3.61 → 1.3.62, consent, no repeated notice');
+ }finally{await browser.close();server.close()}
+})().catch(e=>{console.error(e);server.close();process.exitCode=1});
