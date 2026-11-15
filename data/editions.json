@@ -593,6 +593,6 @@
       ]
     }
   },
-  "appRelease": "1.3.59",
-  "appReleaseNotes": "Mercerie : deux boutons distincts permettent de prendre une photo du tissu avec l’appareil photo du téléphone ou de choisir un fichier. Ces options sont disponibles à l’ajout et à la modification d’une fiche. Catalogue de mercerie : choix de vignettes petites, moyennes ou grandes. La taille est conservée sur cet appareil pour chaque couturière."
+  "appRelease": "1.3.60",
+  "appReleaseNotes": "Couture : trois icônes illustrées pour Cours, Techniques et Bonus, suivies des icônes Recherche et Choix. Les menus sont masqués par défaut et s’affichent au clic. Une petite étoile cliquable permet d’ajouter ou retirer des favoris dans les cours, les fiches techniques et les projets bonus. Les favoris apparaissent en premier dans les menus de choix. Les favoris couture sont personnels à chaque couturière, conservés après fermeture et inclus dans les sauvegardes du carnet."
 }
