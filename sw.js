@@ -1,5 +1,5 @@
 /* De fil en aiguille — cache PWA. Augmenter CACHE_VERSION pour chaque nouvelle version de l'application. */
-const CACHE_VERSION = 'fil52-shell-v1.3.52';
+const CACHE_VERSION = 'fil52-shell-v1.3.53';
 const CORE = [
   './','./index.html','./manifest.webmanifest','./data/editions.json','./data/changelog.json',
   './assets/history-houses.js','./assets/history-houses.css',

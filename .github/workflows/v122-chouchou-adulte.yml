@@ -1,0 +1,40 @@
+name: Cours 4 - Chouchou adulte et patron A4
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  scrunchie:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright@1.56.1
+      - run: npx playwright install --with-deps chromium
+      - name: Vérifier le patron PDF A4, ses pages et ses textes
+        run: |
+          python3 -m pip install --quiet pypdf
+          python3 - <<'PY'
+          from pypdf import PdfReader
+          p='assets/cours-04-patron-chouchou.pdf'
+          r=PdfReader(p)
+          assert len(r.pages)==2, len(r.pages)
+          for page in r.pages:
+              b=page.mediabox
+              assert abs(float(b.width)-595.276)<0.15
+              assert abs(float(b.height)-841.89)<0.15
+          t1=r.pages[0].extract_text()
+          t2=r.pages[1].extract_text()
+          assert '27,5 x 12 cm' in t1, t1[:350]
+          assert '5 x 5 cm' in t1
+          assert '14 cm' in t1
+          assert '13,5 cm' in t2
+          assert '55 x 12 cm' in t2
+          print('OK : PDF vectoriel 2 pages A4, demi-patron total 27,5 x 12 cm, témoin 5 x 5 cm')
+          PY
+      - run: node tests/chouchou-pattern.cjs
