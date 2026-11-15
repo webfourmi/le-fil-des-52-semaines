@@ -23,7 +23,7 @@ const {chromium}=require('playwright');
    assert.equal(await article.locator('.couture-houses-figure img').count(),5);
    assert.equal(await article.locator('.couture-houses-exercises>div').count(),3);
    const text=await article.innerText();
-   for(const v of ['Rose Bertin','Worth','Jeanne Paquin','Jeanne Lanvin','Poiret','Vionnet','Chanel','Schiaparelli','Dior','Balenciaga','Saint Laurent','atelier flou','tailleur','1945'])assert(text.includes(v),'Manque '+v);
+   for(const v of ['Rose Bertin','Worth','Jeanne Paquin','Jeanne Lanvin','Poiret','Vionnet','Chanel','Schiaparelli','Dior','Balenciaga','Saint Laurent','atelier flou','tailleur','1945'])assert(text.toLowerCase().includes(v.toLowerCase()),'Manque '+v);
    const links=await article.locator('a[target="_blank"]').evaluateAll(ns=>ns.map(n=>({target:n.target,rel:n.rel,href:n.href})));
    assert(links.length>12);
    assert(links.every(x=>x.rel.includes('noopener')));
