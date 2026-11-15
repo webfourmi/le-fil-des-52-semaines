@@ -5,7 +5,8 @@
       0,
       1,
       2,
-      3
+      3,
+      4
     ],
     "patchwork": [
       0,
@@ -255,79 +256,86 @@
     },
     "4": {
       "title": "Chouchou en tissu",
-      "intro": "Une jolie façon de transformer une chute allongée en accessoire utile. Cette fois, tu apprendras à retourner un tube et à installer un élastique.",
-      "duration": "45 min à 1 h 15 (couture + bloc)",
-      "technique": "Tube de tissu, montage d’élastique, fermeture invisible",
-      "reuse": "Chute de popeline de coton légère ou ancienne chemise",
-      "objective": "Fabriquer un chouchou souple avec un élastique bien fixé et une ouverture refermée proprement.",
-      "result": "Chouchou souple adapté à l’épaisseur du tissu et à la longueur de l’élastique ; essaye le tour sur tes cheveux avant de fermer.",
+      "intro": "Un chouchou adulte généreusement froncé, idéal pour utiliser une chute de coton léger : nous apprenons à coudre un long tube, à insérer un élastique et à fermer proprement l'anneau à la main.",
+      "duration": "45 min à 1 h 15 (couture du chouchou seul ; prévoir davantage avec le bloc de patchwork)",
+      "technique": "Couture au point droit, tube retourné, élastique, fermeture invisible au point glissé",
+      "reuse": "Une chute de popeline de coton de 55 × 12 cm, ou une bande prélevée dans une ancienne chemise",
+      "objective": "Réaliser un chouchou de taille adulte avec un bel effet de fronces, un élastique solide et une jonction invisible.",
+      "result": "Un chouchou adulte souple, cousu dans une bande de 55 × 12 cm. Le volume dépend du tissu et la tension de l'élastique : toujours essayer avant de fermer.",
       "materials": [
-        "1 bande de coton tissé léger de 45 × 10 cm",
-        "1 morceau d’élastique souple de 18 cm environ, à ajuster selon le confort",
-        "Épingle à nourrice pour passer l’élastique, fil assorti",
-        "Aiguille universelle 80/12 et aiguille à coudre à la main"
+        "1 bande de coton tissé léger de 55 × 12 cm, marges de 1 cm comprises (popeline, chemise recyclée)",
+        "1 élastique plat souple d'environ 20 cm de long et 6 à 10 mm de large, à ajuster aux cheveux",
+        "Fil assorti ; aiguille universelle 80/12 pour la machine et aiguille à main",
+        "Épingle à nourrice bien fermée, épingles ou pinces, règle, craie textile, ciseaux, fer à repasser"
       ],
-      "settings": "Point droit de longueur 2,5 mm pour le tissu ; fermeture de l’élastique avec des points solides à la main ou un zigzag court validé sur une chute.",
-      "tip": "Ne laisse pas l’élastique s’échapper dans le tube : épingle une extrémité sur le bord pendant que tu tires l’autre.",
+      "settings": "Point droit d'environ 2,5 mm après test sur une chute, piqûre à 1 cm du bord long ; arrêter les coutures. Superposer les deux bouts de l'élastique sur 2 cm et renforcer au point zigzag court testé ou à la main.",
+      "tip": "Le chouchou adulte se coupe dans une seule bande de 55 × 12 cm. Le demi-patron est réparti sur deux feuilles A4 à raccorder : 14 + 13,5 = 27,5 cm au pli, puis 55 cm après dépliage. Vérifier le témoin de 5 × 5 cm.",
       "safety": "L’épingle à nourrice doit être bien fermée pour le passage dans le tube ; garde les petits objets hors de portée des jeunes enfants.",
       "prep": [
-        "Vérifier que le coton ne s’effiloche pas excessivement ; surfiler si nécessaire.",
-        "Tester le glissement de l’élastique dans le tissu.",
-        "Repérer l’envers et l’endroit de la bande."
+        "Imprimer les deux feuilles du patron à 100 %, sans ajustement ni en-têtes ; vérifier le carré témoin de 5 × 5 cm, raccorder les repères A, puis mesurer 27,5 × 12 cm sur le patron au pli.",
+        "Repasser le tissu, vérifier le droit-fil et couper une bande de 55 × 12 cm, sans ajouter de marge. Un tracé direct à la règle est également possible.",
+        "Choisir un coton léger pour faciliter le retournement et tester le glissement d'un élastique plat souple de 6 à 10 mm de large.",
+        "Repérer l'endroit et l'envers de la bande avant de commencer."
       ],
       "steps": [
         {
-          "title": "Découper le rectangle",
-          "detail": "Coupez une bande de 45 × 10 cm pour un chouchou. Préférez un tissu léger qui fronce bien."
+          "title": "Tracer et découper le tissu",
+          "detail": "Repasser le coton et découper une bande de 55 × 12 cm dans le droit-fil, en utilisant le patron A4 en deux feuilles assemblées ou une règle. Les marges de 1 cm sont comprises : ne rien ajouter."
         },
         {
-          "title": "Plier sur la longueur",
-          "detail": "Pliez endroit contre endroit, dans le sens de la longueur, pour obtenir un long rectangle de 45 × 5 cm."
+          "title": "Plier le rectangle dans sa longueur",
+          "detail": "Poser la bande endroit vers soi, puis plier en deux dans le sens de la longueur, endroit contre endroit. Aligner et épingler les deux bords longs : on obtient un rectangle de 55 × 6 cm."
         },
         {
-          "title": "Piquer le tube",
-          "detail": "Piquez le grand côté à 1 cm du bord. Laissez les deux petites extrémités ouvertes et faites quelques points arrière."
+          "title": "Piquer le grand côté pour former le tube",
+          "detail": "Coudre les deux grands bords réunis à 1 cm du bord, au point droit d'environ 2,5 mm, avec points d'arrêt. Laisser ouverts les deux petits côtés du tube. Sa largeur à plat est d'environ 5 cm après couture."
         },
         {
-          "title": "Retourner le tube",
-          "detail": "Retournez sur l’endroit à l’aide d’une épingle à nourrice fermée ou d’un retourne-biais ; repassez légèrement."
+          "title": "Retourner le tube sur l'endroit",
+          "detail": "Avec une épingle à nourrice bien fermée ou un retourne-biais, faire progresser le tissu à l'intérieur du tube par petits plis. Retourner complètement, positionner la couture sur le côté et repasser légèrement."
         },
         {
-          "title": "Introduire l’élastique",
-          "detail": "Fixez l’élastique à l’épingle à nourrice, glissez-le dans le tube et maintenez fermement l’autre extrémité."
+          "title": "Passer l'élastique",
+          "detail": "Fixer l'épingle à nourrice à une extrémité de l'élastique de 20 cm et l'introduire dans le tube. Maintenir l'autre extrémité à l'extérieur avec une pince. Vérifier qu'il n'est pas vrillé."
         },
         {
-          "title": "Fermer l’anneau élastique",
-          "detail": "Superposez les extrémités de l’élastique sur 2 cm et cousez-les solidement en plusieurs passages. Vérifiez la tenue en étirant doucement."
+          "title": "Fermer solidement l'anneau élastique",
+          "detail": "Essayer la tension sur les cheveux. Superposer les extrémités de l'élastique sur 2 cm et les fixer par plusieurs passages à la main ou au zigzag court testé sur une chute. Un élastique coupé à 20 cm donnera un anneau d'environ 18 cm au repos avant étirement."
         },
         {
-          "title": "Assembler les extrémités du tube",
-          "detail": "Rapprochez les deux bouts de tissu : rentrez environ 1 cm d’un bout et glissez l’autre dedans, sans tordre l’anneau. Épinglez soigneusement."
+          "title": "Réunir les extrémités du tissu",
+          "detail": "Répartir les fronces pour dégager les extrémités. Sur l'une, rentrer 1 cm de tissu vers l'intérieur et marquer le repli au fer. Introduire l'autre extrémité sur environ 1 cm à l'intérieur du premier bout, sans tordre l'anneau. Maintenir avec des épingles."
         },
         {
-          "title": "Refermer le tissu",
-          "detail": "Fermez la jonction par de petits points invisibles à la main, puis répartissez les fronces tout autour de l’élastique."
+          "title": "Fermer au point glissé et répartir les fronces",
+          "detail": "Avec une aiguille à main et du fil assorti, cacher le nœud dans le repli, puis prendre alternativement de minuscules points dans les deux plis. Resserrer délicatement pour faire disparaître la jonction, arrêter le fil et répartir les fronces. Ne pas piquer dans l'élastique."
         }
       ],
-      "bonus": "Comparer un chouchou de popeline et un chouchou de tissu plus fluide : lequel crée des fronces régulières ?",
+      "bonus": "Trois tailles à comparer : petit chouchou (45 × 10 cm, élastique 18 cm), chouchou adulte classique (55 × 12 cm, élastique 20 cm), très volumineux (65 × 13 cm, élastique 20 à 22 cm). Les élastiques restent indicatifs : ajuster à la chevelure. Variantes : satin souple ou coton vintage.",
       "mistakes": [
         [
-          "Tube difficile à retourner",
-          "Utilisez une épingle fermée et avancez par petits plis au lieu de tirer brutalement."
+          "Tissu peu froncé",
+          "Vérifier que le tissu mesure bien 55 cm ; un tissu rigide donnera moins de volume qu'un coton léger ou une viscose."
         ],
         [
-          "Élastique lâche",
-          "Mesurez la tension sur la chevelure avant la fermeture définitive et choisissez un élastique de meilleure tenue si besoin."
+          "Élastique lâche ou trop serré",
+          "Essayer la longueur avant la fermeture définitive : 20 cm coupés et 2 cm superposés donnent environ 18 cm d'anneau."
         ],
         [
-          "Bourrelet à la jonction",
-          "Égalisez les marges et répartissez l’épaisseur avant les points à la main."
+          "Tube torsadé ou bourrelet à la jonction",
+          "Vérifier l'orientation du tube avant de rentrer un bout dans l'autre ; bien replier 1 cm et répartir les épaisseurs."
+        ],
+        [
+          "Gabarit imprimé trop petit",
+          "Refuser toute réduction ou ajustement automatique : carré témoin 5 × 5 cm, demi-bande raccordée 27,5 × 12 cm."
         ]
       ],
       "checkpoint": [
-        "L’élastique est-il solidement cousu et assez confortable ?",
-        "Le tissu forme-t-il un anneau sans torsion ?",
-        "La fermeture est-elle discrète et résistante ?"
+        "La bande de tissu a-t-elle été coupée à 55 × 12 cm, marges comprises ?",
+        "Le tube mesure-t-il environ 5 cm de large une fois cousu et retourné ?",
+        "L'élastique est-il assez confortable, sans vrille, et bien fixé ?",
+        "La fermeture à points glissés est-elle discrète et solide ?",
+        "Les fronces sont-elles réparties régulièrement ?"
       ],
       "diagram": "scrunchie",
       "patchworkTitle": "Carré central simple",
@@ -357,6 +365,13 @@
           "title": "Janome : vidéos couture débutant",
           "url": "https://www.janome.fr/blog/nos-videos-couture-debutant-n412"
         }
+      ],
+      "photoGuide": [
+        "Fournitures et bande de 55 × 12 cm avant couture",
+        "Tissu plié endroit contre endroit et couture du tube à 1 cm",
+        "Retournement du tube à l'épingle à nourrice",
+        "Deux extrémités de l'élastique avant leur assemblage",
+        "Chouchou fini, avec gros plan sur la fermeture invisible"
       ]
     },
     "5": {
