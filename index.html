@@ -154,7 +154,7 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
 @media(max-width:720px){.technique-card{grid-template-columns:1fr;gap:11px}.technique-image-frame img{max-width:380px}.technique-card-info{padding:8px 3px}.sewing-section-tabs button{flex:1;min-width:125px}}
 @media(max-width:850px){.bottomnav{justify-content:flex-start;overflow-x:auto;gap:4px;scrollbar-width:thin}.bottomnav button{flex:0 0 auto;min-width:70px;padding:3px 5px}.bottomnav .nav-art{width:28px;height:28px}}
 /* Voyage : outils discrets et favoris dans le titre. */
-#app .culture-tabs{gap:10px;flex-wrap:wrap}
+#app .culture-tabs{gap:10px;flex-wrap:nowrap}
 #app .culture-article-picker[hidden]{display:none!important}
 #app .culture-title-star{display:inline-grid;place-items:center;vertical-align:baseline;width:36px;height:40px;padding:0;margin:0 5px 0 0;border:0;border-radius:10px;background:transparent;color:#8a7156;font:inherit;font-size:1.25rem;cursor:pointer}
 #app .culture-title-star:hover{background:#f3e5cf}
@@ -211,11 +211,11 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
 /* Barre Couture commune : mêmes icônes illustrées, sans raccourci Cours 0. */
 #app .sewing-section-tabs{display:grid;grid-template-columns:repeat(7,minmax(0,78px));gap:10px}
 #app .sewing-section-tabs button{width:100%;max-width:78px;min-width:0}
-@media(max-width:600px){#app .sewing-section-tabs{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;max-width:360px}#app .sewing-section-tabs button{width:100%;padding:4px;font-size:.68rem;max-width:78px}#app .sewing-section-tabs button img{width:58px;height:58px}}
+@media(max-width:600px){#app .sewing-section-tabs{grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;max-width:100%}#app .sewing-section-tabs button{width:100%;padding:0;min-height:44px;max-width:78px;align-content:center}#app .sewing-section-tabs button img{width:100%;max-width:58px;height:auto;aspect-ratio:1}#app .sewing-section-tabs button>span{display:none}}
 /* Patchwork : tous les outils dans la même barre. */
 #app nav.sewing-course-tools.patchwork-tools{grid-template-columns:repeat(6,minmax(0,1fr));max-width:620px;gap:10px;margin:18px 0 22px}
 #app .patch-picker[hidden],#app #patch-search-panel[hidden],#app #patch-choice-panel[hidden]{display:none!important}
-@media(max-width:600px){#app nav.sewing-course-tools.patchwork-tools{grid-template-columns:repeat(3,minmax(0,1fr));max-width:360px;gap:8px}}
+@media(max-width:600px){#app nav.sewing-course-tools.patchwork-tools{grid-template-columns:repeat(6,minmax(0,1fr));max-width:100%;gap:3px}#app nav.patchwork-tools .sewing-tool{padding:3px;min-height:44px}#app nav.patchwork-tools .sewing-tool-art{width:100%;max-width:58px;height:auto;aspect-ratio:1}#app nav.patchwork-tools .sewing-tool-zero{width:19px;height:19px;font-size:11px;right:-1px;top:-1px}}
 </style>
 <style>
 [data-bonus-project][hidden],#bonus-empty[hidden]{display:none!important}
@@ -248,7 +248,7 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
 <script defer src="./assets/noel-bonus.js"></script><script defer src="./assets/thanksgiving-dindon.js"></script>
 <link rel="stylesheet" href="./assets/noel-bonus.css">
 <script defer src="./assets/backup.js?v=1.3.60"></script>
-<script defer src="./assets/pwa.js?v=1.3.62"></script>
+<script defer src="./assets/pwa.js?v=1.3.63"></script>
 <style>
 .pattern-category-picker{max-width:440px;margin:14px 0 20px;display:grid;gap:7px}.pattern-category-picker select{width:100%;font-size:1rem}
 #patterns-sewing[data-pattern-view="sewing"] .patterncard[data-pattern-group="bonus"],#patterns-sewing[data-pattern-view="bonus"] .patterncard[data-pattern-group="course"]{display:none}
