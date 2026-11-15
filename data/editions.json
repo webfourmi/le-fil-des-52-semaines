@@ -5,7 +5,8 @@
       0,
       1,
       2,
-      3
+      3,
+      4
     ],
     "patchwork": [
       0,
@@ -588,6 +589,6 @@
       ]
     }
   },
-  "appRelease": "1.3.69",
-  "appReleaseNotes": "Ajout des cinq photos originales du cours 4 : matériel, bande de tissu, épingle fixée à l’élastique, assemblage à la machine et chouchou terminé. Légendes et descriptions accessibles ; chaque photo peut être agrandie pour voir les détails. Les cinq photos sont incluses dans le cache pour consultation hors connexion après installation. Les sept étapes, le patron et les illustrations sont conservés. Le cours 4 reste un projet en cours d’écriture, sans validation."
+  "appRelease": "1.3.70",
+  "appReleaseNotes": "Le cours de couture 4, chouchou adulte, n’affiche plus la mention « Projet en cours d’écriture » dans les menus, cartes et page du cours. Les sept étapes, les cinq photos et le patron A4 sont conservés."
 }
