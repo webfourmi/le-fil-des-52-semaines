@@ -1,7 +1,7 @@
 /* Sauvegardes personnelles de De fil en aiguille. Aucune donnée transférée. */
 (function(root){
   'use strict';
-  const FORMAT='le-fil-des-52-semaines.personnel',SCHEMA=6,MAX_FILE_SIZE=320*1024*1024;
+  const FORMAT='le-fil-des-52-semaines.personnel',SCHEMA=7,MAX_FILE_SIZE=320*1024*1024;
   const arrKinds=['mat','steps','blocks','ready','projectsDone'];
   const objectKinds=['notes','ratings'];
   const validProfile=p=>p==='m'||p==='f';
@@ -55,6 +55,17 @@
       check(root.Fil52JournalPhotos.validRef(ref)&& (kind==='notes'?(typeof value==='string'&&value.length<=12000):(Number.isInteger(value)&&value>=1&&value<=5)),'Entrée du journal invalide.');result[ref]=value;
     }return result;
   }
+  function course4Edits(value){
+    check(plain(value)&&Object.keys(value).length<=8,'Brouillons du cours 4 invalides.');
+    const result={};
+    for(const [index,entry] of Object.entries(value)){
+      check(/^[0-7]$/.test(index)&&plain(entry),'Index de brouillon du chouchou incorrect.');
+      check(typeof entry.title==='string'&&entry.title.trim().length>0&&entry.title.length<=120,'Titre de brouillon incorrect.');
+      check(typeof entry.detail==='string'&&entry.detail.trim().length>0&&entry.detail.length<=4000,'Explication du brouillon incorrecte.');
+      result[index]={title:entry.title.trim(),detail:entry.detail.trim()};
+    }
+    return result;
+  }
   function validateData(data,schema=SCHEMA){
     check(plain(data),'Données de couture manquantes.');
     const output={};
@@ -64,6 +75,7 @@
     if(schema>=4)output.personalProjects=personalProjects(data.personalProjects);
     if(schema>=5){output.cultureFavorites=cultureIds(data.cultureFavorites,'favoris');output.cultureRead=cultureIds(data.cultureRead,'terminés');}
     if(schema>=6){output.journalNotes=journalExtras(data.journalNotes,'notes');output.journalRatings=journalExtras(data.journalRatings,'ratings');}
+    if(schema>=7)output.course4Edits=course4Edits(data.course4Edits);
     if(Object.hasOwn(data,'sewingFavorites')){check(Array.isArray(data.sewingFavorites)&&data.sewingFavorites.length<=200&&data.sewingFavorites.every(x=>typeof x==='string'&&/^(course:(?:[1-9]|[1-4][0-9]|5[0-2])|(?:technique|bonus):[A-Za-z0-9-]{1,60})$/.test(x)),'Favoris couture invalides.');output.sewingFavorites=[...new Set(data.sewingFavorites)];}
     return output;
   }
@@ -77,6 +89,7 @@
     data.cultureRead=state.cultureRead?.[profile]||[];
     data.journalNotes=state.journalNotes?.[profile]||{};
     data.journalRatings=state.journalRatings?.[profile]||{};
+    data.course4Edits=state.course4Edits?.[profile]||{};
     check(Array.isArray(photos)&&photos.length<=104,'Album invalide.');
     const validated=validateData(data);
     check(Array.isArray(personalPhotos)&&personalPhotos.length<=root.Fil52PersonalPhotos.MAX_PHOTOS,'Galerie des projets personnels invalide.');
@@ -91,7 +104,7 @@
   function parseBackup(text){
     check(typeof text==='string'&&text.length<=MAX_FILE_SIZE&&text.length>0,'Fichier vide ou trop grand.');
     let file;try{file=JSON.parse(text)}catch(e){throw Error('Ce fichier ne contient pas un JSON valide.')}
-    check(plain(file)&&file.format===FORMAT&&(file.schema===SCHEMA||file.schema===5||file.schema===4||file.schema===3||file.schema===2),'Format de sauvegarde incompatible.');
+    check(plain(file)&&file.format===FORMAT&&(file.schema===SCHEMA||file.schema===6||file.schema===5||file.schema===4||file.schema===3||file.schema===2),'Format de sauvegarde incompatible.');
     check(validProfile(file.profile),'Identité de sauvegarde inconnue.');
     check(typeof file.exportedAt==='string'&&Number.isFinite(Date.parse(file.exportedAt)),'Date de sauvegarde invalide.');
     const photos=file.schema===2?[]:file.photos;
@@ -134,6 +147,7 @@
     if((backup.schema||SCHEMA)>=6){
       for(const kind of ['journalNotes','journalRatings'])next[kind]={...(state[kind]||{m:{},f:{}}),[profile]:data[kind]};
     }
+    if((backup.schema||SCHEMA)>=7)next.course4Edits={...(state.course4Edits||{m:{},f:{}}),[profile]:data.course4Edits};
     if(Object.hasOwn(data,'sewingFavorites'))next.sewingFavorites={...(state.sewingFavorites||{m:[],f:[]}),[profile]:data.sewingFavorites};
     return next;
   }
