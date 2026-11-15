@@ -593,6 +593,6 @@
       ]
     }
   },
-  "appRelease": "1.3.64",
-  "appReleaseNotes": "Couture et Patchwork : disposition sur une seule ligne imposée par une feuille de style dédiée, chargée après le thème et renouvelée avec cette mise à jour. Patchwork : suppression des bordures, fonds et ombres ajoutés autour des boutons. Seules les illustrations décoratives d’origine restent visibles, y compris au survol et à la sélection."
+  "appRelease": "1.3.65",
+  "appReleaseNotes": "Cours de couture : le numéro, l’étoile des favoris et le titre sont regroupés sur une même ligne d’en-tête, avec une taille adaptée au téléphone. Les sections Fournitures et Réglages et conseils sont repliées au départ. Toucher leur titre les ouvre ou les referme ; les listes, conseils et coches sont conservés."
 }

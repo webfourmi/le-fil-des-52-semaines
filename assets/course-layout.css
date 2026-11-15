@@ -1,0 +1,47 @@
+#app .course-title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 8px;
+  margin-bottom: 12px;
+  min-width: 0;
+}
+#app .course-title-row .course-number {
+  flex: none;
+  white-space: nowrap;
+  color: #526b56;
+  font-weight: 750;
+  font-size: .85rem;
+}
+#app .course-title-row .sewing-favorite {
+  flex: none;
+  width: 28px;
+  min-height: 40px;
+  margin: 0;
+}
+#app .course-title-row .course-main-title {
+  min-width: 0;
+  margin: 0;
+  font-size: clamp(1.05rem, 4.8vw, 1.6rem);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+#app .lessonhead:has(.course-title-row) { display: block; }
+#app .lessonhead:has(.course-title-row) > .circleicon { display: none; }
+#app .course-fold { padding: 0; min-width: 0; align-self: start; }
+#app .course-fold > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px;
+  cursor: pointer;
+  list-style: none;
+}
+#app .course-fold > summary::-webkit-details-marker { display: none; }
+#app .course-fold > summary h3 { margin: 0; font-size: 1.2rem; }
+#app .course-fold > summary::after { content: '+'; font-size: 1.4rem; color: #688772; }
+#app .course-fold[open] > summary::after { content: '−'; }
+#app .course-fold > summary:focus-visible { outline: 3px solid #946da1; outline-offset: -3px; border-radius: 18px; }
+#app .course-fold-body { padding: 0 20px 20px; }
+@media(max-width:440px) { #app .course-title-row { gap: 5px; } #app .course-title-row .course-number { font-size: .75rem; } }

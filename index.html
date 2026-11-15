@@ -248,13 +248,14 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
 <script defer src="./assets/noel-bonus.js"></script><script defer src="./assets/thanksgiving-dindon.js"></script>
 <link rel="stylesheet" href="./assets/noel-bonus.css">
 <script defer src="./assets/backup.js?v=1.3.60"></script>
-<script defer src="./assets/pwa.js?v=1.3.64"></script>
+<script defer src="./assets/pwa.js?v=1.3.65"></script>
 <style>
 .pattern-category-picker{max-width:440px;margin:14px 0 20px;display:grid;gap:7px}.pattern-category-picker select{width:100%;font-size:1rem}
 #patterns-sewing[data-pattern-view="sewing"] .patterncard[data-pattern-group="bonus"],#patterns-sewing[data-pattern-view="bonus"] .patterncard[data-pattern-group="course"]{display:none}
 #patterns-sewing[data-pattern-view="bonus"] .section.card:has(h3:first-child){display:none}
 </style>
 <link rel="stylesheet" href="./assets/toolbar-layout.css?v=1.3.64">
+<link rel="stylesheet" href="./assets/course-layout.css?v=1.3.65">
 </head>
 <body>
 <div class="shell"><aside class="sidebar"><div class="brand"><div class="brandmark"><img src="./assets/icon-app.svg" alt="" aria-hidden="true"></div><div><strong>De fil en<br>aiguille</strong><small>Le studio de couture</small></div></div><nav class="nav" id="nav"></nav><div class="side-bottom"><span class="eyebrow">Notre atelier</span><b>Au fil de nos envies</b><span class="small">Couture, patchwork et voyages textiles : des nouveautés quand elles sont prêtes, sans date limite.</span></div></aside><main class="main"><div class="topline"><div class="small">✺ Le studio créatif · à votre rythme</div><div class="top-avatar"><span class="avatar" title="Viera">V</span><span class="avatar" title="Mathilde">M</span></div></div><div id="app" aria-live="polite"></div><div class="foot">De fil en aiguille · Carnet d’atelier fleuri · Photographies historiques créditées ; illustrations d’atelier décoratives.</div></main></div>
@@ -472,7 +473,27 @@ function courseOneStepId(i){return i===4?8:i>4?i-1:i;}
 function sewingSection(){return state.page==='bonus'?'bonus':sewingTechniquesOpen?'techniques':'courses'}
 function sewingFavoriteButton(key,title){const on=state.sewingFavorites[state.profile].includes(key);return `<button type="button" class="sewing-favorite ${on?'is-favorite':''}" data-sewing-favorite="${safe(key)}" aria-pressed="${on}" aria-label="${on?'Retirer':'Ajouter'} ${safe(title)} ${on?'des':'aux'} favoris" title="${on?'Retirer des favoris':'Ajouter aux favoris'}"><span aria-hidden="true">${on?'★':'☆'}</span></button>`}
 function sewingFavoriteOptions(items,kind,current){return [...items].sort((a,b)=>Number(state.sewingFavorites[state.profile].includes(kind+':'+b.id))-Number(state.sewingFavorites[state.profile].includes(kind+':'+a.id))).map(x=>`<option value="${safe(x.id)}" ${String(current)===String(x.id)?'selected':''}>${state.sewingFavorites[state.profile].includes(kind+':'+x.id)?'★ ':''}${safe(x.label||x.title)}</option>`).join('')}
-function sewingCourseBody(html,w){const template=document.createElement('template');template.innerHTML=html;(template.content.querySelector('.lessonhead h2')||template.content.querySelector('h2'))?.insertAdjacentHTML('afterbegin',sewingFavoriteButton('course:'+w,projects[w-1])+' ');return template.innerHTML}
+const courseFoldsOpen=new Set();
+function sewingCourseBody(html,w){
+ const template=document.createElement('template');template.innerHTML=html;
+ const title=template.content.querySelector('.lessonhead h2')||template.content.querySelector('h2');
+ if(title){
+  const oldNumber=title.previousElementSibling;if(oldNumber?.matches('.tag')&&/(N°|Cours\s*\d)/.test(oldNumber.textContent))oldNumber.remove();
+  const row=document.createElement('div');row.className='course-title-row';
+  row.innerHTML=`<span class="course-number">N° ${String(w).padStart(2,'0')}</span>${sewingFavoriteButton('course:'+w,projects[w-1])}`;
+  title.before(row);title.classList.add('course-main-title');title.style.removeProperty('margin-top');row.append(title);
+ }
+ for(const heading of template.content.querySelectorAll('h3')){
+  const label=heading.textContent.trim(),kind=/^Fournitures/.test(label)?'materials':/^(Réglages et conseils|Les réglages de départ)$/.test(label)?'settings':'';
+  const card=heading.parentElement;if(!kind||!card.classList.contains('card'))continue;
+  const key=w+':'+kind,fold=document.createElement('details'),summary=document.createElement('summary'),body=document.createElement('div');
+  fold.className='card course-fold';fold.dataset.courseFold=key;fold.open=courseFoldsOpen.has(key);body.className='course-fold-body';
+  if(kind==='settings')heading.textContent='Réglages et conseils';
+  summary.append(heading);while(card.firstChild)body.append(card.firstChild);fold.append(summary,body);card.replaceWith(fold);
+ }
+ return template.innerHTML;
+}
+document.addEventListener('toggle',e=>{const fold=e.target;if(!fold.matches?.('details[data-course-fold]')||!fold.isConnected)return;if(fold.open)courseFoldsOpen.add(fold.dataset.courseFold);else courseFoldsOpen.delete(fold.dataset.courseFold)},true);
 function sewingTabNavigation(){
  const section=sewingSection(),panel=sewingPanels[section];
  return `<nav class="sewing-section-tabs" aria-label="Rubriques et outils de couture">
