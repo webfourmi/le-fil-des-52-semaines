@@ -59,6 +59,18 @@ lessons[3][4].caption="L’étui terminé, retourné sur l’endroit, avec son o
 lessons[3][4].image={src:'./assets/cours-03/photo-5.jpg',alt:"Étui à mouchoirs terminé en coton imprimé coloré, ouverture centrale croisée visible",width:1050,height:1400};
 // Photo fournie pour le damier du cours patchwork 1 (quatre tissus Halloween).
 lessons[1][5].image={src:'./assets/patchwork-01/bloc-01-halloween.jpg',alt:'Bloc 1 damier Halloween : deux carrés de coton clair et deux carrés noirs imprimés, disposés en diagonale',width:1536,height:1437};
+
+// Cours 4 : photographies originales fournies par la couturière.
+const photosCoursQuatre=[
+ ['Matériel','Le coton imprimé, l’élastique et l’épingle à nourrice, avant le montage.','Coton imprimé de personnages, élastique blanc et épingle à nourrice',960,1280],
+ ['Bande de tissu','La bande de coton imprimé préparée pour le montage du chouchou.','Bande de coton imprimé posée sur la table de couture',960,1280],
+ ['Passage de l’élastique','L’épingle à nourrice est fixée à une extrémité de l’élastique pour le guider dans le tube.','Gros plan de l’épingle à nourrice fixée à l’élastique blanc près du tissu',1090,1280],
+ ['Assemblage de l’élastique','Les extrémités de l’élastique sont assemblées à la machine ; garder le tissu à l’écart de la couture.','Élastique blanc sous le pied de la machine, tissu froncé maintenu sur le côté',960,1280],
+ ['Résultat final','Le chouchou terminé, avec les fronces réparties autour de l’élastique.','Chouchou terminé en coton imprimé de personnages turquoise, orange et vert',960,1280]
+];
+photosCoursQuatre.forEach(([role,caption,alt,width,height],i)=>{
+ lessons[4][i]={id:'week-4-'+(i+1),role,caption,image:{src:'./assets/cours-04/photo-'+(i+1)+'.jpg',alt,width,height}};
+});
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 // Les chemins locaux garantissent la compatibilité GitHub Pages et le cache PWA.
 function source(src){return typeof src==='string' && /^\.\/assets\/[a-zA-Z0-9_./-]+\.(webp|avif|png|jpe?g)$/.test(src) && !src.includes('..')?src:'';}

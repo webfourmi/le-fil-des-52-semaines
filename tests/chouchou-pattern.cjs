@@ -37,6 +37,28 @@ const server=http.createServer((req,res)=>{
    for(let i=0;i<7;i++){assert.equal(await p.locator('.step b').nth(i).textContent(),expected[i].title);assert.equal(await p.locator('.step p').nth(i).textContent(),expected[i].detail)}
    assert((await p.locator('#app').innerText()).includes('55 × 12 cm'),'Cours doit donner 55 x 12');
    const before=await p.evaluate(()=>JSON.stringify({steps:state.steps,blocks:state.blocks,projectsDone:state.projectsDone}));
+   const gallery=p.locator('.sewing-photo-gallery');
+   await gallery.evaluate(el=>{const fold=el.closest('details');if(fold)fold.open=true});
+   assert.equal(await gallery.locator('img').count(),5);
+   for(const img of await gallery.locator('img').all()){
+    await img.evaluate(async el=>{el.loading='eager';await el.decode()});
+    assert(await img.evaluate(el=>el.naturalWidth>0));
+   }
+   await gallery.locator('[data-lesson-photo]').first().click();
+   await p.locator('.lesson-photo-dialog').waitFor({state:'visible'});
+   await p.locator('[data-zoom-photo]').click();
+   assert(await p.locator('.lesson-photo-dialog').evaluate(el=>el.classList.contains('photo-zoomed')));
+   await p.locator('[data-close-photo]').click();
+   await p.waitForFunction(()=>!!navigator.serviceWorker.controller);
+   await ctx.setOffline(true);
+   await p.reload({waitUntil:'domcontentloaded'});
+   await p.locator(nav+' [data-page="learn"]').click();
+   await p.locator('.sewing-photo-gallery img').first().waitFor({state:'attached'});
+   assert.equal(await p.locator('.sewing-photo-gallery img').count(),5);
+   for(const img of await p.locator('.sewing-photo-gallery img').all()){
+    await img.evaluate(async el=>{el.loading='eager';await el.decode()});
+   }
+   await ctx.setOffline(false);
    await p.locator('.sewing-course-pattern [data-pattern-preview="scrunchie"]').click();
    assert.equal(await p.locator('#pattern-category-select').inputValue(),'sewing');
    const frame=p.frameLocator('#pattern-preview-frame');
