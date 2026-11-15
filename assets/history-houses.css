@@ -1,0 +1,35 @@
+/* Histoire de la couture n°04 : maisons de couture et ateliers */
+.couture-houses-article{max-width:940px;margin-inline:auto;padding:clamp(18px,3vw,38px);overflow:hidden}
+.couture-houses-head{padding-bottom:18px;border-bottom:1px solid #e1d0c0}
+.couture-houses-head h2{font-size:clamp(1.85rem,4vw,3.1rem);margin:7px 0}
+.couture-houses-deck{font:italic clamp(1.15rem,2.4vw,1.49rem) Georgia,serif;color:#98675a;margin-bottom:6px}
+.couture-houses-opening{font:italic clamp(1.04rem,2vw,1.2rem)/1.82 Georgia,serif;color:#57584e;margin:23px 0 26px;padding:17px 19px;background:#f8f0e5;border-left:4px solid #b98876;border-radius:0 12px 12px 0}
+.couture-houses-toc{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 32px}
+.couture-houses-toc a{padding:7px 11px;border:1px solid #e1d1bf;border-radius:21px;background:#fffaf4;color:#526b59;font-size:.78rem;text-decoration:none}
+.couture-houses-chapter{margin:34px 0 46px;scroll-margin-top:24px}
+.couture-houses-chapter h3,.couture-houses-workshop h3{font-size:clamp(1.4rem,2.6vw,1.92rem);margin:8px 0 15px}
+.couture-houses-chapter h4{font-size:1.13rem;margin:20px 0 9px;color:#88594f}
+.couture-houses-chapter p{line-height:1.82;margin-bottom:14px}
+.couture-houses-era{font-size:.73rem;color:#986058;text-transform:uppercase;letter-spacing:.11em;font-weight:800}
+.couture-houses-figure{max-width:590px;margin:22px auto 25px;border:1px solid #e3d1bf;border-radius:17px;background:#f3ece1;overflow:hidden}
+.couture-houses-figure img{display:block;width:100%;height:auto;max-height:525px;object-fit:contain;background:#ece9e3}
+.couture-houses-figure figcaption{padding:11px 15px;font-size:.81rem;line-height:1.65;color:#645c52;background:#fffaf3}
+.couture-houses-source{font-size:.86rem;line-height:1.67;border-left:3px solid #d7c1a9;padding:2px 0 2px 13px;color:#716558}
+.couture-houses-workrooms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin:24px 0}
+.couture-houses-workrooms>div{padding:17px;border:1px solid #dccab8;border-radius:15px;background:#f9f2e8}
+.couture-houses-workrooms h4{margin:0 0 8px}.couture-houses-workrooms p{margin:0}
+.couture-houses-timeline{border-left:3px solid #baa48e;margin:20px 0 25px;padding-left:16px}
+.couture-houses-timeline>div{display:flex;gap:15px;align-items:baseline;margin:13px 0}
+.couture-houses-timeline b{flex:0 0 125px;color:#96594c}
+.couture-houses-timeline span{flex:1}
+.couture-houses-ending{font:italic 1.1rem/1.75 Georgia,serif;color:#765a4f;background:#f8f0e5;padding:17px;border-radius:13px}
+.couture-houses-workshop{padding:clamp(15px,3vw,26px);background:#f7f0e5;border:1px solid #e1cab7;border-radius:18px;margin:40px 0}
+.couture-houses-exercises{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:20px 0}
+.couture-houses-exercises>div{background:#fffaf3;border:1px solid #e7d3c2;border-radius:13px;padding:16px}
+.couture-houses-exercises h4{font-size:1.06rem;color:#8f584f;margin:0 0 9px}
+.couture-houses-exercises p{font-size:.92rem;line-height:1.7;margin:0}
+.couture-houses-sources{padding-top:21px;margin-top:31px;border-top:1px solid #e1cebc}
+.couture-houses-sources h3{font-size:1.37rem}
+.couture-houses-sources li{font-size:.88rem;line-height:1.75;margin-bottom:5px}
+@media(max-width:740px){.couture-houses-article{padding:17px}.couture-houses-workrooms,.couture-houses-exercises{grid-template-columns:1fr}.couture-houses-timeline>div{display:block}.couture-houses-timeline b{display:block}.couture-houses-figure img{max-height:430px}}
+@media(max-width:370px){.couture-houses-article{padding:12px}.couture-houses-figure{margin-left:-4px;margin-right:-4px}.couture-houses-toc a{font-size:.74rem}}
