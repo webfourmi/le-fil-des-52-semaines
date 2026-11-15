@@ -48,8 +48,9 @@ const server=http.createServer((req,res)=>{
    assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),'Débordement horizontal');
    await p.locator('[data-pattern-preview-close]').click();
    const card=p.locator('.patterncard').filter({has:p.locator('[data-pattern-preview="scrunchie"]')});
-   assert((await card.innerText()).includes('Validé à 100 %'));
-   assert((await card.innerText()).includes('55 × 12 cm'));
+   const cardText=await card.textContent();
+   assert(cardText.includes('Validé à 100 %'),'Statut manquant dans le HTML : '+cardText.slice(0,350));
+   assert(cardText.includes('55 × 12 cm'),'Dimensions manquantes dans le HTML : '+cardText.slice(0,350));
    await card.locator('[data-week="4"]').click();
    assert.equal(await p.locator('#week-select').inputValue(),'4');
    assert.equal(await p.evaluate(()=>JSON.stringify({steps:state.steps,blocks:state.blocks,projectsDone:state.projectsDone})),before);
