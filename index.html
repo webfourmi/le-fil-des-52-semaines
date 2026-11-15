@@ -216,6 +216,16 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
 #app nav.sewing-course-tools.patchwork-tools{grid-template-columns:repeat(6,minmax(0,1fr));max-width:620px;gap:10px;margin:18px 0 22px}
 #app .patch-picker[hidden],#app #patch-search-panel[hidden],#app #patch-choice-panel[hidden]{display:none!important}
 @media(max-width:600px){#app nav.sewing-course-tools.patchwork-tools{grid-template-columns:repeat(6,minmax(0,1fr));max-width:100%;gap:3px}#app nav.patchwork-tools .sewing-tool{padding:3px;min-height:44px}#app nav.patchwork-tools .sewing-tool-art{width:100%;max-width:58px;height:auto;aspect-ratio:1}#app nav.patchwork-tools .sewing-tool-zero{width:19px;height:19px;font-size:11px;right:-1px;top:-1px}}
+.course4-step-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:9px 0 0 27px}
+.course4-step-actions button{min-height:36px;padding:7px 12px}
+.course4-toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.course4-edit-form{margin:12px 0 8px 22px;padding:15px;border:1px solid var(--line);border-radius:13px;background:var(--cream);display:grid;gap:9px}
+.course4-edit-form h4{font-size:1.1rem;margin:0}
+.course4-edit-form label{display:block;font-weight:700}
+.course4-edit-form input,.course4-edit-form textarea{display:block;width:100%;max-width:100%;padding:10px;border:1px solid #b0bdb2;border-radius:9px;background:#fff;font:inherit;color:var(--ink)}
+.course4-edit-form textarea{resize:vertical;min-height:130px;line-height:1.6}
+.course4-edit-buttons{display:flex;gap:9px;flex-wrap:wrap}
+@media(max-width:600px){.course4-edit-form{margin-left:0;padding:12px}.course4-edit-buttons button{flex:1;min-width:130px}}
 </style>
 <style>
 [data-bonus-project][hidden],#bonus-empty[hidden]{display:none!important}
@@ -301,7 +311,7 @@ const EDITORIAL_APPROVED=Object.freeze({
 window.Fil52EditorialApproved=EDITORIAL_APPROVED;
 function editorialIsApproved(kind,id){return EDITORIAL_APPROVED[kind]?.includes(id)===true}
 function editorialBadge(kind,id){return editorialIsApproved(kind,id)?'':'<span class="editorial-status editorial-writing">✎ Projet en cours d’écriture</span>'}
-const DEFAULT={profile:'m',page:'home',week:1,patchWeek:1,cultureFavorites:{m:[],f:[]},cultureRead:{m:[],f:[]},mat:{m:[],f:[]},steps:{m:[],f:[]},blocks:{m:[],f:[]},notes:{m:{},f:{}},names:{m:'Viera',f:'Mathilde'},published:[1],edition:'0.2'};
+const DEFAULT={profile:'m',page:'home',week:1,patchWeek:1,cultureFavorites:{m:[],f:[]},cultureRead:{m:[],f:[]},mat:{m:[],f:[]},steps:{m:[],f:[]},blocks:{m:[],f:[]},notes:{m:{},f:{}},course4Edits:{m:{},f:{}},names:{m:'Viera',f:'Mathilde'},published:[1],edition:'0.2'};
 let state;try{let data=JSON.parse(localStorage.getItem('fil52.progress.v1')||'{}');state={...structuredClone(DEFAULT),...data};}catch(e){state=structuredClone(DEFAULT)}
 if(!Number.isInteger(state.patchWeek)||state.patchWeek<0||state.patchWeek>52)state.patchWeek=1;
 for(const kind of ['cultureFavorites','cultureRead']){
@@ -311,7 +321,22 @@ for(const kind of ['cultureFavorites','cultureRead']){
 if(!state.sewingFavorites||typeof state.sewingFavorites!=='object')state.sewingFavorites={m:[],f:[]};
 for(const profile of ['m','f'])state.sewingFavorites[profile]=Array.isArray(state.sewingFavorites[profile])?[...new Set(state.sewingFavorites[profile].filter(x=>typeof x==='string'&&/^(course:(?:[1-9]|[1-4][0-9]|5[0-2])|(?:technique|bonus):[A-Za-z0-9-]{1,60})$/.test(x)))]:[];
 if(!state.names)state.names={m:'Viera',f:'Mathilde'};if(state.names.f==='Ma fille')state.names.f='Mathilde';if(!state.names.m||state.names.m==='Moi')state.names.m='Viera';if(!['m','f'].includes(localStorage.getItem('fil52.identity')))state.profile=null;else state.profile=localStorage.getItem('fil52.identity');state.ready=state.ready||{m:[],f:[]};state.projectsDone=state.projectsDone||{m:[],f:[]};state.ratings=state.ratings||{m:{},f:{}};state.personalProjects=state.personalProjects||{m:[],f:[]};state.journalNotes=state.journalNotes||{m:{},f:{}};state.journalRatings=state.journalRatings||{m:{},f:{}};for(const profile of ['m','f']){if(!state.journalNotes[profile]||typeof state.journalNotes[profile]!=='object')state.journalNotes[profile]={};if(!state.journalRatings[profile]||typeof state.journalRatings[profile]!=='object')state.journalRatings[profile]={};}for(const profile of ['m','f'])if(!Array.isArray(state.personalProjects[profile]))state.personalProjects[profile]=[];
-function save(){try{localStorage.setItem('fil52.progress.v1',JSON.stringify({...state,page:'home'}));}catch(e){toast('Stockage local indisponible : votre progression peut être perdue.')}}
+/* Réécriture des étapes du chouchou : brouillons propres à chaque profil. */
+{
+ const raw=state.course4Edits&&typeof state.course4Edits==='object'&&!Array.isArray(state.course4Edits)?state.course4Edits:{};
+ state.course4Edits={m:{},f:{}};
+ for(const profile of ['m','f']){
+  const entries=raw[profile];
+  if(!entries||typeof entries!=='object'||Array.isArray(entries))continue;
+  for(const [key,item] of Object.entries(entries)){
+   if(!/^[0-7]$/.test(key)||!item||typeof item!=='object'||Array.isArray(item))continue;
+   const title=typeof item.title==='string'?item.title.trim():'';
+   const detail=typeof item.detail==='string'?item.detail.trim():'';
+   if(title&&detail&&title.length<=120&&detail.length<=4000)state.course4Edits[profile][key]={title,detail};
+  }
+ }
+}
+function save(){try{localStorage.setItem('fil52.progress.v1',JSON.stringify({...state,page:'home'}));return true;}catch(e){toast('Stockage local indisponible : votre progression peut être perdue.');return false;}}
 const el=id=>document.getElementById(id);
 const safe=s=>String(s??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function toast(t){let x=el('toast');x.textContent=t;x.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>x.classList.remove('show'),2700)}
@@ -579,6 +604,40 @@ function updateTechniqueSearch(){
  if(count)count.textContent=shown+' fiche'+(shown>1?'s':'')+' affichée'+(shown>1?'s':'')+'.';
 }
 function learn(){if(sewingTechniquesOpen)return sewingTechniqueLibrary();let w=state.week;const active=(w===1 || !!upcomingEditions[w]?.steps?.length) && state.published.includes(w);return `${sewingTabNavigation()}<div class="weektop"><div><span class="eyebrow">Votre atelier progressif</span><h1>Mes cours</h1></div><div class="course-picker sewing-picker" ${sewingPanels.courses?'':'hidden'}><div id="sewing-search-panel" ${sewingPanels.courses==='search'?'':'hidden'}><label for="sewing-course-search">Rechercher un projet couture</label><input id="sewing-course-search" type="search" autocomplete="off" placeholder="Ex. sac, pochette, chouchou…" value="${safe(sewingSearchQuery)}" aria-controls="sewing-search-results" aria-label="Recherche par mots-clés dans les projets de couture"><div id="sewing-search-results" class="course-search-results" role="region" aria-live="polite" aria-label="Résultats de recherche des projets" hidden></div></div><div id="sewing-choice-panel" ${sewingPanels.courses==='choice'?'':'hidden'}><label for="week-select" class="course-select-label">Ou choisir un cours</label><select id="week-select" class="selection" aria-label="Choisir un cours de couture">${sewingFavoriteOptions([{id:0,title:'Mise en route de la machine',label:'Cours 00 · Mise en route de la machine'},...projects.map((title,i)=>({id:i+1,title,label:'Cours '+String(i+1).padStart(2,'0')+' · '+title+(editorialIsApproved('sewing',i+1)?'':' · Projet en cours d’écriture')}))],'course',w)}</select></div></div></div><div class="editorial-head-status">${editorialBadge('sewing',w)}</div><div class="section">${sewingCourseBody(active?(w===1?lessonDetail():publishedEdition(w)):`<div class="card"><span class="tag orange">En cours d’écriture · Contenu à compléter</span><h2 style="margin-top:14px">Cours ${String(w).padStart(2,'0')} : ${safe(projects[w-1])}</h2><p>Ce projet est une piste à compléter librement. Il ne sera considéré comme finalisé qu’après validation éditoriale.</p><div class="grid2"><div class="info"><b>Projet couture</b><br>${safe(projects[w-1])}</div><div class="info"><b>Patchwork</b><br>${safe(blocks[w-1])}</div></div><p style="margin-top:20px"><span class="eyebrow">Histoire de la couture</span><br>${safe(histories[(w-1)%histories.length])}</p><p><span class="eyebrow">Coutures du monde</span><br>${safe(worlds[(w-1)%worlds.length])}</p><button class="secondary" data-week="1">Revenir au cours n° 01</button></div>`,w)}${active?'<section class="card section course-validation"><h3>Valider mon cours</h3><label class="material"><input type="checkbox" data-journal-complete="'+w+'" '+(state.projectsDone[state.profile].includes(w)?'checked':'')+'> Projet couture terminé</label><p class="small">Coche quand ton ouvrage est terminé. Le raccourci de l’accueil proposera le prochain cours publié. Le bloc de patchwork se valide séparément.</p></section>':''}</div><div class="sectionline"><div><span class="eyebrow">Le chemin de nos créations</span><h2>Les cours de couture, à ton rythme</h2></div></div><div class="preview-list">${projects.map((_,i)=>weekCard(i+1)).join('')}</div>`}
+let editingCourse4Step=null;
+function course4EditorMarkup(index,step){
+ const draft=state.course4Edits[state.profile]?.[index];
+ if(editingCourse4Step===index){
+  return '<form class="course4-edit-form" data-course4-editor="'+index+'">'+
+   '<h4>Réécrire l’étape '+(index+1)+'</h4>'+
+   '<label for="course4-title-'+index+'">Titre de l’étape</label>'+
+   '<input id="course4-title-'+index+'" name="title" type="text" maxlength="120" required value="'+safe(step.title)+'">'+
+   '<label for="course4-detail-'+index+'">Explication détaillée</label>'+
+   '<textarea id="course4-detail-'+index+'" name="detail" maxlength="4000" rows="6" required>'+safe(step.detail)+'</textarea>'+
+   '<div class="course4-edit-buttons"><button type="submit" class="primary">Enregistrer mon brouillon</button>'+
+   '<button type="button" class="secondary" data-course4-cancel>Annuler</button></div>'+
+   '<p class="small">Cette réécriture est personnelle. Elle ne modifie pas la version publiée.</p></form>';
+ }
+ return '<div class="course4-step-actions">'+
+  (draft?'<span class="small">✎ Étape réécrite dans ton brouillon.</span>':'')+
+  '<button type="button" class="secondary" data-course4-edit="'+index+'">✎ Modifier l’étape</button>'+
+  (draft?'<button type="button" class="secondary" data-course4-reset="'+index+'">Rétablir le texte initial</button>':'')+
+  '</div>';
+}
+async function copyCourse4Steps(){
+ const source=upcomingEditions[4]?.steps||[];
+ if(!source.length)return toast('Le cours 4 n’est pas encore chargé.');
+ const personal=state.course4Edits[state.profile]||{};
+ const body='Cours 4 · Chouchou · Étapes proposées pour relecture\n\n'+
+  source.map((step,i)=>{
+   const edited=personal[i]||step;
+   return 'Étape '+(i+1)+' : '+edited.title+'\n'+edited.detail;
+  }).join('\n\n');
+ try{
+  await navigator.clipboard.writeText(body);
+  toast('Les huit étapes ont été copiées. Tu peux les coller dans notre conversation pour validation.');
+ }catch(_){toast('Copie indisponible ici. Les brouillons restent dans la sauvegarde du carnet.')}
+}
 function publishedEdition(w){
  const data=upcomingEditions[w];if(!data)return '';
  const p=state.profile,base=w*1000,steps=(data.steps||[]),materials=(data.materials||[]),done=steps.filter((_,i)=>state.steps[p].includes(base+i)).length;
