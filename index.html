@@ -1272,8 +1272,44 @@ document.addEventListener('load',e=>{if(e.target instanceof HTMLImageElement&&e.
 document.addEventListener('error',e=>{const img=e.target;if(!(img instanceof HTMLImageElement)||!img.closest('.photo-card'))return;const wrap=document.createElement('div');wrap.className='photo-fallback';wrap.setAttribute('role','img');wrap.setAttribute('aria-label','Photo documentaire indisponible hors connexion ; ouvrez sa notice originale ci-dessous.');const mark=document.createElement('span');mark.textContent='▧';const label=document.createElement('small');label.textContent='Photographie documentaire à consulter sur la notice originale';wrap.append(mark,label);img.replaceWith(wrap);},true);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('photo-preview-overlay')?.remove();if((e.key==='Enter'||e.key===' ')&&e.target.matches('img.zoomable-photo')){e.preventDefault();openPhotoPreview(e.target)}});
 document.addEventListener('input',e=>{if(e.target.id==='bonus-search'){bonusSearchQuery=e.target.value;bonusSelected='';const sel=el('bonus-select');if(sel)sel.value='';updateBonusSearch();return}if(e.target.id==='technique-search'){techniqueSearchQuery=e.target.value;techniqueSelected='';const sel=el('technique-select');if(sel)sel.value='';updateTechniqueSearch();return}if(e.target.id==='supply-search')Fil52Mercerie.filter(e.target.value); if(e.target.id==='journal-search'){journalSearchQuery=e.target.value;updateJournalSearch()}if(e.target.id==='travel-search'){travelSearchQuery=e.target.value;updateTravelSearch()}if(e.target.id==='personal-search'){personalSearchQuery=e.target.value;updatePersonalSearch()}});
-document.addEventListener('submit',e=>{if(e.target.id==='supply-new'){e.preventDefault();const form=e.target,profile=state.profile,button=form.querySelector('[type=submit]');button.disabled=true;Fil52Mercerie.submitForm(profile,form).then(()=>{if(state.profile===profile&&state.page==='supply')render();toast('Fourniture enregistrée.')}).catch(err=>{button.disabled=false;toast(err.message)});return}if(e.target.id==='personal-new-form'){e.preventDefault();newPersonalProject()}});
+document.addEventListener('submit',e=>{if(e.target.matches('form[data-course4-editor]')){
+ e.preventDefault();
+ if(state.page!=='learn'||state.week!==4||!['m','f'].includes(state.profile))return;
+ const index=Number(e.target.dataset.course4Editor),official=upcomingEditions[4]?.steps?.[index];
+ if(!Number.isInteger(index)||index<0||index>7||!official)return;
+ const title=(e.target.elements.namedItem('title')?.value||'').trim();
+ const detail=(e.target.elements.namedItem('detail')?.value||'').trim();
+ if(!title||!detail||title.length>120||detail.length>4000){toast('Complète le titre et l’explication de l’étape.');return}
+ const edits=state.course4Edits[state.profile],old=edits[index];
+ if(title===official.title&&detail===official.detail)delete edits[index];else edits[index]={title,detail};
+ if(!save()){if(old)edits[index]=old;else delete edits[index];return}
+ editingCourse4Step=null;const pos=window.scrollY;render();window.scrollTo({top:pos,behavior:'instant'});
+ toast('Étape '+(index+1)+' enregistrée dans ton brouillon.');return;
+ }if(e.target.id==='supply-new'){e.preventDefault();const form=e.target,profile=state.profile,button=form.querySelector('[type=submit]');button.disabled=true;Fil52Mercerie.submitForm(profile,form).then(()=>{if(state.profile===profile&&state.page==='supply')render();toast('Fourniture enregistrée.')}).catch(err=>{button.disabled=false;toast(err.message)});return}if(e.target.id==='personal-new-form'){e.preventDefault();newPersonalProject()}});
 document.addEventListener('click',e=>{
+ const course4Edit=e.target.closest('[data-course4-edit]');
+ if(course4Edit&&state.page==='learn'&&state.week===4){
+  const index=Number(course4Edit.dataset.course4Edit);
+  if(!Number.isInteger(index)||index<0||index>=8)return;
+  editingCourse4Step=index;
+  const pos=window.scrollY;render();window.scrollTo({top:pos,behavior:'instant'});
+  document.getElementById('course4-title-'+index)?.focus({preventScroll:true});return;
+ }
+ if(e.target.closest('[data-course4-cancel]')){
+  editingCourse4Step=null;const pos=window.scrollY;render();window.scrollTo({top:pos,behavior:'instant'});return;
+ }
+ const course4Reset=e.target.closest('[data-course4-reset]');
+ if(course4Reset&&state.page==='learn'&&state.week===4){
+  const index=Number(course4Reset.dataset.course4Reset);
+  if(!Number.isInteger(index)||index<0||index>=8)return;
+  if(!confirm('Rétablir le texte initial de l’étape '+(index+1)+' ?'))return;
+  const old=state.course4Edits[state.profile][index];
+  delete state.course4Edits[state.profile][index];
+  if(!save()){state.course4Edits[state.profile][index]=old;return}
+  editingCourse4Step=null;const pos=window.scrollY;render();window.scrollTo({top:pos,behavior:'instant'});
+  toast('Le texte original de cette étape est rétabli.');return;
+ }
+ if(e.target.closest('[data-course4-copy]')&&state.page==='learn'&&state.week===4){copyCourse4Steps();return}
  const travelTool=e.target.closest('[data-travel-panel]');if(travelTool){const panel=travelTool.dataset.travelPanel;travelPickerOpen=travelPickerOpen===panel?'':panel;render();document.querySelector(travelPickerOpen==='search'?'#travel-search':travelPickerOpen==='choice'?'#culture-article-select':'[data-travel-panel="'+panel+'"]')?.focus({preventScroll:true});return}
  if(e.target.closest('[data-sewing-patterns]')){patternKind='sewing';patternPreview='';patternSection='';page('print');return}
  const sewingStar=e.target.closest('[data-sewing-favorite]');if(sewingStar){const key=sewingStar.dataset.sewingFavorite,list=state.sewingFavorites[state.profile];state.sewingFavorites[state.profile]=list.includes(key)?list.filter(x=>x!==key):[...list,key];save();const pos=scrollY;render();scrollTo({top:pos,behavior:'instant'});document.querySelector('[data-sewing-favorite="'+key+'"]')?.focus({preventScroll:true});return}
