@@ -23,7 +23,7 @@ const records=Object.freeze([
  Object.freeze({
   id:'ourlet-invisible',
   title:'L’ourlet invisible',
-  subtitle:'Technique ma machine · Janome Cherry 21 · Validé',
+  subtitle:'Technique ma machine · Janome Cherry 21',
   description:'Ourlet invisible avec le pied G : réglages E ou F, pliage, couture, repassage avec pattemouille, avantages, limites et dépannage.',
   keywords:'ourlet invisible janome cherry 21 machine pied G point E point F réglages tension longueur pli accordéon surfilage repassage pattemouille linge humide protection anti lustrage pli ourlet envers jupe pantalon robe',
   image:'./assets/techniques/ourlet-invisible-v2.webp',

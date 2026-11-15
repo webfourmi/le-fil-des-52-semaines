@@ -3,7 +3,7 @@
 'use strict';
 let deferred=null, worker=null, waiting=null, updateAccepted=false;
 let previouslyControlled=false;
-const APP_BUILD='1.3.55';
+const APP_BUILD='1.3.56';
 const compareVersions=(a,b)=>{const x=String(a).split('.').map(Number),y=String(b).split('.').map(Number);for(let i=0;i<Math.max(x.length,y.length);i++){const diff=(x[i]||0)-(y[i]||0);if(diff)return diff}return 0};
 const el=id=>document.getElementById(id);
 const updateUI=()=>{
@@ -119,7 +119,7 @@ async function checkEdition(showCurrent=false){
    // Ne notifier qu'une seule fois : l'affichage compte comme « vu », même si la personne ferme la bannière.
    // Avant, seule l'action « Voir le cours » enregistrait la version, et la notification revenait à chaque ouverture.
    localStorage.setItem('fil52.seen.latest',String(newest));
-   notice('Le cours n° '+String(newest).padStart(2,'0')+' est désormais validé !','Voir le cours',()=>{
+   notice('Le cours n° '+String(newest).padStart(2,'0')+' est désormais disponible !','Voir le cours',()=>{
      dismiss();
      if(typeof window.Fil52OpenEdition==='function')window.Fil52OpenEdition(d,newest);
      else location.reload();
@@ -202,13 +202,7 @@ document.addEventListener('DOMContentLoaded',()=>{
  });
  updateUI();register();loadReleaseNotes().then(()=>{
    checkEdition();
-   // Après l'installation, présenter une seule fois le contenu de la version fraîchement reçue.
-   let last='';try{last=localStorage.getItem('fil52.changelog.seenVersion')||''}catch(_){}
-   if(last!==APP_BUILD){
-     const display=()=>showReleaseNotes(false,APP_BUILD).catch(()=>{});
-     if(document.querySelector('[data-identity]'))document.addEventListener('fil52-identity-ready',display,{once:true});
-     else display();
-   }
+   // Les nouveautés sont proposées avant l’installation et restent consultables dans l’historique.
  });
  new MutationObserver(()=>updateUI()).observe(el('app'),{childList:true,subtree:false});
  document.addEventListener('visibilitychange',()=>{if(!document.hidden){checkEdition();worker?.update().catch(()=>{})}});

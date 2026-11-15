@@ -10,7 +10,7 @@ function render(blocks,published,issues,p,done){
  return '<section class="patch-course-list" aria-label="Mes cours de patchwork"><h2>Mes cours de patchwork</h2><p class="small">Ouvre le cours souhaité pour retrouver son matériel, ses explications et ses photos.</p>'+course(0,'Bien préparer mon matériel','Avant de commencer',intro())+blocks.map((title,i)=>{
  const w=i+1,available=published.includes(w)&&(w===1||issues[w]?.patchCuts?.length);
  const body=available?'<div class="patch-course-content">'+(w===1?root.Fil52LessonGuides.renderFirstPatchwork(p,done):root.Fil52LessonGuides.renderPatchwork(issues[w],w,p,done))+'</div>':'<div class="patch-course-content"><p>Les explications de ce bloc seront ajoutées lors de sa publication. Tu peux continuer les cours déjà disponibles.</p></div>';
- return course(w,title,available?(done.includes(w)?'Bloc terminé':(w===3?'✓ Validé 100 % · cours':'Cours disponible')):'À venir',body);
+ return course(w,title,available?(done.includes(w)?'Bloc terminé':'Cours disponible'):'À venir',body);
  }).join('')+'</section>';
 }
 document.addEventListener('toggle',event=>{const node=event.target;if(!node.matches?.('[data-patch-course]')||!node.isConnected)return;const n=+node.dataset.patchCourse;if(node.open)openCourses.add(n);else openCourses.delete(n)},true);

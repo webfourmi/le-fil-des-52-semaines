@@ -73,7 +73,7 @@ function renderPatchwork(d,w,p,done,checkedSteps=[]){
  '<span class="eyebrow">Un carré, une histoire · Bloc n° '+w+'</span><h3>'+esc(d.patchworkTitle)+'</h3>'+
  '<p>Un bloc <b>fini de 20 × 20 cm</b> après son assemblage dans la couverture. Conserve <b>21,5 × 21,5 cm avant assemblage</b> pour tenir compte des marges de 7,5 mm.</p>'+
  diagram(w,true)+
- (w===3?'<p class="eyebrow">✓ Bloc 3 · Validé 100 %</p><p><a class="primary course-pattern-link" href="./assets/patchwork-03-gabarit.html" data-pattern-preview="patchwork3">Consulter le patron A4 du bloc 3</a></p>':'')+
+ (w===3?'<p class="eyebrow">Bloc 3</p><p><a class="primary course-pattern-link" href="./assets/patchwork-03-gabarit.html" data-pattern-preview="patchwork3">Consulter le patron A4 du bloc 3</a></p>':'')+
 
  (w===4?'<p><a class="primary course-pattern-link" href="./assets/patchwork-04-gabarit.html" data-pattern-preview="patchwork4">Consulter le patron A4 du bloc 4</a> <a class="secondary" href="./assets/patchwork-04-gabarit.pdf" target="_blank" rel="noopener">Télécharger le PDF</a></p>':'')+
  '<h4>Découpe pour un seul bloc</h4>'+list(d.patchCuts)+

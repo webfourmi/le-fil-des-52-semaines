@@ -4,7 +4,7 @@
 function render(){
 return `
 <section class="kantha-atelier" aria-label="Atelier étui à lunettes Kantha">
-<header><span class="eyebrow">Atelier créatif · Bengale</span><h3>Fleur du Bengale : mon étui à lunettes Kantha</h3><p>Après le petit carré d'observation, transformons nos points avant en un étui souple, brodé et doublé. Ce modèle contemporain s'inspire du réemploi et du piquage Kantha, sans prétendre reproduire un objet historique.</p><p><strong>Projet validé</strong> · Débutant + · 2 à 3 heures · Dimensions finales approximatives : 10 × 19 cm.</p></header>
+<header><span class="eyebrow">Atelier créatif · Bengale</span><h3>Fleur du Bengale : mon étui à lunettes Kantha</h3><p>Après le petit carré d'observation, transformons nos points avant en un étui souple, brodé et doublé. Ce modèle contemporain s'inspire du réemploi et du piquage Kantha, sans prétendre reproduire un objet historique.</p><p>Débutant + · 2 à 3 heures · Dimensions finales approximatives : 10 × 19 cm.</p></header>
 <div class="kantha-visual"><svg viewBox="0 0 760 350" role="img" aria-label="Étui à lunettes brodé, fermé par deux cordons avec une fleur et des lignes de broderie">
 <rect width="760" height="350" rx="20" fill="#f7f0e6"/><path d="M284 66 H472 Q491 67 491 89 V285 Q490 308 466 310 H289 Q267 307 267 286 V90 Q267 67 284 66Z" fill="#f9f3e5" stroke="#a57555" stroke-width="4"/>
 <path d="M267 79 Q378 102 491 79" fill="none" stroke="#a57555" stroke-width="5"/><path d="M274 73 Q300 90 324 73 T374 73 T424 73 T474 73" fill="none" stroke="#a57555" stroke-width="7"/>
