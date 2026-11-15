@@ -248,7 +248,7 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
 <script defer src="./assets/noel-bonus.js"></script><script defer src="./assets/thanksgiving-dindon.js"></script>
 <link rel="stylesheet" href="./assets/noel-bonus.css">
 <script defer src="./assets/backup.js?v=1.3.67"></script>
-<script defer src="./assets/pwa.js?v=1.3.67"></script>
+<script defer src="./assets/pwa.js?v=1.3.68"></script>
 <style>
 .pattern-category-picker{max-width:440px;margin:14px 0 20px;display:grid;gap:7px}.pattern-category-picker select{width:100%;font-size:1rem}
 #patterns-sewing[data-pattern-view="sewing"] .patterncard[data-pattern-group="bonus"],#patterns-sewing[data-pattern-view="bonus"] .patterncard[data-pattern-group="course"]{display:none}
@@ -295,7 +295,7 @@ const worlds=['Japon · Sashiko','Inde · Kantha','Corée · Pojagi','Afrique de
 let upcomingEditions={};
 /* Validation éditoriale globale, distincte des progressions personnelles. */
 const EDITORIAL_APPROVED=Object.freeze({
- sewing:Object.freeze([0,1,2,3,4]),patchwork:Object.freeze([0,1,2,3]),
+ sewing:Object.freeze([0,1,2,3]),patchwork:Object.freeze([0,1,2,3]),
  world:Object.freeze(['japon','bengale','coree','vietnam']),
  history:Object.freeze(['needle-01','antiquity-02','houses-04'])
 });
@@ -589,7 +589,7 @@ function publishedEdition(w){
  <div class="grid2 section"><div class="card"><h3>Fournitures · 1 ouvrage</h3><p class="small">La liste correspond à une seule réalisation.</p>${materials.map((m,i)=>material(base+i,safe(m))).join('')}${courseSupplyHelper()}</div><div class="card"><h3>Réglages et conseils</h3><p>${safe(data.settings||'Testez d’abord les réglages sur une chute.')}</p><div class="tip"><b>Astuce :</b> ${safe(data.tip||'Prenez le temps de mesurer entre chaque étape.')}</div></div></div>
  ${Fil52LessonGuides.renderPreparation(data,w)}
  ${w===2?`<section class="card section sewing-course-pattern"><h3>✂ Patron à taille réelle · Dessous de verre à coins arrondis</h3><p>Couper deux pièces de 12 × 12 cm avec arrondis, une face imprimée et une unie. Le gabarit A4 contient les marges de 1 cm, l’ouverture de retournement de 4 cm, un H630 facultatif et un carré témoin de 5 × 5 cm.</p><a class="primary course-pattern-link" href="./assets/cours-02-patron-arrondis.html" data-pattern-preview="coaster" rel="noopener noreferrer">⎙ Imprimer gabarit A4</a></section>` :w===3?`<section class="card section sewing-course-pattern"><h3>✂ Patron A4 · Étui à mouchoirs</h3><p>Une seule pièce de coton de <b>15 × 19 cm</b>, marges comprises. Le gabarit à taille réelle montre les deux doubles ourlets de 5 mm et un carré témoin de 5 × 5 cm. Imprime et vérifie le carré témoin avant de couper.</p><a class="primary course-pattern-link" href="./assets/cours-03-patron-mouchoirs.html" data-pattern-preview="tissueCase" rel="noopener noreferrer">⎙ Imprimer gabarit A4</a></section>`:w===4?`<section class="card section sewing-course-pattern"><h3>✂ Patron A4 · Chouchou en tissu</h3><p>Demi-bande de 27,5 × 12 cm à reconstituer sur deux feuilles A4, à couper au pli pour obtenir 55 × 12 cm, marges comprises. Carré témoin de 5 × 5 cm.</p><a class="primary course-pattern-link" href="./assets/cours-04-patron-chouchou.html" data-pattern-preview="scrunchie">Consulter le patron A4</a> <a class="secondary" href="./assets/cours-04-patron-chouchou.pdf" target="_blank" rel="noopener">Télécharger le PDF</a></section>`:''}
- <div class="card section"><h3>Le tutoriel pas à pas</h3>${steps.map((st,i)=>`<div class="step"><div class="stepnum">${i+1}</div><div style="flex:1"><label><input type="checkbox" data-toggle="steps" data-val="${base+i}" ${state.steps[p].includes(base+i)?'checked':''}><div><b>${safe(st.title)}</b><p>${safe(st.detail)}</p></div></label>${w===2?Fil52LessonPhotos.renderSewingStep2(i):w===3?Fil52LessonPhotos.renderSewingStep3(i):''}</div></div>`).join('')}<div class="tip" style="margin-top:16px"><b>Défi bonus :</b> ${safe(data.bonus||'Améliorer la précision et soigner les finitions.')}</div></div>
+ <div class="card section"><h3>Le tutoriel pas à pas</h3>${steps.map((st,i)=>`<div class="step"><div class="stepnum">${i+1}</div><div style="flex:1"><label><input type="checkbox" data-toggle="steps" data-val="${base+i}" ${state.steps[p].includes(base+i)?'checked':''}><div><b>${safe(st.title)}</b><p${w===4?' style="white-space:pre-line"':''}>${safe(st.detail)}</p></div></label>${w===2?Fil52LessonPhotos.renderSewingStep2(i):w===3?Fil52LessonPhotos.renderSewingStep3(i):''}</div></div>`).join('')}<div class="tip" style="margin-top:16px"><b>Défi bonus :</b> ${safe(data.bonus||'Améliorer la précision et soigner les finitions.')}</div></div>
  ${w===2||w===3?'':Fil52LessonPhotos.render(w)}
  ${Fil52LessonGuides.renderTroubleshooting(data,w)}
  

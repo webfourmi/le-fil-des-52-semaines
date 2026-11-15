@@ -13,7 +13,7 @@ const server=http.createServer((req,res)=>{
   });
 }).listen(8766,'127.0.0.1');
 (async()=>{
- const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+ const browser=await chromium.launch({headless:true,channel:process.env.TEST_BROWSER_CHANNEL||undefined,args:['--no-sandbox']});
  try{
   for(const width of [320,390,1280]){
    const ctx=await browser.newContext({viewport:{width,height:900}});
@@ -28,8 +28,13 @@ const server=http.createServer((req,res)=>{
    if(await overlay.isVisible())await overlay.getByRole('button',{name:'Fermer',exact:true}).click();
    const nav=width<850?'#bottomnav':'#nav';
    await p.locator(nav+' [data-page="learn"]').click();
+   await p.locator('[data-sewing-panel="choice"]').click();
    await p.locator('#week-select').selectOption('4');
-   assert.equal(await p.evaluate(()=>editorialIsApproved('sewing',4)),true);
+   assert.equal(await p.evaluate(()=>editorialIsApproved('sewing',4)),false);
+   assert.match(await p.locator('.editorial-head-status').innerText(),/Projet en cours d’écriture/);
+   assert.equal(await p.locator('.step').count(),7);
+   const expected=JSON.parse(fs.readFileSync('data/editions.json','utf8')).issues['4'].steps;
+   for(let i=0;i<7;i++){assert.equal(await p.locator('.step b').nth(i).textContent(),expected[i].title);assert.equal(await p.locator('.step p').nth(i).textContent(),expected[i].detail)}
    assert((await p.locator('#app').innerText()).includes('55 × 12 cm'),'Cours doit donner 55 x 12');
    const before=await p.evaluate(()=>JSON.stringify({steps:state.steps,blocks:state.blocks,projectsDone:state.projectsDone}));
    await p.locator('.sewing-course-pattern [data-pattern-preview="scrunchie"]').click();
@@ -49,7 +54,6 @@ const server=http.createServer((req,res)=>{
    await p.locator('[data-pattern-preview-close]').click();
    const card=p.locator('.patterncard').filter({has:p.locator('[data-pattern-preview="scrunchie"]')});
    const cardText=await card.textContent();
-   assert(cardText.includes('Validé à 100 %'),'Statut manquant dans le HTML : '+cardText.slice(0,350));
    assert(cardText.includes('55 × 12 cm'),'Dimensions manquantes dans le HTML : '+cardText.slice(0,350));
    await card.locator('[data-week="4"]').click();
    assert.equal(await p.locator('#week-select').inputValue(),'4');

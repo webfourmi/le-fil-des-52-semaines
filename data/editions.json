@@ -5,8 +5,7 @@
       0,
       1,
       2,
-      3,
-      4
+      3
     ],
     "patchwork": [
       0,
@@ -280,35 +279,31 @@
       "steps": [
         {
           "title": "Tracer et découper le tissu",
-          "detail": "Repasser le coton et découper une bande de 55 × 12 cm dans le droit-fil, en utilisant le patron A4 en deux feuilles assemblées ou une règle. Les marges de 1 cm sont comprises : ne rien ajouter."
+          "detail": "Repasser le coton pour éliminer les plis.\n\nÀ l'aide du patron A4 en deux feuilles assemblées, ou d'une règle, tracer et découper une bande de 55 × 12 cm, dans le droit-fil du tissu.\n\nLes marges de couture de 1 cm sont comprises dans ces dimensions : il ne faut donc rien ajouter.\n\nDécouper également un morceau d'élastique de 20 cm."
         },
         {
-          "title": "Plier le rectangle dans sa longueur",
-          "detail": "Poser la bande endroit vers soi, puis plier en deux dans le sens de la longueur, endroit contre endroit. Aligner et épingler les deux bords longs : on obtient un rectangle de 55 × 6 cm."
+          "title": "Coudre les deux extrémités courtes",
+          "detail": "Plier la bande en deux en rapprochant ses deux extrémités courtes, endroit contre endroit.\n\nAligner soigneusement les bords et les maintenir avec des épingles ou des pinces.\n\nPiquer au point droit, à 1 cm du bord, en réalisant quelques points d'arrêt au début et à la fin.\n\nOn obtient ainsi une large bande de tissu formant un cercle.\n\nOuvrir les marges de couture au fer pour éviter une surépaisseur."
         },
         {
-          "title": "Piquer le grand côté pour former le tube",
-          "detail": "Coudre les deux grands bords réunis à 1 cm du bord, au point droit d'environ 2,5 mm, avec points d'arrêt. Laisser ouverts les deux petits côtés du tube. Sa largeur à plat est d'environ 5 cm après couture."
+          "title": "Coudre la bande",
+          "detail": "Plier l'anneau de tissu en deux dans le sens de la longueur, endroit contre endroit.\n\nFaire coïncider les deux longs bords et les maintenir ensemble avec des épingles.\n\nPiquer au point droit à 1 cm du bord, tout autour de l'anneau, en laissant une ouverture de 5 cm, à proximité de la couture réalisée à l'étape précédente.\n\nFaire quelques points d'arrêt de chaque côté de cette ouverture.\n\nCette ouverture servira à retourner le tissu, puis à introduire l'élastique."
         },
         {
           "title": "Retourner le tube sur l'endroit",
-          "detail": "Avec une épingle à nourrice bien fermée ou un retourne-biais, faire progresser le tissu à l'intérieur du tube par petits plis. Retourner complètement, positionner la couture sur le côté et repasser légèrement."
+          "detail": "Introduire les doigts dans l'ouverture de 5 cm et saisir une partie du tissu à l'intérieur.\n\nTirer doucement le tissu à travers l'ouverture, petit à petit, jusqu'à retourner complètement l'anneau sur l'endroit.\n\nNe pas forcer pour éviter de déchirer les coutures.\n\nRemettre le tissu bien à plat, en plaçant la longue couture vers l'intérieur de l'anneau.\n\nOn obtient un tube circulaire, avec une petite ouverture qui permettra de passer l'élastique."
         },
         {
           "title": "Passer l'élastique",
-          "detail": "Fixer l'épingle à nourrice à une extrémité de l'élastique de 20 cm et l'introduire dans le tube. Maintenir l'autre extrémité à l'extérieur avec une pince. Vérifier qu'il n'est pas vrillé."
+          "detail": "Fixer une épingle à nourrice bien fermée à une extrémité de l'élastique de 20 cm.\n\nIntroduire cette épingle dans le tube par l'ouverture de 5 cm.\n\nFaire avancer l'épingle à l'intérieur du tissu, en faisant glisser celui-ci par petits plis.\n\nMaintenir l'autre extrémité de l'élastique à l'extérieur avec une pince ou une seconde épingle pour éviter qu'elle ne disparaisse dans le tube.\n\nFaire progresser l'élastique sur tout le tour jusqu'à retrouver l'ouverture.\n\nVérifier qu'il n'est pas vrillé."
         },
         {
           "title": "Fermer solidement l'anneau élastique",
-          "detail": "Essayer la tension sur les cheveux. Superposer les extrémités de l'élastique sur 2 cm et les fixer par plusieurs passages à la main ou au zigzag court testé sur une chute. Un élastique coupé à 20 cm donnera un anneau d'environ 18 cm au repos avant étirement."
+          "detail": "Avant de coudre, essayer la tension de l'élastique sur les cheveux, en maintenant provisoirement ses extrémités ensemble.\n\nAjuster la longueur si nécessaire.\n\nSuperposer ensuite les deux extrémités de l'élastique sur 2 cm.\n\nLes assembler solidement avec plusieurs passages de couture à la main ou au point zigzag court à la machine, préalablement testé sur une chute.\n\nVeiller à ne pas prendre le tissu du chouchou dans cette couture.\n\nUn élastique coupé à 20 cm, avec un chevauchement de 2 cm, donnera un anneau d'environ 18 cm de circonférence au repos."
         },
         {
-          "title": "Réunir les extrémités du tissu",
-          "detail": "Répartir les fronces pour dégager les extrémités. Sur l'une, rentrer 1 cm de tissu vers l'intérieur et marquer le repli au fer. Introduire l'autre extrémité sur environ 1 cm à l'intérieur du premier bout, sans tordre l'anneau. Maintenir avec des épingles."
-        },
-        {
-          "title": "Fermer au point glissé et répartir les fronces",
-          "detail": "Avec une aiguille à main et du fil assorti, cacher le nœud dans le repli, puis prendre alternativement de minuscules points dans les deux plis. Resserrer délicatement pour faire disparaître la jonction, arrêter le fil et répartir les fronces. Ne pas piquer dans l'élastique."
+          "title": "Fermer le chouchou",
+          "detail": "Répartir les fronces du tissu tout autour de l'élastique.\n\nAu niveau de l'ouverture de 5 cm, replier les deux marges de tissu de 1 cm vers l'intérieur, envers contre envers, pour cacher les bords coupés.\n\nMaintenir les deux bords repliés l'un contre l'autre avec des épingles ou des pinces.\n\nSur l'endroit, piquer au point droit près du bord pour refermer les 5 cm d'ouverture, en prenant bien les deux épaisseurs de tissu repliées.\n\nAttention à ne pas coudre l'élastique.\n\nRéaliser quelques points d'arrêt au début et à la fin de la couture.\n\nTourner légèrement le tube pour placer la couture de fermeture vers l'intérieur du chouchou.\n\nRépartir une dernière fois les fronces.\n\nLe chouchou est terminé !"
         }
       ],
       "bonus": "Trois tailles à comparer : petit chouchou (45 × 10 cm, élastique 18 cm), chouchou adulte classique (55 × 12 cm, élastique 20 cm), très volumineux (65 × 13 cm, élastique 20 à 22 cm). Les élastiques restent indicatifs : ajuster à la chevelure. Variantes : satin souple ou coton vintage.",
@@ -593,6 +588,6 @@
       ]
     }
   },
-  "appRelease": "1.3.67",
-  "appReleaseNotes": "Patchwork : une icône Cours est placée en premier, avant le cours préparatoire 0. Broderie et Crochet : présentation harmonisée avec Couture, en-tête numéro/étoile/titre, outils en haut, fournitures, conseils et photos repliables. Les projets conservent leur statut en cours d’écriture. Dictionnaire commun à Couture, Patchwork, Broderie et Crochet, accessible depuis chaque cours et enrichi des termes déjà utilisés dans les cours de broderie et crochet. Galerie des créations : vignettes petites, moyennes ou grandes, recherche au clic, photo cliquable ou icône avec nom pour ouvrir la fiche. Les réalisations sans photo peuvent aussi apparaître. Journal d’atelier : barre d’icônes Couture, Patchwork, Broderie, Crochet, Voyage et Persos. Les notes, photos et coches des nouvelles rubriques sont incluses dans la sauvegarde personnelle."
+  "appRelease": "1.3.68",
+  "appReleaseNotes": "Remplacement intégral des étapes par le texte corrigé : découpe 55 × 12 cm, marges de 1 cm comprises et élastique de 20 cm. Montage en sept étapes : assembler les petits côtés en anneau, coudre les longs bords avec une ouverture de 5 cm, puis retourner par cette ouverture. Passage de l’élastique sans torsion, essai de tension, chevauchement de 2 cm et assemblage solide pour un anneau d’environ 18 cm au repos. Fermeture sur l’endroit près du bord, sans piquer l’élastique, couture tournée vers l’intérieur et fronces réparties. Le cours 4 reste un projet en cours d’écriture, sans validation éditoriale. Les autres cours, le patron et les illustrations sont conservés. Installation proposée avant actualisation ; journal détaillé présenté automatiquement une seule fois pour cette version, toujours consultable dans l’historique."
 }

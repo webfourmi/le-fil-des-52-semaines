@@ -11,6 +11,8 @@ jobs:
     timeout-minutes: 18
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -38,3 +40,5 @@ jobs:
           print('OK : PDF vectoriel 2 pages A4, demi-patron total 27,5 x 12 cm, témoin 5 x 5 cm')
           PY
       - run: node tests/chouchou-pattern.cjs
+      - name: Vérifier l’installation proposée et le journal sans répétition
+        run: node tests/v1368-chouchou-update.cjs

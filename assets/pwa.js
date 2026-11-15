@@ -3,7 +3,7 @@
 'use strict';
 let deferred=null, worker=null, waiting=null, updateAccepted=false;
 let previouslyControlled=false;
-const APP_BUILD='1.3.67';
+const APP_BUILD='1.3.68';
 const compareVersions=(a,b)=>{const x=String(a).split('.').map(Number),y=String(b).split('.').map(Number);for(let i=0;i<Math.max(x.length,y.length);i++){const diff=(x[i]||0)-(y[i]||0);if(diff)return diff}return 0};
 const el=id=>document.getElementById(id);
 const updateUI=()=>{
@@ -175,7 +175,12 @@ function showWorker(w){
  if(updateAccepted||waiting===w)return;
  waiting=w;
  notice('Une nouvelle version de l’application est prête.','Voir les nouveautés',()=>showReleaseNotes(true));
- showReleaseNotes(true).catch(()=>{});
+ // Le journal automatique ne se répète pas pour une même version disponible.
+ loadReleaseNotes().then(notes=>{
+   const key='fil52.changelog.offeredVersion';
+   try{if(localStorage.getItem(key)===notes.version)return;localStorage.setItem(key,notes.version)}catch(_){}
+   return showReleaseNotes(true,notes.version);
+ }).catch(()=>{});
 }
 document.addEventListener('DOMContentLoaded',()=>{
  document.addEventListener('click',e=>{
