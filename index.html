@@ -182,6 +182,22 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
 #app .supply-remove-photo{display:flex;flex-direction:row;align-items:center;gap:8px}
 #app .supply-remove-photo input{width:auto}
 @media(max-width:440px){#app .supply-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#app .supply-tile{padding:8px}#app .supply-tile-photo,#app .supply-tile-placeholder{height:110px}#app .supply-form{grid-template-columns:minmax(0,1fr)}#app .supply-form input[type=file]{min-width:0}}
+/* Photos au choix et taille du catalogue de mercerie. */
+#app .supply-photo-choices{min-width:0;margin:0;padding:12px;border:1px solid var(--line);border-radius:12px}
+#app .supply-photo-choices input[hidden]{display:none!important}
+#app .supply-photo-choices .actions{margin:0}
+#app #supply-photo-choice{margin:8px 0 0;overflow-wrap:anywhere}
+#app .supply-catalog-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+#app .supply-catalog-heading h2{margin:0}
+#app .supply-size-label{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:#526357;font-size:.85rem}
+#app #supply-catalog-size{padding:7px 10px;border:1px solid #d9c7b2;border-radius:10px;background:#fffaf1;color:#365548;max-width:100%}
+#app .supply-grid[data-size="small"]{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}
+#app .supply-grid[data-size="large"]{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+#app .supply-grid[data-size="small"] .supply-tile-photo,#app .supply-grid[data-size="small"] .supply-tile-placeholder{height:85px}
+#app .supply-grid[data-size="large"] .supply-tile-photo,#app .supply-grid[data-size="large"] .supply-tile-placeholder{height:220px}
+#app .supply-grid[data-size="small"] .supply-tile-placeholder img{width:48px;height:48px}
+#app .supply-grid[data-size="large"] .supply-tile-placeholder img{width:100px;height:100px}
+@media(max-width:440px){#app .supply-grid[data-size="small"]{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}#app .supply-grid[data-size="large"]{grid-template-columns:minmax(0,1fr)}#app .supply-grid[data-size="small"] .supply-tile{padding:5px;font-size:.8rem}}
 </style>
 <style>
 [data-bonus-project][hidden],#bonus-empty[hidden]{display:none!important}
@@ -192,7 +208,7 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
 </style>
 <script defer src="./assets/gallery.js"></script>
 <script defer src="./assets/personal-gallery.js"></script>
-<script defer src="./assets/journal-photos.js"></script><script defer src="./assets/mercerie.js?v=1.3.58"></script>
+<script defer src="./assets/journal-photos.js"></script><script defer src="./assets/mercerie.js?v=1.3.59"></script>
 <script defer src="./assets/journal-album.js"></script>
 <script defer src="./assets/halloween-voyage.js"></script>
 <script defer src="./assets/vietnam-nord.js?v=1.3.55"></script>
@@ -214,7 +230,7 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
 <script defer src="./assets/noel-bonus.js"></script><script defer src="./assets/thanksgiving-dindon.js"></script>
 <link rel="stylesheet" href="./assets/noel-bonus.css">
 <script defer src="./assets/backup.js"></script>
-<script defer src="./assets/pwa.js?v=1.3.58"></script>
+<script defer src="./assets/pwa.js?v=1.3.59"></script>
 <style>
 .pattern-category-picker{max-width:440px;margin:14px 0 20px;display:grid;gap:7px}.pattern-category-picker select{width:100%;font-size:1rem}
 #patterns-sewing[data-pattern-view="sewing"] .patterncard[data-pattern-group="bonus"],#patterns-sewing[data-pattern-view="bonus"] .patterncard[data-pattern-group="course"]{display:none}
@@ -1145,6 +1161,7 @@ document.addEventListener('click',e=>{
  const travelTool=e.target.closest('[data-travel-panel]');if(travelTool){const panel=travelTool.dataset.travelPanel;travelPickerOpen=travelPickerOpen===panel?'':panel;render();document.querySelector(travelPickerOpen==='search'?'#travel-search':travelPickerOpen==='choice'?'#culture-article-select':'[data-travel-panel="'+panel+'"]')?.focus({preventScroll:true});return}
  const sewingTab=e.target.closest('[data-sewing-section]');if(sewingTab){const previous=atelierView();sewingTechniquesOpen=sewingTab.dataset.sewingSection==='techniques';state.page='learn';atelierPush(previous);render();return}
  const techniqueOpen=e.target.closest('[data-technique-open]');if(techniqueOpen){const target=[...document.querySelectorAll('[data-technique-card]')].find(x=>x.querySelector('img')?.src.includes(techniqueOpen.dataset.techniqueOpen));if(target)openPhotoPreview(target.querySelector('img'));return}
+ const supplyPhotoSource=e.target.closest('[data-supply-photo-source]');if(supplyPhotoSource){el('supply-new')?.querySelector('[name="'+supplyPhotoSource.dataset.supplyPhotoSource+'"]')?.click();return}
  const supplyPhotoButton=e.target.closest('[data-supply-photo-open]');if(supplyPhotoButton){document.querySelector('input[data-supply-photo="'+supplyPhotoButton.dataset.supplyPhotoOpen+'"]')?.click();return}
  const supplyDelete=e.target.closest('[data-supply-delete]');if(supplyDelete){if(confirm('Supprimer cette fourniture ?')){try{Fil52Mercerie.remove(state.profile,supplyDelete.dataset.supplyDelete);render()}catch(err){toast(err.message)}}return}
  const supplyEdit=e.target.closest('[data-supply-edit]');if(supplyEdit){Fil52Mercerie.show(state.profile,'edit',supplyEdit.dataset.supplyEdit);render();el('supply-new')?.querySelector('[name="name"]')?.focus();return}
@@ -1209,6 +1226,8 @@ document.addEventListener('change',e=>{let a=e.target;
  if(a.id==='pattern-category-select'){patternKind=['sewing','patchwork','bonus'].includes(a.value)?a.value:'sewing';patternPreview='';patternSection='';render();return}
  if(a.id==='bonus-select'){bonusSelected=a.value;bonusSearchQuery='';const search=el('bonus-search');if(search)search.value='';updateBonusSearch();return}
  if(a.id==='technique-select'){techniqueSelected=a.value;techniqueSearchQuery='';const search=el('technique-search');if(search)search.value='';updateTechniqueSearch();return}
+ if(a.id==='supply-catalog-size'){try{Fil52Mercerie.setCatalogSize(state.profile,a.value)}catch(err){toast('Impossible de mémoriser la taille des vignettes.')}return}
+ if(a.closest('#supply-new')&&['initialPhoto','cameraPhoto'].includes(a.name)){Fil52Mercerie.selectPhoto(a);return}
  if(a.dataset.supplyPhoto){const file=a.files?.[0];if(file)Fil52Mercerie.photoFile(state.profile,a.dataset.supplyPhoto,file).then(()=>{render();toast('Photo de mercerie enregistrée.')}).catch(err=>toast(err.message));return}
  if(a.id==='supply-import'){const file=a.files?.[0];if(file){if(!confirm('Remplacer la mercerie actuelle par ce fichier ?'))return;if(file.size>1000000){toast('Fichier trop volumineux.');return}file.text().then(t=>{Fil52Mercerie.importJSON(state.profile,t);render();toast('Mercerie restaurée.')}).catch(err=>toast(err.message))}return}
  if(a.dataset.journalPhotoUpload){addJournalPhotos(Array.from(a.files||[]));return}

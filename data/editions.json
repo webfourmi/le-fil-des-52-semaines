@@ -593,6 +593,6 @@
       ]
     }
   },
-  "appRelease": "1.3.58",
-  "appReleaseNotes": "Mercerie : une icône d’ajout ouvre une page « Ajouter une fourniture » et l’icône de recherche affiche ou masque la barre de recherche. Nom et catégorie obligatoires ; largeur et longueur en centimètres, couleur, rangement, photo et notes facultatifs. Mes fournitures : toucher une photo, ou une icône accompagnée du nom, ouvre la fiche complète. Tous les champs et la photo peuvent être modifiés, remplacés ou effacés. Les fournitures déjà enregistrées sont conservées."
+  "appRelease": "1.3.59",
+  "appReleaseNotes": "Mercerie : deux boutons distincts permettent de prendre une photo du tissu avec l’appareil photo du téléphone ou de choisir un fichier. Ces options sont disponibles à l’ajout et à la modification d’une fiche. Catalogue de mercerie : choix de vignettes petites, moyennes ou grandes. La taille est conservée sur cet appareil pour chaque couturière."
 }

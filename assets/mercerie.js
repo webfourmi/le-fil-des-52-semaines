@@ -51,6 +51,19 @@ function filter(query=view.query){
  for(const card of document.querySelectorAll('[data-supply-card]')){card.hidden=!terms.every(term=>normalize(card.dataset.supplySearch).includes(term));if(!card.hidden)count++}
  const countNode=document.getElementById('supply-count');if(countNode)countNode.textContent=terms.length?count+' fourniture(s) trouvée(s).':'';
 }
+function catalogSize(profile){try{const value=localStorage.getItem('fil52.mercerie.tileSize.'+profile);if(['small','medium','large'].includes(value))return value}catch(_){}return 'medium'}
+function setCatalogSize(profile,value){
+ if(!['small','medium','large'].includes(value))return;
+ localStorage.setItem('fil52.mercerie.tileSize.'+profile,value);
+ const grid=document.getElementById('supply-list');if(grid)grid.dataset.size=value;
+}
+function selectPhoto(input){
+ if(!input.files?.length)return;
+ const form=input.closest('form'),other=form.querySelector('[name="'+(input.name==='cameraPhoto'?'initialPhoto':'cameraPhoto')+'"]');
+ if(other)other.value='';
+ const status=form.querySelector('#supply-photo-choice');if(status)status.textContent=(input.name==='cameraPhoto'?'Photo prise : ':'Fichier choisi : ')+input.files[0].name;
+ const remove=form.querySelector('[name="removePhoto"]');if(remove)remove.checked=false;
+}
 function toolbar(){return `<nav class="supply-tools" aria-label="Outils de ma mercerie"><button type="button" class="culture-tab ${view.mode==='add'?'selected':''}" data-supply-view="add" aria-label="Ajouter une fourniture" title="Ajouter une fourniture"><img src="./assets/nav-supply-add.svg" alt="" width="64" height="64"></button><button type="button" class="culture-tab ${view.searchOpen?'selected':''}" data-supply-search-toggle aria-label="Rechercher une fourniture" title="Rechercher une fourniture" aria-expanded="${view.searchOpen}" aria-controls="supply-search-panel"><img src="./assets/nav-travel-search.svg" alt="" width="64" height="64"></button></nav>`}
 function form(item){
  const editing=!!item,x=item||{name:'',category:'',width:null,length:null,color:'',location:'',notes:'',photo:''};
@@ -62,7 +75,7 @@ function form(item){
  <label>Couleur (facultatif) <input name="color" maxlength="60" value="${escape(x.color)}"></label>
  <label>Rangement (facultatif) <input name="location" maxlength="90" value="${escape(x.location)}" placeholder="Boîte, tiroir…"></label>
  ${editing?`<details class="supply-wide"><summary>Quantité et unité du stock</summary><div class="supply-stock-fields"><label>Quantité <input name="amount" type="number" min="0" max="100000" step="0.01" value="${x.amount}"></label><label>Unité <select name="unit">${units.map(u=>`<option ${u===x.unit?'selected':''}>${escape(u)}</option>`).join('')}</select></label></div></details>`:''}
- <label class="supply-wide">Photo (facultatif) <input name="initialPhoto" type="file" accept="image/jpeg,image/png,image/webp"></label>
+ <fieldset class="supply-wide supply-photo-choices"><legend>Photo (facultatif)</legend><div class="actions"><button type="button" class="secondary" data-supply-photo-source="cameraPhoto">📷 Prendre une photo</button><button type="button" class="secondary" data-supply-photo-source="initialPhoto">▧ Choisir un fichier</button></div><input name="cameraPhoto" type="file" accept="image/jpeg,image/png,image/webp" capture="environment" aria-label="Prendre une photo du tissu" hidden><input name="initialPhoto" type="file" accept="image/jpeg,image/png,image/webp" aria-label="Choisir un fichier photo" hidden><p id="supply-photo-choice" class="small" role="status"></p></fieldset>
  ${x.photo?`<div class="supply-wide"><img class="supply-photo" src="${x.photo}" alt="Photo actuelle de ${escape(x.name)}"><label class="supply-remove-photo"><input type="checkbox" name="removePhoto"> Supprimer la photo actuelle</label></div>`:''}
  <label class="supply-wide">Notes (facultatif) <textarea name="notes" maxlength="1000" rows="3" placeholder="Composition, projet prévu…">${escape(x.notes)}</textarea></label>
  <div class="actions supply-wide"><button class="primary" type="submit">${editing?'Enregistrer les modifications':'Ajouter à ma mercerie'}</button><button class="secondary" type="button" data-supply-view="${editing?'detail':'list'}" ${editing?'data-supply-id="'+escape(x.id)+'"':''}>Annuler</button></div><p class="supply-wide small">Les dimensions sont en centimètres. Seuls le nom et la catégorie sont obligatoires.</p></form></section>`;
@@ -79,7 +92,7 @@ function render(profile){
  if(view.mode==='edit'&&current)return head+form(current);
  if(view.mode==='detail'&&current)return head+detail(current);
  view.mode='list';
- return head+`<section class="card section"><h2>Mes fournitures <small>(${items.length})</small></h2><div id="supply-search-panel" ${view.searchOpen?'':'hidden'}><label for="supply-search">Rechercher une fourniture</label><input id="supply-search" type="search" value="${escape(view.query)}" placeholder="Nom, catégorie, couleur, rangement…" autocomplete="off"></div><div id="supply-list" class="supply-grid">
+ return head+`<section class="card section"><div class="supply-catalog-heading"><h2>Mes fournitures <small>(${items.length})</small></h2><label class="supply-size-label" for="supply-catalog-size">Taille des vignettes <select id="supply-catalog-size">${[['small','Petite'],['medium','Moyenne'],['large','Grande']].map(([value,label])=>`<option value="${value}" ${catalogSize(profile)===value?'selected':''}>${label}</option>`).join('')}</select></label></div><div id="supply-search-panel" ${view.searchOpen?'':'hidden'}><label for="supply-search">Rechercher une fourniture</label><input id="supply-search" type="search" value="${escape(view.query)}" placeholder="Nom, catégorie, couleur, rangement…" autocomplete="off"></div><div id="supply-list" class="supply-grid" data-size="${catalogSize(profile)}">
  ${items.map(x=>`<button type="button" class="supply-tile" data-supply-view="detail" data-supply-id="${escape(x.id)}" data-supply-card="${escape(x.id)}" data-supply-search="${escape([x.name,x.category,x.color,x.notes,x.location].join(' '))}" aria-label="Voir la fiche de ${escape(x.name)}">${x.photo?`<img class="supply-tile-photo" src="${x.photo}" alt="" loading="lazy">`:'<span class="supply-tile-placeholder"><img src="./assets/nav-mercerie.svg" alt="" width="72" height="72"></span>'}<strong>${escape(x.name)}</strong></button>`).join('')||'<p>Ta mercerie est encore vide. Touche l’icône d’ajout pour enregistrer une fourniture.</p>'}</div><p id="supply-count" class="small" aria-live="polite"></p></section>
  <section class="card section"><h2>Sauvegarder ma mercerie</h2><p class="small">Tes fournitures et leurs photos sont comprises dans la sauvegarde de mercerie et dans les nouvelles sauvegardes générales du carnet.</p><div class="actions"><button type="button" class="secondary" id="supply-export">Télécharger ma mercerie</button><label class="secondary supply-import-label">Restaurer ma mercerie <input id="supply-import" type="file" accept=".json,application/json"></label></div></section>`;
 }
@@ -90,7 +103,8 @@ async function submitForm(profile,form){
  const values={name:data.get('name'),category:data.get('category'),width:data.get('width'),length:data.get('length'),color:data.get('color'),location:data.get('location'),notes:data.get('notes'),unit:existing?data.get('unit'):'cm',amount:existing?data.get('amount'):Number(data.get('length')||0)};
  // Quand le stock en cm suit la longueur, garder les deux mesures cohérentes.
  if(existing&&values.unit==='cm'&&existing.unit==='cm'&&Number(values.amount)===existing.amount&&(existing.amount===existing.length||existing.amount===0))values.amount=Number(values.length||0);
- const photo=data.get('initialPhoto');
+ const camera=data.get('cameraPhoto'),file=data.get('initialPhoto');
+ const photo=camera instanceof File&&camera.size?camera:file;
  if(photo instanceof File&&photo.size)values.photo=await photoData(photo);
  else if(data.has('removePhoto'))values.photo='';
  let savedId=id;
@@ -102,5 +116,5 @@ function download(profile){
  const blob=new Blob([exportJSON(profile)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
  a.href=url;a.download='mercerie-'+(profile==='m'?'viera':'mathilde')+'.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
 }
-root.Fil52Mercerie={render,show,toggleSearch,filter,submitForm,list,add,update,remove,photoFile,download,importJSON,exportJSON,validProfile,validateItems:items=>parse(JSON.stringify(items)),replace:save};
+root.Fil52Mercerie={render,show,toggleSearch,filter,catalogSize,setCatalogSize,selectPhoto,submitForm,list,add,update,remove,photoFile,download,importJSON,exportJSON,validProfile,validateItems:items=>parse(JSON.stringify(items)),replace:save};
 })(globalThis);
