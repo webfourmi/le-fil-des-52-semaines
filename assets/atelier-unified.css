@@ -1,0 +1,31 @@
+/* Shared illustrated controls for all lessons and the personal journal. */
+#app nav.sewing-course-tools.patchwork-tools { grid-template-columns: repeat(7,minmax(0,1fr)); }
+#app .atelier-iconbar { display:grid; grid-auto-flow:column; grid-auto-columns:minmax(0,1fr); gap:4px; max-width:606px; margin:18px 0 22px; }
+#app .atelier-iconbar button { display:grid; place-items:center; min-width:0; min-height:44px; padding:2px; border:0; border-radius:12px; background:transparent; box-shadow:none; }
+#app .atelier-iconbar button.active { background:#e5ecdf; }
+#app .atelier-iconbar button img { display:block; width:100%; max-width:64px; height:auto; aspect-ratio:1; object-fit:contain; }
+#app .atelier-iconbar button:focus-visible { outline:3px solid #946da1; outline-offset:2px; }
+#app .journal-top-buttons { display:block; }
+#app .journal-top-buttons .atelier-iconbar { width:100%; }
+#app .needlework-course .card { min-width:0; overflow-wrap:anywhere; }
+#app .needlework-course h2:not(.course-main-title) { font-size:1.4rem; }
+#app .needlework-course img { max-width:100%; }
+#app [id^="needle-"][hidden] { display:none!important; }
+#app #needle-course-search { width:100%; padding:12px; border:1px solid var(--line); border-radius:12px; font:inherit; }
+#app .album-toolbar { display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin:16px 0; }
+#app .album-toolbar .album-search-button { padding:0; border:0; background:transparent; width:48px; height:48px; }
+#app .album-search-button img { width:100%; height:100%; }
+#app .album-size-label { display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-size:.85rem; }
+#app #album-size { padding:7px 10px; border:1px solid #d9c7b2; border-radius:10px; background:#fffaf1; }
+#app #album-search-panel[hidden] { display:none!important; }
+#app #album-grid .journal-album-item { display:grid; grid-template-columns:minmax(0,1fr); gap:10px; padding:10px; min-width:0; width:auto; height:auto; background:#fffaf1; border:1px solid #d9c7b2; border-radius:16px; box-shadow:none; text-align:center; }
+#app #album-grid .album-meta { display:block; padding:0; overflow-wrap:anywhere; }
+#app #album-grid .album-meta b { display:block; font-size:.85rem; }
+#app #album-grid .album-meta small { display:block; font-size:.73rem; }
+#app #album-grid img { width:100%; height:150px; object-fit:cover; aspect-ratio:auto; border-radius:10px; }
+#app #album-grid .supply-tile-placeholder img { width:72px; height:72px; object-fit:contain; }
+#app #album-grid[data-size="small"] .supply-tile-photo,#app #album-grid[data-size="small"] .supply-tile-placeholder { height:85px; }
+#app #album-grid[data-size="large"] .supply-tile-photo,#app #album-grid[data-size="large"] .supply-tile-placeholder { height:220px; }
+#app #album-grid[data-size="small"] .supply-tile-placeholder img { width:48px; height:48px; }
+#app #album-grid[data-size="large"] .supply-tile-placeholder img { width:100px; height:100px; }
+@media(max-width:440px) { #app .atelier-iconbar { gap:2px; } #app #album-grid .journal-album-item { padding:6px; } #app #album-grid[data-size="medium"] .supply-tile-photo,#app #album-grid[data-size="medium"] .supply-tile-placeholder { height:110px; } }

@@ -52,7 +52,7 @@ function hydrateThumbnails(grid,items){
  }else{queue.push(...buttons);execute()}
 }
 
-async function render(profile,state,projects,blocks,cultureArticles){
+async function render(profile,state,projects,blocks,cultureArticles,kindFilter=''){
  const target=document.getElementById('journal-photo-overview'),token=++renderToken;
  if(!target)return;
  try{
@@ -67,6 +67,8 @@ async function render(profile,state,projects,blocks,cultureArticles){
   function titleFor(kind,value){
    if(kind==='sewing')return 'Couture '+value+' · '+(projects[Number(value)-1]||'Projet');
    if(kind==='patchwork')return 'Patchwork '+value+' · '+(blocks[Number(value)-1]||'Bloc');
+   if(kind==='embroidery')return 'Broderie 01 · Mes premiers points de broderie';
+   if(kind==='crochet')return 'Crochet 01 · Les étoiles givrées de l’hiver';
    if(kind==='voyage')return journeys.find(x=>x.id===value)?.title||value;
    return state.personalProjects[profile]?.find(x=>x.id===value)?.title||'Création personnelle';
   }
@@ -82,33 +84,39 @@ async function render(profile,state,projects,blocks,cultureArticles){
   }
   for(const photo of journal){
    const sep=photo.ref.indexOf(':'),kind=photo.ref.slice(0,sep),value=photo.ref.slice(sep+1);
-   if(!['sewing','patchwork','voyage'].includes(kind))continue;
+   if(!['sewing','patchwork','embroidery','crochet','voyage'].includes(kind))continue;
    add(kind,value,photo.dataUrl,photo.updatedAt);
   }
   for(const photo of personal)add('personal',photo.projectId,photo.dataUrl,photo.updatedAt);
+  function ensure(kind,value){const id=kind+':'+value;if(!items.has(id))items.set(id,{kind,value,title:titleFor(kind,value),count:0,cover:null,date:'',notes:''})}
+  for(const project of state.personalProjects[profile]||[])ensure('personal',project.id);
+  for(const n of state.projectsDone[profile]||[])ensure('sewing',String(n));
+  for(const [n,note] of Object.entries(state.notes[profile]||{}))if(note.trim())ensure('sewing',n);
+  for(const n of state.blocks[profile]||[])ensure('patchwork',String(n));
+  for(const ref of state.needleworkDone?.[profile]||[]){const i=ref.indexOf(':');ensure(ref.slice(0,i),ref.slice(i+1))}
+  for(const [ref,note] of Object.entries(state.journalNotes[profile]||{}))if(note.trim()){const i=ref.indexOf(':');ensure(ref.slice(0,i),ref.slice(i+1))}
   for(const x of items.values()){
    x.notes=x.kind==='personal'?(state.personalProjects[profile]?.find(v=>v.id===x.value)?.notes||''):x.kind==='sewing'?(state.notes[profile]?.[x.value]||''):(state.journalNotes[profile]?.[x.kind+':'+x.value]||'');
   }
-  const sorted=[...items.values()].sort((a,b)=>b.date.localeCompare(a.date));
-  target.innerHTML='<h2>Mes réalisations en images</h2><p class="small">'+sorted.length+' création(s) photographiée(s) · '+(journal.length+legacy.length+personal.length)+' photo(s) · Les images restent privées sur cet appareil.</p><label for="album-filter"><b>Rechercher dans mes albums</b></label><input id="album-filter" type="search" placeholder="Titre, tissu, projet, voyage…" autocomplete="off" style="width:100%;padding:12px;margin:8px 0;border:1px solid var(--line);border-radius:12px;font:inherit"><div class="journal-album-grid" id="album-grid"></div><p class="small" id="album-results" role="status"></p>';
+  const sorted=[...items.values()].filter(x=>!kindFilter||x.kind===kindFilter).sort((a,b)=>b.date.localeCompare(a.date));
+  const sizeKey='fil52.journal.tileSize.'+profile;let size='medium';try{const saved=localStorage.getItem(sizeKey);if(['small','medium','large'].includes(saved))size=saved}catch(_){}
+  target.innerHTML='<h2>Galerie de mes créations</h2><p class="small">'+sorted.length+' création(s) · Photos et notes privées sur cet appareil.</p><div class="album-toolbar"><button type="button" class="album-search-button" data-album-add aria-label="Ajouter une création"><img src="./assets/nav-supply-add.svg" alt=""></button><button type="button" class="album-search-button" id="album-search-toggle" aria-label="Rechercher une création" aria-expanded="false" aria-controls="album-search-panel"><img src="./assets/nav-travel-search.svg" alt=""></button><label class="album-size-label" for="album-size">Taille des vignettes <select id="album-size">'+[['small','Petite'],['medium','Moyenne'],['large','Grande']].map(([value,label])=>'<option value="'+value+'" '+(value===size?'selected':'')+'>'+label+'</option>').join('')+'</select></label><button type="button" class="ghost" data-album-all>Toutes les créations</button></div><div id="album-search-panel" hidden><label for="album-filter">Rechercher dans mes créations</label><input id="album-filter" type="search" placeholder="Titre, tissu, projet…" autocomplete="off" style="width:100%;padding:12px;margin:8px 0;border:1px solid var(--line);border-radius:12px;font:inherit"></div><div class="supply-grid" data-size="'+size+'" id="album-grid"></div><p class="small" id="album-results" role="status"></p>';
   const grid=target.querySelector('#album-grid'),counter=target.querySelector('#album-results');
   function display(q){
-   const terms=norm(q).trim().split(/\s+/).filter(Boolean);
-   const found=sorted.filter(x=>terms.every(t=>norm(x.title+' '+x.notes+' '+x.kind).includes(t)));
-   grid.replaceChildren();
-   if(!found.length){grid.innerHTML='<p class="album-empty">Aucune photo ne correspond à cette recherche. Ouvre « Mon carnet » pour ajouter des photos à une réalisation.</p>'}
+   const terms=norm(q).trim().split(/\s+/).filter(Boolean),found=sorted.filter(x=>terms.every(t=>norm(x.title+' '+x.notes+' '+x.kind).includes(t)));grid.replaceChildren();
+   if(!found.length)grid.innerHTML='<p class="album-empty">Aucune création à afficher. Ajoute des notes, une photo ou une réalisation terminée dans « Mon carnet ».</p>';
+   const icons={sewing:'nav-sewing-simple.svg',patchwork:'nav-patch-simple.svg',embroidery:'nav-embroidery.svg',crochet:'nav-crochet.svg',voyage:'nav-world.svg',personal:'nav-personal.svg'};
    for(const x of found){
-    const b=document.createElement('button');b.type='button';b.className='journal-album-item';b.dataset.albumOpen=x.value;b.dataset.albumKind=x.kind;b.setAttribute('aria-label','Ouvrir '+x.title);
-    const image=document.createElement('img');image.loading='lazy';image.decoding='async';image.width=320;image.height=320;image.alt='Photographie de '+x.title;image.dataset.thumbPending='1';
-    const meta=document.createElement('span');meta.className='album-meta';
-    const title=document.createElement('b');title.textContent=x.title;
-    const subtitle=document.createElement('small');subtitle.textContent=x.count+' photo'+(x.count>1?'s':'')+' · '+(x.kind==='personal'?'Création personnelle':x.kind==='voyage'?'Voyage':x.kind==='sewing'?'Couture':'Patchwork');
-    meta.append(title,subtitle);b.append(image,meta);grid.append(b);
+    const button=document.createElement('button');button.type='button';button.className='supply-tile journal-album-item';button.dataset.albumOpen=x.value;button.dataset.albumKind=x.kind;button.setAttribute('aria-label','Ouvrir '+x.title);
+    const img=document.createElement('img');img.loading='lazy';img.alt='';
+    if(x.cover){img.className='supply-tile-photo';img.dataset.thumbPending='1';button.append(img)}else{const placeholder=document.createElement('span');placeholder.className='supply-tile-placeholder';img.src='./assets/'+(icons[x.kind]||icons.personal);placeholder.append(img);button.append(placeholder)}
+    const meta=document.createElement('span');meta.className='album-meta';const title=document.createElement('b');title.textContent=x.title;const count=document.createElement('small');count.textContent=x.count+' photo'+(x.count>1?'s':'');meta.append(title,count);button.append(meta);grid.append(button);
    }
-   counter.textContent=found.length+' album(s) affiché(s).';
-   hydrateThumbnails(grid,found);
+   counter.textContent=found.length+' création(s) affichée(s).';hydrateThumbnails(grid,found);
   }
   const field=target.querySelector('#album-filter');field.addEventListener('input',()=>display(field.value));
+  target.querySelector('#album-search-toggle').addEventListener('click',e=>{const panel=target.querySelector('#album-search-panel');panel.hidden=!panel.hidden;e.currentTarget.setAttribute('aria-expanded',String(!panel.hidden));if(panel.hidden)display('');else{display(field.value);field.focus()}});
+  target.querySelector('#album-size').addEventListener('change',e=>{grid.dataset.size=e.target.value;try{localStorage.setItem(sizeKey,e.target.value)}catch(_){}});
   display('');
  }catch(e){if(token===renderToken&&target.isConnected)target.textContent='Impossible de lire les albums : '+e.message}
 }

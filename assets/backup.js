@@ -64,13 +64,15 @@
     if(schema>=4)output.personalProjects=personalProjects(data.personalProjects);
     if(schema>=5){output.cultureFavorites=cultureIds(data.cultureFavorites,'favoris');output.cultureRead=cultureIds(data.cultureRead,'terminés');}
     if(schema>=6){output.journalNotes=journalExtras(data.journalNotes,'notes');output.journalRatings=journalExtras(data.journalRatings,'ratings');}
-    if(Object.hasOwn(data,'sewingFavorites')){check(Array.isArray(data.sewingFavorites)&&data.sewingFavorites.length<=200&&data.sewingFavorites.every(x=>typeof x==='string'&&/^(course:(?:[1-9]|[1-4][0-9]|5[0-2])|(?:technique|bonus):[A-Za-z0-9-]{1,60})$/.test(x)),'Favoris couture invalides.');output.sewingFavorites=[...new Set(data.sewingFavorites)];}
+    if(Object.hasOwn(data,'sewingFavorites')){check(Array.isArray(data.sewingFavorites)&&data.sewingFavorites.length<=200&&data.sewingFavorites.every(x=>typeof x==='string'&&/^((?:course|embroidery|crochet):(?:[1-9]|[1-4][0-9]|5[0-2])|(?:technique|bonus):[A-Za-z0-9-]{1,60})$/.test(x)),'Favoris couture invalides.');output.sewingFavorites=[...new Set(data.sewingFavorites)];}
+    if(Object.hasOwn(data,'needleworkDone')){check(Array.isArray(data.needleworkDone)&&data.needleworkDone.length<=2&&data.needleworkDone.every(x=>/^(embroidery|crochet):1$/.test(x)),'Progression broderie/crochet invalide.');output.needleworkDone=[...new Set(data.needleworkDone)];}
     return output;
   }
   function exportData(state,profile,photos=[],personalPhotos=[],journalPhotos=[]){
     check(validProfile(profile),'Identité personnelle non choisie.');
     const data={};
     for(const kind of [...arrKinds,...objectKinds])data[kind]=state[kind]?.[profile];
+    data.needleworkDone=state.needleworkDone?.[profile]||[];
     data.sewingFavorites=state.sewingFavorites?.[profile]||[];
     data.personalProjects=state.personalProjects?.[profile]||[];
     data.cultureFavorites=state.cultureFavorites?.[profile]||[];
@@ -135,6 +137,7 @@
       for(const kind of ['journalNotes','journalRatings'])next[kind]={...(state[kind]||{m:{},f:{}}),[profile]:data[kind]};
     }
     if(Object.hasOwn(data,'sewingFavorites'))next.sewingFavorites={...(state.sewingFavorites||{m:[],f:[]}),[profile]:data.sewingFavorites};
+    if(Object.hasOwn(data,'needleworkDone'))next.needleworkDone={...(state.needleworkDone||{m:[],f:[]}),[profile]:data.needleworkDone};
     return next;
   }
   root.Fil52Backup={FORMAT,SCHEMA,MAX_FILE_SIZE,exportData,parseBackup,applyBackup};

@@ -5,7 +5,7 @@
 'use strict';
 const DATABASE='fil52.journal-photos.v1',STORE='photos',MAX_PER_ENTRY=5,MAX_PHOTOS=650;
 const validProfile=p=>p==='m'||p==='f';
-const validRef=ref=>typeof ref==='string'&&/^(?:(?:sewing|patchwork):(?:[1-9]|[1-4][0-9]|5[0-2])|voyage:(?:world|history):[a-z0-9-]{1,40})$/.test(ref);
+const validRef=ref=>typeof ref==='string'&&/^(?:(?:sewing|patchwork|embroidery|crochet):(?:[1-9]|[1-4][0-9]|5[0-2])|voyage:(?:world|history):[a-z0-9-]{1,40})$/.test(ref);
 const validPhotoId=id=>typeof id==='string'&&/^[A-Za-z0-9-]{1,90}$/.test(id);
 const check=(p,msg)=>{if(!p)throw Error(msg)};
 const key=(profile,ref,id)=>profile+':'+ref+':'+id;
