@@ -153,6 +153,14 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
 .technique-card-info .actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
 @media(max-width:720px){.technique-card{grid-template-columns:1fr;gap:11px}.technique-image-frame img{max-width:380px}.technique-card-info{padding:8px 3px}.sewing-section-tabs button{flex:1;min-width:125px}}
 @media(max-width:850px){.bottomnav{justify-content:flex-start;overflow-x:auto;gap:4px;scrollbar-width:thin}.bottomnav button{flex:0 0 auto;min-width:70px;padding:3px 5px}.bottomnav .nav-art{width:28px;height:28px}}
+/* Voyage : outils discrets et favoris dans le titre. */
+#app .culture-tabs{gap:10px;flex-wrap:wrap}
+#app .culture-article-picker[hidden]{display:none!important}
+#app .culture-title-star{display:inline-grid;place-items:center;vertical-align:baseline;width:36px;height:40px;padding:0;margin:0 5px 0 0;border:0;border-radius:10px;background:transparent;color:#8a7156;font:inherit;font-size:1.25rem;cursor:pointer}
+#app .culture-title-star:hover{background:#f3e5cf}
+#app .culture-title-star.is-favorite{color:#a57326}
+#app .culture-title-star:focus-visible{outline:3px solid #946da1;outline-offset:2px}
+@media(max-width:600px){#app nav.culture-tabs .culture-tab{width:62px;height:62px}#app nav.culture-tabs .culture-tab img{width:54px;height:54px}#app nav.culture-tabs{gap:8px;flex-wrap:nowrap}}
 </style>
 <style>
 [data-bonus-project][hidden],#bonus-empty[hidden]{display:none!important}
@@ -185,7 +193,7 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
 <script defer src="./assets/noel-bonus.js"></script><script defer src="./assets/thanksgiving-dindon.js"></script>
 <link rel="stylesheet" href="./assets/noel-bonus.css">
 <script defer src="./assets/backup.js"></script>
-<script defer src="./assets/pwa.js?v=1.3.56"></script>
+<script defer src="./assets/pwa.js?v=1.3.57"></script>
 <style>
 .pattern-category-picker{max-width:440px;margin:14px 0 20px;display:grid;gap:7px}.pattern-category-picker select{width:100%;font-size:1rem}
 #patterns-sewing[data-pattern-view="sewing"] .patterncard[data-pattern-group="bonus"],#patterns-sewing[data-pattern-view="bonus"] .patterncard[data-pattern-group="course"]{display:none}
@@ -599,7 +607,7 @@ const PHOTO_NEEDLE='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Ai
 const PHOTO_SASHIKO='https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Boro_textile_from_Japan%2C_with_sashiko.jpg/500px-Boro_textile_from_Japan%2C_with_sashiko.jpg';
 const PHOTO_MUSEUM='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Sashiko_by_volunteers%2C_2012_-_Textile_Museum_of_Canada_-_DSC00807.JPG/960px-Sashiko_by_volunteers%2C_2012_-_Textile_Museum_of_Canada_-_DSC00807.JPG';
 function culturePhotos(){return `<div class="photo-card"><figure><img loading="lazy" src="${PHOTO_NEEDLE}" alt="Photographie de plusieurs vues d'une aiguille en os à chas du Magdalénien, au Muséum de Toulouse"><figcaption class="photo-caption"><b>Une aiguille magdalénienne à chas</b><br>Muséum de Toulouse · Photo : Didier Descouens · CC BY-SA 4.0.<a href="https://commons.wikimedia.org/wiki/File:Aiguille_os_246.1_Global.jpg" target="_blank" rel="noopener">Photographie et licence ↗</a></figcaption></figure></div><div class="photo-card"><figure><img loading="lazy" src="${PHOTO_SASHIKO}" alt="Photographie d'un textile boro japonais, bleu indigo, avec reprises et couture sashiko"><figcaption class="photo-caption"><b>Réparations boro et points de sashiko</b><br>Photo : Karl Zetterström / Statens museer för världskultur · CC BY 4.0.<a href="https://commons.wikimedia.org/wiki/File:Boro_textile_from_Japan,_with_sashiko.jpg" target="_blank" rel="noopener">Photographie et licence ↗</a></figcaption></figure></div>`}
-let cultureTab='world',cultureSelection={world:null,history:null};
+let cultureTab='world',cultureSelection={world:null,history:null},travelPickerOpen='';
 function cultureHistory(){return `<article class="section card culture-history" aria-labelledby="history-01-title">
 <span class="culture-label">Histoire de la couture · N° 01</span>
 <h2 id="history-01-title">Bien avant nos machines : l'aiguille à chas</h2>
@@ -647,6 +655,12 @@ function cultureSorted(kind,person=state.profile){
  return cultureArticles(kind).map((item,i)=>({...item,order:i,category:favorites.has(item.id)?0:read.has(item.id)?2:1}))
   .sort((a,b)=>a.category-b.category||a.order-b.order);
 }
+function cultureArticleWithFavorite(html,article,fav){
+ const template=document.createElement('template');template.innerHTML=html;
+ const title=template.content.querySelector('article h2');
+ if(title)title.insertAdjacentHTML('afterbegin',`<button type="button" class="culture-title-star ${fav?'is-favorite':''}" data-culture-favorite="${safe(article.id)}" aria-pressed="${fav}" aria-label="${fav?'Retirer des favoris':'Ajouter aux favoris'}" title="${fav?'Retirer des favoris':'Ajouter aux favoris'}"><span aria-hidden="true">${fav?'★':'☆'}</span></button> `);
+ return template.innerHTML;
+}
 function culturePage(){
  const kind=cultureTab,items=cultureSorted(kind),selected=cultureSelection[kind];
  const article=items.find(item=>item.id===selected)||items[0];
@@ -662,15 +676,16 @@ function culturePage(){
  <nav class="culture-tabs" aria-label="Choisir un voyage">
   <button type="button" class="culture-tab ${kind==='world'?'selected':''}" data-culture-tab="world" aria-label="Coutures du monde" title="Voyage autour du monde" aria-pressed="${kind==='world'}"><img src="./assets/nav-world.svg" alt="" aria-hidden="true" width="56" height="56"></button>
   <button type="button" class="culture-tab ${kind==='history'?'selected':''}" data-culture-tab="history" aria-label="Histoire de la couture" title="Voyage dans le temps" aria-pressed="${kind==='history'}"><img src="./assets/nav-history.svg" alt="" aria-hidden="true" width="56" height="56"></button>
+  <button type="button" class="culture-tab ${travelPickerOpen==='search'?'selected':''}" data-travel-panel="search" aria-label="Rechercher un voyage" title="Rechercher un voyage" aria-expanded="${travelPickerOpen==='search'}" aria-controls="travel-search-panel"><img src="./assets/nav-travel-search.svg" alt="" aria-hidden="true" width="56" height="56"></button>
+  <button type="button" class="culture-tab ${travelPickerOpen==='choice'?'selected':''}" data-travel-panel="choice" aria-label="Choisir un article" title="Choisir un article" aria-expanded="${travelPickerOpen==='choice'}" aria-controls="travel-choice-panel"><img src="./assets/nav-travel-choice.svg" alt="" aria-hidden="true" width="56" height="56"></button>
  </nav>
- <section class="culture-article-picker" aria-label="Choisir un article"><label for="travel-search"><button type="button" class="travel-picker-icon secondary" data-travel-activate="travel-search" aria-label="Activer la recherche Voyage" aria-controls="travel-search">⌕</button> <b>Rechercher un voyage par mots-clés</b></label><input id="travel-search" type="search" value="${safe(travelSearchQuery)}" placeholder="Ex. Japon, indigo, aiguilles…" autocomplete="off"><div id="travel-search-results" class="search-inline-results" aria-live="polite"></div>
-  <label for="culture-article-select"><button type="button" class="travel-picker-icon secondary" data-travel-activate="culture-article-select" aria-label="Ouvrir le choix des articles Voyage" aria-controls="culture-article-select">▾</button> <b>${kind==='world'?'Coutures du monde':'Voyage dans le temps'} · choisir un article</b></label>
+ <section id="travel-search-panel" class="culture-article-picker" aria-label="Recherche Voyage" ${travelPickerOpen==='search'?'':'hidden'}><label for="travel-search"><b>Rechercher un voyage par mots-clés</b></label><input id="travel-search" type="search" value="${safe(travelSearchQuery)}" placeholder="Ex. Japon, indigo, aiguilles…" autocomplete="off"><div id="travel-search-results" class="search-inline-results" aria-live="polite"></div></section>
+ <section id="travel-choice-panel" class="culture-article-picker" aria-label="Choix d’un article" ${travelPickerOpen==='choice'?'':'hidden'}><label for="culture-article-select"><b>${kind==='world'?'Coutures du monde':'Voyage dans le temps'} · choisir un article</b></label>
   <select id="culture-article-select" class="selection" aria-label="Choisir un article : favoris, non lus puis déjà lus">${menu}</select>
-  <p class="small culture-status-hint">★ Favoris en premier · ○ Non lus ensuite · ✓ Déjà lus à la fin.</p>
  </section>
- ${article?`<div class="editorial-head-status">${editorialBadge(kind,article.id.slice(article.id.indexOf(":")+1))}</div><div class="culture-reading-actions" aria-label="Suivi de lecture"><button type="button" class="culture-star ${fav?'is-favorite':''}" data-culture-favorite="${safe(article.id)}" aria-pressed="${fav}" aria-label="${fav?'Retirer des favoris':'Ajouter aux favoris'}" title="${fav?'Retirer des favoris':'Ajouter aux favoris'}">${fav?'★':'☆'} <span>${fav?'Dans mes favoris':'Ajouter aux favoris'}</span></button><span class="culture-read-state">${read?'✓ Article déjà lu':'○ Article non lu'}</span></div>
- ${kind==='history'?(article.id==='history:houses-04'?Fil52HistoryHouses.render():article.id==='history:medieval-03'?Fil52HistoryMedieval.render():article.id==='history:antiquity-02'?Fil52HistoryAntiquity.render():cultureHistory()):Fil52Travel.render(article.id.slice('world:'.length))}
- <div class="card culture-read-complete"><label class="material" for="culture-complete"><input type="checkbox" id="culture-complete" data-culture-complete="${safe(article.id)}" ${read?'checked':''}><span><b>Article terminé</b><small> Coche cette case après ta lecture. Tu pourras toujours revenir à cet article dans « Déjà lus ».</small></span></label></div>`:''}
+ ${article?`<div class="editorial-head-status">${editorialBadge(kind,article.id.slice(article.id.indexOf(":")+1))}</div>
+ ${cultureArticleWithFavorite(kind==='history'?(article.id==='history:houses-04'?Fil52HistoryHouses.render():article.id==='history:medieval-03'?Fil52HistoryMedieval.render():article.id==='history:antiquity-02'?Fil52HistoryAntiquity.render():cultureHistory()):Fil52Travel.render(article.id.slice('world:'.length)),article,fav)}
+ <div class="card culture-read-complete"><label class="material" for="culture-complete"><input type="checkbox" id="culture-complete" data-culture-complete="${safe(article.id)}" ${read?'checked':''}><span><b>Article lu</b></span></label></div>`:''}
  <div class="section card"><h3>Notre méthode documentaire</h3><p class="small">Nous privilégions des textes fondés sur les collections du Victoria and Albert Museum, du Metropolitan Museum of Art et d’autres musées. Les photographies représentent de vrais objets, accompagnés de leurs crédits et licences. Elles sont chargées depuis Wikimedia Commons et peuvent être indisponibles sans Internet.</p><ul class="source-list"><li><a href="https://commons.wikimedia.org/wiki/File:Aiguille_os_246.1_Global.jpg" target="_blank" rel="noopener">Muséum de Toulouse : aiguille magdalénienne, notice photographique</a></li><li><a href="https://commons.wikimedia.org/wiki/Category:Sashiko" target="_blank" rel="noopener">Wikimedia Commons : catégorie documentaire sashiko</a></li><li><a href="https://commons.wikimedia.org/wiki/File:Boro_textile_from_Japan,_with_sashiko.jpg" target="_blank" rel="noopener">Musées des cultures du monde (Suède) : textile boro avec sashiko</a></li><li><a href="https://commons.wikimedia.org/wiki/File:Sashiko_by_volunteers,_2012_-_Textile_Museum_of_Canada_-_DSC00807.JPG" target="_blank" rel="noopener">Textile Museum of Canada : motifs de sashiko exposés</a></li></ul></div>`;
 }
 
@@ -1106,7 +1121,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementB
 document.addEventListener('input',e=>{if(e.target.id==='bonus-search'){bonusSearchQuery=e.target.value;bonusSelected='';const sel=el('bonus-select');if(sel)sel.value='';updateBonusSearch();return}if(e.target.id==='technique-search'){techniqueSearchQuery=e.target.value;techniqueSelected='';const sel=el('technique-select');if(sel)sel.value='';updateTechniqueSearch();return}if(e.target.id==='supply-search'){const term=textForSearch(e.target.value);let n=0;for(const card of document.querySelectorAll('[data-supply-card]')){const found=textForSearch(card.dataset.supplySearch).includes(term);card.hidden=!found;if(found)n++}const result=el('supply-count');if(result)result.textContent=n+' fourniture(s) affichée(s).'} if(e.target.id==='journal-search'){journalSearchQuery=e.target.value;updateJournalSearch()}if(e.target.id==='travel-search'){travelSearchQuery=e.target.value;updateTravelSearch()}if(e.target.id==='personal-search'){personalSearchQuery=e.target.value;updatePersonalSearch()}});
 document.addEventListener('submit',e=>{if(e.target.id==='supply-new'){e.preventDefault();const form=e.target,formData=new FormData(form),photo=formData.get('initialPhoto'),profile=state.profile;try{const values=Object.fromEntries(formData.entries());delete values.initialPhoto;const id=Fil52Mercerie.add(profile,values);if(photo instanceof File&&photo.size){Fil52Mercerie.photoFile(profile,id,photo).then(()=>{if(state.profile===profile&&state.page==='supply')render();toast('Fourniture et photo enregistrées.')}).catch(err=>{if(state.profile===profile&&state.page==='supply')render();toast('Fourniture ajoutée, mais photo non enregistrée : '+err.message)})}else{render();toast('Fourniture ajoutée.')}}catch(err){toast(err.message)}return}if(e.target.id==='personal-new-form'){e.preventDefault();newPersonalProject()}});
 document.addEventListener('click',e=>{
- const travelTool=e.target.closest('[data-travel-activate]');if(travelTool){e.preventDefault();const target=el(travelTool.dataset.travelActivate);if(target){target.focus();if(target instanceof HTMLSelectElement){try{if(typeof target.showPicker==='function')target.showPicker();else target.click()}catch(_){target.click()}}else updateTravelSearch()}return}
+ const travelTool=e.target.closest('[data-travel-panel]');if(travelTool){const panel=travelTool.dataset.travelPanel;travelPickerOpen=travelPickerOpen===panel?'':panel;render();document.querySelector(travelPickerOpen==='search'?'#travel-search':travelPickerOpen==='choice'?'#culture-article-select':'[data-travel-panel="'+panel+'"]')?.focus({preventScroll:true});return}
  const sewingTab=e.target.closest('[data-sewing-section]');if(sewingTab){const previous=atelierView();sewingTechniquesOpen=sewingTab.dataset.sewingSection==='techniques';state.page='learn';atelierPush(previous);render();return}
  const techniqueOpen=e.target.closest('[data-technique-open]');if(techniqueOpen){const target=[...document.querySelectorAll('[data-technique-card]')].find(x=>x.querySelector('img')?.src.includes(techniqueOpen.dataset.techniqueOpen));if(target)openPhotoPreview(target.querySelector('img'));return}
  const supplyPhotoButton=e.target.closest('[data-supply-photo-open]');if(supplyPhotoButton){document.querySelector('input[data-supply-photo="'+supplyPhotoButton.dataset.supplyPhotoOpen+'"]')?.click();return}

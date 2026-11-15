@@ -593,6 +593,6 @@
       ]
     }
   },
-  "appRelease": "1.3.56",
-  "appReleaseNotes": "Voyage : l’icône de recherche active le champ de recherche par mots-clés ; l’icône de choix ouvre le sélecteur des articles, dans les deux onglets Monde et Histoire. Suppression des badges et mentions de validation des articles, cours, patrons et projets. Seuls les contenus encore en rédaction portent le statut « Projet en cours d’écriture » ; les coches personnelles sont conservées. Les nouveautés consultées avant installation ne sont plus réaffichées après installation ni aux ouvertures suivantes."
+  "appRelease": "1.3.57",
+  "appReleaseNotes": "Voyage : quatre icônes coordonnées pour Monde, Histoire, Recherche et Choix. Les barres de recherche et de choix sont masquées par défaut et apparaissent uniquement lorsque leur icône est activée. Une petite étoile cliquable précède le titre de chaque article pour ajouter ou retirer un favori. Suppression du grand bouton et des indications de classement et de lecture en tête d’article. À la fin de chaque article, la case « Article lu » conserve le suivi personnel de lecture."
 }
