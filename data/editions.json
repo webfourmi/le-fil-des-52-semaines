@@ -593,6 +593,6 @@
       ]
     }
   },
-  "appRelease": "1.3.65",
-  "appReleaseNotes": "Cours de couture : le numéro, l’étoile des favoris et le titre sont regroupés sur une même ligne d’en-tête, avec une taille adaptée au téléphone. Les sections Fournitures et Réglages et conseils sont repliées au départ. Toucher leur titre les ouvre ou les referme ; les listes, conseils et coches sont conservés."
+  "appRelease": "1.3.66",
+  "appReleaseNotes": "Cours de couture : Ce que tu vas apprendre, les galeries Photos et Si cela ne se passe pas comme prévu sont aussi repliés par défaut. Toucher le titre ouvre ou referme la section. Les photos restent agrandissables et les conseils détaillés restent accessibles à l’intérieur du panneau. Les contenus, favoris et coches sont conservés."
 }

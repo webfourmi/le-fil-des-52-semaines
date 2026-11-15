@@ -39,7 +39,7 @@
   list-style: none;
 }
 #app .course-fold > summary::-webkit-details-marker { display: none; }
-#app .course-fold > summary h3 { margin: 0; font-size: 1.2rem; }
+#app .course-fold > summary :is(h2,h3) { margin: 0; font-size: 1.2rem; }
 #app .course-fold > summary::after { content: '+'; font-size: 1.4rem; color: #688772; }
 #app .course-fold[open] > summary::after { content: '−'; }
 #app .course-fold > summary:focus-visible { outline: 3px solid #946da1; outline-offset: -3px; border-radius: 18px; }
