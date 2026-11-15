@@ -1,6 +1,17 @@
 {
-  "current": "1.3.69",
+  "current": "1.3.70",
   "releases": [
+    {
+      "version": "1.3.70",
+      "date": "2026-11-15",
+      "title": "Cours couture 4 : présentation finalisée",
+      "changes": [
+        "Suppression de la mention « Projet en cours d’écriture » pour le cours 4, le chouchou adulte, dans la sélection des cours, la page du cours et les raccourcis de l’accueil.",
+        "Statut éditorial du cours 4 harmonisé avec les cours déjà approuvés, sans afficher d’étiquette « Validé à 100 % ».",
+        "Les sept étapes de réalisation, les cinq photos d’origine et le patron A4 restent inchangés.",
+        "Mise à jour proposée à l’installation ; nouveautés détaillées affichées une seule fois, puis accessibles dans l’historique."
+      ]
+    },
     {
       "version": "1.3.69",
       "date": "2026-11-15",
