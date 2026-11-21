@@ -1,6 +1,7 @@
 {
   "version": "0.9",
   "approved": {
+    "bonus": ["thanksgiving"],
     "sewing": [
       0,
       1,
@@ -589,6 +590,6 @@
       ]
     }
   },
-  "appRelease": "1.3.70",
-  "appReleaseNotes": "Le cours de couture 4, chouchou adulte, n’affiche plus la mention « Projet en cours d’écriture » dans les menus, cartes et page du cours. Les sept étapes, les cinq photos et le patron A4 sont conservés."
+  "appRelease": "1.3.71",
+  "appReleaseNotes": "Le dindon d’automne est finalisé. Six photos agrandissables illustrent le montage de la housse de Thanksgiving, de la découpe au coussin garni."
 }

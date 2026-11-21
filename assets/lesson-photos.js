@@ -102,16 +102,17 @@ document.addEventListener('error',event=>{
  if(button){const empty=document.createElement('div');empty.className='lesson-photo-empty';empty.textContent='Photo indisponible';button.replaceWith(empty);}
  else if(img.closest('.lesson-photo-dialog')){const message=document.createElement('p');message.textContent='Photo indisponible hors connexion ou introuvable.';img.replaceWith(message);}
 },true);
+function renderInlinePhoto(group,index){
+ const slot=lessons[group]?.[index];
+ const img=slot?.image,src=source(img?.src);
+ if(!src)return '';
+ return `<figure class="sewing-two-photo"><button type="button" class="lesson-photo-open sewing-two-photo-open" data-lesson-photo="${esc(group)}:${esc(index)}" aria-label="${esc('Agrandir : '+slot.caption)}"><img loading="lazy" decoding="async" src="${esc(src)}" alt="${esc(img.alt)}" width="${img.width}" height="${img.height}"></button><figcaption>${esc(slot.caption)}</figcaption></figure>`;
+}
 function renderSewingStep2(stepIndex){
- const index=[0,1,2,3,-1,4,6][stepIndex];if(index===undefined||index<0)return '';
- const slot=lessons[2][index],img=slot?.image,src=source(img?.src);if(!src)return '';
- return '<figure class="sewing-two-photo"><button type="button" class="lesson-photo-open sewing-two-photo-open" data-lesson-photo="2:'+index+'" aria-label="'+esc('Agrandir : '+slot.caption)+'"><img loading="lazy" decoding="async" src="'+esc(src)+'" alt="'+esc(img.alt)+'" width="'+img.width+'" height="'+img.height+'"></button><figcaption>'+esc(slot.caption)+'</figcaption></figure>';
+ return renderInlinePhoto(2,[0,1,2,3,-1,4,6][stepIndex]);
 }
 function renderSewingStep3(stepIndex){
- const index=[0,-1,1,2,3,-1,4][stepIndex];
- if(index===undefined||index<0)return '';
- const slot=lessons[3][index],img=slot?.image,src=source(img?.src);if(!src)return '';
- return '<figure class="sewing-two-photo"><button type="button" class="lesson-photo-open sewing-two-photo-open" data-lesson-photo="3:'+index+'" aria-label="'+esc('Agrandir : '+slot.caption)+'"><img loading="lazy" decoding="async" src="'+esc(src)+'" alt="'+esc(img.alt)+'" width="'+img.width+'" height="'+img.height+'"></button><figcaption>'+esc(slot.caption)+'</figcaption></figure>';
+ return renderInlinePhoto(3,[0,-1,1,2,3,-1,4][stepIndex]);
 }
-root.Fil52LessonPhotos={lessons,render,renderPatchwork:w=>render(w,true),renderSewingStep2,renderSewingStep3};
+root.Fil52LessonPhotos={lessons,render,renderPatchwork:w=>render(w,true),renderInlinePhoto,renderSewingStep2,renderSewingStep3};
 })(globalThis);
