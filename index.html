@@ -1101,7 +1101,7 @@ function medievalShirtPage(){
 function measurementsPage(){
   return `<span class="eyebrow">Mon atelier</span><h1>Mes mensurations</h1>
     <p class="lead">Crée une fiche par personne. Les fiches restent dans cet atelier et sont incluses dans son fichier de sauvegarde.</p>
-    <div class="actions section"><button class="secondary" type="button" data-page="backup">Sauvegardes de l’atelier</button><button class="secondary" type="button" data-page="medievalShirt">Patron de la chemise médiévale</button><button class="secondary" type="button" data-page="medievalCotte">Patron de la cotte médiévale</button></div>
+    <div class="actions section"><button class="secondary" type="button" data-page="backup">Sauvegardes de l’atelier</button></div>
     <div id="measurement-content">Chargement des fiches…</div>`;
 }
 function backupPage(){let p=state.profile;return `<span class="eyebrow">Mon atelier</span><h1>Sauvegarde de ${safe(state.names[p])}</h1><p class="lead">Cette sauvegarde contient mes progrès, mes notes, mes albums photo Couture, Patchwork et Voyage, mes projets persos et ma mercerie personnelle, avec leurs photographies, ainsi que mes fiches de mensurations. L'autre couturière conserve ses propres données chez elle.</p><div class="grid2 section"><section class="card backup-panel"><h2>↓ Sauvegarder sur mon Drive</h2><p>Télécharger mon carnet et toutes ses photos dans un fichier JSON à déposer moi-même sur Google Drive.</p><button class="primary" id="backup-export">Télécharger ma sauvegarde</button><p id="backup-health" class="small" role="status">Contrôle du stockage local…</p><p class="small">Un rappel apparaît après 7 jours sans export sur cet appareil. La date du dernier export et le suivi du rappel restent dans ce navigateur.</p>
