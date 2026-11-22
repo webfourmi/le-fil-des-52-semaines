@@ -268,7 +268,7 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
 <script defer src="./assets/noel-bonus.js"></script><script defer src="./assets/thanksgiving-dindon.js?v=1.3.71"></script>
 <script defer src="./assets/herisson-pique-epingles.js?v=1.3.72"></script>
 <link rel="stylesheet" href="./assets/noel-bonus.css">
-<script defer src="./assets/measurements.js?v=1.3.75"></script>
+<script defer src="./assets/measurements.js?v=1.3.80"></script>
 <script defer src="./assets/medieval-shirt.js?v=1.3.77"></script>
 <script defer src="./assets/backup.js?v=1.3.67"></script>
 <script defer src="./assets/pwa.js?v=1.3.78"></script>
@@ -1101,7 +1101,6 @@ function medievalShirtPage(){
 function measurementsPage(){
   return `<span class="eyebrow">Mon atelier</span><h1>Mes mensurations</h1>
     <p class="lead">Crée une fiche par personne. Les fiches restent dans cet atelier et sont incluses dans son fichier de sauvegarde.</p>
-    <div class="actions section"><button class="secondary" type="button" data-page="backup">Sauvegardes de l’atelier</button></div>
     <div id="measurement-content">Chargement des fiches…</div>`;
 }
 function backupPage(){let p=state.profile;return `<span class="eyebrow">Mon atelier</span><h1>Sauvegarde de ${safe(state.names[p])}</h1><p class="lead">Cette sauvegarde contient mes progrès, mes notes, mes albums photo Couture, Patchwork et Voyage, mes projets persos et ma mercerie personnelle, avec leurs photographies, ainsi que mes fiches de mensurations. L'autre couturière conserve ses propres données chez elle.</p><div class="grid2 section"><section class="card backup-panel"><h2>↓ Sauvegarder sur mon Drive</h2><p>Télécharger mon carnet et toutes ses photos dans un fichier JSON à déposer moi-même sur Google Drive.</p><button class="primary" id="backup-export">Télécharger ma sauvegarde</button><p id="backup-health" class="small" role="status">Contrôle du stockage local…</p><p class="small">Un rappel apparaît après 7 jours sans export sur cet appareil. La date du dernier export et le suivi du rappel restent dans ce navigateur.</p>
