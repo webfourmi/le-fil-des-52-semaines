@@ -252,7 +252,7 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
 <script defer src="./assets/herisson-pique-epingles.js?v=1.3.72"></script>
 <link rel="stylesheet" href="./assets/noel-bonus.css">
 <script defer src="./assets/backup.js?v=1.3.67"></script>
-<script defer src="./assets/pwa.js?v=1.3.72"></script>
+<script defer src="./assets/pwa.js?v=1.3.73"></script>
 <style>
 .pattern-category-picker{max-width:440px;margin:14px 0 20px;display:grid;gap:7px}.pattern-category-picker select{width:100%;font-size:1rem}
 #patterns-sewing[data-pattern-view="sewing"] .patterncard[data-pattern-group="bonus"],#patterns-sewing[data-pattern-view="bonus"] .patterncard[data-pattern-group="course"]{display:none}
@@ -463,7 +463,7 @@ function dashboard(){const course=homeNext('projectsDone'),patch=homeNext('block
     <div class="hero-foot"><span>✦</span> Avec la Janome Cherry 21 <span class="sep">·</span> Des idées à explorer librement</div>
   </div>
   <div class="hero-visual" role="img" aria-label="Ambiance d'atelier de couture et marque-pages en tissu, illustration d'ambiance"><div class="hero-caption">L'atelier de Mathilde &amp; Viera <span>Édition automne 2026</span></div></div>
-</section><details class="pwa-panel" aria-label="Installer l’application"><summary><strong>✳ L’atelier dans votre poche</strong><span class="pwa-chevron" aria-hidden="true">⌄</span></summary><div class="pwa-inner"><p>Installe le carnet sur ton téléphone pour le retrouver directement sur ton écran d’accueil. Les mises à jour de l’application, des cours et des patrons sont vérifiées à son ouverture.</p><p class="small"><b>Avant l’installation :</b> télécharge une sauvegarde de ton carnet et de tes photos. Sur certains téléphones, l’application installée peut utiliser un stockage distinct de celui du navigateur.</p><div class="pwa-actions"><button class="secondary" type="button" data-page="backup">Sauvegarder mon carnet</button><button class="primary" id="pwa-install" type="button" hidden>Installer l’application</button><button class="secondary" id="pwa-help-toggle" type="button">Comment l’installer ?</button><button class="secondary" id="pwa-check" type="button">Vérifier les nouveautés</button><button class="secondary" id="pwa-changelog-open" type="button">Historique des nouveautés</button></div><p id="pwa-version" class="small">Version de l’application : vérification…</p><div id="pwa-help" hidden><p><b>iPhone :</b> ouvre ce site dans Safari, touche <b>Partager</b>, puis <b>Sur l’écran d’accueil</b> et <b>Ajouter</b>. Si le journal est vide dans l’app installée, importe ta sauvegarde personnelle.</p><p><b>Android :</b> ouvre le site dans Chrome, puis le menu <b>⋮</b> et <b>Installer l’application</b> ou <b>Ajouter à l’écran d’accueil</b>.</p><p class="small">Aucune notification push n’est envoyée lorsque l’application est fermée. Les alertes apparaissent au retour dans l’application.</p></div></div></details>
+</section>${backupReminder()}<details class="pwa-panel" aria-label="Installer l’application"><summary><strong>✳ L’atelier dans votre poche</strong><span class="pwa-chevron" aria-hidden="true">⌄</span></summary><div class="pwa-inner"><p>Installe le carnet sur ton téléphone pour le retrouver directement sur ton écran d’accueil. Les mises à jour de l’application, des cours et des patrons sont vérifiées à son ouverture.</p><p class="small"><b>Avant l’installation :</b> télécharge une sauvegarde de ton carnet et de tes photos. Sur certains téléphones, l’application installée peut utiliser un stockage distinct de celui du navigateur.</p><div class="pwa-actions"><button class="secondary" type="button" data-page="backup">Sauvegarder mon carnet</button><button class="primary" id="pwa-install" type="button" hidden>Installer l’application</button><button class="secondary" id="pwa-help-toggle" type="button">Comment l’installer ?</button><button class="secondary" id="pwa-check" type="button">Vérifier les nouveautés</button><button class="secondary" id="pwa-changelog-open" type="button">Historique des nouveautés</button></div><p id="pwa-version" class="small">Version de l’application : vérification…</p><div id="pwa-help" hidden><p><b>iPhone :</b> ouvre ce site dans Safari, touche <b>Partager</b>, puis <b>Sur l’écran d’accueil</b> et <b>Ajouter</b>. Si le journal est vide dans l’app installée, importe ta sauvegarde personnelle.</p><p><b>Android :</b> ouvre le site dans Chrome, puis le menu <b>⋮</b> et <b>Installer l’application</b> ou <b>Ajouter à l’écran d’accueil</b>.</p><p class="small">Aucune notification push n’est envoyée lorsque l’application est fermée. Les alertes apparaissent au retour dans l’application.</p></div></div></details>
 
 <div class="current-heading"><span class="eyebrow">PRENDRE LE FIL</span><h2>À ton rythme <span class="hand-drawn">✳</span></h2><p>Ton prochain cours et ton prochain carré restent ici jusqu’à leur validation.</p></div>
 <div class="feature-grid">
@@ -965,63 +965,123 @@ async function shareJournalPhoto(photoId){
 // Compatibilité : les premières photos stockées avec l’ancien journal restent accessibles.
 async function addGalleryPhoto(kind,file){if(!file)return;try{await Fil52Gallery.upsert(state.profile,state.week,kind,file);renderGallery(state.profile)}catch(e){toast(e.message)}}
 async function deleteGalleryPhoto(kind){if(!confirm('Supprimer cette photo ?'))return;try{await Fil52Gallery.remove(state.profile,state.week,kind);renderGallery(state.profile)}catch(e){toast(e.message)}}
+const BACKUP_DAY = 24 * 60 * 60 * 1000;
+const BACKUP_INTERVAL = 7 * BACKUP_DAY;
+
+function lastBackupExport(profile) {
+  try {
+    const timestamp = Date.parse(localStorage.getItem('fil52.backup.last.' + profile));
+    return Number.isFinite(timestamp) ? timestamp : null;
+  } catch {
+    return null;
+  }
+}
+
+function backupIsDue(profile) {
+  const now = Date.now();
+  const lastExport = lastBackupExport(profile);
+  if (lastExport !== null) return now - lastExport >= BACKUP_INTERVAL;
+  try {
+    const key = 'fil52.backup.reminderStart.' + profile;
+    const started = Date.parse(localStorage.getItem(key));
+    if (Number.isFinite(started)) return now - started >= BACKUP_INTERVAL;
+    localStorage.setItem(key, new Date(now).toISOString());
+  } catch {
+    // The reminder needs a date stored on this device.
+  }
+  return false;
+}
+
+function backupReminder() {
+  if (!backupIsDue(state.profile)) return '';
+  return `<section class="card section" aria-label="Rappel de sauvegarde">
+    <p>Il est temps d’exporter une copie de ton atelier vers ton Google Drive personnel.</p>
+    <button class="secondary" type="button" data-page="backup">Ouvrir les sauvegardes</button>
+  </section>`;
+}
+
 async function updateBackupHealth(){
  const status=el('backup-health');if(!status)return;
  const profile=state.profile;
- let date=null;try{date=localStorage.getItem('fil52.backup.last.'+profile)}catch(e){}
- const age=date&&Number.isFinite(Date.parse(date))?Math.max(0,Date.now()-Date.parse(date)):null;
- const days=age===null?null:Math.floor(age/86400000);
- const label=days===null?'Aucun export connu sur cet appareil':days===0?"Un export déclenché aujourd’hui":days===1?'Dernier export déclenché hier':'Dernier export déclenché il y a '+days+' jours';
+ const lastExport=lastBackupExport(profile);
+ const label=lastExport===null?'Aucun export lancé sur cet appareil':'Dernier export lancé le '+new Date(lastExport).toLocaleString('fr-FR');
+ status.classList.toggle('backup-needs-attention',backupIsDue(profile));
  try{
   const [weekly,journal,personal]=await Promise.all([Fil52Gallery.list(profile),Fil52JournalPhotos.list(profile),Fil52PersonalPhotos.list(profile)]);
   if(!status.isConnected||profile!==state.profile)return;
   let usageLabel='';
   try{const info=await navigator.storage?.estimate?.();if(info?.usage!=null)usageLabel=' · Stockage local utilisé (tout le site) : '+Math.round(info.usage/1048576)+' Mo.'}catch(e){}
   status.textContent=label+' · '+weekly.length+' ancienne(s) photo(s) des cours, '+journal.length+' photo(s) du journal, '+personal.length+' photo(s) personnelles.'+usageLabel+' Le téléchargement ne garantit pas que le fichier a été conservé ailleurs.';
-  status.classList.toggle('backup-needs-attention',days===null||days>=14);
  }catch(e){if(status.isConnected)status.textContent=label+' · Vérification des albums indisponible : '+e.message}
 }
-function backupPage(){let p=state.profile;return `<span class="eyebrow">Mon journal personnel</span><h1>Sauvegarde de ${safe(state.names[p])}</h1><p class="lead">Cette sauvegarde contient mes progrès, mes notes, mes albums photo Couture, Patchwork et Voyage, mes projets persos et ma mercerie personnelle, avec leurs photographies. L'autre couturière conserve ses propres données chez elle.</p><div class="grid2 section"><section class="card backup-panel"><h2>↓ Enregistrer mon carnet</h2><p>Télécharger mon carnet et toutes ses photos dans un fichier JSON à déposer moi-même sur Google Drive.</p><button class="primary" id="backup-export">Télécharger ma sauvegarde</button><p id="backup-health" class="small" role="status">Contrôle du stockage local…</p><p class="small">Conseil : conserve une copie de sauvegarde sur un autre appareil ou dans un dossier privé. Le contrôle ci-dessus ne peut pas vérifier que le fichier téléchargé existe toujours.</p><p class="small">Le fichier rassemble tes notes, tes coches et tes photographies. Tu dois ensuite le copier toi-même dans Google Drive. Il ne sera jamais transféré automatiquement.</p>
+function backupPage(){let p=state.profile;return `<span class="eyebrow">Mon atelier</span><h1>Sauvegarde de ${safe(state.names[p])}</h1><p class="lead">Cette sauvegarde contient mes progrès, mes notes, mes albums photo Couture, Patchwork et Voyage, mes projets persos et ma mercerie personnelle, avec leurs photographies. L'autre couturière conserve ses propres données chez elle.</p><div class="grid2 section"><section class="card backup-panel"><h2>↓ Sauvegarder sur mon Drive</h2><p>Télécharger mon carnet et toutes ses photos dans un fichier JSON à déposer moi-même sur Google Drive.</p><button class="primary" id="backup-export">Télécharger ma sauvegarde</button><p id="backup-health" class="small" role="status">Contrôle du stockage local…</p><p class="small">Un rappel apparaît après 7 jours sans export sur cet appareil. La date du dernier export et le suivi du rappel restent dans ce navigateur.</p>
 <div class="tip"><b>Enregistrer dans Drive :</b> 1. Télécharger le fichier · 2. Ouvrir Google Drive · 3. Importer le fichier dans un dossier privé « Couture ». Pour changer d'appareil, télécharge-le depuis Drive et restaure-le ici.</div>
-<div class="actions"><a class="secondary" href="https://drive.google.com/drive/my-drive" target="_blank" rel="noopener noreferrer">Ouvrir mon Google Drive ↗</a></div></section><section class="card backup-panel"><h2>↑ Restaurer mon carnet</h2><input id="backup-file" class="backup-file" type="file" accept=".json,application/json" aria-label="Choisir une sauvegarde personnelle"><div id="backup-preview" class="backup-preview" hidden aria-live="polite"></div><p class="backup-warning">Seule une sauvegarde du même profil peut être importée. La restauration remplace les données de mon profil. Les anciens fichiers V0.3/V0.4 conservent mes projets persos actuels.</p><div class="backup-actions"><button class="primary" id="backup-restore" disabled>Restaurer mon carnet</button><button class="secondary" id="backup-cancel">Annuler</button></div></section></div><div class="card section"><h3>Deux maisons, le même atelier</h3><p>Les cours, les patrons et les rubriques culturelles sont identiques sur les deux appareils. Les réalisations et les notes de Mathilde ne sont jamais modifiables depuis ton espace, et inversement. Pour changer d'appareil, importe ton propre fichier. Aucune connexion Google n’est nécessaire : télécharge puis importe le fichier depuis ton propre Drive.</p></div>`}
+<div class="actions"><a class="secondary" href="https://drive.google.com/drive/my-drive" target="_blank" rel="noopener noreferrer">Ouvrir mon Google Drive ↗</a></div></section><section class="card backup-panel"><h2>↑ Restaurer depuis mon Drive</h2><p>Télécharge ta sauvegarde depuis ton Drive personnel, puis choisis le fichier ici pour voir son contenu avant de restaurer.</p><input id="backup-file" class="backup-file" type="file" accept=".json,application/json" aria-label="Choisir une sauvegarde personnelle"><div id="backup-preview" class="backup-preview" hidden aria-live="polite"></div><p class="backup-warning">Seule une sauvegarde du même profil peut être importée. La restauration remplace les données de mon profil. Les anciens fichiers V0.3/V0.4 conservent mes projets persos actuels.</p><div class="backup-actions"><button class="primary" id="backup-restore" disabled>Restaurer mon carnet</button><button class="secondary" id="backup-cancel">Annuler</button></div></section></div><div class="card section"><h3>Deux maisons, le même atelier</h3><p>Les cours, les patrons et les rubriques culturelles sont identiques sur les deux appareils. Les réalisations et les notes de Mathilde ne sont jamais modifiables depuis ton espace, et inversement. Pour changer d'appareil, importe ton propre fichier. Aucune connexion Google n’est nécessaire : télécharge puis importe le fichier depuis ton propre Drive.</p></div>`}
 let backupPending=null;
+let backupRead=0;
+let restoreBusy=false;
 let exportBusy=false;
 async function downloadBackup(){if(exportBusy)return;exportBusy=true;const button=el('backup-export');if(button){button.disabled=true;button.textContent='Préparation de la sauvegarde…'}try{
 if(Fil52Backup.SCHEMA!==6)throw Error('Une mise à jour de l’application est nécessaire avant de sauvegarder le carnet culturel.');
-const photos=await Fil52Gallery.list(state.profile);
-const personalPhotos=await Fil52PersonalPhotos.list(state.profile);
-const journalPhotos=await Fil52JournalPhotos.list(state.profile);
-const archive=Fil52Backup.exportData(state,state.profile,photos,personalPhotos,journalPhotos);
-archive.mercerie=Fil52Mercerie.list(state.profile);
+const profile=state.profile;
+const [photos,personalPhotos,journalPhotos]=await Promise.all([Fil52Gallery.list(profile),Fil52PersonalPhotos.list(profile),Fil52JournalPhotos.list(profile)]);
+if(state.profile!==profile)throw Error('L’espace personnel a changé. Relance l’export.');
+const archive=Fil52Backup.exportData(state,profile,photos,personalPhotos,journalPhotos);
+archive.mercerie=Fil52Mercerie.list(profile);
 const json=JSON.stringify(archive);
 const validated=Fil52Backup.parseBackup(json);
 if(validated.photos.length!==photos.length||validated.personalPhotos.length!==personalPhotos.length||validated.journalPhotos.length!==journalPhotos.length)throw Error('Contrôle de la sauvegarde échoué.');
 const url=URL.createObjectURL(new Blob([json],{type:'application/json;charset=utf-8'}));
 const stamp=new Date().toISOString().replace(/[:.]/g,'-').replace('Z','Z');
-const name=state.profile==='f'?'mathilde':'moi';
+const name=profile==='f'?'mathilde':'moi';
 const a=document.createElement('a');a.href=url;a.download='fil52-'+name+'-'+stamp+'.json';
 document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
-try{localStorage.setItem('fil52.backup.last.'+state.profile,new Date().toISOString())}catch(e){}updateBackupHealth();toast('Sauvegarde vérifiée et téléchargée : '+photos.length+' photo(s) des cours, '+journalPhotos.length+' photo(s) du journal et '+personalPhotos.length+' photo(s) personnelles. Copie-la dans ton Google Drive.');
+try{localStorage.setItem('fil52.backup.last.'+profile,new Date().toISOString())}catch(e){}updateBackupHealth();toast('Sauvegarde vérifiée et téléchargée : '+photos.length+' photo(s) des cours, '+journalPhotos.length+' photo(s) du journal et '+personalPhotos.length+' photo(s) personnelles. Copie-la dans ton Google Drive.');
 }catch(e){toast('Sauvegarde impossible : '+e.message)}
 finally{exportBusy=false;if(button){button.disabled=false;button.textContent='Télécharger ma sauvegarde'}}}
-async function prepareBackup(file){backupPending=null;const preview=el('backup-preview'),button=el('backup-restore');preview.hidden=false;button.disabled=true;preview.textContent='Lecture et contrôle du fichier…';if(!file){preview.textContent='Choisissez un fichier.';return}try{if(file.size>Fil52Backup.MAX_FILE_SIZE)throw Error('Fichier trop volumineux.');let parsed=Fil52Backup.parseBackup(await file.text());if(parsed.profile!==state.profile)throw Error('Cette sauvegarde ne correspond pas à '+state.names[state.profile]+'.');const original=JSON.parse(await file.text());parsed.mercerie=Object.hasOwn(original,'mercerie')?Fil52Mercerie.validateItems(original.mercerie):null;backupPending=parsed;preview.textContent='Sauvegarde du '+new Date(parsed.exportedAt).toLocaleDateString('fr-FR')+' · '+parsed.data.blocks.length+'/52 blocs, '+parsed.photos.length+' photos historiques des cours, '+parsed.journalPhotos.length+' photos du journal'+(parsed.mercerie?' · '+parsed.mercerie.length+' fournitures de mercerie.':' · Mercerie actuelle conservée.')+(parsed.preservePersonal?' · Projets persos actuels conservés (ancien fichier).':' · '+parsed.data.personalProjects.length+' projets persos, '+parsed.personalPhotos.length+' photos personnelles.');button.disabled=false}catch(e){preview.textContent='Import refusé : '+e.message}}
+async function prepareBackup(file){
+ const read=++backupRead,profile=state.profile;
+ backupPending=null;
+ const preview=el('backup-preview'),button=el('backup-restore');
+ preview.hidden=false;
+ button.disabled=true;
+ preview.textContent='Lecture et contrôle du fichier…';
+ if(!file){preview.textContent='Choisis un fichier.';return}
+ try{
+   if(file.size>Fil52Backup.MAX_FILE_SIZE)throw Error('Fichier trop volumineux.');
+   const json=await file.text();
+   if(read!==backupRead||!preview.isConnected||state.profile!==profile)return;
+   const parsed=Fil52Backup.parseBackup(json);
+   if(parsed.profile!==profile)throw Error('Cette sauvegarde ne correspond pas à '+state.names[profile]+'.');
+   const original=JSON.parse(json);
+   parsed.mercerie=Object.hasOwn(original,'mercerie')?Fil52Mercerie.validateItems(original.mercerie):null;
+   backupPending=parsed;
+   preview.textContent='Sauvegarde du '+new Date(parsed.exportedAt).toLocaleDateString('fr-FR')+' · '+parsed.data.blocks.length+'/52 blocs, '+parsed.photos.length+' photos historiques des cours, '+parsed.journalPhotos.length+' photos du journal'+(parsed.mercerie?' · '+parsed.mercerie.length+' fournitures de mercerie.':' · Mercerie actuelle conservée.')+(parsed.preservePersonal?' · Projets persos actuels conservés (ancien fichier).':' · '+parsed.data.personalProjects.length+' projets persos, '+parsed.personalPhotos.length+' photos personnelles.');
+   button.disabled=false;
+ }catch(e){
+   if(read===backupRead&&preview.isConnected)preview.textContent='Import refusé : '+e.message;
+ }
+}
 async function restoreBackup(){
- if(!backupPending)return;
+ if(restoreBusy||!backupPending)return;
  if(!confirm('Restaurer ce carnet et ses photos ? Les données du profil seront remplacées, sauf les projets persos conservés lors de l’import d’une ancienne sauvegarde.'))return;
- const profile=state.profile,previous=state;
+ const profile=state.profile,previous=state,backup=backupPending;
+ const controls=['backup-file','backup-restore','backup-cancel'].map(el);
+ restoreBusy=true;
+ for(const control of controls)control.disabled=true;
  let oldWeekly=null,oldPersonal=null,oldJournal=null,oldSupplies=null,changedWeekly=false,changedPersonal=false,changedJournal=false,changedSupplies=false;
  try{
-   const next=Fil52Backup.applyBackup(state,backupPending,profile);
+   const next=Fil52Backup.applyBackup(state,backup,profile);
    oldWeekly=await Fil52Gallery.list(profile);
    oldPersonal=await Fil52PersonalPhotos.list(profile);
    oldJournal=await Fil52JournalPhotos.list(profile);
    oldSupplies=Fil52Mercerie.list(profile);
-   if(!backupPending.preservePersonal){
-     await Fil52PersonalPhotos.replace(profile,backupPending.personalPhotos,next.personalProjects[profile].map(p=>p.id));changedPersonal=true;
+   if(!backup.preservePersonal){
+     await Fil52PersonalPhotos.replace(profile,backup.personalPhotos,next.personalProjects[profile].map(p=>p.id));changedPersonal=true;
    }
-   if(!backupPending.legacy){await Fil52Gallery.replace(profile,backupPending.photos);changedWeekly=true}
-   if(!backupPending.preserveJournal){await Fil52JournalPhotos.replace(profile,backupPending.journalPhotos);changedJournal=true}
-   if(backupPending.mercerie){Fil52Mercerie.replace(profile,backupPending.mercerie);changedSupplies=true}
+   if(!backup.legacy){await Fil52Gallery.replace(profile,backup.photos);changedWeekly=true}
+   if(!backup.preserveJournal){await Fil52JournalPhotos.replace(profile,backup.journalPhotos);changedJournal=true}
+   if(backup.mercerie){Fil52Mercerie.replace(profile,backup.mercerie);changedSupplies=true}
    try{localStorage.setItem('fil52.progress.v1',JSON.stringify({...next,page:'home'}))}
    catch(e){throw Error('Enregistrement du carnet impossible : '+e.message)}
    state=next;state.page='backup';backupPending=null;render();toast('Carnet et galeries restaurés.');
@@ -1034,6 +1094,9 @@ async function restoreBackup(){
      if(changedSupplies&&oldSupplies)Fil52Mercerie.replace(profile,oldSupplies);
    }catch(_){toast('Restauration interrompue : vérifie tes sauvegardes.');return}
    toast('Restauration impossible : '+e.message);
+ }finally{
+   restoreBusy=false;
+   for(const control of controls)control.disabled=false;
  }
 }
 function personalPage(){
@@ -1340,7 +1403,7 @@ document.addEventListener('click',e=>{
  if(e.target.closest('[data-home-patch]')){const w=+e.target.closest('[data-home-patch]').dataset.homePatch;openHomePatch(w);return}
  if(e.target.closest('[data-personal-delete]')){deletePersonalProject(e.target.closest('[data-personal-delete]').dataset.personalDelete);return}
  if(e.target.closest('[data-personal-photo-delete]')){const b=e.target.closest('[data-personal-photo-delete]');deletePersonalPhoto(b.dataset.personalProjectId,b.dataset.personalPhotoDelete);return}
- if(e.target.closest('[data-gallery-delete]')){deleteGalleryPhoto(e.target.closest('[data-gallery-delete]').dataset.galleryDelete);return}if(e.target.closest('[data-identity]')){selectIdentity(e.target.closest('[data-identity]').dataset.identity);return}if(e.target.closest('#backup-export')){downloadBackup();return}if(e.target.closest('#backup-restore')){restoreBackup();return}if(e.target.closest('#backup-cancel')){backupPending=null;const f=el('backup-file');if(f)f.value='';el('backup-preview').hidden=true;el('backup-restore').disabled=true;return}let b=e.target.closest('[data-page],[data-week],[data-profile],[data-quilt-person],[data-print]');if(!b)return;if(b.dataset.page){if(b.dataset.page==='print'){patternPreview='';patternSection='';if(b.closest('.patch-course-content'))patternKind='patchwork';}page(b.dataset.page)}else if(b.dataset.week)selectWeek(b.dataset.week);else if(b.dataset.profile)chooseProfile(b.dataset.profile);else if(b.dataset.quiltPerson){let p=b.dataset.quiltPerson,n=+b.dataset.quiltBlock;toggle('blocks',p,n);toast(`${state.blocks[p].includes(n)?'Bloc terminé':'Bloc décoché'} : n° ${n} · ${state.names[p]}`)}else if(b.dataset.print)printPattern(b.dataset.print)});
+ if(e.target.closest('[data-gallery-delete]')){deleteGalleryPhoto(e.target.closest('[data-gallery-delete]').dataset.galleryDelete);return}if(e.target.closest('[data-identity]')){selectIdentity(e.target.closest('[data-identity]').dataset.identity);return}if(e.target.closest('#backup-export')){downloadBackup();return}if(e.target.closest('#backup-restore')){restoreBackup();return}if(e.target.closest('#backup-cancel')){backupRead++;backupPending=null;const f=el('backup-file');if(f)f.value='';el('backup-preview').hidden=true;el('backup-restore').disabled=true;return}let b=e.target.closest('[data-page],[data-week],[data-profile],[data-quilt-person],[data-print]');if(!b)return;if(b.dataset.page){if(b.dataset.page==='print'){patternPreview='';patternSection='';if(b.closest('.patch-course-content'))patternKind='patchwork';}page(b.dataset.page)}else if(b.dataset.week)selectWeek(b.dataset.week);else if(b.dataset.profile)chooseProfile(b.dataset.profile);else if(b.dataset.quiltPerson){let p=b.dataset.quiltPerson,n=+b.dataset.quiltBlock;toggle('blocks',p,n);toast(`${state.blocks[p].includes(n)?'Bloc terminé':'Bloc décoché'} : n° ${n} · ${state.names[p]}`)}else if(b.dataset.print)printPattern(b.dataset.print)});
 document.addEventListener('change',e=>{let a=e.target;
  if(a.dataset.needleworkDone){const ref=a.dataset.needleworkDone,list=state.needleworkDone[state.profile];state.needleworkDone[state.profile]=a.checked?[...new Set([...list,ref])]:list.filter(x=>x!==ref);save();return}
  if(a.id==='needle-course-select'){document.querySelector('.needlework-course')?.scrollIntoView({block:'start'});return}
