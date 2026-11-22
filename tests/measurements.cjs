@@ -22,6 +22,24 @@ async function main() {
     await form.getByLabel('Prénom').fill('Camille');
     await form.getByLabel('Tour de taille (cm)').fill('74.5');
     await form.getByLabel('Notes d’ajustement').fill('Prévoir une toile.');
+    await form.getByText('Guide illustré pour prendre les mesures').click();
+    const guide = form.getByLabel('Mesure à illustrer');
+    const instructions = form.locator('#measurement-instructions');
+    const diagram = form.locator('#measurement-diagram');
+    const choices = await guide.locator('option').evaluateAll(options => options.map(option => option.value));
+    assert.equal(choices.length, 19);
+    const captions = new Set();
+    const drawings = new Set();
+    for (const key of choices) {
+      await guide.selectOption(key);
+      captions.add(await instructions.textContent());
+      drawings.add(await diagram.evaluate(canvas => canvas.toDataURL()));
+    }
+    assert.equal(captions.size, 19);
+    assert.equal(drawings.size, 19);
+    await guide.selectOption('rise');
+    assert.match(await instructions.textContent(), /chaise dure/);
+    assert.equal(await form.getByLabel('Tour de taille (cm)').inputValue(), '74.5');
     await form.getByRole('button', { name: 'Enregistrer la fiche' }).click();
     await form.getByRole('status').getByText('Fiche enregistrée').waitFor();
     for (const name of ['Alex', 'Dominique', 'Lou', 'Sacha']) {
@@ -82,6 +100,14 @@ async function main() {
     await target.locator('#measurement-person').selectOption(camille);
     assert.equal(await target.getByLabel('Prénom').inputValue(), 'Camille R.');
     assert.equal(await target.getByLabel('Tour de taille (cm)').inputValue(), '74.5');
+    await target.waitForFunction(() => !!navigator.serviceWorker.controller);
+    await target.context().setOffline(true);
+    await target.reload();
+    await openMeasurements(target);
+    await target.getByText('Guide illustré pour prendre les mesures').click();
+    await target.getByLabel('Mesure à illustrer').selectOption('rise');
+    assert.match(await target.locator('#measurement-instructions').textContent(), /chaise dure/);
+    console.log('OK : 19 illustrations, saisie préservée et guide hors connexion.');
     console.log('OK : cinq fiches, édition, duplication, suppression, séparation des profils, exports et restauration compatible.');
   } finally {
     await browser.close();

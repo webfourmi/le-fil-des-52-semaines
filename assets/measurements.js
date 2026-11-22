@@ -23,6 +23,84 @@
     ['bustSpan', 'Écart de poitrine', 5, 75],
     ['finishedLength', 'Longueur finie souhaitée', 5, 250]
   ];
+  // Coordinates refer to the same front or back silhouette on a 180 × 288 canvas.
+  // Rings show visible and hidden halves of a tape measure around the body.
+  const landmarks = {
+    height: ['Du sommet du crâne au sol, pieds nus, debout contre un mur.', 'line', [24, 9, 24, 276]],
+    chest: ['Fais le tour à l’endroit le plus fort de la poitrine, sous les bras. Garde le ruban horizontal et respire normalement.', 'ring', [90, 92, 24, 5]],
+    waist: ['Fais le tour de la taille naturelle, au creux qui se marque en inclinant le buste sur le côté.', 'ring', [90, 119, 18, 4]],
+    hips: ['Fais le tour au point le plus fort des hanches et des fesses, pieds rapprochés.', 'ring', [90, 142, 26, 5]],
+    shoulders: ['Dans le dos, mesure d’une pointe d’épaule à l’autre. Repère les os aux extrémités des épaules.', 'line', [65, 66, 115, 66], true],
+    back: ['Penche un peu la tête pour repérer la vertèbre saillante à la base du cou. Redresse-toi, puis mesure le long du dos jusqu’à la taille naturelle.', 'line', [90, 57, 90, 119], true],
+    arm: ['Pars de la pointe de l’épaule et descends jusqu’à l’os du poignet, en passant sur le coude légèrement fléchi.', 'line', [115, 66, 127, 109, 136, 146]],
+    biceps: ['Bras relâché, fais le tour de la partie la plus large du haut du bras.', 'ring', [121, 88, 7, 3]],
+    wrist: ['Fais le tour du poignet au niveau des os saillants.', 'ring', [136, 146, 5, 3]],
+    neck: ['Fais le tour à la base du cou, à l’endroit où reposerait un col de chemise.', 'ring', [90, 55, 10, 3]],
+    inseam: ['Mesure depuis le haut de l’entrejambe jusqu’au sol, le long de l’intérieur de la jambe, pieds nus.', 'line', [91, 158, 96, 207, 98, 276]],
+    rise: ['Assieds-toi bien droit sur une chaise dure. Mesure la hauteur verticale entre la taille naturelle et l’assise, sur le côté.', 'seat', [128, 119, 128, 156]],
+    thigh: ['Fais le tour du haut de la cuisse, à son point le plus large, juste sous l’entrejambe.', 'ring', [104, 170, 12, 4]],
+    knee: ['Jambe droite et relâchée, fais le tour du genou au niveau du milieu de la rotule.', 'ring', [105, 207, 9, 3]],
+    calf: ['Fais le tour de la partie la plus large du mollet, debout, sans serrer.', 'ring', [106, 229, 9, 3]],
+    ankle: ['Fais le tour juste au-dessus des os de la cheville, à l’endroit le plus fin.', 'ring', [105, 259, 6, 3]],
+    bustHeight: ['Mesure depuis la jonction du cou et de l’épaule jusqu’à la pointe de poitrine du même côté.', 'line', [98, 56, 104, 92]],
+    bustSpan: ['Mesure la distance horizontale entre les deux pointes de poitrine.', 'line', [77, 92, 103, 92]],
+    finishedLength: ['Repère le point de départ indiqué sur le patron. Pour une chemise, mesure depuis l’épaule, près du cou, jusqu’au bas souhaité. Le trait illustre cet exemple.', 'line', [98, 56, 101, 119, 105, 184]]
+  };
+
+  function drawGuide(canvas, key) {
+    const ctx = canvas.getContext('2d');
+    const [, kind, points, back] = landmarks[key];
+    ctx.setTransform(2, 0, 0, 2, 0, 0);
+    ctx.clearRect(0, 0, 180, 288);
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+    ctx.fillStyle = '#eee9de';
+    ctx.strokeStyle = '#536457';
+    ctx.lineWidth = 1.3;
+    const outline = kind === 'seat'
+      ? 'M81 44L81 53Q70 58 69 72L72 113L69 148Q70 156 80 157L117 157L118 200L116 222L118 226L133 226Q139 224 134 221L128 217L129 164Q130 141 118 139L90 138L92 112L96 77Q96 61 91 54L91 44Z'
+      : 'M83 43L81 53Q77 59 67 62Q61 64 59 74L53 105L40 146L37 156Q36 162 41 160L47 151L63 111L69 87Q67 106 72 118Q70 126 65 138Q62 151 65 168L69 202L67 229L72 263L68 271Q62 277 70 277L81 277L82 263L83 231L85 207L90 161L95 207L97 231L98 263L99 277L110 277Q118 277 112 271L108 263L113 229L111 202L115 168Q118 151 115 138Q110 126 108 118Q113 106 111 87L117 111L133 151L139 160Q144 162 143 156L140 146L127 105L121 74Q119 64 113 62Q103 59 99 53L97 43Z';
+    ctx.fill(new Path2D(outline));
+    ctx.stroke(new Path2D(outline));
+    ctx.beginPath();
+    ctx.ellipse(kind === 'seat' ? 86 : 90, 28, 14, 19, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    if (back) {
+      ctx.beginPath();
+      ctx.moveTo(90, 57);
+      ctx.lineTo(90, 138);
+      ctx.stroke();
+    }
+    if (kind === 'seat') {
+      ctx.stroke(new Path2D('M64 108V158H116M68 158V225M108 158V225'));
+    }
+    ctx.strokeStyle = '#973f34';
+    ctx.fillStyle = '#973f34';
+    ctx.lineWidth = 2.6;
+    if (kind === 'ring') {
+      const [x, y, rx, ry] = points;
+      ctx.beginPath();
+      ctx.ellipse(x, y, rx, ry, 0, 0, Math.PI);
+      ctx.stroke();
+      ctx.setLineDash([3, 3]);
+      ctx.beginPath();
+      ctx.ellipse(x, y, rx, ry, 0, Math.PI, 2 * Math.PI);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      return;
+    }
+    ctx.beginPath();
+    ctx.moveTo(points[0], points[1]);
+    for (let index = 2; index < points.length; index += 2) ctx.lineTo(points[index], points[index + 1]);
+    ctx.stroke();
+    for (const index of [0, points.length - 2]) {
+      ctx.beginPath();
+      ctx.arc(points[index], points[index + 1], 3.4, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+  }
+
   let opening;
 
   function database() {
@@ -120,6 +198,19 @@
           <form id="measurement-form" class="supply-form">
             <label>Prénom <input name="name" maxlength="80" required value="${safe(row?.name || '')}"></label>
             <p class="small supply-wide">Mesure en centimètres, avec un mètre souple posé à plat sans serrer. Renseigne les mesures dont tu disposes.</p>
+            <details class="supply-wide measurement-guide">
+              <summary>Guide illustré pour prendre les mesures</summary>
+              <div class="measurement-guide-body">
+                <canvas id="measurement-diagram" width="360" height="576" aria-hidden="true"></canvas>
+                <div>
+                  <label for="measurement-guide-choice">Mesure à illustrer</label>
+                  <select id="measurement-guide-choice">
+                    ${fields.map(([key, label]) => `<option value="${key}" ${key === 'chest' ? 'selected' : ''}>${label}</option>`).join('')}
+                  </select>
+                  <p id="measurement-instructions" aria-live="polite"></p>
+                </div>
+              </div>
+            </details>
             ${fields.map(([key, label, min, max]) => `<label>${label} (cm)<input name="${key}" type="number" inputmode="decimal" step="any" min="${min}" max="${max}" value="${row?.values[key] ?? ''}"></label>`).join('')}
             <label class="supply-wide">Notes d’ajustement <textarea name="notes" maxlength="3000">${safe(row?.notes || '')}</textarea></label>
             <p class="small supply-wide" role="status">${safe(message || (row ? `${fields.length - Object.keys(row.values).length} mesures non renseignées · modifiée le ${new Date(row.updatedAt).toLocaleString('fr-FR')}` : ''))}</p>
@@ -129,6 +220,13 @@
             </div>
           </form>
         </section>`;
+      showGuide();
+    }
+
+    function showGuide() {
+      const key = container.querySelector('#measurement-guide-choice').value;
+      container.querySelector('#measurement-instructions').textContent = landmarks[key][0];
+      drawGuide(container.querySelector('#measurement-diagram'), key);
     }
 
     try {
@@ -158,6 +256,10 @@
     }
 
     container.addEventListener('change', event => {
+      if (event.target.id === 'measurement-guide-choice') {
+        showGuide();
+        return;
+      }
       if (event.target.id !== 'measurement-person') return;
       selected = event.target.value;
       show();
