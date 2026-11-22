@@ -6,6 +6,19 @@ require('../assets/medieval-shirt.js');
 const { calculate } = globalThis.Fil52MedievalShirt;
 const typical = { chest: 94, hips: 101, shoulders: 39, arm: 59, biceps: 30, wrist: 17, neck: 36, finishedLength: 88 };
 const options = { ease: 22, margin: 1, slit: 14 };
+const cotteMode = process.argv.includes('--cotte');
+const navigation = cotteMode ? 'Patron de la cotte médiévale' : 'Patron de la chemise médiévale';
+const cotte = calculate({ ...typical, finishedLength: 110 }, { ...options, ease: 30, fullness: 40 }, 'cotte');
+assert.equal(cotte.body * 2, 1310);
+assert.equal(cotte.positions.gore.count, 2);
+assert.equal(cotte.goreStart + cotte.goreRadius, cotte.length);
+assert(cotte.goreStart > cotte.armhole);
+const radiusAngle = 400 / (2 * cotte.goreRadius);
+const noMargin = calculate(cotte.measures, { ...options, ease: 30, fullness: 40, margin: 0 }, 'cotte');
+assert(Math.abs(noMargin.positions.gore.w - 2 * cotte.goreRadius * Math.sin(radiusAngle)) < 0.01);
+assert.equal(noMargin.positions.gore.h, cotte.goreRadius);
+assert(cotte.positions.gore.h > noMargin.positions.gore.h);
+assert.throws(() => calculate({ ...typical, finishedLength: 65 }, { ...options, ease: 30, fullness: 40 }, 'cotte'), /hors plage/);
 const fitted = calculate(typical, options);
 assert.equal(fitted.body * 2, 1230);
 assert.equal(fitted.positions.front.w, 635);
@@ -38,7 +51,7 @@ async function main() {
     await form.getByLabel('Prénom').fill('Fiche pilote');
     await form.getByRole('button', { name: 'Enregistrer la fiche' }).click();
     await form.getByRole('status').getByText('Fiche enregistrée').waitFor();
-    await page.getByRole('button', { name: 'Patron de la chemise médiévale' }).click();
+    await page.getByRole('button', { name: navigation }).click();
     await page.getByText(/Mesures manquantes/).waitFor();
     assert.equal(await page.locator('[data-shirt-print]').count(), 0);
     await page.evaluate(values => Fil52Measurements.list('m').then(([person]) =>
@@ -46,20 +59,30 @@ async function main() {
     ), typical);
     await page.locator('#medieval-shirt-content').getByRole('status').waitFor();
     await page.getByRole('button', { name: 'Mes mensurations', exact: true }).click();
-    await page.getByRole('button', { name: 'Patron de la chemise médiévale' }).click();
+    await page.getByRole('button', { name: navigation }).click();
     await page.getByRole('heading', { name: 'Aperçu avant impression' }).waitFor();
-    assert.equal(await page.locator('.shirt-pieces figure').count(), 4);
+    assert.equal(await page.locator('.shirt-pieces figure').count(), cotteMode ? 5 : 4);
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 2));
-    await page.getByLabel('Longueur finie souhaitée (cm)', { exact: true }).fill('96');
+    if (cotteMode) {
+      await page.getByLabel('Ampleur ajoutée par godet').selectOption('55');
+      await page.getByText(/tour au bas 241 cm/).waitFor();
+      await page.locator('figcaption').getByText(/Godet de côté.*couper 2/).waitFor();
+    }
+    const length = cotteMode ? '108' : '96';
+    await page.getByLabel('Longueur finie souhaitée (cm)', { exact: true }).fill(length);
     await page.getByRole('button', { name: 'Calculer le patron' }).click();
-    await page.getByText(/longueur 96 cm/).waitFor();
+    await page.getByText(new RegExp('longueur ' + length + ' cm')).waitFor();
     for (const [format, width, height] of [['A4', 210, 297], ['A0', 841, 1189]]) {
       const pending = page.context().waitForEvent('page');
       await page.locator('[data-shirt-print="' + format + '"]').click();
       const print = await pending;
       await print.getByText('Carré test 5 × 5 cm').waitFor();
+      if (cotteMode) {
+        await print.getByRole('heading', { name: 'Cotte médiévale sur mesure' }).waitFor();
+        await print.getByText(/Épingle la pointe de chaque godet/).waitFor();
+      }
       const pages = await print.locator('.sheet').count();
-      assert(format === 'A4' ? pages > 6 : pages === 5);
+      assert(format === 'A4' ? pages > 6 : pages === (cotteMode ? 6 : 5));
       assert(await print.locator('.sheet').evaluateAll(sheets => sheets.every(sheet => sheet.scrollHeight <= sheet.clientHeight + 1)));
       const square = await print.locator('.test').boundingBox();
       assert(Math.abs(square.width * 25.4 / 96 - 50) < 0.1);
@@ -74,7 +97,7 @@ async function main() {
       if (process.env.SHIRT_TEST_PDF_DIR) {
         const fs = require('node:fs/promises');
         const path = require('node:path');
-        await fs.writeFile(path.join(process.env.SHIRT_TEST_PDF_DIR, 'chemise-' + format + '.pdf'), pdf);
+        await fs.writeFile(path.join(process.env.SHIRT_TEST_PDF_DIR, (cotteMode ? 'cotte-' : 'chemise-') + format + '.pdf'), pdf);
       }
       await print.close();
     }
@@ -82,9 +105,9 @@ async function main() {
     await page.context().setOffline(true);
     await page.reload();
     await page.getByRole('button', { name: 'Mes mensurations', exact: true }).click();
-    await page.getByRole('button', { name: 'Patron de la chemise médiévale' }).click();
+    await page.getByRole('button', { name: navigation }).click();
     await page.getByRole('heading', { name: 'Aperçu avant impression' }).waitFor();
-    console.log('OK : trois gabarits, marges, fiche incomplète, impression A4/A0, échelle, pagination et parcours hors connexion.');
+    console.log((cotteMode ? 'Cotte' : 'Chemise') + ' : trois gabarits, marges, fiche incomplète, impression A4/A0, échelle, pagination et parcours hors connexion.');
   } finally {
     await browser.close();
   }

@@ -1,4 +1,4 @@
-/* Chemise d’inspiration XIIIe siècle, patron pilote calculé sur l’appareil. */
+/* Patrons pilotes de la chemise et de la cotte, calculés sur l’appareil. */
 (function (root) {
   'use strict';
 
@@ -12,6 +12,14 @@
     ['neck', 'Tour de cou', 10, 100],
     ['finishedLength', 'Longueur finie', 35, 150]
   ];
+  const models = {
+    shirt: {
+      title: 'Chemise médiévale sur mesure', minLength: 35, ease: [16, 22, 28], cuffEase: 9, bicepsEase: 12
+    },
+    cotte: {
+      title: 'Cotte médiévale sur mesure', minLength: 70, ease: [24, 30, 36], cuffEase: 12, bicepsEase: 16, fullness: [25, 40, 55]
+    }
+  };
   const formats = { A4: [210, 297], A0: [841, 1189] };
   const text = value => String(value).replace(/[&<>"']/g, char => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
@@ -19,32 +27,40 @@
   const round = value => Math.round(value * 10) / 10;
   const cm = value => new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 }).format(value / 10) + ' cm';
 
-  function calculate(measures, options) {
+  function calculate(measures, options, garment = 'shirt') {
+    const isCotte = garment === 'cotte';
+    const model = models[garment];
+    if (!model) throw Error('Modèle de vêtement inconnu.');
     const missing = required.filter(([key]) => !Number.isFinite(measures[key]));
     if (missing.length) throw Error('Mesures manquantes : ' + missing.map(([, label]) => label).join(', ') + '.');
     for (const [key, label, min, max] of required) {
-      if (measures[key] < min || measures[key] > max) throw Error(label + ' hors plage pour ce modèle.');
+      if (measures[key] < (key === 'finishedLength' ? model.minLength : min) || measures[key] > max) throw Error(label + ' hors plage pour ce modèle.');
     }
-    const { ease, margin, slit } = options;
-    if (![16, 22, 28].includes(ease) || ![0, 1, 1.5].includes(margin) || ![10, 14, 18].includes(slit)) {
+    const { ease, margin, slit, fullness } = options;
+    if (!model.ease.includes(ease) || ![0, 1, 1.5].includes(margin) || ![10, 14, 18].includes(slit) || (isCotte && !model.fullness.includes(fullness))) {
       throw Error('Réglages du patron invalides.');
     }
     const body = Math.max(measures.chest + ease, measures.hips + ease, 2 * (measures.shoulders + 2)) * 5;
     const length = measures.finishedLength * 10;
     const shoulderDrop = (body / 10 - measures.shoulders) / 2;
     const sleeve = (measures.arm - shoulderDrop) * 10;
-    const rootWidth = (measures.biceps + 12) * 10;
+    const rootWidth = (measures.biceps + model.bicepsEase) * 10;
     // The loose cuff needs to admit the hand. Check the opening on the toile.
-    const cuff = Math.max(measures.wrist + 9, 20) * 10;
+    const cuff = Math.max(measures.wrist + model.cuffEase, 20) * 10;
     const gusset = Math.max(65, Math.min(120, rootWidth * 0.26));
     const armhole = rootWidth / 2 + gusset;
-    const neckRadius = (measures.neck + 4) * 10 / (2 * Math.PI);
+    const neckRadius = (measures.neck + (isCotte ? 6 : 4)) * 10 / (2 * Math.PI);
     const frontDepth = neckRadius * 1.45;
     const backDepth = neckRadius * 0.45;
     if (sleeve < 100 || cuff >= rootWidth || length < armhole + 120 || body / 2 - neckRadius < 65) {
       throw Error('Ces mesures dépassent les proportions du modèle pilote. Vérifie la carrure, le bras, le biceps, le poignet et la longueur choisie.');
     }
     const m = margin * 10;
+    const goreStart = Math.max(armhole + 90, Math.min(length * 0.46, 520));
+    const goreRadius = length - goreStart;
+    if (isCotte && goreRadius < Math.max(170, fullness * 10 * 3 / (2 * Math.PI))) {
+      throw Error('Allonge la cotte ou réduis l’ampleur pour que les godets puissent être montés sous le repère de côté.');
+    }
     const halfTaper = (rootWidth - cuff) / 2;
     const slope = halfTaper / sleeve;
     const offset = m * Math.hypot(1, slope);
@@ -71,6 +87,8 @@
       }
     };
 
+    if (isCotte) positions.gore = makeGore(goreRadius, fullness * 10, m);
+
     function makePanel(name, depth, opening) {
       const w = body + 2*m, h = length + 2*m, center = w/2;
       return {
@@ -79,11 +97,34 @@
         sew: `M${m} ${m}h${body}v${length}h-${body}Z`,
         neck: `M${center-neckRadius} ${m} A${neckRadius} ${depth} 0 0 0 ${center+neckRadius} ${m}` +
           (opening ? ` M${center} ${m+depth}v${opening}` : ''),
-        marks: `M${center-neckRadius} 0V${m+4}M${center+neckRadius} 0V${m+4}M0 ${m+rootWidth/2}h12M${w} ${m+rootWidth/2}h-12M0 ${m+armhole}h12M${w} ${m+armhole}h-12`,
+        marks: `M${center-neckRadius} 0V${m+4}M${center+neckRadius} 0V${m+4}M0 ${m+rootWidth/2}h12M${w} ${m+rootWidth/2}h-12M0 ${m+armhole}h12M${w} ${m+armhole}h-12` +
+          (isCotte ? `M0 ${m+goreStart}h12M${w} ${m+goreStart}h-12` : ''),
         grain: [center, m+Math.min(length/3, 210)], label: [center, m+length*0.55]
       };
     }
-    return { positions, body, length, sleeve, rootWidth, cuff, gusset, armhole, ...options, measures };
+    return { positions, body, length, sleeve, rootWidth, cuff, gusset, armhole, goreStart, goreRadius, garment, ...options, measures };
+  }
+
+  // Both side seams follow radii. The hem is a circular arc about the top notch.
+  function makeGore(radius, hemArc, margin) {
+    const angle = hemArc / (2 * radius);
+    const sin = Math.sin(angle), cos = Math.cos(angle);
+    const outerRadius = radius + margin;
+    const tangent = Math.sqrt(outerRadius * outerRadius - margin * margin);
+    const halfWidth = tangent * sin + margin * cos;
+    const apex = margin / sin;
+    const outerEnd = apex + tangent * cos - margin * sin;
+    const innerEnd = apex + radius * cos;
+    const innerHalfWidth = radius * sin;
+    const sector = (top, x, y, r) => `M${halfWidth} ${top}L${halfWidth-x} ${y}A${r} ${r} 0 0 0 ${halfWidth+x} ${y}Z`;
+    return {
+      name: 'Godet de côté', count: 2, w: 2 * halfWidth, h: apex + outerRadius,
+      cut: sector(0, halfWidth, outerEnd, outerRadius),
+      sew: sector(apex, innerHalfWidth, innerEnd, radius),
+      marks: `M${halfWidth-5} ${apex}h10`,
+      grain: [halfWidth, apex + radius * 0.28],
+      label: [halfWidth, apex + radius * 0.7]
+    };
   }
 
   function diagram(piece, x, y, w, h) {
@@ -106,6 +147,8 @@
   }
 
   function printable(pattern, format) {
+    const isCotte = pattern.garment === 'cotte';
+    const title = models[pattern.garment].title;
     const [width, height] = formats[format];
     const frameW = width - 20, frameH = height - 35;
     const stepX = frameW - 10, stepY = frameH - 10;
@@ -124,7 +167,7 @@
         }
       }
     }
-    return `<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Patron de chemise médiévale · ${format}</title><style>
+    return `<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${title} · ${format}</title><style>
       @page { size: ${width}mm ${height}mm; margin: 0 }
       *{box-sizing:border-box} body{margin:0;font:11pt system-ui;color:#17251a} .sheet{width:${width}mm;height:${height}mm;padding:10mm;overflow:hidden;break-after:page}
       .sheet:last-child{break-after:auto} .sheet>p{margin:0 0 3mm} .frame{position:relative;width:${frameW}mm;height:${frameH}mm;outline:.2mm solid #999}
@@ -133,23 +176,27 @@
       h1{font-size:18pt;margin:0 0 3mm} h2{font-size:12pt;margin:3mm 0 1mm} ul,ol{margin:1mm 0;padding-left:6mm} .toolbar{padding:8px;position:sticky;top:0;background:white;z-index:1} .toolbar button{font:inherit}
       @media print{.toolbar{display:none}}
     </style><body><div class="toolbar"><button type="button" onclick="window.print()">Imprimer ou enregistrer en PDF</button></div>
-      <section class="sheet"><h1>Chemise médiévale sur mesure</h1>
-      <p>Patron pilote d’inspiration XIIIe siècle · ${format} · ${tiles.length} planches. Imprimer en taille réelle (100 %), sans ajustement, sans en-têtes ni pieds de page. Vérifier le carré avant de couper.</p>
+      <section class="sheet"><h1>${title}</h1>
+      <p>Patron pilote d’inspiration ${isCotte ? "médiévale" : "XIIIe siècle"} · ${format} · ${tiles.length} planches. Imprimer en taille réelle (100 %), sans ajustement, sans en-têtes ni pieds de page. Vérifier le carré avant de couper.</p>
       <div class="test">Carré test 5 × 5 cm</div>
-      <h2>Mesures et réglages</h2><p>${required.map(([key,label]) => label + ' ' + cm(pattern.measures[key] * 10)).join(' · ')}. Aisance minimale ${pattern.ease} cm · marges ${pattern.margin} cm · fente ${pattern.slit} cm.</p>
+      <h2>Mesures et réglages</h2><p>${required.map(([key,label]) => label + ' ' + cm(pattern.measures[key] * 10)).join(' · ')}. Aisance minimale ${pattern.ease} cm · marges ${pattern.margin} cm · fente ${pattern.slit} cm${isCotte ? ` · ${pattern.fullness} cm d’ampleur ajoutée par godet` : ''}.</p>
       <h2>Dimensions de coupe</h2><p>${Object.values(pattern.positions).map(piece => piece.name + ' : ' + cm(piece.w) + ' × ' + cm(piece.h) + ' (×' + piece.count + ')').join(' · ')}. La largeur indiquée pour la manche est sa largeur maximale.</p>
       <h2>Assemblage des feuilles</h2><ul>${layout.map(line => '<li>' + line + '</li>').join('')}</ul>
       <p>Assemble chaque pièce de gauche à droite, puis de haut en bas. Coupe sur les lignes de raccord en gris à droite et en bas. Superpose ces bords aux bords gauche et haut des planches suivantes. Trait continu : coupe. Tirets : couture. Pointillés rouille : encolure et fente à ouvrir après les épaules.</p>
       <h2>Montage de la toile</h2>
-      <ol><li>Coupe un devant, un dos, deux manches et deux goussets. Si les marges sont à zéro, ajoute-les à la coupe. Termine l’encolure au biais, sans marge supplémentaire sur son tracé.</li>
+      <ol><li>Coupe un devant, un dos, deux manches et deux goussets${isCotte ? " ainsi que deux godets" : ""}. Si les marges sont à zéro, ajoute-les à la coupe. Termine l’encolure au biais, sans marge supplémentaire sur son tracé.</li>
       <li>Couds chaque épaule du bord extérieur au repère de l’encolure. Sur le devant et le dos, coupe le tracé rouille et rejoins le bord supérieur aux deux repères. Ouvre la fente devant. Essaie le passage de la tête avant de poser le biais.</li>
-      <li>Aligne le milieu du haut de manche sur l’épaule. Assemble les demi-largeurs aux côtés du corps jusqu’au premier repère. Sur chaque côté, couds deux bords voisins du carré aux bords de manche, de l’emmanchure aux crans. Couds les deux autres bords aux segments du devant et du dos entre les crans. Ferme la manche et le côté à partir des pointes du carré.</li>
-      <li>Vérifie l’aisance en levant les bras et le passage des mains. Termine les poignets et le bas par un ourlet.</li></ol>
+      <li>Aligne le milieu du haut de manche sur l’épaule. Assemble les demi-largeurs aux côtés du corps jusqu’au premier repère. Sur chaque côté, couds deux bords voisins du carré aux bords de manche, de l’emmanchure aux crans. Couds les deux autres bords aux segments du devant et du dos entre les crans. Ferme la manche et le côté à partir des pointes du carré${isCotte ? " jusqu’au dernier cran de côté" : ""}.</li>
+      ${isCotte ? `<li>Épingle la pointe de chaque godet au dernier cran d’un côté, à ${cm(pattern.goreStart)} de l’épaule. Couds ses deux bords droits entre le devant et le dos. Le bord courbe reste en bas.</li>
+      <li>Essaie la cotte sur une chemise. Vérifie la marche, l’aisance et le passage des mains. Laisse pendre le vêtement, puis égalise le bas avant d’ourler.</li>`
+        : '<li>Vérifie l’aisance en levant les bras et le passage des mains. Termine les poignets et le bas par un ourlet.</li>'}</ol>
       <p>Modèle pilote à essayer dans une toile avant de couper le tissu final. Le dessin s’inspire des constructions géométriques de la période.</p></section>
       ${tiles.join('')}</body></html>`;
   }
 
-  async function mount(container, profile) {
+  async function mount(container, profile, garment = 'shirt') {
+    const model = models[garment];
+    const isCotte = garment === 'cotte';
     let people;
     try { people = await root.Fil52Measurements.list(profile); }
     catch { container.textContent = 'Impossible de lire les fiches sur cet appareil.'; return; }
@@ -157,10 +204,11 @@
     if (!people.length) { container.textContent = 'Crée d’abord une fiche dans Mes mensurations.'; return; }
     container.innerHTML = `<form class="supply-form">
       <label>Personne<select name="person">${people.map(row => `<option value="${text(row.id)}">${text(row.name)}</option>`).join('')}</select></label>
-      <label>Aisance minimale du corps<select name="ease"><option value="16">16 cm</option><option value="22" selected>22 cm</option><option value="28">28 cm</option></select></label>
-      <label>Longueur finie souhaitée (cm)<input name="length" type="number" inputmode="decimal" step="any" min="35" max="150" placeholder="Valeur de la fiche"></label>
+      <label>Aisance minimale du corps<select name="ease">${model.ease.map((value, index) => `<option value="${value}" ${index === 1 ? "selected" : ""}>${value} cm</option>`).join("")}</select></label>
+      <label>Longueur finie souhaitée (cm)<input name="length" type="number" inputmode="decimal" step="any" min="${model.minLength}" max="150" placeholder="Valeur de la fiche"></label>
       <label>Marges de couture et d’ourlet<select name="margin"><option value="0">Sans marges</option><option value="1" selected>1 cm</option><option value="1.5">1,5 cm</option></select></label>
       <label>Longueur de la fente d’encolure<select name="slit"><option value="10">10 cm</option><option value="14" selected>14 cm</option><option value="18">18 cm</option></select></label>
+      ${isCotte ? `<label>Ampleur ajoutée par godet<select name="fullness">${model.fullness.map((value, index) => `<option value="${value}" ${index === 1 ? "selected" : ""}>${value} cm</option>`).join("")}</select></label>` : ''}
       <div class="actions supply-wide"><button type="submit" class="primary">Calculer le patron</button></div>
     </form><div id="shirt-preview"></div>`;
     const form = container.querySelector('form');
@@ -170,7 +218,7 @@
       event?.preventDefault();
       pattern = null;
       if (!form.checkValidity()) {
-        result.innerHTML = '<p role="status">Renseigne une longueur de 35 à 150 cm.</p>';
+        result.innerHTML = `<p role="status">Renseigne une longueur de ${model.minLength} à 150 cm.</p>`;
         return;
       }
       const data = new FormData(form);
@@ -179,13 +227,13 @@
       if (data.get('length')) measures.finishedLength = Number(data.get('length'));
       form.elements.namedItem('length').placeholder = person.values.finishedLength ?? 'À renseigner';
       try {
-        pattern = calculate(measures, Object.fromEntries(['ease', 'margin', 'slit'].map(key => [key, Number(data.get(key))])));
+        pattern = calculate(measures, Object.fromEntries(['ease', 'margin', 'slit', 'fullness'].map(key => [key, Number(data.get(key))])), garment);
       } catch (error) {
         result.innerHTML = `<p role="status">${text(error.message)} Complète les valeurs dans Mes mensurations.</p>`;
         return;
       }
       result.innerHTML = `<section class="section"><h2>Aperçu avant impression</h2>
-        <p>Tour fini ${cm(pattern.body * 2)} · manche depuis l’épaule tombante ${cm(pattern.sleeve)} · longueur ${cm(pattern.length)}.</p>
+        <p>Tour fini ${cm(pattern.body * 2)} · manche depuis l’épaule tombante ${cm(pattern.sleeve)} · longueur ${cm(pattern.length)}${isCotte ? ` · tour au bas ${cm(pattern.body * 2 + pattern.fullness * 20)}` : ""}.</p>
         <div class="shirt-pieces">${Object.values(pattern.positions).map(piece => `<figure>${diagram(piece, -3, -3, piece.w+6, piece.h+6)}<figcaption>${piece.name} · ${cm(piece.w)} × ${cm(piece.h)} · couper ${piece.count}</figcaption></figure>`).join('')}</div>
         <p>Patron pilote. Vérifie l’aisance, l’encolure et le passage des mains sur une toile avant la coupe finale.</p>
         <div class="actions"><button type="button" class="secondary" data-shirt-print="A4">Imprimer ou PDF A4</button><button type="button" class="secondary" data-shirt-print="A0">Imprimer ou PDF A0</button></div>
