@@ -185,13 +185,14 @@
     function show(message = '') {
       const row = rows.find(item => item.id === selected);
       container.innerHTML = `
-        <section class="card"><h2>Mes personnes</h2>
+        <section class="card"><h2>Mes fiches</h2>
           <div class="actions">
             <button type="button" class="secondary" data-measure-action="new">Nouvelle fiche</button>
             <button type="button" class="secondary" data-measure-action="export-all" ${rows.length ? '' : 'disabled'}>Exporter toutes les fiches</button>
           </div>
-          <label>Fiche à ouvrir <select id="measurement-person"><option value="">Nouvelle fiche</option>
+          <label>Fiche à ouvrir <select id="measurement-person">
             ${rows.map(item => `<option value="${safe(item.id)}" ${item.id === selected ? 'selected' : ''}>${safe(item.name)} · ${new Date(item.updatedAt).toLocaleDateString('fr-FR')}</option>`).join('')}
+            <option value="" ${selected ? '' : 'selected'}>＋ Nouvelle fiche</option>
           </select></label>
         </section>
         <section class="card section"><h2>${row ? 'Modifier la fiche' : 'Créer une fiche'}</h2>
