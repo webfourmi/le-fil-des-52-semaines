@@ -1,0 +1,42 @@
+/* Histoire de la couture nº 05 : premiers brevets de machines à coudre, images documentées */
+.patents-article{max-width:970px;margin-inline:auto;padding:clamp(17px,3vw,36px);overflow:hidden}
+.patents-head{padding-bottom:19px;border-bottom:1px solid #e2d2c1}
+.patents-head h2{font-size:clamp(1.85rem,4.2vw,3.1rem);line-height:1.13;margin:7px 0 10px}
+.patents-deck{font:italic clamp(1.12rem,2.3vw,1.52rem) Georgia,serif;color:#965c53;margin-bottom:9px}
+.patents-opening{font:italic clamp(1.06rem,2vw,1.2rem)/1.85 Georgia,serif;background:#f7eee3;padding:17px 20px;border-left:4px solid #b78b72;margin:25px 0}
+.patents-toc{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:15px 0 30px}
+.patents-toc>strong{font-size:.8rem;color:#695a50;margin-right:6px}
+.patents-toc a{display:inline-block;padding:7px 12px;border:1px solid #e0cebb;background:#fffcf7;border-radius:22px;font-size:.79rem;text-decoration:none}
+.patents-chapter{margin:38px 0 48px;scroll-margin-top:25px}
+.patents-era{display:block;color:#995b55;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:800;margin-bottom:9px}
+.patents-chapter h3,.patents-workshop h3{font-size:clamp(1.4rem,2.65vw,2rem);margin:0 0 15px}
+.patents-chapter h4,.patents-workshop h4{font-size:1.12rem;margin:19px 0 9px}
+.patents-chapter p,.patents-workshop p{font-size:.99rem;line-height:1.83;margin-bottom:16px}
+.patents-figure{max-width:670px;margin:23px auto 28px;border:1px solid #decbbc;background:#f4ede4;border-radius:17px;overflow:hidden}
+.patents-figure-image{display:flex;align-items:center;justify-content:center;background:#eeeae2;max-height:570px;min-height:180px;text-decoration:none}
+.patents-figure-image img{display:block;width:100%;height:auto;object-fit:contain;max-height:570px}
+.patents-figure-saint{max-width:530px}
+.patents-figure-thimonnier,.patents-figure-howe{max-width:520px}
+.patents-figure figcaption{padding:13px 16px;background:#fffbf5;color:#625a51;font-size:.85rem;line-height:1.7}
+.patents-image-credit{display:block;margin-top:7px;font-size:.77rem;color:#706759}
+.patents-tip{padding:13px 18px!important;border-left:4px solid #7e9b80;background:#f0f5ed;border-radius:0 11px 11px 0;color:#455847}
+.patents-source{border-left:3px solid #ddc4ae;padding-left:14px;font-size:.83rem!important;color:#786b60}
+.patents-table-wrap{width:100%;overflow-x:auto}
+.patents-table{border-collapse:collapse;width:100%;min-width:510px;font-size:.88rem}
+.patents-table th,.patents-table td{border-bottom:1px solid #dfd3c6;text-align:left;padding:10px 12px;vertical-align:top;line-height:1.55}
+.patents-table th{background:#ecf0e6;color:#526b57;font-weight:750}
+.patents-table td:first-child{white-space:nowrap;font-weight:800;color:#825c51}
+.patents-quote{padding:16px 19px;background:#f5ebdf;color:#70574c;font:italic 1.07rem/1.9 Georgia,serif!important;border-radius:13px;margin:25px 0!important}
+.patents-workshop{background:#f7efe5;border:1px solid #ddc9b5;border-radius:16px;margin:37px 0 44px;padding:clamp(16px,3vw,27px)}
+.patents-compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin:19px 0 24px}
+.patents-compare>div{border-radius:12px;border:1px solid #e1d1c1;background:#fffbf6;padding:17px}
+.patents-compare h4{margin:0 0 8px;color:#8f6259}
+.patents-compare p{font-size:.91rem;line-height:1.73;margin:0}
+.patents-sources{border-top:1px solid #ddcbbb;padding-top:20px;margin-top:38px}
+.patents-sources h3{font-size:1.37rem}
+.patents-sources ul{padding-left:21px}
+.patents-sources li{margin:6px 0;font-size:.86rem;line-height:1.65}
+.patents-source-note{font-size:.82rem;color:#76685f;line-height:1.68}
+@media(max-width:700px){.patents-article{padding:17px}.patents-compare{grid-template-columns:1fr}.patents-figure-image img{max-height:440px}.patents-toc a{font-size:.76rem}.patents-figure figcaption{font-size:.8rem}}
+@media(max-width:390px){.patents-article{padding:12px}.patents-figure{margin-left:-4px;margin-right:-4px}.patents-toc{gap:5px}}
+@media(prefers-reduced-motion:reduce){.patents-article *{scroll-behavior:auto}}
