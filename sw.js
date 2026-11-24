@@ -1,5 +1,5 @@
 /* De fil en aiguille — cache PWA. Augmenter CACHE_VERSION pour chaque nouvelle version de l'application. */
-const CACHE_VERSION = 'fil52-shell-v1.3.81';
+const CACHE_VERSION = 'fil52-shell-v1.3.82';
 const CORE = [
   './assets/herisson-pique-epingles.js?v=1.3.72', './assets/herisson/apercu.png',
   './assets/herisson/flanc.png', './assets/herisson/ventre.png', './assets/herisson/gabarits.svg', './assets/herisson/patron-a4.pdf',
