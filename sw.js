@@ -1,5 +1,5 @@
 /* De fil en aiguille — cache PWA. Augmenter CACHE_VERSION pour chaque nouvelle version de l'application. */
-const CACHE_VERSION = 'fil52-shell-v1.3.82';
+const CACHE_VERSION = 'fil52-shell-v1.3.83';
 const CORE = [
   './assets/herisson-pique-epingles.js?v=1.3.72', './assets/herisson/apercu.png',
   './assets/herisson/flanc.png', './assets/herisson/ventre.png', './assets/herisson/gabarits.svg', './assets/herisson/patron-a4.pdf',
@@ -8,6 +8,7 @@ const CORE = [
   './assets/thanksgiving/05-housse-a-plat.webp', './assets/thanksgiving/06-coussin-termine.webp',
   './assets/cours-04/photo-1.jpg','./assets/cours-04/photo-2.jpg','./assets/cours-04/photo-3.jpg','./assets/cours-04/photo-4.jpg','./assets/cours-04/photo-5.jpg',
   './','./index.html','./manifest.webmanifest','./data/editions.json','./data/changelog.json',
+  './assets/history-patents.js','./assets/history-patents.css',
   './assets/history-houses.js','./assets/history-houses.css',
   './assets/history-medieval.js','./assets/history-medieval.css','./assets/aumoniere-medievale.js','./assets/aumoniere-medievale-patron.html','./assets/aumoniere-fleur.svg','./assets/aumoniere-points.svg','./assets/medieval-tailleur.svg',
   './assets/history-antiquity.js','./assets/history-antiquity.css','./assets/patron-toge-romaine.svg','./assets/patron-tunique-romaine.svg','./assets/patrons-romains.html',

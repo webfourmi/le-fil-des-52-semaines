@@ -1,7 +1,9 @@
 {
   "version": "0.9",
   "approved": {
-    "bonus": ["thanksgiving"],
+    "bonus": [
+      "thanksgiving"
+    ],
     "sewing": [
       0,
       1,
@@ -23,7 +25,8 @@
     "history": [
       "needle-01",
       "antiquity-02",
-      "houses-04"
+      "houses-04",
+      "patents-05"
     ]
   },
   "published": [
