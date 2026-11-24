@@ -293,10 +293,12 @@ details.pwa-panel>summary:focus-visible{outline:3px solid #bc8a5d;outline-offset
 <link rel="stylesheet" href="./assets/history-antiquity.css">
 <link rel="stylesheet" href="./assets/history-medieval.css">
 <link rel="stylesheet" href="./assets/history-houses.css">
+<link rel="stylesheet" href="./assets/history-patents.css">
 <script src="./assets/history-antiquity.js"></script>
 <script src="./assets/aumoniere-medievale.js"></script>
 <script src="./assets/history-medieval.js"></script>
 <script src="./assets/history-houses.js"></script>
+<script src="./assets/history-patents.js"></script>
 <script>
 'use strict';
 const NS='<svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>';
@@ -321,7 +323,7 @@ const EDITORIAL_APPROVED=Object.freeze({
  sewing:Object.freeze([0,1,2,3,4]),patchwork:Object.freeze([0,1,2,3]),
  bonus:Object.freeze(['thanksgiving']),
  world:Object.freeze(['japon','bengale','coree','vietnam']),
- history:Object.freeze(['needle-01','antiquity-02','houses-04'])
+ history:Object.freeze(['needle-01','antiquity-02','houses-04','patents-05'])
 });
 window.Fil52EditorialApproved=EDITORIAL_APPROVED;
 function editorialIsApproved(kind,id){return EDITORIAL_APPROVED[kind]?.includes(id)===true}
@@ -832,7 +834,8 @@ function cultureArticles(kind){
   :[{id:'history:needle-01',title:"Bien avant nos machines : l'aiguille à chas",subtitle:'N° 01 · Les premières aiguilles à chas'},
      {id:'history:antiquity-02',title:'La couture dans l’Antiquité',subtitle:'N° 02 · Égypte, Grèce, Rome et patrons romains'},
      {id:'history:medieval-03',title:'La couture au Moyen Âge',subtitle:'N° 03 · Mode médiévale, aumônière et neuf points à la main'},
-      {id:'history:houses-04',title:'L’évolution des maisons de couture',subtitle:'N° 04 · Worth, Lanvin, Vionnet, Dior et les métiers d’art'}];
+      {id:'history:houses-04',title:'L’évolution des maisons de couture',subtitle:'N° 04 · Worth, Lanvin, Vionnet, Dior et les métiers d’art'},
+      {id:'history:patents-05',title:'Les premiers brevets de machines à coudre',subtitle:'N° 05 · Saint, Thimonnier, Howe et Singer'}];
 }
 function cultureSorted(kind,person=state.profile){
  const favorites=new Set(state.cultureFavorites[person]||[]),read=new Set(state.cultureRead[person]||[]);
@@ -868,7 +871,7 @@ function culturePage(){
   <select id="culture-article-select" class="selection" aria-label="Choisir un article : favoris, non lus puis déjà lus">${menu}</select>
  </section>
  ${article?`<div class="editorial-head-status">${editorialBadge(kind,article.id.slice(article.id.indexOf(":")+1))}</div>
- ${cultureArticleWithFavorite(kind==='history'?(article.id==='history:houses-04'?Fil52HistoryHouses.render():article.id==='history:medieval-03'?Fil52HistoryMedieval.render():article.id==='history:antiquity-02'?Fil52HistoryAntiquity.render():cultureHistory()):Fil52Travel.render(article.id.slice('world:'.length)),article,fav)}
+ ${cultureArticleWithFavorite(kind==='history'?(article.id==='history:patents-05'?Fil52HistoryPatents.render():article.id==='history:houses-04'?Fil52HistoryHouses.render():article.id==='history:medieval-03'?Fil52HistoryMedieval.render():article.id==='history:antiquity-02'?Fil52HistoryAntiquity.render():cultureHistory()):Fil52Travel.render(article.id.slice('world:'.length)),article,fav)}
  ${article.id==='history:medieval-03'?`<section class="section card" id="medieval-model-links" aria-labelledby="medieval-model-links-title"><h3 id="medieval-model-links-title">Les modèles médiévaux à coudre</h3><div class="actions">${HISTORICAL_MODELS.map(model=>historicalModelLink(model,model.shortTitle)).join('')}</div></section>`:''}
  <div class="card culture-read-complete"><label class="material" for="culture-complete"><input type="checkbox" id="culture-complete" data-culture-complete="${safe(article.id)}" ${read?'checked':''}><span><b>Article lu</b></span></label></div>`:''}
  <div class="section card"><h3>Notre méthode documentaire</h3><p class="small">Nous privilégions des textes fondés sur les collections du Victoria and Albert Museum, du Metropolitan Museum of Art et d’autres musées. Les photographies représentent de vrais objets, accompagnés de leurs crédits et licences. Elles sont chargées depuis Wikimedia Commons et peuvent être indisponibles sans Internet.</p><ul class="source-list"><li><a href="https://commons.wikimedia.org/wiki/File:Aiguille_os_246.1_Global.jpg" target="_blank" rel="noopener">Muséum de Toulouse : aiguille magdalénienne, notice photographique</a></li><li><a href="https://commons.wikimedia.org/wiki/Category:Sashiko" target="_blank" rel="noopener">Wikimedia Commons : catégorie documentaire sashiko</a></li><li><a href="https://commons.wikimedia.org/wiki/File:Boro_textile_from_Japan,_with_sashiko.jpg" target="_blank" rel="noopener">Musées des cultures du monde (Suède) : textile boro avec sashiko</a></li><li><a href="https://commons.wikimedia.org/wiki/File:Sashiko_by_volunteers,_2012_-_Textile_Museum_of_Canada_-_DSC00807.JPG" target="_blank" rel="noopener">Textile Museum of Canada : motifs de sashiko exposés</a></li></ul></div>`;
